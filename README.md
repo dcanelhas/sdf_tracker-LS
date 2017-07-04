@@ -14,7 +14,7 @@ git clone https://github.com/OpenNI/OpenNI2.git
 cd OpenNI2
 make
 ```
-see www.openni.org 
+see https://structure.io/openni
 
 ## Building
 
