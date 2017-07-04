@@ -1,0 +1,31 @@
+{
+    'ATTRIBUTE_PACKET':{ },
+    'FILE_VERSION':3,
+    'GRANULARITY':4096,
+    'KEYWORDS':{ },
+    'MACHINE_REP':'EEEI',
+    'NAME':'',
+    'TIME':{
+        'DELTA':1.0,
+        'KEYWORDS':{ },
+        'LENGTH':4096,
+        'NAME':'Time',
+        'START':0.0,
+        'UNITS':'s'
+    },
+    'TIME_INTERPRETATION':{
+        'AXIS_TYPE':'CONTINUOUS'
+    },
+    'TRACKS':{
+        '0':{
+            'AXES':{
+                '0':'TIME'
+            },
+            'FORMAT':'D',
+            'KEYWORDS':{ },
+            'NAME':'Track 0',
+            'UNITS':''
+        }
+    }
+}
+

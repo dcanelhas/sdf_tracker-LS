@@ -1,0 +1,5723 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+% 'BasicFonts': class PDFDictionary 
+1 0 obj
+% The standard fonts dictionary
+<< /F1 2 0 R
+ /F2 3 0 R
+ /F3 4 0 R
+ /F4 5 0 R >>
+endobj
+% 'F1': class PDFType1Font 
+2 0 obj
+% Font Helvetica
+<< /BaseFont /Helvetica
+ /Encoding /WinAnsiEncoding
+ /Name /F1
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F2': class PDFType1Font 
+3 0 obj
+% Font Helvetica-Bold
+<< /BaseFont /Helvetica-Bold
+ /Encoding /WinAnsiEncoding
+ /Name /F2
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F3': class PDFType1Font 
+4 0 obj
+% Font Courier
+<< /BaseFont /Courier
+ /Encoding /WinAnsiEncoding
+ /Name /F3
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F4': class PDFType1Font 
+5 0 obj
+% Font Helvetica-Oblique
+<< /BaseFont /Helvetica-Oblique
+ /Encoding /WinAnsiEncoding
+ /Name /F4
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'Page1': class PDFPage 
+6 0 obj
+% Page dictionary
+<< /Contents 53 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page2': class PDFPage 
+7 0 obj
+% Page dictionary
+<< /Contents 54 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page3': class PDFPage 
+8 0 obj
+% Page dictionary
+<< /Contents 55 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page4': class PDFPage 
+9 0 obj
+% Page dictionary
+<< /Contents 56 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page5': class PDFPage 
+10 0 obj
+% Page dictionary
+<< /Contents 57 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page6': class PDFPage 
+11 0 obj
+% Page dictionary
+<< /Contents 58 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page7': class PDFPage 
+12 0 obj
+% Page dictionary
+<< /Contents 59 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page8': class PDFPage 
+13 0 obj
+% Page dictionary
+<< /Contents 60 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page9': class PDFPage 
+14 0 obj
+% Page dictionary
+<< /Contents 61 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page10': class PDFPage 
+15 0 obj
+% Page dictionary
+<< /Contents 62 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page11': class PDFPage 
+16 0 obj
+% Page dictionary
+<< /Contents 63 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page12': class PDFPage 
+17 0 obj
+% Page dictionary
+<< /Contents 64 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page13': class PDFPage 
+18 0 obj
+% Page dictionary
+<< /Contents 65 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page14': class PDFPage 
+19 0 obj
+% Page dictionary
+<< /Contents 66 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page15': class PDFPage 
+20 0 obj
+% Page dictionary
+<< /Contents 67 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page16': class PDFPage 
+21 0 obj
+% Page dictionary
+<< /Contents 68 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page17': class PDFPage 
+22 0 obj
+% Page dictionary
+<< /Contents 69 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page18': class PDFPage 
+23 0 obj
+% Page dictionary
+<< /Contents 70 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page19': class PDFPage 
+24 0 obj
+% Page dictionary
+<< /Contents 71 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page20': class PDFPage 
+25 0 obj
+% Page dictionary
+<< /Contents 72 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page21': class PDFPage 
+26 0 obj
+% Page dictionary
+<< /Contents 73 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page22': class PDFPage 
+27 0 obj
+% Page dictionary
+<< /Contents 74 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page23': class PDFPage 
+28 0 obj
+% Page dictionary
+<< /Contents 75 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page24': class PDFPage 
+29 0 obj
+% Page dictionary
+<< /Contents 76 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page25': class PDFPage 
+30 0 obj
+% Page dictionary
+<< /Contents 77 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page26': class PDFPage 
+31 0 obj
+% Page dictionary
+<< /Contents 78 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 52 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'R32': class PDFCatalog 
+32 0 obj
+% Document Root
+<< /Outlines 34 0 R
+ /PageLabels 79 0 R
+ /PageMode /UseNone
+ /Pages 52 0 R
+ /Type /Catalog >>
+endobj
+% 'R33': class PDFInfo 
+33 0 obj
+<< /Author ()
+ /CreationDate (D:20161222090212+07'00')
+ /Creator (\(unspecified\))
+ /Keywords ()
+ /Producer (ReportLab PDF Library - www.reportlab.com)
+ /Subject (\(unspecified\))
+ /Title (XML Support: Pickling Tools 1.7.0) >>
+endobj
+% 'R34': class PDFOutlines 
+34 0 obj
+<< /Count 18
+ /First 35 0 R
+ /Last 51 0 R
+ /Type /Outlines >>
+endobj
+% 'Outline.0': class OutlineEntryObject 
+35 0 obj
+<< /Dest [ 6 0 R
+ /XYZ
+ 62.69291
+ 729.0236
+ 0 ]
+ /Next 36 0 R
+ /Parent 34 0 R
+ /Title (XML Support: New in PicklingTools 1.3.0) >>
+endobj
+% 'Outline.1': class OutlineEntryObject 
+36 0 obj
+<< /Dest [ 6 0 R
+ /XYZ
+ 62.69291
+ 253.6236
+ 0 ]
+ /Next 37 0 R
+ /Parent 34 0 R
+ /Prev 35 0 R
+ /Title (XML, Dictionaries and Ordering) >>
+endobj
+% 'Outline.2': class OutlineEntryObject 
+37 0 obj
+<< /Dest [ 8 0 R
+ /XYZ
+ 62.69291
+ 675.0236
+ 0 ]
+ /Next 38 0 R
+ /Parent 34 0 R
+ /Prev 36 0 R
+ /Title (XML, Dictionaries, and Documents) >>
+endobj
+% 'Outline.3': class OutlineEntryObject 
+38 0 obj
+<< /Dest [ 8 0 R
+ /XYZ
+ 62.69291
+ 255.156
+ 0 ]
+ /Next 39 0 R
+ /Parent 34 0 R
+ /Prev 37 0 R
+ /Title (Translating between XML and Python Dictionaries) >>
+endobj
+% 'Outline.4': class OutlineEntryObject 
+39 0 obj
+<< /Dest [ 9 0 R
+ /XYZ
+ 62.69291
+ 657.0236
+ 0 ]
+ /Next 40 0 R
+ /Parent 34 0 R
+ /Prev 38 0 R
+ /Title (Python Tools: XMLDumper) >>
+endobj
+% 'Outline.5': class OutlineEntryObject 
+40 0 obj
+<< /Dest [ 10 0 R
+ /XYZ
+ 62.69291
+ 475.4236
+ 0 ]
+ /Next 41 0 R
+ /Parent 34 0 R
+ /Prev 39 0 R
+ /Title (Attributes and Folding) >>
+endobj
+% 'Outline.6': class OutlineEntryObject 
+41 0 obj
+<< /Dest [ 13 0 R
+ /XYZ
+ 62.69291
+ 715.8236
+ 0 ]
+ /Next 42 0 R
+ /Parent 34 0 R
+ /Prev 40 0 R
+ /Title (Python and the XMLLoader) >>
+endobj
+% 'Outline.7': class OutlineEntryObject 
+42 0 obj
+<< /Dest [ 14 0 R
+ /XYZ
+ 62.69291
+ 321.8947
+ 0 ]
+ /Next 43 0 R
+ /Parent 34 0 R
+ /Prev 41 0 R
+ /Title (Attributes and the XMLLoader) >>
+endobj
+% 'Outline.8': class OutlineEntryObject 
+43 0 obj
+<< /Dest [ 18 0 R
+ /XYZ
+ 62.69291
+ 508.8198
+ 0 ]
+ /Next 44 0 R
+ /Parent 34 0 R
+ /Prev 42 0 R
+ /Title (Lists and the XMLLoader/XMLDumper) >>
+endobj
+% 'Outline.9': class OutlineEntryObject 
+44 0 obj
+<< /Dest [ 21 0 R
+ /XYZ
+ 62.69291
+ 321.4236
+ 0 ]
+ /Next 45 0 R
+ /Parent 34 0 R
+ /Prev 43 0 R
+ /Title (Array Disposition) >>
+endobj
+% 'Outline.10': class OutlineEntryObject 
+45 0 obj
+<< /Dest [ 25 0 R
+ /XYZ
+ 62.69291
+ 334.9827
+ 0 ]
+ /Next 46 0 R
+ /Parent 34 0 R
+ /Prev 44 0 R
+ /Title (Back and Forth Between XML and Python Dictionaries) >>
+endobj
+% 'Outline.11': class OutlineEntryObject 
+46 0 obj
+<< /Dest [ 26 0 R
+ /XYZ
+ 62.69291
+ 315.8236
+ 0 ]
+ /Next 47 0 R
+ /Parent 34 0 R
+ /Prev 45 0 R
+ /Title (C++ and the XMLLoader and XMLDumper) >>
+endobj
+% 'Outline.12': class OutlineEntryObject 
+47 0 obj
+<< /Dest [ 27 0 R
+ /XYZ
+ 62.69291
+ 509.8236
+ 0 ]
+ /Next 48 0 R
+ /Parent 34 0 R
+ /Prev 46 0 R
+ /Title (Different Types of Keys Of Dictionaries) >>
+endobj
+% 'Outline.13': class OutlineEntryObject 
+48 0 obj
+<< /Count 1
+ /Dest [ 27 0 R
+ /XYZ
+ 62.69291
+ 218.8236
+ 0 ]
+ /First 49 0 R
+ /Last 49 0 R
+ /Next 50 0 R
+ /Parent 34 0 R
+ /Prev 47 0 R
+ /Title (Python C-Extension Module: New In PicklingTools 1.4.1) >>
+endobj
+% 'Outline.18.0': class OutlineEntryObject 
+49 0 obj
+<< /Dest [ 28 0 R
+ /XYZ
+ 62.69291
+ 587.8014
+ 0 ]
+ /Parent 48 0 R
+ /Title (Building the pyobjconvert Python C-Extension Module) >>
+endobj
+% 'Outline.14': class OutlineEntryObject 
+50 0 obj
+<< /Dest [ 30 0 R
+ /XYZ
+ 62.69291
+ 427.8439
+ 0 ]
+ /Next 51 0 R
+ /Parent 34 0 R
+ /Prev 48 0 R
+ /Title (Conclusion) >>
+endobj
+% 'Outline.15': class OutlineEntryObject 
+51 0 obj
+<< /Dest [ 30 0 R
+ /XYZ
+ 62.69291
+ 202.8439
+ 0 ]
+ /Parent 34 0 R
+ /Prev 50 0 R
+ /Title (Appendix A:) >>
+endobj
+% 'R52': class PDFPages 
+52 0 obj
+% page tree
+<< /Count 26
+ /Kids [ 6 0 R
+ 7 0 R
+ 8 0 R
+ 9 0 R
+ 10 0 R
+ 11 0 R
+ 12 0 R
+ 13 0 R
+ 14 0 R
+ 15 0 R
+ 16 0 R
+ 17 0 R
+ 18 0 R
+ 19 0 R
+ 20 0 R
+ 21 0 R
+ 22 0 R
+ 23 0 R
+ 24 0 R
+ 25 0 R
+ 26 0 R
+ 27 0 R
+ 28 0 R
+ 29 0 R
+ 30 0 R
+ 31 0 R ]
+ /Type /Pages >>
+endobj
+% 'R53': class PDFStream 
+53 0 obj
+% page stream
+<< /Length 5551 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 741.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 73.79488 0 Td (XML Support: Pickling Tools 1.7.0) Tj T* -73.79488 0 Td ET
+Q
+Q
+q
+1 0 0 1 62.69291 708.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (XML Support: New in PicklingTools 1.3.0) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 654.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL 4.25229 Tw (The XML format and Python dictionary are fairly equivalent formats: they both allow recursive,) Tj T* 0 Tw .571318 Tw (heterogeneous structures for storing data. In many ways, XML is yet another serialization format and the) Tj T* 0 Tw 1.604597 Tw (PicklingTools embraces XML as yet another serialization \(with some limitations: DTD is not supported) Tj T* 0 Tw (\(1.3.0 has no support at all, 1.3.1 reads but ignores DTD\), although support for namespaces is coming\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 648.0236 cm
+Q
+q
+1 0 0 1 62.69291 624.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.248555 Tw (New in PicklingTools 1.4.1 is support for a Python C-Extension module that speeds up conversion) Tj T* 0 Tw (from dict to XML by 6-10x and from XML to dict by 60-100x.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 624.0236 cm
+Q
+q
+1 0 0 1 62.69291 594.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 2.165318 Tw (If you are using XML as a key-value format, then PicklingTools and XML are essentially equivalent.) Tj T* 0 Tw (Consider the tags and content of following simple XML document:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 476.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 108 re B*
+Q
+q
+BT 1 0 0 1 0 86 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (doc) Tj (>) Tj  T* (  ) Tj (<) Tj (chapter) Tj (>) Tj (1) Tj (<) Tj (/chapter) Tj (>) Tj  T* (  ) Tj (<) Tj (chapter) Tj (>) Tj (2) Tj (<) Tj (/chapter) Tj (>) Tj  T* (  ) Tj (<) Tj (appendix) Tj (>) Tj  T* (    ) Tj (<) Tj (A) Tj (>) Tj (3.0) Tj (<) Tj (/A) Tj (>) Tj  T* (    ) Tj (<) Tj (B) Tj (>) Tj (4.0) Tj (<) Tj (/B) Tj (>) Tj  T* (  ) Tj (<) Tj (appendix) Tj (>) Tj  T* (<) Tj (doc) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 456.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (These are equivalent to the keys and values of the following Python dictionary:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 351.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 96 re B*
+Q
+q
+BT 1 0 0 1 0 74 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( d = {) Tj T* (...  'chapter': [1,2],) Tj T* (...  'appendix': {) Tj T* (...      'A': 3.0,) Tj T* (...      'B': 4.0) Tj T* (...   }) Tj T* (... }) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 319.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .04332 Tw (Python dictionaries tend to be easier to manipulate in Python and C++ \(which is why they are the currency) Tj T* 0 Tw (of the PicklingTools\). but XML does have some advantages over Python Dictionaries:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 313.6236 cm
+Q
+q
+1 0 0 1 62.69291 265.6236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 42 cm
+Q
+q
+1 0 0 1 20 42 cm
+Q
+q
+1 0 0 1 20 18 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 4.93998 Tw (XML is intrinsically ordered, whereas Python dictionaries aren't \(but can be with the) Tj T* 0 Tw (OrderedDict, see below\)) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 12 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (XML can represent true documents: this is XML's intrinsic advantage) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 265.6236 cm
+Q
+q
+1 0 0 1 62.69291 232.6236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (XML, Dictionaries and Ordering) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 190.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .691654 Tw (Consider the ordering issue: in XML, the order of tags and content is preserved in an XML document as) Tj T* 0 Tw 2.199984 Tw (the tags and content always are processed in the order they appear. A Python dictionary, however,) Tj T* 0 Tw (doesn't necessarily preserve the order of keys-values. Consider:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 121.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+BT 1 0 0 1 0 38 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( d = { 'chapter':[1,2], 'appendix':{'A':3.0, 'B':4.0} }) Tj T* (>) Tj (>) Tj (>) Tj ( for key,value in d.iteritems\(\) :) Tj T* (...   print key,) Tj T* (# Output:  chapter appendix        OR      appendix chapter) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 89.42362 cm
+q
+BT 1 0 0 1 0 14 Tm .659318 Tw 12 TL /F1 10 Tf 0 0 0 rg (In the example above, "chapter appendix" is JUST AS LIKELY as "appendix chapter" as output because) Tj T* 0 Tw (the Python dictionary is a ) Tj /F4 10 Tf (hash table only ) Tj /F1 10 Tf (and doesn't preserve order.) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+% 'R54': class PDFStream 
+54 0 obj
+% page stream
+<< /Length 4599 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 717.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL 1.746457 Tw (If insertion order is really a desired feature, The OrderedDict in a new data structure Python 2.7 that) Tj T* 0 Tw 2.794651 Tw (captures this \(The equivalent in C++ is the OTab and was introduced in PicklingTools 1.2.0\). The) Tj T* 0 Tw .602765 Tw (OrderedDict is just like a Python dictionary \(in fact, it inherits from it\), but it preserves insertion order just) Tj T* 0 Tw (like XML:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 587.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 120 re B*
+Q
+q
+BT 1 0 0 1 0 98 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( from collections import OrderedDict # Available as of Python 2.7) Tj T* (>) Tj (>) Tj (>) Tj ( od = OrderedDict\([) Tj T* (...      \('chapter': [1,2]\),            # Long form of the OrderedDict) Tj T* (...      \('appendix', OrderedDict\([) Tj T* (...            \('A', 3.0\),) Tj T* (...            \('B', 4.0\),) Tj T* (...      ]\)\),) Tj T* (... ]\)) Tj T* (>) Tj (>) Tj (>) Tj ( print od['chapter']  # Just like Python dict otherwise) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 543.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .812485 Tw (Unfortunately, the default output form of OrderedDict is not as clean as the equivalent dictionary \(as the) Tj T* 0 Tw .569461 Tw (OrderedDict is currently represented as a list of tuples\), but it is still just as easy to manipulate in Python) Tj T* 0 Tw (or C++.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 501.8236 cm
+q
+BT 1 0 0 1 0 26 Tm .276457 Tw 12 TL /F1 10 Tf 0 0 0 rg (To be clear: ) Tj /F4 10 Tf (ordered dictionary ) Tj /F1 10 Tf (means that keys are ordered by insertion order ) Tj /F4 10 Tf (NOT by sorting order) Tj /F1 10 Tf (. You) Tj T* 0 Tw .480542 Tw (can still look up values via key \(i.e., a['key']\), but if you ITERATE through items, you iterate through them) Tj T* 0 Tw (in the order they were inserted \(or in the case of literals, the order they were listed\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 459.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.40186 Tw (Python uses the above long form to represent OrderedDicts, but we are hopeful to upgrade Python to) Tj T* 0 Tw 1.84881 Tw (make OrderedDicts a more first-class object. The notation that C++ uses is to use 'o{ }' to represent) Tj T* 0 Tw (Ordered Dictionaries. Consider, C++ can use a little letter o to indicate it's an ordered dictionary:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 354.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 96 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 74 Tm /F3 10 Tf 12 TL (o{) Tj T* (  'chapter': [1,2],) Tj T* (  'appendix': o{        // C++ output can choose between the short) Tj T* (      'A': 4.0          // form \(this example\) or the long form) Tj T* (      'B': 3.0,         // \(above\) of OrderedDict.  Unfortunately,) Tj T* (   }                    // Python DOES NOT understand this short form.) Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 310.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 2.201318 Tw (From Python, the OrderedDict behaves JUST like the Python dictionary, except for the fact that the) Tj T* 0 Tw 1.028221 Tw (insertion order of the keys is preserved. Thus, when you iterate \(or print\), you see the original insertion) Tj T* 0 Tw (order.:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 85.42362 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 216 re B*
+Q
+q
+BT 1 0 0 1 0 194 Tm 12 TL /F3 10 Tf 0 0 0 rg (# Python:  2.7 and above) Tj T* (>) Tj (>) Tj (>) Tj ( from collections import OrderedDict) Tj T* (>) Tj (>) Tj (>) Tj ( od = OrderedDict\([\('chapter',[1,2]\),\\) Tj T* (...                   \('appendix',OrderedDict\([\('A',3.0\),\('B',4.0\)]\)\)]\)) Tj T* (>) Tj (>) Tj (>) Tj ( for \(key, value\) in od.iteritems\(\) :) Tj T* (...    print key                    # For OrderedDict, preserves) Tj T* (...                                 # insertion order) Tj T* (chapter) Tj T* (appendix) Tj T*  T* (// C++:  PicklingTools 1.2.0 and above) Tj T* (OTab oo = OTab\("o{'chapter':[1,2], 'appendix':o{'A':4.0,'B':3.0} }"\);) Tj T* (for \(It ii\(od\); ii\(\); \) {) Tj T* (    cout ) Tj (<) Tj (<) Tj ( ii.key\(\) ) Tj (<) Tj (<) Tj ( endl;) Tj T* (}) Tj T* (// chapter) Tj T* (// appendix) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R55': class PDFStream 
+55 0 obj
+% page stream
+<< /Length 6235 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 729.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .387318 Tw (By using the OrderedDict, the insertion order can be preserved. Many times, however, the insertion order) Tj T* 0 Tw 1.094724 Tw (is not relevant: a user may simply care for the absence/presence of keys in the table, in which case, a) Tj T* 0 Tw (Python dictionary is fine to use.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 687.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .332093 Tw (In the case ordering is an issue, XML and Python dictionaries can be equivalent: you just have to use the) Tj T* 0 Tw 2.474147 Tw (Python OrderedDict instead of the dict: Simply choose the XML_LOAD_USE_OTABS options in the) Tj T* 0 Tw (XMLLoader when translating from XML to Python dictionaries.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 654.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (XML, Dictionaries, and Documents) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 624.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .869398 Tw (When it comes to representing documents, XML is the medium to use; This is XML's raison d'etre: tags) Tj T* 0 Tw (interspersed with content and data and attributes, Consider the very simple XML document below:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 566.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (text) Tj (>) Tj (It was the ) Tj (<) Tj (it color='green') Tj (>) Tj (best) Tj (<) Tj (/it) Tj (>) Tj ( of times,) Tj T* (      it was the ) Tj (<) Tj (it color='red') Tj (>) Tj (worst) Tj (<) Tj (/it) Tj (>) Tj ( of times.) Tj T* (<) Tj (/text) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 534.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .883876 Tw (There is no real "easy" equivalent of the above in Python dictionaries: you can make up a format which) Tj T* 0 Tw (captures all the information, but in the end, it is just a hack over XML:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 477.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( { 'text': o{ 0:'It was the ', 'it':{ 'color='green, '_':'best',) Tj T* (...              2:'of times\\n',) Tj T* (...              3:'     it was the ', 'it':'worst', 4:' of times.\\n'  } }) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 445.6236 cm
+q
+BT 1 0 0 1 0 14 Tm .50061 Tw 12 TL /F1 10 Tf 0 0 0 rg (The above ) Tj /F4 10 Tf (kind of ) Tj /F1 10 Tf (works as a translation between XML and Python dictionaries, but breaks down quickly) Tj T* 0 Tw (with more complex documents with attributes, nested tags or content interspersed.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 391.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .517984 Tw (If you are manipulating documents like above, don't use Python Dictionaries! Use some other format that) Tj T* 0 Tw 3.48229 Tw (is made for documents: XML, LaTeX, and REStructed Text are some alternatives for expressing) Tj T* 0 Tw .41748 Tw (documents. \(In fact, REStructured Text permeates the PicklingTools documentation because it's a simple) Tj T* 0 Tw (way to produce documentation in text, PDF and HTML\)) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 361.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 2.029213 Tw (For key-value pairs, we can translate directly between XML and Python dictionaries. For documents,) Tj T* 0 Tw (Python dictionaries are the wrong choice.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 355.6236 cm
+Q
+q
+1 0 0 1 62.69291 267.156 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 64.46765 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .196654 Tw (Sidebar: It can make sense to have a document embedded with the text of a Python dictionary, if you) Tj T* 0 Tw (want to keep meta-information around it:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 0 cm
+q
+q
+.771416 0 0 .771416 0 0 cm
+q
+1 0 0 1 6.6 8.555696 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 582 72 re B*
+Q
+q
+BT 1 0 0 1 0 50 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( book = {) Tj T* (...   'book': 'A Tale of Two Cities',) Tj T* (...   'REStructuedText': 'It was the *best* of times, it was the *worst* of times',) Tj T* (...   'XML': ') Tj (<) Tj (top) Tj (>) Tj (It was the ) Tj (<) Tj (it) Tj (>) Tj (best) Tj (<) Tj (/it) Tj (>) Tj ( of time, it was the ) Tj (<) Tj (it) Tj (>) Tj (worst) Tj (<) Tj (/it) Tj (>) Tj ( of times) Tj (<) Tj (/top) Tj (>) Tj (',) Tj T* (... }) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 267.156 cm
+Q
+q
+1 0 0 1 62.69291 234.156 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Translating between XML and Python Dictionaries) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 204.156 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.473059 Tw (The PicklingTools offers tools to translate between XML and Python dictionaries \(both directions\) from) Tj T* 0 Tw (both C++ and Python. The tools assume one major maxim:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 146.956 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F3 10 Tf 12 TL (Assumption: We are using XML to represent recursive, heterogeneous) Tj T* (key-values data structures.  In this case, we can translate back and forth) Tj T* (between XML and Python dictionaries and not lose information.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 90.95598 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .501235 Tw (The interfaces are essentially the same in both Python and C++: there is an XMLDumper which converts) Tj T* 0 Tw 1.425318 Tw (from plain dictionaries to XML, and an XMLLoader which converts from XML to plain dictionaries. The) Tj T* 0 Tw .053988 Tw (Python tools are easier to use than the C++ tools, so we'll discuss those first, but all the interfaces for both) Tj T* 0 Tw (are basically the same.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 84.95598 cm
+Q
+ 
+endstream
+endobj
+% 'R56': class PDFStream 
+56 0 obj
+% page stream
+<< /Length 5572 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 669.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 86 Tm /F1 10 Tf 12 TL 2.176303 Tw (There was quite a bit of work when doing the XML tools in Python and C++ to make sure the) Tj T* 0 Tw 2.79436 Tw (interfaces were the same and the outputs were the same as well. There are two tests called) Tj T* 0 Tw .779069 Tw (xmldump_test.[py/cc] and xmlload_test.[py/cc] that use exactly the same output to compare against.) Tj T* 0 Tw .861751 Tw (Although there are tools in Python and C++ to deal with XML separately, the C++ and Python XML) Tj T* 0 Tw .25686 Tw (tools here have been written completely from scratch so both the Python and C++ can be maintained) Tj T* 0 Tw 2.757674 Tw (in parallel. The Python and C++ code in the XMLDumper/XMLLoader is remarkably similar for) Tj T* 0 Tw 2.990697 Tw (maintenance purposes: any changes in the Python can easily be propagated to the C++ and) Tj T* 0 Tw (vice-versa.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 669.0236 cm
+Q
+q
+1 0 0 1 62.69291 636.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Python Tools: XMLDumper) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 606.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.962126 Tw (To convert from Python dictionaries to XML, use the XMLdumper. The online documentation is quite) Tj T* 0 Tw (good:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 560.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( import xmldumper) Tj T* (>) Tj (>) Tj (>) Tj ( help\(xmldumper\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 540.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Let's start with a simple example and convert a simple dict to XML:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 459.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 50 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( example = { 'a':1, 'b':2.2, 'c':'three' }) Tj T* (>) Tj (>) Tj (>) Tj ( from xmldumper import *) Tj T* (>) Tj (>) Tj (>) Tj ( import sys    # for sys.stdout) Tj T* (>) Tj (>) Tj (>) Tj ( xd = XMLDumper\(sys.stdout\)      # dump XML to stdout) Tj T* (>) Tj (>) Tj (>) Tj ( xd.XMLDumpKeyValue\('top', example\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 439.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The output:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 406.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 24 re B*
+Q
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (top) Tj (>) Tj (<) Tj (a) Tj (>) Tj (1) Tj (<) Tj (/a) Tj (>) Tj (<) Tj (b) Tj (>) Tj (2.2) Tj (<) Tj (/b) Tj (>) Tj (<) Tj (c) Tj (>) Tj (three) Tj (<) Tj (/c) Tj (>) Tj (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 374.4236 cm
+q
+BT 1 0 0 1 0 14 Tm .229431 Tw 12 TL /F1 10 Tf 0 0 0 rg (This is a tad unreadable, but sometimes you may want to compress your XML output all together. Most of) Tj T* 0 Tw (the time, though, you will probably want to use the ) Tj /F4 10 Tf (pretty print ) Tj /F1 10 Tf (version, which indents to show nesting:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 329.2236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xd = XMLDumper\(sys.stdout, XML_DUMP_PRETTY\)) Tj T* (>) Tj (>) Tj (>) Tj ( xd.XMLDumpKeyValue\('top', example\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 309.2236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The output:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 228.0236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 50 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (top) Tj (>) Tj  T* (  ) Tj (<) Tj (a) Tj (>) Tj (1) Tj (<) Tj (/a) Tj (>) Tj  T* (  ) Tj (<) Tj (b) Tj (>) Tj (2.2) Tj (<) Tj (/b) Tj (>) Tj  T* (  ) Tj (<) Tj (c) Tj (>) Tj (three) Tj (<) Tj (/c) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 184.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .634692 Tw (Notice the top-level container: this is actually an XML requirement that there be exactly one outer tag \(in) Tj T* 0 Tw .778409 Tw (this case, it is called 'top'\) containing the content. The 'top' tags surround the input table. If we want, we) Tj T* 0 Tw (can just output the value:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 150.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 24 re B*
+Q
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xd.XMLDumpValue\(example\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 130.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The output:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 85.62362 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (a) Tj (>) Tj (1) Tj (<) Tj (/a) Tj (>) Tj  T* (<) Tj (b) Tj (>) Tj (2.2) Tj (<) Tj (/b) Tj (>) Tj  T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R57': class PDFStream 
+57 0 obj
+% page stream
+<< /Length 5060 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 739.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 24 re B*
+Q
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (c) Tj (>) Tj (three) Tj (<) Tj (/c) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 719.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This isn't legal XML by itself, but it can be part of a larger XML document composed piecewise.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 689.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.156098 Tw (There are actually a number of options for the XMLDumper: each option is ored in. For example, if we) Tj T* 0 Tw (want pretty-printed XML and strict XML \(with the header\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 644.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xd = XMLDumper\(sys.stdout, XML_DUMP_PRETTY | XML_STRICT_HDR \)) Tj T* (>) Tj (>) Tj (>) Tj ( xd.XMLDumpKeyValue\('top', example\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 624.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The output:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 531.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 84 re B*
+Q
+q
+BT 1 0 0 1 0 62 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (?xml version="1.0" encoding="UTF-8"?) Tj (>) Tj  T* (<) Tj (top) Tj (>) Tj  T* (    ) Tj (<) Tj (a) Tj (>) Tj (1) Tj (<) Tj (/a) Tj (>) Tj  T* (    ) Tj (<) Tj (b) Tj (>) Tj (2.2) Tj (<) Tj (/b) Tj (>) Tj  T* (    ) Tj (<) Tj (c) Tj (>) Tj (three) Tj (<) Tj (/c) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 487.4236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .89528 Tw (In this case, we output the XML header which, strictly speaking, is needed to be a standard conforming) Tj T* 0 Tw 1.091984 Tw (XML document. Currently, we only support version 1.0 and UTF-8 \(namespaces are coming in a future) Tj T* 0 Tw (release\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 454.4236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Attributes and Folding) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 424.4236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .999987 Tw (Attributes are a critical part of any XML document: the XML tools here use a default convention that all) Tj T* 0 Tw (keys that start with '_' are to be placed as attributes:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 379.2236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( a = { "chapter": { '_length': 100, '_pages':200, 'text': 'hello' } }) Tj T* (>) Tj (>) Tj (>) Tj ( xd.XMLDumpKeyValue\("top", a\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 359.2236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The output:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 266.0236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 84 re B*
+Q
+q
+BT 1 0 0 1 0 62 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (?xml version="1.0" encoding="UTF-8"?) Tj (>) Tj  T* (<) Tj (top) Tj (>) Tj  T* (    ) Tj (<) Tj (chapter length="100" pages="200") Tj (>) Tj  T* (        ) Tj (<) Tj (text) Tj (>) Tj (hello) Tj (<) Tj (/text) Tj (>) Tj  T* (    ) Tj (<) Tj (/chapter) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 198.0236 cm
+q
+BT 1 0 0 1 0 50 Tm 1.86061 Tw 12 TL /F1 10 Tf 0 0 0 rg (Notice that the keys '_length' and '_pages' got turned into attributes in the output XML because they) Tj T* 0 Tw .68061 Tw (started with '_'. This process is called ) Tj /F4 10 Tf (folding ) Tj /F1 10 Tf (and allows attributes to be represented simply in key-value) Tj T* 0 Tw 1.042485 Tw (structures. If you aren't comfortable with this, consider the following analogy: In UNIX, all files that start) Tj T* 0 Tw .300988 Tw (with a '.' are treated specially in an 'ls'. In the PicklingTools, all keys that start with '_' are treated specially) Tj T* 0 Tw (in XML processing.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 180.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (You can turn this folding feature off easily enough:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 135.2393 cm
+q
+q
+.988825 0 0 .988825 0 0 cm
+q
+1 0 0 1 6.6 6.674587 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 474 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xd=XMLDumper\(sys.stdout, XML_DUMP_PRETTY | XML_DUMP_PREPEND_KEYS_AS_TAGS\)) Tj T* (>) Tj (>) Tj (>) Tj ( xd.XMLDumpKeyValue\("top", a\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 115.2393 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The output:) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+% 'R58': class PDFStream 
+58 0 obj
+% page stream
+<< /Length 4297 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 667.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 96 re B*
+Q
+q
+BT 1 0 0 1 0 74 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (top) Tj (>) Tj  T* (    ) Tj (<) Tj (chapter) Tj (>) Tj  T* (        ) Tj (<) Tj (_length) Tj (>) Tj (100) Tj (<) Tj (/_length) Tj (>) Tj  T* (        ) Tj (<) Tj (_pages) Tj (>) Tj (200) Tj (<) Tj (/_pages) Tj (>) Tj  T* (        ) Tj (<) Tj (text) Tj (>) Tj (hello) Tj (<) Tj (/text) Tj (>) Tj  T* (    ) Tj (<) Tj (/chapter) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 635.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .95061 Tw (You can also change the prepend_char to be anything you want in the constructor to XMLDumper \(see) Tj T* 0 Tw (help\(xmldumper\)\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 593.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .15186 Tw (Many people using XML support the convention that simple data should be in attributes and only structure) Tj T* 0 Tw .89664 Tw (\(lists, dictionaries\) should be in tags. The XML_DUMP_SIMPLE_TAGS_AS_ATTRIBUTES option allows) Tj T* 0 Tw (you to do just that:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 549.9453 cm
+q
+q
+.96447 0 0 .96447 0 0 cm
+q
+1 0 0 1 6.6 6.843137 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 486 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xd=XMLDumper\(sys.stdout,XML_DUMP_PRETTY|XML_DUMP_SIMPLE_TAGS_AS_ATTRIBUTES\)) Tj T* (>) Tj (>) Tj (>) Tj ( xd.XMLDumpKeyValue\("top", a\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 529.9453 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The output:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 460.7453 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+BT 1 0 0 1 0 38 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (top) Tj (>) Tj  T* (    ) Tj (<) Tj (chapter length="100" pages="200" text="hello") Tj (>) Tj  T* (    ) Tj (<) Tj (/chapter) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 440.7453 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This option allows all simple data to sit in attributes.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 410.7453 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 2.238735 Tw (All the options for XMLDumper are below. Some of them make more sense when coupled with the) Tj T* 0 Tw (XMLLoader \(see next section\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 85.18892 cm
+q
+q
+.976496 0 0 .976496 0 0 cm
+q
+1 0 0 1 6.6 6.758862 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 480 324 re B*
+Q
+q
+BT 1 0 0 1 0 302 Tm 12 TL /F3 10 Tf 0 0 0 rg (# Options for dictionaries -) Tj (>) Tj ( XML) Tj T* (#  If XML attributes are being folded up, then you may) Tj T* (#  want to prepend a special character to distinguish attributes) Tj T* (#  from nested tags: an underscore is the usual default.  If) Tj T* (#  you don't want a prepend char, use XML_DUMP_NO_PREPEND option) Tj T* (XML_PREPEND_CHAR = '_') Tj T*  T*  T* (# When dumping, by DEFAULT the keys that start with _ become) Tj T* (# attributes \(this is called "unfolding"\).  You may want to keep) Tj T* (# those keys as tags.  Consider:) Tj T* (#) Tj T* (#   { 'top': { '_a':'1', '_b': 2 }}) Tj T* (#) Tj T* (# DEFAULT behavior, this becomes:) Tj T* (#   ) Tj (<) Tj (top a="1" b="2") Tj (>) Tj (<) Tj (/top) Tj (>) Tj (       This moves the _names to attributes) Tj T* (#) Tj T* (# But, you may want all _ keys to stay as tags: that's the purpose of this opt) Tj T* (#   ) Tj (<) Tj (top) Tj (>) Tj ( ) Tj (<) Tj (_a) Tj (>) Tj (1) Tj (<) Tj (/_a) Tj (>) Tj ( ) Tj (<) Tj (_b) Tj (>) Tj (2) Tj (<) Tj (/b) Tj (>) Tj ( ) Tj (<) Tj (/top) Tj (>) Tj  T* (XML_DUMP_PREPEND_KEYS_AS_TAGS = 0x100) Tj T*  T* (# Any value that is simple \(i.e., contains no nested) Tj T* (# content\) will be placed in the attributes bin:) Tj T* (#  For examples:) Tj T* (#    { 'top': { 'x':'1', 'y': 2 }} -) Tj (>) Tj (  ) Tj (<) Tj (top x="1" y="2") Tj (>) Tj (<) Tj (/top) Tj (>) Tj  T* (XML_DUMP_SIMPLE_TAGS_AS_ATTRIBUTES = 0x200) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R59': class PDFStream 
+59 0 obj
+% page stream
+<< /Length 3264 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 79.82362 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 684 re B*
+Q
+q
+BT 1 0 0 1 0 662 Tm 12 TL /F3 10 Tf 0 0 0 rg  T* (# By default, everything dumps as strings \(without quotes\), but those things) Tj T* (# that are strings lose their "stringedness", which means) Tj T* (# they can't be "evaled" on the way back in.  This option makes) Tj T* (# Vals that are strings dump with quotes.) Tj T* (XML_DUMP_STRINGS_AS_STRINGS = 0x400) Tj T*  T* (# Like XML_DUMP_STRINGS_AS_STRINGS, but this one ONLY) Tj T* (# dumps strings with quotes if it thinks Eval will return) Tj T* (# something else.  For example in { 's': '123' } : '123' is) Tj T* (# a STRING, not a number.  When evaled with an XMLLoader) Tj T* (# with XML_LOAD_EVAL_CONTENT flag, that will become a number.) Tj T* (XML_DUMP_STRINGS_BEST_GUESS = 0x800) Tj T*  T* (# Show nesting when you dump: like "prettyPrint": basically, it shows) Tj T* (# nesting) Tj T* (XML_DUMP_PRETTY = 0x1000) Tj T*  T* (# Arrays of POD \(plain old data: ints, real, complex, etc\) can) Tj T* (# dump as huge lists:  By default they just dump with one tag) Tj T* (# and then a list of numbers.  If you set this option, they dump) Tj T* (# as a true XML list \() Tj (<) Tj (data) Tj (>) Tj (1.0/) Tj (<) Tj (data) Tj (>) Tj (<) Tj (data) Tj (>) Tj (2.0) Tj (<) Tj (/data) Tj (>) Tj ( ...\)) Tj T* (# which is very expensive, but is easier to use with other) Tj T* (# tools \(spreadsheets that support lists, etc.\).) Tj T* (XML_DUMP_POD_LIST_AS_XML_LIST = 0x2000) Tj T*  T* (# When dumping an empty tag, what do you want it to be?) Tj T* (# I.e., what is ) Tj (<) Tj (empty) Tj (>) Tj (<) Tj (/empty) Tj (>) Tj  T* (# Normally \(DEFAULT\) this is an empty dictionary 'empty': {}) Tj T* (# If you want that to be empty content, as in an empty string,) Tj T* (# set this option: 'empty': "") Tj T* (# NOTE: You don't need this option if you are using) Tj T* (# XML_DUMP_STRINGS_AS_STRINGS or XML_DUMP_STRINGS_BEST_GUESS) Tj T* (XML_DUMP_PREFER_EMPTY_STRINGS = 0x4000) Tj T*  T* (# When dumping dictionaries in order, a dict BY DEFAULT prints) Tj T* (# out the keys in sorted/alphabetic order and BY DEFAULT an OrderedDict) Tj T* (# prints out in the OrderedDict order.  The "unnatural" order) Tj T* (# for a dict is to print out in "random" order \(but probably slightly) Tj T* (# faster\).  The "unnatural" order for an OrderedDict is sorted) Tj T* (# \(because normally we use an OrderedDict because we WANTS its) Tj T* (# notion of order\)) Tj T* (XML_DUMP_UNNATURAL_ORDER = 0x8000) Tj T*  T* (# Even though illegal XML, allow element names starting with Digits:) Tj T* (# when it does see a starting digit, it turns it into an _digit) Tj T* (# so that it is still legal XML) Tj T* (XML_TAGS_ACCEPTS_DIGITS  = 0x80) Tj T*  T* (# Allows digits as starting XML tags, even though illegal XML.) Tj T* (# This preserves the number as a tag.) Tj T* (XML_DIGITS_AS_TAGS = 0x80000) Tj T*  T*  T* (# When dumping XML, the default is to NOT have the XML header) Tj T* (# ) Tj (<) Tj (?xml version="1.0") Tj (>) Tj (:  Specifying this option will always make that) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R60': class PDFStream 
+60 0 obj
+% page stream
+<< /Length 4445 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 727.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F3 10 Tf 0 0 0 rg (# the header always precedes all content) Tj T* (XML_STRICT_HDR = 0x10000) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 694.8236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Python and the XMLLoader) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 652.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.484104 Tw (The XMLLoader reads XML and converts it to a Python dictionary: this is the inverse operation of the) Tj T* 0 Tw 2.204985 Tw (XMLDumper. \(Note this assumes the type of XML we are processing is key-value kind of XML, not) Tj T* 0 Tw (document XML\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 634.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The online docs are always helpful:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 589.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( import xmlloader) Tj T* (>) Tj (>) Tj (>) Tj ( help\(xmlloader\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 569.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Let's start with a simple example. In a file named 'example.xml', we will put the following XML:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 488.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 50 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (top) Tj (>) Tj  T* (  ) Tj (<) Tj (a) Tj (>) Tj (1) Tj (<) Tj (/a) Tj (>) Tj  T* (  ) Tj (<) Tj (b) Tj (>) Tj (2.2) Tj (<) Tj (/b) Tj (>) Tj  T* (  ) Tj (<) Tj (c) Tj (>) Tj (three) Tj (<) Tj (/c) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 468.4236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (To process this file and turn it into a dictionary:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 375.2236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 84 re B*
+Q
+q
+BT 1 0 0 1 0 62 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( from xmlloader import *) Tj T* (>) Tj (>) Tj (>) Tj ( example = file\('example.xml', 'r'\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl = StreamXMLLoader\(example, 0\)  # 0 = All defaults on options) Tj T* (>) Tj (>) Tj (>) Tj ( result = xl.expectXML\(\)) Tj T* (>) Tj (>) Tj (>) Tj ( print result) Tj T* ({'top': {'a': '1', 'c': 'three', 'b': '2.2'}}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 343.2236 cm
+q
+BT 1 0 0 1 0 14 Tm .785542 Tw 12 TL /F1 10 Tf 0 0 0 rg (We can match the ) Tj /F4 10 Tf (pretty print ) Tj /F1 10 Tf (nature of the original XML using the pretty module \(which comes with the) Tj T* 0 Tw (PicklingTools\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 214.0236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 120 re B*
+Q
+q
+BT 1 0 0 1 0 98 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( from pretty import pretty) Tj T* (>) Tj (>) Tj (>) Tj ( pretty\(result\)) Tj T* ({) Tj T* (    'top':{) Tj T* (        'a':'1',) Tj T* (        'b':'2.2',) Tj T* (        'c':'three') Tj T* (    }) Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 170.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.419986 Tw (From the previous section, we know that all XML has to have exactly one outermost container: in this) Tj T* 0 Tw 1.228221 Tw (case, the 'top' key. Many times, when translating from XML to a dictionary, the outer most container is) Tj T* 0 Tw (superfluous. There is a simple option to 'drop' the outer most container:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 88.82362 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 50 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( example = file\('example.xml', 'r'\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl = StreamXMLLoader\(example, XML_LOAD_DROP_TOP_LEVEL\)) Tj T* (>) Tj (>) Tj (>) Tj ( result = xl.expectXML\(\)) Tj T* (>) Tj (>) Tj (>) Tj ( pretty\(result\)) Tj T* ({) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R61': class PDFStream 
+61 0 obj
+% page stream
+<< /Length 5841 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 703.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+BT 1 0 0 1 0 38 Tm 12 TL /F3 10 Tf 0 0 0 rg (    'a':'1',) Tj T* (    'b':'2.2',) Tj T* (    'c':'three') Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 647.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL 1.351751 Tw (You might notice that the values above are strings and not integers or floats: the default when turning) Tj T* 0 Tw .364535 Tw (XML into a dict is to just keep whatever string of content was in the XML as, well, a string. Using the eval) Tj T* 0 Tw 1.484104 Tw (function built-in to Python, we can turn these strings into their appropriate values. Or, we can use the) Tj T* 0 Tw (XML_LOAD_EVAL_CONTENT option \(which uses eval, but is a little bit smarter\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 527.0947 cm
+q
+q
+.930106 0 0 .930106 0 0 cm
+q
+1 0 0 1 6.6 7.095962 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 504 120 re B*
+Q
+q
+BT 1 0 0 1 0 98 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( example = file\('example.xml', 'r'\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl = StreamXMLLoader\(example, XML_LOAD_DROP_TOP_LEVEL | XML_LOAD_EVAL_CONTENT\)) Tj T* (>) Tj (>) Tj (>) Tj ( result = xl.expectXML\(\)) Tj T* (>) Tj (>) Tj (>) Tj ( pretty\(result\)) Tj T* ({) Tj T* (    'a':1,) Tj T* (    'b':2.2,) Tj T* (    'c':'three') Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 459.0947 cm
+q
+BT 1 0 0 1 0 50 Tm .276457 Tw 12 TL /F1 10 Tf 0 0 0 rg (This brings the keys to real values. Internally, the XMLLoader uses eval \(which can be a security problem) Tj T* 0 Tw 1.30856 Tw (if you XML from untrusted sources\), but is a little bit smarter: it only keeps the result of the eval if the) Tj T* 0 Tw .044104 Tw (entire output would be consumed in a tag. For example <) Tj (tag) Tj (>) Tj (123 #12) Tj (<) Tj (/tag) Tj (> should will stay a string using) Tj T* 0 Tw .237126 Tw (XML_LOAD_EVAL_CONTENT, even though plain eval would return 123. And this is good! We don't want) Tj T* 0 Tw (to lose any content!:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 389.8947 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+BT 1 0 0 1 0 38 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xml_text = ') Tj (<) Tj (tag) Tj (>) Tj (123 #12) Tj (<) Tj (/tag) Tj (>) Tj (') Tj T* (>) Tj (>) Tj (>) Tj ( xl = XMLLoader\(xml_text, XML_LOAD_EVAL_CONTENT\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl.expectXML\(\)) Tj T* ({'tag':'123 #12'}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 333.8947 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .620814 Tw (Notice the example above shows the difference between XMLLoader and StreamXMLLoader: the former) Tj T* 0 Tw .597356 Tw (takes input from a string, the latter takes input from a stream. You might also note that in every example) Tj T* 0 Tw .721488 Tw (we have created a new XMLLoader: if we didn't, the loader would just read from where we left off in the) Tj T* 0 Tw (previous input. Rule of thumb: create a new XMLLoader for each XML document to process.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 300.8947 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Attributes and the XMLLoader) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 282.8947 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (There are about 4 ways of dealing with attributes in XML when converting to Python dictionaries.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 276.8947 cm
+Q
+q
+1 0 0 1 62.69291 204.8947 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 66 cm
+Q
+q
+1 0 0 1 20 66 cm
+Q
+q
+1 0 0 1 20 54 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Put them in a special '__attrs__' sub-table: the default) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 48 cm
+Q
+q
+1 0 0 1 20 36 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Unfold them: use XML_LOAD_UNFOLD_ATTRS) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 30 cm
+Q
+q
+1 0 0 1 20 18 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (3.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Unfold them, but drop the _: use XML_LOAD_NO_PREPEND_CHAR) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 12 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (4.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Ignore them: use XML_LOAD_DROP_ALL_ATTRS option) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 204.8947 cm
+Q
+q
+1 0 0 1 62.69291 186.8947 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Consider the following XML file \(book.xml\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 93.69472 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 84 re B*
+Q
+q
+BT 1 0 0 1 0 62 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (?xml version="1.0" encoding="UTF-8"?) Tj (>) Tj  T* (<) Tj (top) Tj (>) Tj  T* (    ) Tj (<) Tj (chapter length="100" pages="200") Tj (>) Tj  T* (       ) Tj (<) Tj (text) Tj (>) Tj (hello) Tj (<) Tj (/text) Tj (>) Tj  T* (   ) Tj (<) Tj (/chapter) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R62': class PDFStream 
+62 0 obj
+% page stream
+<< /Length 3887 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 741.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.357882 Tw (We will convert this XML to a dict using the default way of handling attributes: stick the attributes in a) Tj T* 0 Tw (special table called '__attrs__':) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 563.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 168 re B*
+Q
+q
+BT 1 0 0 1 0 146 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( book = file\('book.xml','r'\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl = StreamXMLLoader\(book, XML_LOAD_DROP_TOP_LEVEL\)) Tj T* (>) Tj (>) Tj (>) Tj ( result = xl.expectXML\(\)) Tj T* (>) Tj (>) Tj (>) Tj ( pretty\(result\)) Tj T* ({) Tj T* (    'chapter':{) Tj T* (        '__attrs__':{) Tj T* (            'length':'100',) Tj T* (            'pages':'200') Tj T* (        },) Tj T* (        'text':'hello') Tj T* (    }) Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 543.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Just like normal XML, we can turn the strings into real values using XML_LOAD_EVAL_CONTENT:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 372.6353 cm
+q
+q
+.96447 0 0 .96447 0 0 cm
+q
+1 0 0 1 6.6 6.843137 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 486 168 re B*
+Q
+q
+BT 1 0 0 1 0 146 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( book = file\('book.xml','r'\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl = StreamXMLLoader\(book, XML_LOAD_DROP_TOP_LEVEL | XML_LOAD_EVAL_CONTENT\)) Tj T* (>) Tj (>) Tj (>) Tj ( result = xl.expectXML\(\)) Tj T* (>) Tj (>) Tj (>) Tj ( pretty\(result\)) Tj T* ({) Tj T* (    'chapter':{) Tj T* (        '__attrs__':{) Tj T* (            'length':100,) Tj T* (            'pages':200) Tj T* (        },) Tj T* (        'text':'hello') Tj T* (    }) Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 352.6353 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This method makes it clear which values are attributes and which values are tags:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 307.4353 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( print result['chapter']['__attrs__']['length']) Tj T* (>) Tj (>) Tj (>) Tj (    # attributes of chapter are under chapter/__attrs__ table) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 263.4353 cm
+q
+BT 1 0 0 1 0 26 Tm .411567 Tw 12 TL /F1 10 Tf 0 0 0 rg (Another different way to handle attributes \(if you don't like the above\) is to use the special character '_' in) Tj T* 0 Tw 1.003059 Tw (front of tags to indicate those came from the attributes section. With the XML_LOAD_UNFOLD_ATTRS) Tj T* 0 Tw (option, the attributes get ) Tj /F4 10 Tf (unfolded ) Tj /F1 10 Tf (into the table of interest, as special keys starting with an '_':) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 99.99197 cm
+q
+q
+.988825 0 0 .988825 0 0 cm
+q
+1 0 0 1 6.6 6.674587 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 474 156 re B*
+Q
+q
+BT 1 0 0 1 0 134 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( book = file\('book.xml','r'\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl = StreamXMLLoader\(book, XML_LOAD_DROP_TOP_LEVEL |) Tj T* (...                            XML_LOAD_EVAL_CONTENT | XML_LOAD_UNFOLD_ATTRS\)) Tj T* (>) Tj (>) Tj (>) Tj ( result = xl.expectXML\(\)) Tj T* (>) Tj (>) Tj (>) Tj ( pretty\(result\)) Tj T* ({) Tj T* (    'chapter':{) Tj T* (        '_length':100,) Tj T* (        '_pages':200,) Tj T* (        'text':'hello') Tj T* (    }) Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 79.99197 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (It's still pretty obvious what keys are attributes:) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+% 'R63': class PDFStream 
+63 0 obj
+% page stream
+<< /Length 3801 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 727.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( print result['chapter']['_length']) Tj T* (>) Tj (>) Tj (>) Tj (    # The attributes of chapter all start with an _) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 695.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 6.343828 Tw (Of course, you can change the prepend character in the constructor of XMLLoader \(see) Tj T* 0 Tw (help\(XMLLoader\)\), or you can get rid of it altogether with XML_LOAD_NO_PREPEND_CHAR:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 571.8998 cm
+q
+q
+.737429 0 0 .737429 0 0 cm
+q
+1 0 0 1 6.6 8.950014 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 636 156 re B*
+Q
+q
+BT 1 0 0 1 0 134 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( book = file\('book.xml','r'\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl = StreamXMLLoader\(book, XML_LOAD_DROP_TOP_LEVEL |) Tj T* (...                            XML_LOAD_EVAL_CONTENT | XML_LOAD_UNFOLD_ATTRS | XML_LOAD_NO_PREPEND_CHAR\)) Tj T* (>) Tj (>) Tj (>) Tj ( result = xl.expectXML\(\)) Tj T* (>) Tj (>) Tj (>) Tj ( pretty\(result\)) Tj T* ({) Tj T* (    'chapter':{) Tj T* (        'length':100,) Tj T* (        'pages':200,) Tj T* (        'text':'hello') Tj T* (    }) Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 551.8998 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Finally, you can just drop all your attributes using the XML_LOAD_DROP_ALL_ATTRS:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 416.9952 cm
+q
+q
+.952737 0 0 .952737 0 0 cm
+q
+1 0 0 1 6.6 6.927412 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 492 132 re B*
+Q
+q
+BT 1 0 0 1 0 110 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( book = file\('book.xml','r'\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl = StreamXMLLoader\(book, XML_LOAD_DROP_TOP_LEVEL |) Tj T* (...                            XML_LOAD_EVAL_CONTENT | XML_LOAD_DROP_ALL_ATTRS \)) Tj T* (>) Tj (>) Tj (>) Tj ( result = xl.expectXML\(\)) Tj T* (>) Tj (>) Tj (>) Tj ( pretty\(result\)) Tj T* ({) Tj T* (    'chapter':{) Tj T* (        'text':'hello') Tj T* (    }) Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 396.9952 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (A list of options is available below \(or look in xmlloader.py\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 87.79525 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 300 re B*
+Q
+q
+BT 1 0 0 1 0 278 Tm 12 TL /F3 10 Tf 0 0 0 rg (###################### OPTIONS for XML -) Tj (>) Tj ( dictionaries) Tj T*  T* (# ATTRS \(attributes on XML nodes\) by default becomes) Tj T* (# separate dictionaries in the table with a) Tj T* (# "__attrs__" key.  If you choose to unfold, the attributes) Tj T* (# become keys at the same level, with an underscore.) Tj T* (# \(thus "unfolding" the attributes to an outer level\).) Tj T* (#) Tj T* (# For example:) Tj T* (#   ) Tj (<) Tj (book attr1="1" attr2="2) Tj (>) Tj (contents) Tj (<) Tj (/book) Tj (>) Tj  T* (# WITHOUT unfolding  \(This is the DEFAULT\)) Tj T* (#   { 'book' : "contents",) Tj T* (#     '__attrs__' : {'attr1'="1", "attr2"="2"}) Tj T* (#   }) Tj T* (# WITH unfolding:  \(Turning XML_LOAD_UNFOLD_ATTRS on\)) Tj T* (#   { 'book' : "contents",) Tj T* (#     '_attr1':"1",) Tj T* (#     '_attr2':"2",) Tj T* (#   }) Tj T* (XML_LOAD_UNFOLD_ATTRS = 0x01) Tj T*  T*  T* (# When unfolding, choose to either use the XML_PREPEND character '_') Tj T* (# or no prepend at all.  This only applies if XML_LOAD_UNFOLD_ATTRS is on.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R64': class PDFStream 
+64 0 obj
+% page stream
+<< /Length 3370 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 104.1688 cm
+q
+q
+.96447 0 0 .96447 0 0 cm
+q
+1 0 0 1 6.6 6.843137 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 486 684 re B*
+Q
+q
+BT 1 0 0 1 0 662 Tm 12 TL /F3 10 Tf 0 0 0 rg (#   ) Tj (<) Tj (book attr1="1" attr2="2) Tj (>) Tj (contents) Tj (<) Tj (/book) Tj (>) Tj  T* (# becomes) Tj T* (#  { 'book': "content",) Tj T* (#    'attr1':'1',) Tj T* (#    'attr2':'2') Tj T* (#  }) Tj T* (# Of course, the problem is you can't differentiate TAGS and ATTRIBUTES) Tj T* (# with this option) Tj T* (XML_LOAD_NO_PREPEND_CHAR = 0x02) Tj T*  T* (# If XML attributes are being folded up, then you may) Tj T* (# want to prepend a special character to distinguish attributes) Tj T* (# from nested tags: an underscore is the usual default.  If) Tj T* (# you don't want a prepend char, use XML_LOAD_NO_PREPEND_CHAR option) Tj T* (XML_PREPEND_CHAR = '_') Tj T*  T* (# Or, you may choose to simply drop all attributes:) Tj T* (# ) Tj (<) Tj (book a="1") Tj (>) Tj (text) Tj (<) Tj (book) Tj (>) Tj  T* (#   becomes) Tj T* (# { 'book':'1' }   # Drop ALL attributes) Tj T* (XML_LOAD_DROP_ALL_ATTRS = 0x04) Tj T*  T* (# By default, we use Dictionaries \(as we trying to model) Tj T* (# key-value dictionaries\).  Can also use ordered dictionaries) Tj T* (# if you really truly care about the order of the keys from) Tj T* (# the XML) Tj T* (XML_LOAD_USE_OTABS = 0x08) Tj T*  T* (# Sometimes, for key-value translation, somethings don't make sense.) Tj T* (# Normally:) Tj T* (#   ) Tj (<) Tj (top a="1" b="2") Tj (>) Tj (content) Tj (<) Tj (/top) Tj (>) Tj  T* (# .. this will issue a warning that attributes a and b will be dropped) Tj T* (# because this doesn't translate "well" into a key-value substructure.) Tj T* (#   { 'top':'content' }) Tj T* (#) Tj T* (# If you really want the attributes, you can try to keep the content by setting) Tj T* (# the value below \(and this will suppress the warning\)) Tj T* (#) Tj T* (#  { 'top': { '__attrs__':{'a':1, 'b':2}, '__content__':'content' } }) Tj T* (#) Tj T* (# It's probably better to rethink your key-value structure, but this) Tj T* (# will allow you to move forward and not lose the attributes) Tj T* (XML_LOAD_TRY_TO_KEEP_ATTRIBUTES_WHEN_NOT_TABLES = 0x10) Tj T*  T* (# Drop the top-level key: the XML spec requires a "containing") Tj T* (# top-level key.  For example: ) Tj (<) Tj (top) Tj (>) Tj (<) Tj (l) Tj (>) Tj (1) Tj (<) Tj (/l) Tj (>) Tj (<) Tj (l) Tj (>) Tj (2) Tj (<) Tj (/l) Tj (>) Tj (<) Tj (/top) Tj (>) Tj  T* (# becomes { 'top':[1,2] }  \(and you need the top-level key to get a) Tj T* (# list\) when all you really want is the list:  [1,2].  This simply) Tj T* (# drops the "envelope" that contains the real data.) Tj T* (XML_LOAD_DROP_TOP_LEVEL = 0x20) Tj T*  T* (# Converting from XML to Tables results in almost everything) Tj T* (# being strings:  this option allows us to "try" to guess) Tj T* (# what the real type is by doing an Eval on each member:) Tj T* (# Consider: ) Tj (<) Tj (top) Tj (>) Tj ( ) Tj (<) Tj (a) Tj (>) Tj (1) Tj (<) Tj (/a) Tj (>) Tj ( ) Tj (<) Tj (b) Tj (>) Tj (1.1) Tj (<) Tj (/b) Tj (>) Tj ( ) Tj (<) Tj (c) Tj (>) Tj ('string' ) Tj (<) Tj (/top) Tj (>) Tj  T* (# WITHOUT this option \(the default\) -) Tj (>) Tj ( {'top': { 'a':'1','b':'1.1','c':'str'}}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R65': class PDFStream 
+65 0 obj
+% page stream
+<< /Length 4943 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 520.8198 cm
+q
+q
+.96447 0 0 .96447 0 0 cm
+q
+1 0 0 1 6.6 6.843137 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 480 252 re B*
+Q
+q
+BT 1 0 0 1 0 230 Tm 12 TL /F3 10 Tf 0 0 0 rg (# WITH this option                  -) Tj (>) Tj ( {'top': { 'a':1, 'b':1.1, 'c':'str' } }) Tj T* (# If the content cannot be evaluated, then content simply says 'as-is'.) Tj T* (# Consider combining this with the XML_DUMP_STRINGS_BEST_GUESS) Tj T* (# if you go back and forth between Tables and XML a lot.) Tj T* (XML_LOAD_EVAL_CONTENT = 0x40) Tj T*  T* (# Even though illegal XML, allow element names starting with Digits:) Tj T* (# when it does see a starting digit, it turns it into an _digit) Tj T* (# so that it is still legal XML) Tj T* (XML_TAGS_ACCEPTS_DIGITS = 0x80) Tj T*  T* (# Allows digits as starting XML tags, even though illegal XML.) Tj T* (# This preserves the number as a tag.) Tj T* (XML_DIGITS_AS_TAGS = 0x80000) Tj T*  T* (# When loading XML, do we require the strict XML header?) Tj T* (# I.e., ) Tj (<) Tj (?xml version="1.0"?) Tj (>) Tj  T* (# By default, we do not.  If we set this option, we get an error) Tj T* (# thrown if we see XML without a header) Tj T* (XML_STRICT_HDR = 0x10000) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 487.8198 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Lists and the XMLLoader/XMLDumper) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 457.8198 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .294269 Tw (Lists present some interesting challenges when converting back and forth. XML supports lists, but Python) Tj T* 0 Tw (lists and XML lists are very different beasts in a few areas.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 439.8198 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Consider: by default, multiple entries of the same tag in XML form a list:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 370.6198 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+BT 1 0 0 1 0 38 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (top) Tj (>) Tj  T* (   ) Tj (<) Tj (ch) Tj (>) Tj (text1) Tj (<) Tj (/ch) Tj (>) Tj (   # list item 1) Tj T* (   ) Tj (<) Tj (ch) Tj (>) Tj (text2) Tj (<) Tj (/ch) Tj (>) Tj (   # list item 2) Tj T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 350.6198 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (There is an easy, obvious way to convert this into Python lists, and it works well:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 293.4198 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xl = XMLLoader\(") Tj (<) Tj (top) Tj (>) Tj (<) Tj (ch) Tj (>) Tj (text1) Tj (<) Tj (/ch) Tj (>) Tj (<) Tj (ch) Tj (>) Tj (text2) Tj (<) Tj (/ch) Tj (>) Tj (<) Tj (/top) Tj (>) Tj ("\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl.expectXML\(\)) Tj T* ({ 'top': { 'ch': ['text1', 'text2'] } }) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 273.4198 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (What happens, though, if there is only one tag in the XML list?:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 216.2198 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (top) Tj (>) Tj  T* (  ) Tj (<) Tj (ch) Tj (>) Tj (text1) Tj (<) Tj (/ch) Tj (>) Tj (   # list item?  plain data?) Tj T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 184.2198 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .067608 Tw (In the absence of extra information, 'ch' becomes a plain string: in XML, the only way to signal a list is with) Tj T* 0 Tw (multiple entries, which don't exist here:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 127.0198 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xl = XMLLoader\(") Tj (<) Tj (top) Tj (>) Tj (<) Tj (ch) Tj (>) Tj (text1) Tj (<) Tj (/ch) Tj (>) Tj (<) Tj (/top) Tj (>) Tj (", 0\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl.expectXML\(\)) Tj T* ({'top': {'ch': 'text1' }}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 83.01983 cm
+q
+BT 1 0 0 1 0 26 Tm 1.556098 Tw 12 TL /F1 10 Tf 0 0 0 rg (In a full XML world, where schemas abound, the solution might be to have a schema to enforce this. ) Tj T* 0 Tw .166654 Tw (Unfortunately, the XML tools here assume we ) Tj /F4 10 Tf (just ) Tj /F1 10 Tf (have the information of the table itself: there is no extra ) Tj T* 0 Tw 1.181567 Tw (information. So, we have to make due with what XML gives us. In this case, we use the convention of) Tj T* 0 Tw ET
+Q
+Q
+ 
+endstream
+endobj
+% 'R66': class PDFStream 
+66 0 obj
+% page stream
+<< /Length 6245 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 753.0236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (having a special attribute ) Tj 1 0 0 rg (type__ ) Tj 0 0 0 rg (to indicate that 'ch' is a list:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 695.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (top) Tj (>) Tj  T* (  ) Tj (<) Tj (ch type__="list") Tj (>) Tj (text1) Tj (<) Tj (/ch) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 675.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Adding this attribute forces the XML translation to keep ch as a list:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 618.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xl = XMLLoader\(") Tj (<) Tj (top) Tj (>) Tj (<) Tj (ch type__='list') Tj (>) Tj (text1) Tj (<) Tj (/ch) Tj (>) Tj (<) Tj (/top) Tj (>) Tj (", 0\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl.expectXML\(\)) Tj T* ({'top': {'ch': ['text1']}}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 598.6236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (For consistency, you can ) Tj /F4 10 Tf (always ) Tj /F1 10 Tf (put it on the first entry to tag an entity as a list:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 529.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+BT 1 0 0 1 0 38 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (top) Tj (>) Tj  T* ( ) Tj (<) Tj (ch type__="list") Tj (>) Tj (text1) Tj (<) Tj (/ch) Tj (>) Tj  T* ( ) Tj (<) Tj (ch) Tj (>) Tj (text2) Tj (<) Tj (/ch) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 509.4236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (And when you translate:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 453.38 cm
+q
+q
+.976496 0 0 .976496 0 0 cm
+q
+1 0 0 1 6.6 6.758862 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 480 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xl = XMLLoader\(") Tj (<) Tj (top) Tj (>) Tj (<) Tj (ch type__='list') Tj (>) Tj (text1) Tj (<) Tj (/ch) Tj (>) Tj (<) Tj (ch) Tj (>) Tj (text2) Tj (<) Tj (/ch) Tj (>) Tj (<) Tj (/top) Tj (>) Tj (", 0\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl.expectXML\(\)) Tj T* ({'top': {'ch': ['text1', 'text2']}}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 397.38 cm
+q
+BT 1 0 0 1 0 38 Tm .65856 Tw 12 TL /F1 10 Tf 0 0 0 rg (But you don't have to put the ) Tj 1 0 0 rg (type__ ) Tj 0 0 0 rg (tag on if you have multiple entries: in that case the tools can easily) Tj T* 0 Tw 1.048626 Tw (figure out if it's a list or not. It's really only if you have a ) Tj /F4 10 Tf (single lonesome tag ) Tj /F1 10 Tf (that you need the special) Tj T* 0 Tw .32249 Tw 1 0 0 rg (type__ ) Tj 0 0 0 rg (to force a list. \(but ONLY put in on the first entry: if you put it on all the entries, you won't get what) Tj T* 0 Tw (you expect\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 379.38 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (How do you represent an empty list? Use an empty tag with the ) Tj 1 0 0 rg (type__ ) Tj 0 0 0 rg (attribute:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 322.18 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (top) Tj (>) Tj  T* (  ) Tj (<) Tj (ch type__="list"/) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 302.18 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Translating, you'll see, yes, 'ch' becomes an empty list:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 244.98 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xl = XMLLoader\(") Tj (<) Tj (top) Tj (>) Tj (<) Tj (ch type__='list'/) Tj (>) Tj (<) Tj (/top) Tj (>) Tj (", 0\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl.expectXML\(\)) Tj T* ({'top': {'ch': []}}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 212.98 cm
+q
+BT 1 0 0 1 0 14 Tm .772765 Tw 12 TL /F1 10 Tf 0 0 0 rg (There's another way in which XML lists and Python lists differ: all XML lists have to be ) Tj /F4 10 Tf (named) Tj /F1 10 Tf (, whereas) Tj T* 0 Tw (Python has the notion of ) Tj /F4 10 Tf (anonymous ) Tj /F1 10 Tf (lists and dictionaries. Consider in Python:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 206.98 cm
+Q
+q
+1 0 0 1 62.69291 181.78 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 448.6898 24 re B*
+Q
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( a = { 'top': [ [1,2,3],['a','b'], {'a':1} ] }) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 181.78 cm
+Q
+q
+1 0 0 1 62.69291 127.78 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL 1.29284 Tw (The 'top' list contains two anonymous lists and one anonymous dictionary. Basically, because lists can) Tj T* 0 Tw .164651 Tw (hold anything \(including other lists\), the content inside the list exists without a name. Python programmers) Tj T* 0 Tw .561098 Tw (normally think of that as just a['top'][0], a['top'][1], etc. using indices, so they don't care that the inner lists) Tj T* 0 Tw (don't have names.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 85.78003 cm
+q
+BT 1 0 0 1 0 26 Tm .872488 Tw 12 TL /F1 10 Tf 0 0 0 rg (In XML, all tags ) Tj /F4 10 Tf (HAVE ) Tj /F1 10 Tf (to have a name. To preserve the XML notion of lists, all entries should have the ) Tj T* 0 Tw .09332 Tw (same name as well \(we saw above that XML enforces lists by having repeated tags\). This means we can't ) Tj T* 0 Tw .259431 Tw (use 0,1,2, etc. like a Python programmer would. The XML needs a name for the anonymous list: the tools) Tj T* 0 Tw ET
+Q
+Q
+ 
+endstream
+endobj
+% 'R67': class PDFStream 
+67 0 obj
+% page stream
+<< /Length 4386 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 753.0236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (use ') Tj 1 0 0 rg (list__) Tj 0 0 0 rg (':) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 527.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 216 re B*
+Q
+q
+BT 1 0 0 1 0 194 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xd = XMLDumper\(sys.stdout, XML_DUMP_PRETTY\)) Tj T* (>) Tj (>) Tj (>) Tj ( a =  { 'top': [ [1,2,3],['a','b'], {'a':1} ] }) Tj T* (>) Tj (>) Tj (>) Tj ( xd.XMLDumpKeyValue\('a', a\)) Tj T* (<) Tj (a) Tj (>) Tj  T* (    ) Tj (<) Tj (top) Tj (>) Tj  T* (        ) Tj (<) Tj (list__) Tj (>) Tj (1) Tj (<) Tj (/list__) Tj (>) Tj  T* (        ) Tj (<) Tj (list__) Tj (>) Tj (2) Tj (<) Tj (/list__) Tj (>) Tj  T* (        ) Tj (<) Tj (list__) Tj (>) Tj (3) Tj (<) Tj (/list__) Tj (>) Tj  T* (    ) Tj (<) Tj (/top) Tj (>) Tj  T* (    ) Tj (<) Tj (top) Tj (>) Tj  T* (        ) Tj (<) Tj (list__) Tj (>) Tj (a) Tj (<) Tj (/list__) Tj (>) Tj  T* (        ) Tj (<) Tj (list__) Tj (>) Tj (b) Tj (<) Tj (/list__) Tj (>) Tj  T* (    ) Tj (<) Tj (/top) Tj (>) Tj  T* (    ) Tj (<) Tj (top) Tj (>) Tj  T* (        ) Tj (<) Tj (a) Tj (>) Tj (1) Tj (<) Tj (/a) Tj (>) Tj  T* (    ) Tj (<) Tj (/top) Tj (>) Tj  T* (<) Tj (/a) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 483.8236 cm
+q
+BT 1 0 0 1 0 26 Tm 1.809431 Tw 12 TL /F1 10 Tf 0 0 0 rg (The convention that the toolset uses is that ") Tj 1 0 0 rg (list__) Tj 0 0 0 rg (" will be the name XML uses to correspond to the) Tj T* 0 Tw .503145 Tw (anonymous Python lists. In the case of the dictionary, being inside a list like that makes it "obvious" it's a) Tj T* 0 Tw (dictionary, so we don't need any special mechanism for that. To be sure this converts back faithfully:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 234.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 240 re B*
+Q
+q
+BT 1 0 0 1 0 218 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( x = """) Tj T* (...   ) Tj (<) Tj (a) Tj (>) Tj  T* (...       ) Tj (<) Tj (top) Tj (>) Tj  T* (...           ) Tj (<) Tj (list__) Tj (>) Tj (1) Tj (<) Tj (/list__) Tj (>) Tj  T* (...           ) Tj (<) Tj (list__) Tj (>) Tj (2) Tj (<) Tj (/list__) Tj (>) Tj  T* (...           ) Tj (<) Tj (list__) Tj (>) Tj (3) Tj (<) Tj (/list__) Tj (>) Tj  T* (...       ) Tj (<) Tj (/top) Tj (>) Tj  T* (...       ) Tj (<) Tj (top) Tj (>) Tj  T* (...           ) Tj (<) Tj (list__) Tj (>) Tj (a) Tj (<) Tj (/list__) Tj (>) Tj  T* (...           ) Tj (<) Tj (list__) Tj (>) Tj (b) Tj (<) Tj (/list__) Tj (>) Tj  T* (...       ) Tj (<) Tj (/top) Tj (>) Tj  T* (...       ) Tj (<) Tj (top) Tj (>) Tj  T* (...           ) Tj (<) Tj (a) Tj (>) Tj (1) Tj (<) Tj (/a) Tj (>) Tj  T* (...       ) Tj (<) Tj (/top) Tj (>) Tj  T* (...   ) Tj (<) Tj (/a) Tj (>) Tj  T* (... """) Tj T* (>) Tj (>) Tj (>) Tj ( xl = XMLLoader\(x, 0\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl.expectXML\(\)) Tj T* ({'a': {'top': [['1', '2', '3'], ['a', 'b'], {'a': '1'}]}}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 214.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (There is one final corner case:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 181.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 24 re B*
+Q
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( a= { 'top': [ {} ] }) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 137.4236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .384431 Tw (An empty dictionary inside a list \(so the dictionary is anonymous\). Any keys in a dict usually offer enough) Tj T* 0 Tw .749488 Tw (information for the XML tools to figure out that it's a dictionary. In this case, since there are no keys, we) Tj T* 0 Tw (need a special key to indicate an anonymous dictionary:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 80.22362 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xd.XMLDumpKeyValue\('a', {'top': [ {} ] } \)) Tj T* (<) Tj (a) Tj (>) Tj  T* (    ) Tj (<) Tj (top type__="list") Tj (>) Tj  T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R68': class PDFStream 
+68 0 obj
+% page stream
+<< /Length 4725 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 703.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+BT 1 0 0 1 0 38 Tm 12 TL /F3 10 Tf 0 0 0 rg (        ) Tj (<) Tj (dict__) Tj (>) Tj  T* (        ) Tj (<) Tj (/dict__) Tj (>) Tj  T* (    ) Tj (<) Tj (/top) Tj (>) Tj  T* (<) Tj (/a) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 683.8236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (In fact, you can use ') Tj 1 0 0 rg (dict__) Tj 0 0 0 rg (' to name an anonymous dictionary, and the tools will do the right thing:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 530.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 144 re B*
+Q
+q
+BT 1 0 0 1 0 122 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( x = """) Tj T* (... ) Tj (<) Tj (a) Tj (>) Tj  T* (...       ) Tj (<) Tj (top type__="list") Tj (>) Tj  T* (...           ) Tj (<) Tj (dict__) Tj (>) Tj  T* (...           ) Tj (<) Tj (/dict__) Tj (>) Tj  T* (...       ) Tj (<) Tj (/top) Tj (>) Tj  T* (...   ) Tj (<) Tj (/a) Tj (>) Tj  T* (... """) Tj T* (>) Tj (>) Tj (>) Tj ( xl = XMLLoader\(x, 0\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl.expectXML\(\)) Tj T* ({'a': {'top': [{}]}}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 510.6236 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (In fact, adding the ') Tj 1 0 0 rg (dict__) Tj 0 0 0 rg (' in the anonymous list works just fine, it's just clumsier:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 333.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 168 re B*
+Q
+q
+BT 1 0 0 1 0 146 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( x = """) Tj T* (... ) Tj (<) Tj (a) Tj (>) Tj  T* (...   ) Tj (<) Tj (top) Tj (>) Tj  T* (...     ) Tj (<) Tj (dict__) Tj (>) Tj (<) Tj (a) Tj (>) Tj (1) Tj (<) Tj (/a) Tj (>) Tj (<) Tj (/dict__) Tj (>) Tj  T* (...   ) Tj (<) Tj (/top) Tj (>) Tj  T* (...   ) Tj (<) Tj (top) Tj (>) Tj  T* (...     ) Tj (<) Tj (dict__/) Tj (>) Tj  T* (...   ) Tj (<) Tj (/top) Tj (>) Tj  T* (... ) Tj (<) Tj (/a) Tj (>) Tj  T* (... """) Tj T* (>) Tj (>) Tj (>) Tj ( xl = XMLLoader\(x, 0\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl.expectXML\(\)) Tj T* ({'a': {'top': [{'a': '1'}, {}]}}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 300.4236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Array Disposition) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 234.4236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 50 Tm /F1 10 Tf 12 TL .021647 Tw (The ArrayDisposition parameter of the XMLLoader and XMLDumper is often misunderstood. Basically, the) Tj T* 0 Tw .462651 Tw (array disposition tells the XMLLoader/XMLDumper how to deal with arrays of POD: POD stands for Plain) Tj T* 0 Tw .013876 Tw (Old Data, meaning data like ints, floats, complexes \(In hard core C, POD is quick and easy to manipulate\).) Tj T* 0 Tw 1.617045 Tw (POD arrays are very important for efficient processing of lots of scientific data as they are are stored) Tj T* 0 Tw (efficiently as contiguous data in memory.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 192.4236 cm
+q
+BT 1 0 0 1 0 26 Tm .29332 Tw 12 TL /F1 10 Tf 0 0 0 rg (Python lists ) Tj /F4 10 Tf (are not ) Tj /F1 10 Tf (POD arrays: lists have to deal with heterogeneous data \(i.e., [1, 2.2, 'three']\) and thus) Tj T* 0 Tw .832765 Tw (aren't as efficient for storing large amounts of data. In a crunch, however, POD arrays can be stored as) Tj T* 0 Tw (Python lists.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 174.4236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (There are five different array dispositions \(number 4 is new to PicklingTools 1.3.0\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 168.4236 cm
+Q
+q
+1 0 0 1 62.69291 76.86614 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 69.2 cm
+Q
+q
+1 0 0 1 20 69.2 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 54.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 42.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.854976 Tw (ARRAYDISPOSITION_AS_NUMERIC : Assume all array data is using the Python Numeric) Tj T* 0 Tw (module which keeps arrays of POD:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 416.6898 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( import Numeric) Tj T* (>) Tj (>) Tj (>) Tj ( a = Numeric.array\([1,2,3], 'f'\) # POD array of floats) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+ 
+endstream
+endobj
+% 'R69': class PDFStream 
+69 0 obj
+% page stream
+<< /Length 7077 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 228.2236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 482.8 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 6 41 Tm  T* ET
+q
+1 0 0 1 23 15 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.263984 Tw (The Python Numeric module may or may not be installed on your platform: many versions of) Tj T* 0 Tw 2.43561 Tw (RedHat Linux allow an RPM to be installed. If you use older XMPY \(pre 4.0\), Numeric is) Tj T* 0 Tw (installed by default. Newer XMPY should use NumPy \(see next bullet\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (As of 1.5.x series, Numeric is out of maintenance and we tend to prefer NumPy.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 476.8 cm
+Q
+q
+1 0 0 1 20 357.6 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 104.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 92.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .360888 Tw (ARRAYDISPOSITION_AS_NUMPY : Assume all array data is using the Python NumPy module) Tj T* 0 Tw (which keeps arrays of POD:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 47 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 425.6898 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( import numpy) Tj T* (>) Tj (>) Tj (>) Tj ( a = numpy.array\([1,2,3], 'f'\) # POD array of floats) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.744651 Tw (The Python numpy module may or may not be installed on your platform: many versions of) Tj T* 0 Tw .931318 Tw (RedHat Linux allow an RPM to be installed. NumPy really only works with XMPY greater than) Tj T* 0 Tw (version 4.0.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 351.6 cm
+Q
+q
+1 0 0 1 20 258.4 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 78.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (3.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 54.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .646905 Tw (ARRAYDISPOSITION_AS_LIST: Turn all array POD data into a list. This is the most inefficient) Tj T* 0 Tw 1.277633 Tw (way to store POD arrays, but it is the most compatible, as all versions of Python support the) Tj T* 0 Tw (Python list:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 425.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( l = [1,2,3]  # Not stored as anything special: uses) Tj T* (>) Tj (>) Tj (>) Tj (              # overhead of lists which is not the most) Tj T* (>) Tj (>) Tj (>) Tj (              # efficient way to store lots of POD) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 252.4 cm
+Q
+q
+1 0 0 1 20 121.2 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 116.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (4.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 116.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (ARRAYDISPOSITION_AS_ARRAY: Most versions of Python have the array module:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 35 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 425.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 50 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( import array) Tj T* (>) Tj (>) Tj (>) Tj ( a = array.array\('f', [1,2,3]\) # POD array of floats) Tj T* (>) Tj (>) Tj (>) Tj (                               # NOTE! Python arrays) Tj T* (>) Tj (>) Tj (>) Tj (                               # have different interfaces) Tj T* (>) Tj (>) Tj (>) Tj (                               # than Numeric arrays) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .207318 Tw (The Python array module doesn't support complex data, but is available on almost Pythons as a) Tj T* 0 Tw (default module.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 115.2 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 100.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (5.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 76.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 2.86497 Tw (ARRAYDISPOSITION_AS_NUMERIC_WRAPPER: This is new to simple array class which) Tj T* 0 Tw 2.781412 Tw (wraps the Python array, but retains the interface of the Numeric array and also supports) Tj T* 0 Tw (complex data.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 70.2 cm
+Q
+q
+1 0 0 1 23 -3 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 405.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 50 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( from simplearray import SimpleArray as array) Tj T* (>) Tj (>) Tj (>) Tj ( a = array\([1,2,3], 'D'\)   # POD array of complex doubles:) Tj T* (>) Tj (>) Tj (>) Tj (                           # works like Numeric arrays but) Tj T* (>) Tj (>) Tj (>) Tj (                           # just a simple Python class) Tj T* (>) Tj (>) Tj (>) Tj (                           # that wraps Python array module) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 228.2236 cm
+Q
+q
+1 0 0 1 62.69291 198.2236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.425318 Tw (In general, the array disposition indicate what the XMLLoader/XMLDumper will try to do with arrays of) Tj T* 0 Tw (POD. The XMLLoader and XMLDumper do slightly different things based on the array disposition.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 192.2236 cm
+Q
+q
+1 0 0 1 62.69291 76.86614 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 109.3575 cm
+Q
+q
+1 0 0 1 20 109.3575 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 94.35748 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 58.35748 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL 2.697674 Tw (In the XMLDumper case, if the Python dictionary contains any POD data \(Numeric array,) Tj T* 0 Tw .193318 Tw (NumPy array, Python array, or Numeric array wrapper\), it will dump it as Numeric data UNLESS) Tj T* 0 Tw .391654 Tw (the array disposition is AS_LIST, in which case it will dump it as a list. Here's an example using) Tj T* 0 Tw (the Numeric wrapper array, and how it dumps:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 1.15748 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 416.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( from simplearray import SimpleArray as array) Tj T* (>) Tj (>) Tj (>) Tj ( e = { 'data': array\([1,2,3], 'D'\), 'time':'12:00' }) Tj T* (>) Tj (>) Tj (>) Tj  T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+ 
+endstream
+endobj
+% 'R70': class PDFStream 
+70 0 obj
+% page stream
+<< /Length 4980 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 76.86614 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 243.3575 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 6 431.8 Tm  T* ET
+q
+1 0 0 1 23 368.6 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 416.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 50 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( import sys) Tj T* (>) Tj (>) Tj (>) Tj ( from xmldumper import *) Tj T* (>) Tj (>) Tj (>) Tj ( xd = XMLDumper\(sys.stdout, e, XML_DUMP_PRETTY,) Tj T* (...                ARRAYDISPOSITION_AS_NUMERIC_WRAPPER\)) Tj T* (>) Tj (>) Tj (>) Tj ( xd.XMLDumpKeyValue\('top', e\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 342.6 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The output:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 273.4 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 419.6898 60 re B*
+Q
+q
+BT 1 0 0 1 0 38 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (top) Tj (>) Tj  T* (    ) Tj (<) Tj (data arraytype__="D") Tj (>) Tj (\(1+0j\),\(2+0j\),\(3+0j\)) Tj (<) Tj (/data) Tj (>) Tj  T* (    ) Tj (<) Tj (time) Tj (>) Tj (12:00) Tj (<) Tj (/time) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 211.4 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .322126 Tw (The POD array dumps a long list of comma-separated values \(CSV\), with an attribute indicating) Tj T* 0 Tw 1.734104 Tw (what the original type of the data was. But, if we use the default array disposition \(which is) Tj T* 0 Tw 1.416136 Tw (ARRAYDISPOSITION_AS_LIST\), that array will be turned into a plain list, and all POD array) Tj T* 0 Tw (information will be lost \(including the type tag\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 154.2 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 419.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( xd = XMLDumper\(sys.stdout, XML_DUMP_PRETTY\)) Tj T* (>) Tj (>) Tj (>) Tj (                          # Default is ARRAYDISPOSITION_AS_LIST\)) Tj T* (>) Tj (>) Tj (>) Tj ( xd.XMLDumpKeyValue\('top', e\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 128.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The output is:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 35 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 419.6898 84 re B*
+Q
+q
+BT 1 0 0 1 0 62 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (top) Tj (>) Tj  T* (    ) Tj (<) Tj (data) Tj (>) Tj (\(1+0j\)) Tj (<) Tj (/data) Tj (>) Tj  T* (    ) Tj (<) Tj (data) Tj (>) Tj (\(2+0j\)) Tj (<) Tj (/data) Tj (>) Tj  T* (    ) Tj (<) Tj (data) Tj (>) Tj (\(3+0j\)) Tj (<) Tj (/data) Tj (>) Tj  T* (    ) Tj (<) Tj (time) Tj (>) Tj (12:00) Tj (<) Tj (/time) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .084983 Tw (Although we lose some information with this array disposition, this format is very compatible with) Tj T* 0 Tw (many XML tools \(as the notion of XML lists is well understood by those tools\).) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 237.3575 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 222.3575 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 210.3575 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 3.18561 Tw (From the XMLLoader's point of view: it will only try to convert POD arrays if it actually) Tj T* 0 Tw (encounters POD arrays! If the XML has only plain XML lists, the array disposition doesn't matter:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 9.15748 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 416.6898 192 re B*
+Q
+q
+BT 1 0 0 1 0 170 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (!-- XMLLoader won't care what the array disposition is for this) Tj T* (     data, because all key values are standard lists: there is) Tj T* (     no special tags or anything indicating otherwise --!) Tj (>) Tj  T* (<) Tj (top) Tj (>) Tj  T* (    ) Tj (<) Tj (data) Tj (>) Tj (\(1+0j\)) Tj (<) Tj (/data) Tj (>) Tj  T* (    ) Tj (<) Tj (data) Tj (>) Tj (\(2+0j\)) Tj (<) Tj (/data) Tj (>) Tj  T* (    ) Tj (<) Tj (data) Tj (>) Tj (\(3+0j\)) Tj (<) Tj (/data) Tj (>) Tj  T* (    ) Tj (<) Tj (time) Tj (>) Tj (12:00) Tj (<) Tj (/time) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj  T*  T* (<) Tj (!---- XMLLoader *will care* because it sees the special) Tj T* (       arraytype__ tag below, so it knows that array POD --!) Tj (>) Tj  T* (<) Tj (top) Tj (>) Tj  T* (    ) Tj (<) Tj (data arraytype__="D") Tj (>) Tj (\(1+0j\),\(2+0j\),\(3+0j\)) Tj (<) Tj (/data) Tj (>) Tj  T* (    ) Tj (<) Tj (time) Tj (>) Tj (12:00) Tj (<) Tj (/time) Tj (>) Tj  T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+ 
+endstream
+endobj
+% 'R71': class PDFStream 
+71 0 obj
+% page stream
+<< /Length 6643 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 309.3639 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 6 442.6597 Tm  T* ET
+q
+1 0 0 1 23 427.4597 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 416.6898 24 re B*
+Q
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (/top) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 377.4597 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 2.584983 Tw (When loading, the XMLLoader will follow the array disposition: all array POD data will be) Tj T* 0 Tw .958555 Tw (converted to either a Numeric array, Python array, Numeric wrapper array or plain Python list.) Tj T* 0 Tw (As an example for Numeric Wrapper array:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 238.2 cm
+q
+q
+.985433 0 0 .985433 0 0 cm
+q
+1 0 0 1 6.6 6.69756 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 432 132 re B*
+Q
+q
+BT 1 0 0 1 0 110 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( x = """) Tj T* (... ) Tj (<) Tj (top) Tj (>) Tj  T* (...     ) Tj (<) Tj (data arraytype__="D") Tj (>) Tj (\(1+0j\),\(2+0j\),\(3+0j\)) Tj (<) Tj (/data) Tj (>) Tj  T* (...     ) Tj (<) Tj (time) Tj (>) Tj (12:00) Tj (<) Tj (/time) Tj (>) Tj  T* (... ) Tj (<) Tj (/top) Tj (>) Tj  T* (... """) Tj T* (>) Tj (>) Tj (>) Tj ( from xmlloader import *) Tj T* (>) Tj (>) Tj (>) Tj ( xl = XMLLoader\(x, 0, ARRAYDISPOSITION_AS_NUMERIC_WRAPPER\)) Tj T* (>) Tj (>) Tj (>) Tj ( xl.expectXML\(\)) Tj T* ({'top': {'data': array\([\(1+0j\),\(2+0j\),\(3+0j\)], 'D'\), 'time': '12:00'}}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 188.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.039318 Tw (In the above example, the POD array was preserved, because we set the array disposition to) Tj T* 0 Tw 1.378555 Tw (load all POD arrays using the Numeric wrapper \(simplearray.py\). If we don't specify an array) Tj T* 0 Tw (disposition, it uses the ARRAYDISPOSITION_AS_LIST as the default:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 47 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 419.6898 132 re B*
+Q
+q
+BT 1 0 0 1 0 110 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( x = """) Tj T* (... ) Tj (<) Tj (top) Tj (>) Tj  T* (...    ) Tj (<) Tj (data arraytype__="D") Tj (>) Tj (\(1+0j\),\(2+0j\),\(3+0j\)) Tj (<) Tj (/data) Tj (>) Tj  T* (...    ) Tj (<) Tj (time) Tj (>) Tj (12:00) Tj (<) Tj (/time) Tj (>) Tj  T* (... ) Tj (<) Tj (/top) Tj (>) Tj  T* (... """) Tj T* (>) Tj (>) Tj (>) Tj ( from xmlloader import *) Tj T* (>) Tj (>) Tj (>) Tj ( xl = XMLLoader\(x, 0\) # Default is ARRAYDISPOSITION_AS_LIST) Tj T* (>) Tj (>) Tj (>) Tj ( xl.expectXML\(\)) Tj T* ({'top': {'data': [\(1+0j\), \(2+0j\), \(3+0j\)], 'time': '12:00'}}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.01832 Tw (In the above case, the array was converted to a Python list: it preserves the data, but not the) Tj T* 0 Tw .217209 Tw (original type of the POD data \(was the data complex float or complex double?\) or the fact that is) Tj T* 0 Tw (was a POD array.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 309.3639 cm
+Q
+q
+1 0 0 1 62.69291 291.3639 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The real reason for ArrayDisposition is because Python doesn't have a "good" standard POD array:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 285.3639 cm
+Q
+q
+1 0 0 1 62.69291 147.3639 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 132 cm
+Q
+q
+1 0 0 1 20 132 cm
+Q
+q
+1 0 0 1 20 120 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Numeric arrays are a standard at many places of work, but they aren't installed as standard) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 114 cm
+Q
+q
+1 0 0 1 20 78 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 21 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.255697 Tw (Python array don't handle complex data, which is a non-starter for some kinds of processing.) Tj T* 0 Tw .621412 Tw (They also don't do array operations \(vector add, multiply, etc.\) AND the serialization for Python) Tj T* 0 Tw (arrays has changed between 2.6 and 2.7, so they are incompatibile between Pythons.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 72 cm
+Q
+q
+1 0 0 1 20 60 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (3.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The Numeric wrapper handles complex, but still doesn't have the vector operations) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 54 cm
+Q
+q
+1 0 0 1 20 42 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (4.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Python lists are standard, but are a poor way to store large amounts of data) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 36 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 21 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (5.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .00311 Tw (The NumPy package is fairly standard on most modern distributions, but you may still have to go) Tj T* 0 Tw .323145 Tw (out of your way to get it. In general NumPy is the best choice, as NumPy is in maintenance and) Tj T* 0 Tw (fairly standard across multiple platforms.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 147.3639 cm
+Q
+q
+1 0 0 1 62.69291 105.3639 cm
+q
+BT 1 0 0 1 0 26 Tm .139985 Tw 12 TL /F1 10 Tf 0 0 0 rg (C++ doesn't have this problem: the Array) Tj (<) Tj (T) Tj (> is the standard way to deal with POD arrays. AS_NUMERIC) Tj T* 0 Tw 2.54152 Tw (and AS_PYTHON_ARRAY are handled the same \(using the C++ Array) Tj (<) Tj (T) Tj (> class\). The AS_LIST is) Tj T* 0 Tw (offered as a compatibility option and will convert POD arrays to the equivalent Python List \(the C++ Arr\(\)\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 87.36389 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (In XML, the 'arraytype' tags are the following:) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+% 'R72': class PDFStream 
+72 0 obj
+% page stream
+<< /Length 6250 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 607.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 156 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 134 Tm /F3 10 Tf 12 TL (s: 1 byte signed char) Tj T* (S: 1 byte unsigned char) Tj T* (i: 2 byte signed char) Tj T* (I: 2 byte unsigned char) Tj T* (l: 4 byte signed char) Tj T* (L: 4 byte unsigned char) Tj T* (x: 4 byte signed char) Tj T* (X: 4 byte unsigned char) Tj T* (f: 4 byte float) Tj T* (d: 8 byte double) Tj T* (F: 8 byte complex \(2 4-byte floats\)) Tj T* (D: 16 byte complex \(2 8-byte doubles\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 587.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Thus:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 554.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 24 re B*
+Q
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F3 10 Tf 0 0 0 rg (<) Tj (s arraytype__='S') Tj (>) Tj (1,2,3) Tj (<) Tj (/s) Tj (>) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 534.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Is an array of unsigned 1 byte integers. These typetags correspond to the C++ Val type tags.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 504.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 7.573314 Tw (When building arrays from Python, look at the Numeric typecodes from Numeric \(print) Tj T* 0 Tw (Numeric.typecodes\) or array \(help array\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 474.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.203984 Tw (Note that from a Python dictionary perspective, the arrays are usually printed as Numeric arrays. Their) Tj T* 0 Tw (typecodes:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 426.9827 cm
+q
+q
+.805709 0 0 .805709 0 0 cm
+q
+1 0 0 1 6.6 8.191538 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 582 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F3 10 Tf 0 0 0 rg (>) Tj (>) Tj (>) Tj ( import Numeric) Tj T* (>) Tj (>) Tj (>) Tj ( print Numeric.typecodes) Tj T* ({'Integer': '1sil', 'UnsignedInteger': 'bwu', 'Float': 'fd', 'Character': 'c', 'Complex': 'FD'}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 346.9827 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 62 Tm /F1 10 Tf 12 TL .24311 Tw (Why didn't we use Numeric typecodes as the standard for the XML type tags? Unfortunately, the Numeric) Tj T* 0 Tw .482485 Tw (typecodes don't have a 8-byte unsigned integer, and depending on the type of machine \(32-bit or 64-bit\),) Tj T* 0 Tw 2.902485 Tw (the 'l' typecode may be \(resp.\) a 4-byte integer or an 8-byte integer. The Numeric typecodes are) Tj T* 0 Tw .276647 Tw (unfortunately inconsistent. The Python array typecodes have similar problems \(the tags aren't guaranteed) Tj T* 0 Tw 1.99436 Tw (to be a x-bytes, and there are no complex typecodes\). The Val typecodes \(listed above\) are always) Tj T* 0 Tw (guaranteed to be exact number of bytes and they support complex data.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 313.9827 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Back and Forth Between XML and Python Dictionaries) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 271.9827 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .352209 Tw (The XMLLoader and XMLDumper have been written in such a way to allow you to convert back and forth) Tj T* 0 Tw 2.054651 Tw (between XML and Python dictionaries and not lose information \(if your XML is key-value XML\). The) Tj T* 0 Tw (previous sections made it look easy, but there are a lot of places where it be tricky.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 265.9827 cm
+Q
+q
+1 0 0 1 62.69291 85.98272 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 174 cm
+Q
+q
+1 0 0 1 20 174 cm
+Q
+q
+1 0 0 1 20 150 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .955697 Tw (lists: Lists can be problematic \(see above discussion\), but the solutions to those problems are) Tj T* 0 Tw (outlined in the previous section.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 144 cm
+Q
+q
+1 0 0 1 20 72 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 57 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 62 Tm 1.963984 Tw 12 TL /F1 10 Tf 0 0 0 rg (floating point numbers: With any floating point data, the number of places you print can be) Tj T* 0 Tw .559984 Tw (important. The 'default' printing of Python is usually not good enough, so the ) Tj /F4 10 Tf (pretty ) Tj /F1 10 Tf (module has) Tj T* 0 Tw .953555 Tw (gone to great lengths \(and the XMLDumper and XMLLoader both import the ) Tj /F4 10 Tf (pretty ) Tj /F1 10 Tf (module\) to) Tj T* 0 Tw .51784 Tw (make sure that floating point numbers are handled responsibly: floats are printed with 7 places,) Tj T* 0 Tw .703318 Tw (doubles are printed with 16 places. Both the C++ and Python versions of pretty should behave) Tj T* 0 Tw (exactly the same way.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 66 cm
+Q
+q
+1 0 0 1 20 30 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 21 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (3.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.028443 Tw (array disposition: When going back and forth between dictionaries and XML, be judicious with) Tj T* 0 Tw .558651 Tw (the array disposition, or you may lose information. See the previous section for more details on) Tj T* 0 Tw (POD data.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 24 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (4.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .69748 Tw (dropping the top-level: In XML, the top-level document is frequently irrelevant. Converting back) Tj T* 0 Tw (and forth between XML and dicts you will probably want to drop the top-level.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 85.98272 cm
+Q
+ 
+endstream
+endobj
+% 'R73': class PDFStream 
+73 0 obj
+% page stream
+<< /Length 3842 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 717.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .25811 Tw (There are two tools for converting between XML and Python dictionaries from the command line: they are) Tj T* 0 Tw .15561 Tw (xml2dict.py and the dict2xml.py \(or in the C++ area, xml2dict and dict2xml: the C++ version is significantly) Tj T* 0 Tw .290542 Tw (faster \(60x\), but will have to be compiled. As usual, the C++ and Python interfaces are exactly the same\).) Tj T* 0 Tw (Sample usage:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 359.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 348 re B*
+Q
+q
+BT 1 0 0 1 0 326 Tm 12 TL /F3 10 Tf 0 0 0 rg (# From a UNIX prompt) Tj T* (% cd /fullpath/to/PicklingTools130/Python) Tj T* (% cat INPUT.XML) Tj T*  T* (<) Tj (?xml version="1.0" encoding="UTF-8"?) Tj (>) Tj  T* (<) Tj (root) Tj (>) Tj  T* (  ) Tj (<) Tj (list__) Tj (>) Tj  T* (    ) Tj (<) Tj (data arraytype__="d") Tj (>) Tj (100.0,200.0) Tj (<) Tj (/data) Tj (>) Tj  T* (    ) Tj (<) Tj (data arraytype__="D") Tj (>) Tj (\(100-100j\),\(600+1j\)) Tj (<) Tj (/data) Tj (>) Tj  T* (    ) Tj (<) Tj (here) Tj (>) Tj (1) Tj (<) Tj (/here) Tj (>) Tj  T* (  ) Tj (<) Tj (/list__) Tj (>) Tj  T* (  ) Tj (<) Tj (list__) Tj (>) Tj (7) Tj (<) Tj (/list__) Tj (>) Tj  T* (  ) Tj (<) Tj (list__) Tj (>) Tj (\(1-2j\)) Tj (<) Tj (/list__) Tj (>) Tj  T* (<) Tj (/root) Tj (>) Tj  T*  T* (% python xml2dict.py INPUT.XML) Tj T*  T* ([) Tj T* (  {) Tj T* (      'data':[) Tj T* (          array\([100.0,200.0], 'd'\),) Tj T* (          array\([\(100-100j\),\(600+1j\)], 'D'\)) Tj T* (      ],) Tj T* (      'here':1) Tj T* (  },) Tj T* (  7,) Tj T* (  \(1-2j\)) Tj T* (]) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 327.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 2.994198 Tw (The options on there were chosen to try to make it easy to go back and forth between the two) Tj T* 0 Tw (representations without losing any info.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 294.8236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (C++ and the XMLLoader and XMLDumper) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 228.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 50 Tm /F1 10 Tf 12 TL .60811 Tw (The C++ version is remarkable similar to the Python version: in almost all respects, their behaviors, their) Tj T* 0 Tw .209398 Tw (interfaces, their options, and even their names should be exactly alike. Even though we said this earlier in) Tj T* 0 Tw .796457 Tw (this document, it is worth saying again: there has been considerable effort to make the C++ and Python) Tj T* 0 Tw 2.727045 Tw (versions of the XMLLoader and XMLDumper to be as close to the same as possible \(for ease of) Tj T* 0 Tw (maintenance\). Thus, the Python and C++ should be almost interchangeable.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 210.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The C++ version is significantly faster \(60x\), but the Python will be easier to use.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 180.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.014651 Tw (Some notable differences: the C++ version deals with Vals instead of Python objects, C++ uses OTabs) Tj T* 0 Tw (instead of OrderedDict.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 162.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Consider the following simple C++ example for XMLDumper:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 81.62362 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 50 Tm 12 TL /F3 10 Tf 0 0 0 rg (// Includes needed) Tj T* (#include ) Tj (<) Tj (iostream) Tj (>) Tj  T* (#include "xmldumper.h") Tj T*  T* (// C++ code) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R74': class PDFStream 
+74 0 obj
+% page stream
+<< /Length 5887 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 583.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 180 re B*
+Q
+q
+BT 1 0 0 1 0 158 Tm 12 TL /F3 10 Tf 0 0 0 rg (int main\(\)) Tj T* ({) Tj T* (  Val v = Tab\("{'a':1, 'b':2.2, 'c':'three'}"\);) Tj T* (  XMLDumper xd\(std::cout, XML_DUMP_PRETTY | XML_STRICT_HDR\);) Tj T* (  xd.XMLDumpKeyValue\("top", v\);) Tj T* (}) Tj T*  T* (/* Output:) Tj T* (<) Tj (top) Tj (>) Tj  T* (   ) Tj (<) Tj (a) Tj (>) Tj (1) Tj (<) Tj (/a) Tj (>) Tj  T* (   ) Tj (<) Tj (b) Tj (>) Tj (2.2) Tj (<) Tj (/b) Tj (>) Tj  T* (   ) Tj (<) Tj (c) Tj (>) Tj (three) Tj (<) Tj (/c) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj  T* (*/) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 551.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .81186 Tw (Like the XMLDumper of Python, the options are specified the same and the behavior and interfaces are) Tj T* 0 Tw (essentially the same. Instead of using "sys.stdout", we use C++ stream std::cout.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 521.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .340574 Tw (There are multiple examples in the baseline of using this the XMLLoader and XMLDumper: take a look at) Tj T* 0 Tw (xml2dict.cc and dict2xml.cc and the Makefiles to see examples of how to compile and use C++.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 488.8236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Different Types of Keys Of Dictionaries) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 470.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Most of the discussions above assume the keys of dictionaries are strings. They can be other types:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 464.8236 cm
+Q
+q
+1 0 0 1 62.69291 248.8236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 210 cm
+Q
+q
+1 0 0 1 20 210 cm
+Q
+q
+1 0 0 1 20 57 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 138 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 138 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (numbers:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 128 Tm  T* ET
+q
+1 0 0 1 20 30 cm
+q
+BT 1 0 0 1 0 98 Tm .139036 Tw 12 TL /F1 10 Tf 0 0 0 rg (If a key is an int, it will be converted to a tag with "0" around it. Unfortunately, an XML tag of) Tj T* 0 Tw .100574 Tw (<) Tj (0) Tj (> is not legal. By default, the tools will error out saying that keys with only numbers would) Tj T* 0 Tw 13.28898 Tw (be illegal XML. There are two options which help mitigate this:) Tj T* 0 Tw 5.293294 Tw (XML_TAGS_ACCEPTS_DIGITS and XML_DIGITS_AS_TAGS \(yes, they are closely) Tj T* 0 Tw .866342 Tw (named\). The first option \(XML_TAGS_ACCEPTS_DIGITS\) turns a dict key that starts with) Tj T* 0 Tw .397485 Tw (digits into an _digit. In other words, ) Tj /F3 10 Tf (0 ) Tj /F1 10 Tf (would become ) Tj /F3 10 Tf (_0) Tj /F1 10 Tf (. This gives legal XML, but doesn't) Tj T* 0 Tw .916342 Tw (translate back from XML to dict well. The second option \(XML_DIGITS_AS_TAGS\) allows) Tj T* 0 Tw .226412 Tw ("illegal" XML where ) Tj /F3 10 Tf (0 ) Tj /F1 10 Tf (becomes the tag <) Tj (0) Tj (>) Tj (: on other words, the numberness is preserved,) Tj T* 0 Tw (even though the underlying XML is strictly speaking illegal.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 0 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 5.107251 Tw (For conversions between Midas 2k OpalTables and XML, we suggest using the) Tj T* 0 Tw (XML_DIGITS_AS_TAGS conversion.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 51 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 36 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 36 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F2 10 Tf 12 TL (tuples and other types:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 26 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.642485 Tw (Right now, having a tuple as a key in a dict will cause "undefined" translations. As The) Tj T* 0 Tw .682765 Tw (Python will likely error out, and the C++ will try to convert the tuple to a string with varying) Tj T* 0 Tw (degrees of success.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 248.8236 cm
+Q
+q
+1 0 0 1 62.69291 230.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (In general, we suggest keeping keys as strings to keep the XML translations clean and well-defined.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 197.8236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Python C-Extension Module: New In PicklingTools 1.4.1) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 131.8236 cm
+q
+BT 1 0 0 1 0 50 Tm .538443 Tw 12 TL /F1 10 Tf 0 0 0 rg (The XMLtools for Python \() Tj /F3 10 Tf (xmldumper.py ) Tj /F1 10 Tf (and ) Tj /F3 10 Tf (xmlloader.py) Tj /F1 10 Tf (\) was originally written all in raw Python:) Tj T* 0 Tw 1.622927 Tw (this was on purpose it would be easy to include the Python "as-is" without any special build process:) Tj T* 0 Tw .88311 Tw /F4 10 Tf (import xmldumper ) Tj /F1 10 Tf (and you are ready to go. The C++ routines, however, are significantly faster than the) Tj T* 0 Tw 1.222927 Tw (Python routines \(character based I/O is usually much faster in C/C++ than Python\). Take a look at the) Tj T* 0 Tw (output of ) Tj /F3 10 Tf (xmltimingstest.py) Tj /F1 10 Tf (:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 86.62362 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F3 10 Tf 12 TL (% python xmltimingschecks.py) Tj T* (Time to create big table 0.00489687919617) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R75': class PDFStream 
+75 0 obj
+% page stream
+<< /Length 8047 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 697.8014 cm
+q
+q
+.554639 0 0 .554639 0 0 cm
+q
+1 0 0 1 6.6 11.89964 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 846 120 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 98 Tm /F3 10 Tf 12 TL (Time to deepcopy big table 0.0030460357666) Tj T* (...time to convert PyObject to Val ... 0.00101280212402) Tj T* (...time to convert PyObject to Val and back... 0.00146102905273) Tj T* (Time for Python XMLDumper to dump an XML file 0.0433909893036) Tj T* (Time for C XMLDumper to dump an XML file: 0.00465703010559) Tj T* ( -----------) Tj T* ( *Warning: This version of Python doesn't support ast.literal_eval, so XML_LOAD_EVAL_CONTENT can be an unsafe option in malicious input/XML) Tj T* (Time for Python Loader to load an XML file 0.61283493042) Tj T* (Time for C Ext Loader to load an XML file 0.00649094581604) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 629.8014 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 50 Tm /F1 10 Tf 12 TL 1.481098 Tw (From these numbers, it's easy to see that dict to XML C++ conversion routines are about an order of) Tj T* 0 Tw 1.050651 Tw (magnitude faster than their Python equivalents, and the XML to dict C++ conversion routines are about) Tj T* 0 Tw 1.923735 Tw (two orders of magnitude faster than their Python equivalents. Although it is nice to have raw Python) Tj T* 0 Tw .994692 Tw (solution to convert between dicts and XML \(for smaller tables\), for any larger tables, the extra speed of) Tj T* 0 Tw (C++ may be essential.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 599.8014 cm
+q
+BT 1 0 0 1 0 14 Tm .512651 Tw 12 TL /F1 10 Tf 0 0 0 rg (The guts of the C++ converters are available in the Python C-Extension module ) Tj /F3 10 Tf (pyobjconvert) Tj /F1 10 Tf (, but the) Tj T* 0 Tw (real interface most Python users will use is ) Tj /F3 10 Tf (cxmltools) Tj /F1 10 Tf (.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 569.8014 cm
+q
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Building the pyobjconvert Python C-Extension Module) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 539.8014 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 3.525366 Tw (The README describes how to create the pyobjconvert module, which has the XML conversion) Tj T* 0 Tw (wrappers:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 494.6014 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F3 10 Tf 12 TL (CReadXMLFromStream, CReadXMLFromString, CReadXMLFromFile) Tj T* (CWriteXMLToStream, CWriteXMLToString, CWriteXMLToFile) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 462.6014 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .634104 Tw (This C extension module for Python increases the speed of the XML to dict conversion by 60x-100x and) Tj T* 0 Tw (the dict to XML conversion by 6-10x.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 408.6014 cm
+q
+BT 1 0 0 1 0 38 Tm .337765 Tw 12 TL /F1 10 Tf 0 0 0 rg (The user probably doesn't want to use the pyobjconvert module directly \(as it has a different API than the) Tj T* 0 Tw .37784 Tw (previous xmltools.py\): instead, the user will ) Tj /F4 10 Tf (import cxmltools ) Tj /F1 10 Tf (which brings all the appropriate definitions in) Tj T* 0 Tw 2.283059 Tw (and the interfaces/names are converted to interfaces that are consistent with the xmldumper.py and) Tj T* 0 Tw (xmlloader.py.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 402.6014 cm
+Q
+q
+1 0 0 1 62.69291 76.86614 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 322.271 cm
+Q
+q
+1 0 0 1 20 310.271 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (HOW TO BUILD) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 310.271 cm
+Q
+q
+1 0 0 1 20 304.271 cm
+Q
+q
+1 0 0 1 20 304.271 cm
+Q
+q
+1 0 0 1 20 220.271 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 69 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 69 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Check 'setup.py':) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 27 cm
+q
+BT 1 0 0 1 0 26 Tm 9.702706 Tw 12 TL /F1 10 Tf 0 0 0 rg (Make sure it includes the paths to the code in ) Tj /F4 10 Tf (PicklingTools141/C++ ) Tj /F1 10 Tf (and) Tj T* 0 Tw 5.193294 Tw /F4 10 Tf (PicklingTools141/C++/opencontainers1_7_5/include ) Tj /F1 10 Tf (\(of course, the version numbers may) Tj T* 0 Tw (change in later releases\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .678555 Tw (By default, this should work, but these are relative paths from the PicklingTools main directory.) Tj T* 0 Tw (You may want to move those directories.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 214.271 cm
+Q
+q
+1 0 0 1 20 105.2 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 94.07097 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 94.07097 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Once you are sure those are correctly set-up, type:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 60.87097 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 422.921 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F3 10 Tf 12 TL (% python setup.py build   # % is the UNIX prompt) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 22.87097 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 2.557984 Tw (This starts the build process and builds the C extension module for you. You should see) Tj T* 0 Tw (something like this \(and notice that it creates three sub-directories\):) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+q
+.209753 0 0 .209753 0 0 cm
+q
+1 0 0 1 6.6 31.46555 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 2034 84 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 62 Tm /F3 10 Tf 12 TL (creating build) Tj T* (creating build/temp.linux-x86_64-2.4) Tj T* (gcc -pthread -fno-strict-aliasing -DNDEBUG -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fPIC -I../C++ -I../C++/opencontainers_1_7_5/include -I/usr/include/python2.4 -c pyobjconvertmodule.cc -o build/temp.linux-x86_64-2.4/pyobjconvertmodule.o) Tj T* (gcc -pthread -fno-strict-aliasing -DNDEBUG -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fPIC -I../C++ -I../C++/opencontainers_1_7_5/include -I/usr/include/python2.4 -c pyobjconverter.cc -o build/temp.linux-x86_64-2.4/pyobjconverter.o) Tj T* (creating build/lib.linux-x86_64-2.4) Tj T* (c++ -pthread -shared build/temp.linux-x86_64-2.4/pyobjconvertmodule.o build/temp.linux-x86_64-2.4/pyobjconverter.o -o build/lib.linux-x86_64-2.4/pyobjconvertmodule.so) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 99.2 cm
+Q
+q
+1 0 0 1 20 30 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 54.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (3.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 54.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Underneath PythonCExt should be three subdirs with names "something" like below:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 419.6898 48 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F3 10 Tf 12 TL (build) Tj T* (build/temp.linux-x86_64-2.4) Tj T* (build/lib.linux-x86_64-2.4) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 30 cm
+Q
+q
+1 0 0 1 20 24 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 0 cm
+q
+BT 1 0 0 1 0 14 Tm .829147 Tw 12 TL /F1 10 Tf 0 0 0 rg (Take a look at the ) Tj /F4 10 Tf (build/lib.linux-x86_64-2.4 ) Tj /F1 10 Tf (dir: under there should be a ) Tj /F3 10 Tf (pyobjconvert.so) Tj T* 0 Tw /F1 10 Tf (file. This is the file that contains your library.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+Q
+Q
+ 
+endstream
+endobj
+% 'R76': class PDFStream 
+76 0 obj
+% page stream
+<< /Length 6699 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 154.875 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 556.1486 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 18 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .35186 Tw (Note these names aren't likely to be the same on your installation. The 'x86' means the machine) Tj T* 0 Tw .121163 Tw (is a 64-bit installation: yours may be a 32-bit installation and would be 'i686'. The '2-4' means this) Tj T* 0 Tw (is for Python 2.4; you are probably using a newer version of Python like 2.6 or 2.7.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 0 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Use the appropriate names for your system.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 556.1486 cm
+Q
+q
+1 0 0 1 20 550.1486 cm
+Q
+q
+1 0 0 1 20 550.1486 cm
+Q
+q
+1 0 0 1 20 495.9396 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 39.209 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (4.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 39.209 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Set your PYTHONPATH so it picks up the .so when you import:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+q
+.401514 0 0 .401514 0 0 cm
+q
+1 0 0 1 6.6 16.43778 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 1062 84 re B*
+Q
+q
+BT 1 0 0 1 0 62 Tm 12 TL /F3 10 Tf 0 0 0 rg (% setenv PYTHONPATH "/full/path/to/PicklingTools141/PythonCExt/build/lib.linux-x86_64-2.4") Tj T*  T* (% python) Tj T* (>) Tj (>) Tj (>) Tj ( import pyobjconvert  # without PYTHONPATH, it probably won't find your .so) Tj T* (>) Tj (>) Tj (>) Tj ( dir\(pyobjconvert\)) Tj T* (['CReadFromXMLFile', 'CReadFromXMLStream', 'CReadFromXMLString', 'CWriteToXMLFile', 'CWriteToXMLStream', 'ConvertToVal', '__doc__', '__file__', '__name__', 'deepcopy_via_val']) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 489.9396 cm
+Q
+q
+1 0 0 1 20 316.7758 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 158.1638 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (5.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 146.1638 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .735251 Tw (Try it out! An easy way to see if it works is to run the xmltimingtools.py script which shows the) Tj T* 0 Tw (relative times of xmldumper vs. C XMLDumper, etc:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 65 cm
+q
+q
+.503883 0 0 .503883 0 0 cm
+q
+1 0 0 1 6.6 13.09828 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 846 144 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 122 Tm /F3 10 Tf 12 TL (% python xmltimingschecks.py) Tj T* (Time to create big table 0.00489687919617) Tj T* (Time to deepcopy big table 0.0030460357666) Tj T* (...time to convert PyObject to Val ... 0.00101280212402) Tj T* (...time to convert PyObject to Val and back... 0.00146102905273) Tj T* (Time for Python XMLDumper to dump an XML file 0.0433909893036) Tj T* (Time for C XMLDumper to dump an XML file: 0.00465703010559) Tj T* ( -----------) Tj T* ( *Warning: This version of Python doesn't support ast.literal_eval, so XML_LOAD_EVAL_CONTENT can be an unsafe option in malicious input/XML) Tj T* (Time for Python Loader to load an XML file 0.61283493042) Tj T* (Time for C Ext Loader to load an XML file 0.00649094581604) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 27 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.07811 Tw (Note the C XMLDumper is about 10x faster than the Python version and the C XMLLoader is) Tj T* 0 Tw (about 100x faster than the Python version) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 14 Tm 1.985529 Tw 12 TL /F1 10 Tf 0 0 0 rg (Surprisingly, converting from PyObject-) Tj (>) Tj (Val-) Tj (>) Tj (PyObject \(which accomplishes a deep copy\) is) Tj T* 0 Tw (faster than the Python deepcopy \(!\)) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 310.7758 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 295.7758 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (6.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 295.7758 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (To use the C version of the XML tools, try using ) Tj /F3 10 Tf (cxmltools) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 265.7758 cm
+q
+BT 1 0 0 1 0 14 Tm .135366 Tw 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F3 10 Tf (cxmltools ) Tj /F1 10 Tf (requires the 'PicklingTools141/Python' to be on the Python path along with the) Tj T* 0 Tw (extension module:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 35 cm
+q
+q
+.971971 0 0 .971971 0 0 cm
+q
+1 0 0 1 6.6 6.790324 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 438 228 re B*
+Q
+q
+BT 1 0 0 1 0 206 Tm 12 TL /F3 10 Tf 0 0 0 rg (% setenv PYTHONPATH "${PYTHONPATH}:/full/path/PicklingTools141/Python") Tj T* (% python) Tj T* (>) Tj (>) Tj (>) Tj ( from cxmltools import *   # make sure cxmltools.py is on PYTHONPATH) Tj T* (...                           # as is) Tj T*  T* (>) Tj (>) Tj (>) Tj ( d = {'a':1, 'b':2 }) Tj T* (>) Tj (>) Tj (>) Tj  T* (>) Tj (>) Tj (>) Tj ( a = WriteToXMLFile\(d, 'top'\)   # Don't forget the "top") Tj T* (>) Tj (>) Tj (>) Tj ( print a) Tj T* (<) Tj (?xml version="1.0" encoding="UTF-8"?) Tj (>) Tj  T* (<) Tj (top) Tj (>) Tj  T* (  ) Tj (<) Tj (a) Tj (>) Tj (1) Tj (<) Tj (/a) Tj (>) Tj  T* (  ) Tj (<) Tj (b) Tj (>) Tj (2) Tj (<) Tj (/b) Tj (>) Tj  T* (<) Tj (/top) Tj (>) Tj  T*  T* (>) Tj (>) Tj (>) Tj ( res = ReadFromXMLString\(a\)) Tj T* (>) Tj (>) Tj (>) Tj ( print res) Tj T* ({'a': 1, 'b': 2}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 14 Tm 1.617318 Tw 12 TL /F1 10 Tf 0 0 0 rg (In case the ) Tj /F3 10 Tf (cxmltools ) Tj /F1 10 Tf (aren't built, you can ) Tj /F4 10 Tf (import xmltools ) Tj /F1 10 Tf (and get the same behavior as) Tj T* 0 Tw (above, just not as fast!) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 154.875 cm
+Q
+q
+1 0 0 1 62.69291 100.875 cm
+q
+BT 1 0 0 1 0 38 Tm 1.974651 Tw 12 TL /F1 10 Tf 0 0 0 rg (Note that the ) Tj /F3 10 Tf (cxmltools ) Tj /F1 10 Tf (does NOT have everything the ) Tj /F3 10 Tf (xmltools ) Tj /F1 10 Tf (has: it only has the simplified) Tj T* 0 Tw .919982 Tw (wrappers \(listed below\). These are the same simplified wrappers that the xmldumper/xmlloader have as) Tj T* 0 Tw .477126 Tw (well. Really, the only thing you ) Tj /F4 10 Tf (don't ) Tj /F1 10 Tf (have are the classes \(XMLDumper/XMLLoader\) that implements the) Tj T* 0 Tw (conversions: all the functionality is still available, but through the easier-to-use wrappers.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 82.87499 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (For converting from XML to dict, the simplified wrappers are:) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+% 'R77': class PDFStream 
+77 0 obj
+% page stream
+<< /Length 5982 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 657.0439 cm
+q
+q
+.988825 0 0 .988825 0 0 cm
+q
+1 0 0 1 6.6 6.674587 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 474 108 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 86 Tm /F3 10 Tf 12 TL (ReadFromXMLFile\(filename, options, array_disp, prepend_char\);) Tj T* (ReadFromXMLStream\(stream, options, array_disp, prepend_char\);) Tj T* (ReadXMLString\(xml_string, options, array_disp, prepend_char\);) Tj T*  T* (defaults:) Tj T* (     options=XML_STRICT_HDR | XML_LOAD_DROP_TOP_LEVEL | XML_LOAD_EVAL_CONTENT) Tj T* (     array_disp=AS_NUMERIC) Tj T* (     prepend_char=XML_PREPEND_CHAR) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 637.0439 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (For converting from dict to XML, the simplified wrappers are:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 471.8439 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 156 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 134 Tm /F3 10 Tf 12 TL (WriteToXMLFile\(dict_to_convert, filename, top_level_key, options,) Tj T* (               array_disp, prepend_char\)) Tj T* (WriteToXMLStream\(dict_to_convert, stream, top_level_key, options,) Tj T* (                 array_disp, prepend_char\)) Tj T* (WriteToXMLString\(dict_to_convert, top_level_key, options,) Tj T* (                 array_disp, prepend_char\)) Tj T*  T* (defaults:) Tj T* (     top_level_key=None   \(this should probably always be "top" instead\)) Tj T* (     options=XML_DUMP_PRETTY | XML_STRICT_HDR | XML_DUMP_STRINGS_BEST_GUESS) Tj T* (     array_disp=AS_NUMERIC) Tj T* (     prepend_char=XML_PREPEND_CHAR) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 439.8439 cm
+q
+BT 1 0 0 1 0 14 Tm 1.512706 Tw 12 TL /F1 10 Tf 0 0 0 rg (Note that the ) Tj /F3 10 Tf (WriteToXMLString ) Tj /F1 10 Tf (returns the string of interest, whereas the WriteToXMLFile/Stream) Tj T* 0 Tw (instead both write to the given entity \(and return None\).) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 406.8439 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Conclusion) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 364.8439 cm
+q
+BT 1 0 0 1 0 26 Tm .499984 Tw 12 TL /F1 10 Tf 0 0 0 rg (There are two sets of Python conversion routines: ) Tj /F4 10 Tf (xmltools.py ) Tj /F1 10 Tf (and ) Tj /F4 10 Tf (cxmltools.py) Tj /F1 10 Tf (. The former allows a raw) Tj T* 0 Tw 2.55061 Tw (Python solution so you can get going immediately. The latter requires more work to build and use) Tj T* 0 Tw (correctly, but gives routines that are significantly faster.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 322.8439 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.02311 Tw (The XML Tools described herein have a particular job: allow dictionaries and XML to be used relatively) Tj T* 0 Tw .237126 Tw (interchangeably. When there is not a clear translation, it's probably worth stepping back and re-evaluating) Tj T* 0 Tw (if XML or dict is the better solution. Some of the questionable conversions:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 316.8439 cm
+Q
+q
+1 0 0 1 62.69291 256.8439 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 54 cm
+Q
+q
+1 0 0 1 20 54 cm
+Q
+q
+1 0 0 1 20 30 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.392651 Tw (Does the XML have content and tags freely interspersed? These don't map well to dicts and) Tj T* 0 Tw (maybe the user is using the "document" part of XML heavily.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 24 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .479398 Tw (Do dicts have complex keys \(like tuples\)? These don't map well to XML, and the user is maybe) Tj T* 0 Tw (relying on the complex nature of dicts within Python.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 256.8439 cm
+Q
+q
+1 0 0 1 62.69291 214.8439 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 3.022339 Tw (If, on the other hand, your XML or dicts are used strictly for key-value type relationships \(with a) Tj T* 0 Tw .090651 Tw (straight-forward use of attributes in XML\), then these conversions make sense and may solve the problem) Tj T* 0 Tw (for you. These tools have been written with a particular usage in mind and hopefully fit your bill.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 181.8439 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Appendix A:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 163.8439 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (What features of XML we support:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 157.8439 cm
+Q
+q
+1 0 0 1 62.69291 91.8439 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 60 cm
+Q
+q
+1 0 0 1 20 60 cm
+Q
+q
+1 0 0 1 20 48 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (hex escape sequences: Sequences such as &) Tj (#x2A; are supported as of 1.3.1) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 42 cm
+Q
+q
+1 0 0 1 20 6 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 21 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 26 Tm .144987 Tw 12 TL /F1 10 Tf 0 0 0 rg (DTDs: Usually, a DTD has a <) Tj (!SOMETHING ... > format: we don't enforce or use the DTD at all,) Tj T* 0 Tw .393984 Tw (but it can be read---it is simply ignored. 1.3.0 couldn't recognize DTDs and 1.3.1 recognizes but) Tj T* 0 Tw (ignores them.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+ 
+endstream
+endobj
+% 'R78': class PDFStream 
+78 0 obj
+% page stream
+<< /Length 1918 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 651.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 78 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 21 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (3.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .47152 Tw (namespaces: Neither 1.3.0 nor 1.3.1 recognize namespaces. 1.3.1 can at least parse XML with) Tj T* 0 Tw .03561 Tw (namespaces \(by recognizing the : in names\), but there is no support beyond that. A later release) Tj T* 0 Tw (will embrace namespaces fully.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 72 cm
+Q
+q
+1 0 0 1 20 48 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (4.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .161412 Tw (comments: XML comments can be interspersed in more places: they reduce to nothing. A future) Tj T* 0 Tw (release may try to preserve the comment in a Python #) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 42 cm
+Q
+q
+1 0 0 1 20 30 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (5.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (version: only 1.0) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 24 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (6.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .137318 Tw (encoding: BUG: We specify UTF-8, but currently only works with ASCII. This won't be a problem) Tj T* 0 Tw (unless you use any non-ASCII chars.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 651.0236 cm
+Q
+ 
+endstream
+endobj
+% 'R79': class PDFPageLabels 
+79 0 obj
+% Document Root
+<< /Nums [ 0
+ 80 0 R
+ 1
+ 81 0 R
+ 2
+ 82 0 R
+ 3
+ 83 0 R
+ 4
+ 84 0 R
+ 5
+ 85 0 R
+ 6
+ 86 0 R
+ 7
+ 87 0 R
+ 8
+ 88 0 R
+ 9
+ 89 0 R
+ 10
+ 90 0 R
+ 11
+ 91 0 R
+ 12
+ 92 0 R
+ 13
+ 93 0 R
+ 14
+ 94 0 R
+ 15
+ 95 0 R
+ 16
+ 96 0 R
+ 17
+ 97 0 R
+ 18
+ 98 0 R
+ 19
+ 99 0 R
+ 20
+ 100 0 R
+ 21
+ 101 0 R
+ 22
+ 102 0 R
+ 23
+ 103 0 R
+ 24
+ 104 0 R
+ 25
+ 105 0 R ] >>
+endobj
+% 'R80': class PDFPageLabel 
+80 0 obj
+% None
+<< /S /D
+ /St 1 >>
+endobj
+% 'R81': class PDFPageLabel 
+81 0 obj
+% None
+<< /S /D
+ /St 2 >>
+endobj
+% 'R82': class PDFPageLabel 
+82 0 obj
+% None
+<< /S /D
+ /St 3 >>
+endobj
+% 'R83': class PDFPageLabel 
+83 0 obj
+% None
+<< /S /D
+ /St 4 >>
+endobj
+% 'R84': class PDFPageLabel 
+84 0 obj
+% None
+<< /S /D
+ /St 5 >>
+endobj
+% 'R85': class PDFPageLabel 
+85 0 obj
+% None
+<< /S /D
+ /St 6 >>
+endobj
+% 'R86': class PDFPageLabel 
+86 0 obj
+% None
+<< /S /D
+ /St 7 >>
+endobj
+% 'R87': class PDFPageLabel 
+87 0 obj
+% None
+<< /S /D
+ /St 8 >>
+endobj
+% 'R88': class PDFPageLabel 
+88 0 obj
+% None
+<< /S /D
+ /St 9 >>
+endobj
+% 'R89': class PDFPageLabel 
+89 0 obj
+% None
+<< /S /D
+ /St 10 >>
+endobj
+% 'R90': class PDFPageLabel 
+90 0 obj
+% None
+<< /S /D
+ /St 11 >>
+endobj
+% 'R91': class PDFPageLabel 
+91 0 obj
+% None
+<< /S /D
+ /St 12 >>
+endobj
+% 'R92': class PDFPageLabel 
+92 0 obj
+% None
+<< /S /D
+ /St 13 >>
+endobj
+% 'R93': class PDFPageLabel 
+93 0 obj
+% None
+<< /S /D
+ /St 14 >>
+endobj
+% 'R94': class PDFPageLabel 
+94 0 obj
+% None
+<< /S /D
+ /St 15 >>
+endobj
+% 'R95': class PDFPageLabel 
+95 0 obj
+% None
+<< /S /D
+ /St 16 >>
+endobj
+% 'R96': class PDFPageLabel 
+96 0 obj
+% None
+<< /S /D
+ /St 17 >>
+endobj
+% 'R97': class PDFPageLabel 
+97 0 obj
+% None
+<< /S /D
+ /St 18 >>
+endobj
+% 'R98': class PDFPageLabel 
+98 0 obj
+% None
+<< /S /D
+ /St 19 >>
+endobj
+% 'R99': class PDFPageLabel 
+99 0 obj
+% None
+<< /S /D
+ /St 20 >>
+endobj
+% 'R100': class PDFPageLabel 
+100 0 obj
+% None
+<< /S /D
+ /St 21 >>
+endobj
+% 'R101': class PDFPageLabel 
+101 0 obj
+% None
+<< /S /D
+ /St 22 >>
+endobj
+% 'R102': class PDFPageLabel 
+102 0 obj
+% None
+<< /S /D
+ /St 23 >>
+endobj
+% 'R103': class PDFPageLabel 
+103 0 obj
+% None
+<< /S /D
+ /St 24 >>
+endobj
+% 'R104': class PDFPageLabel 
+104 0 obj
+% None
+<< /S /D
+ /St 25 >>
+endobj
+% 'R105': class PDFPageLabel 
+105 0 obj
+% None
+<< /S /D
+ /St 26 >>
+endobj
+xref
+0 106
+0000000000 65535 f
+0000000113 00000 n
+0000000245 00000 n
+0000000410 00000 n
+0000000585 00000 n
+0000000746 00000 n
+0000000925 00000 n
+0000001204 00000 n
+0000001483 00000 n
+0000001762 00000 n
+0000002041 00000 n
+0000002321 00000 n
+0000002601 00000 n
+0000002881 00000 n
+0000003161 00000 n
+0000003442 00000 n
+0000003723 00000 n
+0000004004 00000 n
+0000004285 00000 n
+0000004566 00000 n
+0000004847 00000 n
+0000005128 00000 n
+0000005409 00000 n
+0000005690 00000 n
+0000005971 00000 n
+0000006252 00000 n
+0000006533 00000 n
+0000006814 00000 n
+0000007095 00000 n
+0000007376 00000 n
+0000007657 00000 n
+0000007938 00000 n
+0000008219 00000 n
+0000008378 00000 n
+0000008659 00000 n
+0000008785 00000 n
+0000008984 00000 n
+0000009189 00000 n
+0000009396 00000 n
+0000009617 00000 n
+0000009815 00000 n
+0000010013 00000 n
+0000010213 00000 n
+0000010417 00000 n
+0000010626 00000 n
+0000010820 00000 n
+0000011047 00000 n
+0000011259 00000 n
+0000011475 00000 n
+0000011749 00000 n
+0000011947 00000 n
+0000012134 00000 n
+0000012290 00000 n
+0000012620 00000 n
+0000018270 00000 n
+0000022968 00000 n
+0000029302 00000 n
+0000034973 00000 n
+0000040132 00000 n
+0000044528 00000 n
+0000047891 00000 n
+0000052435 00000 n
+0000058375 00000 n
+0000062361 00000 n
+0000066261 00000 n
+0000069730 00000 n
+0000074772 00000 n
+0000081116 00000 n
+0000085601 00000 n
+0000090425 00000 n
+0000097601 00000 n
+0000102680 00000 n
+0000109422 00000 n
+0000115771 00000 n
+0000119712 00000 n
+0000125698 00000 n
+0000133844 00000 n
+0000140642 00000 n
+0000146723 00000 n
+0000148744 00000 n
+0000149184 00000 n
+0000149261 00000 n
+0000149338 00000 n
+0000149415 00000 n
+0000149492 00000 n
+0000149569 00000 n
+0000149646 00000 n
+0000149723 00000 n
+0000149800 00000 n
+0000149877 00000 n
+0000149955 00000 n
+0000150033 00000 n
+0000150111 00000 n
+0000150189 00000 n
+0000150267 00000 n
+0000150345 00000 n
+0000150423 00000 n
+0000150501 00000 n
+0000150579 00000 n
+0000150657 00000 n
+0000150736 00000 n
+0000150816 00000 n
+0000150896 00000 n
+0000150976 00000 n
+0000151056 00000 n
+0000151136 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
+ [(\321\\~jk\263j\225\030[\230Ch\377\306\204) (\321\\~jk\263j\225\030[\230Ch\377\306\204)] 
+
+ /Info 33 0 R
+ /Root 32 0 R
+ /Size 106 >>
+startxref
+151185
+%%EOF

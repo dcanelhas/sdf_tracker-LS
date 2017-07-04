@@ -1,0 +1,3771 @@
+New features as of version 1.7.0
+
+  Sept. 2016
+
+  ***SOME BREAKAGE MAY OCCUR!! (See below)***
+
+  Top-Level:
+    * Printing more resolution of floats and doubles (so doesn't lose precision)
+    * The op[] for Val is having trouble when using const Val objects.
+    * InformativeError in occonforms.h needs inline marker
+
+  Discussion:
+
+  ******* PRECISION OF FLOATS AND DOUBLES WHEN PRINTING *****************
+  **As of PicklingTools 1.7.0 (this release) we are printing floats/doubles 
+    in higher precision, so some outputs may have more significant figures
+    when printed.  This is so that going through a string WON'T lose any 
+    precision.  The example below shows going from 
+            real_8 -> string -> real_8 
+    can lose precision (unless we change the precision to 17 places).
+
+      real_8 a = 1.2345678912345654321; // uses all bits 
+      Val v = a;  
+    
+      char filename[] = "/tmp/junkreal";
+      WriteValToFile(v, filename);         // Writes out human readable string
+      Val vresult;
+      ReadValFromFile(filename, vresult);  // Reads human readable string
+    
+      real_8 result = vresult;   
+      if (a==result) {
+        cout << "OK" << endl;
+      } else {
+        cout << "Lost precision going to the File and string!" << endl;
+      }
+
+    We had to extend to precision for doubles to 17 digits, and floats
+    to 9 digits so we don't lose any information going to a string file.
+    See the test C++/opencontainers_1_8_5/tests/precision_test.cc for
+    more information.
+
+    YOU CAN STILL GET OLD BEHAVIOUR BY SETTING TWO MACROS FROM THE COMMAND
+    LINE (Changing the macros OC_DBL_DIGITS and OC_FLT_DIGITS):
+           -DOC_DBL_DIGITS=16
+           -DOC_FLT_DIGITS=7
+
+    We feel the newer behavior is more correct because you won't lose
+    any information going back and forth between strings and reals.
+
+  ************* CALLING OPERATOR[] ON A CONST VAL *******************
+  **Using non-const methods on a const object should give a compiler 
+    error.  As expected, line 4 below (t["a"]) fails to compile
+    because operator[] is a non-const method (because it can CHANGE the Val!)
+
+          // This all works as expected
+          const Tab tt("{'a':666}");
+          cout << tt("a") << std::endl; /// compiles okay
+          cout << tt["a"] << endl; /// FAILS to compile, but that's correct
+   
+    We expect similar behavior with Val:
+
+          // This all compiles??? Check line 4!
+          const Val t = Tab("{'a':666}");
+          cout << t("a") << std::endl; /// compiles okay
+          cout << t["a"] << endl;      /// compiles OKAY??? NOT GOOD!!
+
+    What happens is that the compiler looks for a const method on Val so it can
+    find something  to make this compile.  And it finds "operator int_8() const"
+    conversion (which is a const method).  So:
+
+          cout << t["a"] << endl;  // is equivalent to ...
+
+          int_8 tmp = t.operator int_8();
+          cout << tmp["a"] << endl;  // This compiles?
+
+    How can that compile, you ask?  An old, sometimes forgotten piece of
+    C lore helps explain:
+
+          char *a = "abc";
+          int i;
+          cout << a[i] << endl;  // These both compile??
+          cout << i[a] << endl; 
+          
+    Because: a[i] == *(a + i) == *(i + a) == i[a];
+    In other words, (const char* + int) is the same operation
+    as (int + const char*): it's just pointer arithmetic.
+
+    We WANT a compiler error!  So, there are two ways to do this.
+
+        operator [] (int) const = delete;  // Newer C++
+        operator [] (int const;            // NO IMPLEMENTATION PROVIDED
+
+    So, if we provide a prototype operator[] that's const. then
+    the compiler has no choice but to match that method (and it
+    won't match the "operator int_8() const" method).  However,
+    since there's no implementation, a link error will occur, basically
+    saying "Hey, you are trying to call [] on a const object! No implementation
+    provided!".  The message looks something like:
+
+       val_test.cc:28: undefined reference to `OC::Val::operator[](char const*) const'
+
+    The "=delete" gives a better error message, and happens
+    at compile time rather than link-time (but it's still definitely not 
+    run-time).  The only problem: the "=delete" only works on newer 
+    C++ compilers.  We still have just enough users at RedHat 6 with an 
+    older compiler that we have to support the less optimal "NO IMPL PROVIDED" 
+    way.  But, the most important thing: WE GET AN ERROR BEFORE RUN-TIME
+    on either platform.
+
+    With the OC_DELETE_OPBRACKET_CONST macro, you can choose to select the
+    =delete version.  From the compile line:
+          -DOC_DELETE_OPBRACKET
+
+   
+  Details:
+
+   C++:
+     * Moved to opencontainers 1.8.5
+       * Updated version numbers
+       * Updated resolution of double and float strinigize to 17 and 9 (resp.).
+       * Added tests/precision_test.cc to show how the problem can manifest
+         (if you don't have 17 and 9 digits).  Affects a number of tests.
+
+       * Updated ocval.h to provide "empty" implementations for 
+         operator[] const (for Val).  See Discussion above.
+         Allow using =delete (instead of empty impl) with a macro
+         for people with newer compilers:  OC_DELETE_OPBRACKET
+       * Updated ocforms.h so InformativeError is inline
+
+M C++/opencontainers_1_8_5/include/ocport.h
+M C++/opencontainers_1_8_5/include/ocval.h
+M C++/opencontainers_1_8_5/tests/conform_test.output
+M C++/opencontainers_1_8_5/tests/items_test.output
+M C++/opencontainers_1_8_5/tests/iter_test.output
+M C++/opencontainers_1_8_5/tests/maketab_test.output
+M C++/opencontainers_1_8_5/tests/otab_test.output
+M C++/opencontainers_1_8_5/tests/pretty_test.output
+M C++/opencontainers_1_8_5/tests/proxy_test.output
+M C++/opencontainers_1_8_5/tests/runall
+M C++/opencontainers_1_8_5/tests/ser_test.output
+M C++/opencontainers_1_8_5/tests/tab_test.output
+M C++/opencontainers_1_8_5/tests/valbigint_test.output
+M C++/opencontainers_1_8_5/tests/valreader_test.output
+M CHANGES
+A C++/opencontainers_1_8_5/tests/precision_test
+A C++/opencontainers_1_8_5/tests/precision_test.cc
+A C++/opencontainers_1_8_5/tests/precision_test.output
+
+
+      
+
+
+New features as of version 1.6.3
+
+  July 2016
+
+  Top-Level :
+   * Added keys(), values(), items() to Tab and OTab (like Python)
+   * Fixed bug with Python C Extension modules not building
+   * Making sure release works with CentOS 7
+
+  Details:
+
+   C++:
+    * Moved to opencontainers 1.8.4
+      * Updated version numbers
+      * Added items_test.cc, .output (tests for .keys(), .values(), .items())
+      * Updated ocval.cc, .h  for  for .keys(), .values(), .items()
+      * Added ocitems.h (for templatized code)
+      * Updated port_test to get rid of a warning in CentOS 7
+    * Updated all Makefiles to work with OpenContainers 1.8.4
+   
+   PythonCExt:
+      * Fixed bug that setup.py wouldn't build (wrong dir in setup.py)
+      * Verified builds/works with CentOS 7
+
+   X-Midas: 
+      * Updated to use opencontainers 1.8.4 code
+
+New features as of version 1.6.2
+
+  December 2015
+
+  Top-Level :
+   * updated Python cxmltools to avoid some crashes
+   * updated CQ includes (needed circular buffer include)
+   * updated Array to allow it to reference (not adopt) some memory 
+   * minor doc and bug fixes
+  
+  Details:
+
+    X-Midas:
+
+     * Updated explain page for midasyeller (had incorrect notion of host)
+
+    Python:
+
+     * updated incorret comment in midastalker.py about the naming of the
+       ARRAYDISPOSITION enums
+
+    PythonCExt:
+
+     * pyocsermodule.cc: certain illegal XML would cause the cxmltools
+                         to crash:
+          >>> import cxmltools 
+          >>> s = '<?xml><tag>vvv</tag>' 
+          >>> cxmltools.ReadFromXMLString(s)
+       Problem: Was only catching runtime_error, not all generic 
+       exceptions (so logic_error would propagate out and kill
+       the Python interpreter).
+       Fixed: by catching exception appropriately rather than just runtime_error
+
+    PythonModule:
+
+     * PythonModule: updated to have latest version of Python code
+                     (this is included so you can just import ptools)
+
+    C++:
+
+      * httplib.h:  Extraneous cerr commented out 
+      * midasyeller.h : Added some code in sendto to catch EAGAIN
+                        and EINTR if sendto fails for sprurious wakeup.
+                        Should fix an error JG is seeing.
+
+      Open Containers 1.8.3
+        - occq.h, occqts.h:  
+            Updated includes to contain #include "occircularbuffer.h
+        - ocport.h: updated to 1.8.3
+        - ocarray.h : updated Array so that you can refer to a piece of 
+                      memory (assuming some other entity is responsible
+                      for its maintenance) so that pieces of memory
+                      can be passed around using Array interfaces.
+                      Added a new constructor and a new memory policy.
+
+
+New Features as of version 1.6.1
+
+  November 2015
+
+  This is just a bug-fix release.  A minor change to fix
+  the FixedSizeAllocator to work with cross process shared memory
+
+  C++:  Updated to opencontainers_1_8_2
+   * Updated ocstreamingpool.cc so it specifically requests a 
+     FixedSizeAllocator to work in cross process shared memory
+   * Updated FixedSizeAllocator so you can request the lock (used
+     to ensure thread-safety) to work in cross process shared memory
+
+
+New Features as of version 1.6.0
+
+  August 2015
+
+  BIG NEWS:
+     Major updates across libraries to support very large serializations:
+     greater than 2Gig! 
+
+     New Python C Extension Module for supporting OC Serialization in Python.
+     Why?  Pickling can't support large serialization (>2G), but OC Ser can.
+     All MidasTalker, MidasServer, etc. can use SERIALIZE_OC in Python and C++.
+     For example:
+         >>> import numpy
+         >>> from pyoceser import ocdumps, odloads  # Python C Extension module
+         >>> huge_array = numpy.zeros(2**32+1, 'b')
+         >>> serialized_string = ocdumps(huge_array)
+         >>> get_back_huge_array = odloads(serialized_string)
+
+     Suport for cx_t<int> for all int types.  For DSP, complex ints
+     can sometimes be the way data is sampled off an antenna.
+
+  Top-Level
+
+   * Adding timeout capability to TransactionLock
+   * Added external break checker/timeouts for shared memory routines
+   * Added fixed size allocator, and augment StreamingPool to possibly use
+   * CircularQueue now cleans up after a get() to force reclamation
+   * Clean up Array to allow 64-bit lengths
+   * Minor change to BigInt and BigUInt interface (sign) because of Array fixes
+   * Change length()/entries() to return size_t throughout baseline
+   * Updated Val to support cx_t<> for int_1,..int_u8
+   * Updated ocser, ocserialize, xmldumper, xmlloader, convert to support cx_t<>
+   * Updated MidasTalker/MidasServer to allow sockets to have very large msgs
+   * Updated the OpenContainers serialization to allow very large msgs (>2*32)
+   * Updated the PickleLoader and PickleDumper to allow very large msgs (>2*32)
+   * Added a new Python C Extension module "pyocser" for Python OC Serialization
+       - This is needed to do serialization of very large objects
+   * Updated OpalPythonDaemon and related code to work w/large serialized data
+
+  Details:
+
+   * Python C Extension
+
+     Because Python Pickling 2 cannot handle very large arrays or strings,
+     we needed to create a serialization that will work with very large
+     arrays and strings (byte lengths of over 2**32).  To this end,
+     we have added a new Python C Extension module to the baseline called
+     'pyocser' with two functions:
+        ocdumps(po)  : Dumps Python Object po, returning the serialized string
+        ocloads(str) : Load a Python Object from the given string (str), 
+                       returning the deserialized Python Object
+
+     - pyocser.h,.cc    : Implementation of OC Serialization in Python
+     - pyocsermodule.cc : The binding code to make a Python module
+     - check_ocser.py   : A python script to verify the ocdumps/loads works
+     - psuedonumeric.h  : Since we may not have Numeric or numpy, pull
+                          the definition (refactored from pyobjconvert)
+     - pyobjconverter.cc: 
+     - setup.py         : Added the new pyocser module setup and build
+
+      A few fixes to occomplex.h, ocnumerictools.h, ocnumpy.tools.h &ocval.cc 
+      so that the Python C Extension module would build correctly on 
+      RedHat 5, 32-bit, Python 2.4 systems .  Note that the default testing
+      environment is RedHat 6, 64-bit Python 2.6 systems.
+
+   * Python
+
+      midaslistener_ex.py, midasserver_ex.py, permutation_client.py, 
+      permutation_server.py, midasyeller_ex.py
+      README:  Updates to show you can use OC Serialization (--ser=5)
+               if you have the Python C Extension module pyocser built.
+               Also recommends NumPy (--arrdisp=4) going forward.
+
+      midassocket.py:
+              * Changes for SERIALIZE_OC is supported, plus the capability
+                to try to give good error messages.
+              * Changes so can have either 4 byte header (normal messages
+                with length of message under 4G), 
+                or 12-byte header (0xFFFFFFFF and length in int_u8)
+              * Updates to send and recv 
+                   send: Don't use sendall anymore: actually break apart 
+                         buffers because may run into problems with non-blocking
+                         sockets, and also buffers that are too big
+                   recv: Not allowed to use very large sizes, so we have
+                         to break buffers up into chunks
+      
+      midastalker.py:
+             * Updates to documentation for SERIALIZE_OC
+
+      speed_test.py:
+             * updates to allow ocdumps and ocloads.  Surprisingly, ocdumps
+               and ocloads are 50%-100% faster than pickle2/unpickle2
+
+   * Updated to OpenContainers 1.8.1
+
+     - ocport.h, Makfile, Makefile.Linux, Makefile.Linux.factored, Makefile.icc
+                 : updated version numbers
+     - ocproxy.h : Added a timeout capability for TransactionLock.
+                   By default, there is no timeout, so it can try to 
+                   get in forever.  If the timeout expires, however,
+                   a runtime_error is thrown, and the user can adjust
+                   accordingly.
+
+     - ocspinfo.h, 
+       ocstreamingpool.h,cc
+                  :  Updated so will work with pools larger than 2G 
+                     (some ints returned change size to int_ptr, which
+                     is 4 bytes on a 32-bit machimne, 8 bytes on a
+                     64-bit machine).
+                     Also, modified so can have a fixed size
+                     allocator section, if desired.
+
+     - ocfixedsizeallocator.h
+       fsa_test.cc, fsa_test.output
+                  : A small, low overhead allocator for small pieces.
+		    And a test.
+
+     - run_all    : Added fsa_test
+
+     - occircularbuffer.h
+                  : When a get happens, it leaves the old value in
+                    there (fully constructed).  For the OCCQ, this means
+                    a full copy of the packet stays in the queue, when it needs
+                    to immediately get reclaimed by the memory allocator.
+
+     - ocarray.h, array_test.cc, array_test.output
+                  : length() and capacity() now return size_t.
+                    Restructured Array so that length and capacity are
+                    size_t (so potentially 64-bit quantities on 64-bit machines)
+                    so Array can hold very large sizes--This meant restructuring
+		    Array, which meant getting rid of the reservedSpace
+                    (replacing it with a bit in the capacity)
+                    and usenewandDlete field (got subsumed under the
+                    allocator).  All of this was necessary to keep the
+                    sizeof(Array) to 32, but still allow 64-bit quantities.
+                    Updated the test to make sure setBit/getBit work.
+
+     - ocbigint.h, ocbigint_test.cc, ocbigint_test.output
+                  : Because the "reservedSpace" is gone from Array,
+                    we have to use the new interface (getBit/setBit)
+                    of array which only gives us one bit of information
+                    for the sign bit.  Also updated the code to use size_t
+                    for all the new sizes.  Updated the test to make
+                    sure negate works.
+     - ocbigunit.h : Updated code to propagate the extra bit along 
+                     (mostly for BigUInt).  Updated to use size_t
+                     in a few places (because of Array's change),
+                     Also moved length and expandTo to the class
+                     (instead of always deferring to the impl).
+             
+     - ocavlhasht.h, ocavltreet.h, ochashtablet.h, ocordavlhasht.h
+                  : Made entries return a size_t instead of an int_u4
+                    (which is what it is stored as internally anyways).
+                    Also had the iterators use size_t when using an index
+                    to iterate.
+
+     - ocval.cc, ocval.cc:
+                  : Everything that returned a size_t: updated the 
+                    code to use size_t rather than int when
+                    appropriate.  Also cleaned up iterators
+                    to use size_t.  
+
+                    Added .length() method to Tab
+
+
+     - ocstring_impl.h: Use size_t for internal length store for large strs
+     
+     - occomplex.h
+                  : Updated so better support for printing cx_t<INTTYPE>,
+                    and added MOVEARRAYPOD for cx_t<INTTYPE>
+     - ocnumerictools.h, ocnumpytools.h 
+                  : NumPy and Numeric DO NOT support complex ints,
+                    so for output we just use the PTOOLS char tags
+                    (which are distinct from Numeric tags).  Also updated
+                    Array conversions to support cx_t<INTYPES>.   
+     - ocproxy.h, ocproxy.cc:  Updated to support cx_t<INTTYPES>
+     - ocval.h, ocval.cc: Updated to support cx_t<INTYPES>.  Updated TagFor
+                          to support all new types, including Array<numeric>
+     - complex_test.cc, complex_test.output, runall:
+                  : New test: make sure the cx_t<INTTYPES> seems to be working
+       
+     - ocser.cc, ocserialize.cc, ocval.cc, ser_test.cc,.output, occonvert.h
+                  : Updated the built-in serializations to handle
+                    serialization of cx_t<INTTYPES> and Array<cx_t<>>
+
+                    Also updated to allow very large tables, arrays
+                    to be able to be serialized.  There are two tags
+                    for most large containers: 
+                      'n''t''o''u''q''Q' for int_u4 lengths
+                      'N''T''O''U''y''Y' for int_u8 lengths.
+                    The new tags are only seen by the serialization routines.
+                    Also updated the tests to check these still work.
+
+     - ocserialize.cc, ocloadumpcontext.h :  
+         Factored out the load and dump contexts so the Python C Ext
+         modules can reuse.  
+
+
+   * C++:
+
+     Added the ability to pass in an external error check (pointer to
+     function) and set a timeout.  Inside the shared memory code,
+     many wait for pipes to be available/be created have a loop with a
+     small timeout.  With this change, the user can (a) specify the
+     timeout and (b) force immediate failure by checking an external
+     break checker.  These changes are important for allowing the 
+     shared memory routines to do a clean shutdown in the face of
+     error conditions.
+
+     Also allows the SHMMain to use small allocators.  This allows the
+     little chunks of memory (mostly Vals) to not clutter memory so much.
+     Also deferring to 16 byte alignment (SSE instructions, esp. FFTW
+     require 16 byte alignment).
+
+     Update memdump to use size_t
+
+     - sharedmem.h,.cc:
+     - shmboot.h,.cc      See above.
+
+     - xmlloader.h, xmldumper.h, xmlload_test.cc,.output
+           : Updated XML tools to make sure they work with cx_t<INTTYPES>
+
+    Updated the socket code (MidasTalker and the ilk) to allow very 
+    large messages (greater than 2*32 bytes)
+
+     - fdtools.h: 
+          * Added htonll/ntohll for large ints in Network Byte Order
+          * updated methods ReadExact, WriteExact, clientReadExact, and
+            readUntilFull, and data members of FDTools class to use 
+            size_t instead of int  
+          * Updated the number of bytes written/read routines so that 
+            if the data is larger than int_u4, will write special escape
+            sequence 0xFFFFFFFF and then another 8 bytes for the real
+            bytelength
+
+     - midastalker.h :
+           * Updates to size_t for byte counts (from int)
+     - midassocket.h :
+           * Updates so uses 4 bytes for normal message counts,
+             for > 0xFFFFFFFF, uses 4 bytes ESC count of 0XFFFFFFF
+             and then an 8 byte length.  Also udpates for size_t when
+             needed
+
+     - xmldump_test.cc : updated to size_t for byte counts
+     - valprotocol.h, valprotocol.cc : updated to use size_t for lengths
+     - pickleloader_test.cc, .output: updated for size_t for lengths
+     - pickleloader.h:
+           * Significant updates for size_t for byte counts to support
+             very large pickles
+   
+     - p2_test.cc, .output, p2common.h
+           * Updated for size_t interface changes, and updated the p2_test
+             to be current and correct
+
+     - chooseser.h:
+           * Updated to use size_t instead of int for all lengths
+
+     - README: Show that NumPy is preferred, and there is a new Python
+               C-extension module for pyocser (OC serialization in Python).
+
+     - midastalker_ex2.cc: 
+          * Left some code in to try very large arrays and strings to test 
+            new large facilities
+
+
+   M2K:
+       Updated a bunch of files so that the OpalPythonDaemon works with
+       serialized data of greater than 2G.  NOTE!  These only work if
+       you update M2k Vector and string to use size_t for lengths/capacities.
+       By default, early MITE/M2k use unsigned int/int_u4, which does
+       not work for data > 4G.  At this time, only OC (OpenContainers
+       serialization) works with data gerater   
+
+     - m2openconser.cc: Updating protocol for int_u8 for some lengths
+     - m2opalmsgextnethdr.h.,cc: 
+           * Substantial changes so works with underlying
+             Midas 2k infrastructure and still work with
+             int_u8 sizes.  Added 
+     - m2opalpythondaemon.cc: uses size_t for lengths instead of int
+     - m2opalpythontablewriter.h,cc:  Allows to use OC Serialization
+     
+New Features as of version 1.5.4
+
+  July 2015
+
+  Top-Level
+
+   * Minor fixes so Proxys compile with templatized arrays
+   * Some X-Midas minor bug-fixes for T4000 files
+   * Bug fix to CQ in timed enqueue
+   * Minor bugfixes to message printed out in shmboot, sharedmem modules
+
+  Details:
+
+   * Updated to OpenContainers 1.8.0
+     - ocport.h   : updated version numbers
+     - ocproxy.cc : template instantiation error, was instantiation Array<T>
+                   wrong with Proxys
+     - occq.h, 
+       occqts.h   : When dequeueing with a timeout, returned the wrong thing,
+                    potential making it look like enqueue would succeed
+                    or fail incorrectly.
+
+   * Shared memory: cleaning up output messages
+     - shmboot.h  : Make it so you can turn off the "forced unlink"
+                    message (when you start up and "unlink" the old one).
+     - shmboot.cc : Fixed the Address randomization message for 64 bit
+     - sharedmem.h, cc: Added flag to interface for to control whether unlink
+                    failure message is shown.
+  
+   * X-Midas:
+     - t4val.cc : Allow users to use non-blocking
+
+
+New Features as of version 1.5.3
+
+  Feb. 2015
+
+  Top-Level
+
+   * Better error messages if mixing single socket and dual socket
+   * Allow NORMAL_SOCKET in all Python, C++ MidasTalker/MidasSocket
+   * Added in a second permutation generator (pure C, no dependencies)
+   * Fix up some NAMESPACE issues (so everything works with OC_FORCE_NAMESPACE)
+   * More compiler warnings for ARM eliminated
+   * Preliminary packaging as a Python module
+   * Fixed X-Midas T4Val to handle all serializations to all Python primitives
+   * Minor fix to UDP MidasListener/Yeller documentation
+
+   
+  Details:
+
+   * X-Midas:  Allow reading t4000 pipes from XMPY Python primitives
+
+     * Made it so T4Tab/Val routines can choose their serialization
+       (by default it was SERIALIZE_OC): this allows Python primitives
+       to be able to get T4000 data as dicts from the pipe directly.
+     * Added C++ primitive "tabgenout" to show how you can use
+       the new routines above to serialize T4000 (in Python serialization)
+       to the pipes (also added explain files)
+     * Added Python primitive "tabinpytester.py" to show how to read
+       from a T4000 from a pipe (i.e, tabgenout) (also added explain files)
+     * Added a silly macro "t4pytest.txt" in the mcr area showing
+       how to run the two primitives above (tabgenout and tabinpytester)
+     * Added the "t4val.py" to the python area: it makes it easier
+       to read dicts from a t4000 pipe (and is used by tabinpytester)
+     * Separated the serialization_e into its own file so we don't
+       have #include m2chooser.h inside of t4val.h (just serialization.h)
+
+
+   * Added in a new all C permutation generator.  It works in both
+     C and C++, generates all permutations in order (similar to
+     the C++ STL next_permutation ... Last check it was about 10%
+     faster than the C++ version.  Your mileage may vary). Added
+     a new example program as well.
+
+   * Fixed up and made sure tests and examples in OpenContainers
+     area all worked.
+   
+   * Better error messages if mixing single socket and dual socket;
+     The better error messages come from the *client* when they try to
+     connect and "can't" for some reason.  
+     Plus, added better support for NORMAL_SOCKET (which essentially
+     just doesn't do the 16 byte exchange at the start, and only uses 
+     one socket: this is the most compatible with other sockets).
+     * C++:
+        * MidasTalker: updated error reporting, NORMAL_SOCKET support.
+        * midastalker_ex2.cc:  Example allows NORMAL_SOCKET now
+        * MidasServer: a little extra code for handling NORMAL_SOCKET
+        * midasserver_ex.cc: Example allows NORMAL_SOCKET now
+	* permutation_client.cc, server.cc: Inheriting updated error messages
+                                            plus better NORMAL_SOCKET handling
+        * README: updated group documention to mention NORMAL_SOCKET
+                                         
+     * Python
+        * midassocket.py: Added NORMAL_SOCKET (didn't have in Python before!)
+        * MidasTalker: updated error reporting, NORMAL_SOCKET support.
+        * midastalker_ex2.py:  Example allows NORMAL_SOCKET now
+        * MidasServer: a little extra code for handling NORMAL_SOCKET
+        * midasserver_ex.py: Example allows NORMAL_SOCKET now
+	* permutation_client.py, server.py: Inheriting updated error messages
+                                            plus better NORMAL_SOCKET handling
+        * README: updated group documention to mention NORMAL_SOCKET
+
+     * X-Midas
+        * Added all Python/C++ code (above) dealing with better error
+          messages and NORMAL_SOCKET
+        * Updated the Host primitives/explain pages 
+             valpipe, permclient, permserver, xmclient, xmserver
+          So they deal with NORMAL_SOCKET and through better errors.
+
+     * Java
+        * Updated README, Makefiles
+	* Updated Midastalker to give better error messages when
+	  mixing single and dual socket.
+
+   * Namespace issues:
+
+      In an attempt to make sure the OC Namespace still is in good shape,
+      and everything still works with OC_FORCE_NAMESPACE, 
+      we discovered a few issues in:
+           C++: arraydisposition.h, httplib.h chooseser.h fdtools.cc httptools.h
+           PythonCExt: pyobjconverter.h
+ 
+      The PTOOLS option tree compiles and should work with either
+         #define OC_FORCE_NAMESPACE on or off
+           HOST Primitives changed: tab2xml, httpclient, keywords2tab, xmclient
+
+
+   * Few more warnings fixed (unused variables) in shmboot.c, p2_test.cc
+
+   * Added the new PythonModule/ptools dir, which contains most of the
+     working code (minus examples and tests) for people who want to 
+     use the code more like a Python module/make it more Pythonic.
+     We DO NOT want to break backwards compatibility (for people who depend
+     on the previous way thinga are packaged), but this is a first step
+     to trying out a new module.
+
+
+
+  List of files:
+M       Python/permutation_client.py
+M       Python/midasserver_ex.py
+M       Python/midasserver.py
+M       Python/permutation_server.py
+M       Python/midastalker.py
+M       Python/midassocket.py
+M       Python/README
+M       Python/midastalker_ex2.py
+D       Xm/ptools152
+A  +    Xm/ptools153
+M  +    Xm/ptools153/python/permutation_client.py
+M  +    Xm/ptools153/python/midasserver_ex.py
+M  +    Xm/ptools153/python/midasserver.py
+M  +    Xm/ptools153/python/permutation_server.py
+M  +    Xm/ptools153/python/midastalker.py
+M  +    Xm/ptools153/python/README
+M  +    Xm/ptools153/python/midassocket.py
+M  +    Xm/ptools153/python/midastalker_ex2.py
+M  +    Xm/ptools153/inc/midastalker.h
+M  +    Xm/ptools153/inc/midasserver.h
+M  +    Xm/ptools153/exp/permserver.exp
+M  +    Xm/ptools153/exp/valpipe.exp
+M  +    Xm/ptools153/exp/permclient.exp
+M  +    Xm/ptools153/exp/xmserver.exp
+M  +    Xm/ptools153/exp/xmclient.exp
+M  +    Xm/ptools153/host/valpipe.cc
+M  +    Xm/ptools153/host/permclient.cc
+M  +    Xm/ptools153/host/xmserver.cc
+M  +    Xm/ptools153/host/xmclient.cc
+M  +    Xm/ptools153/host/permserver.cc
+M       Xm/README
+M       C++/midastalker.h
+M       C++/permutation_client.cc
+M       C++/midasserver_ex.cc
+M       C++/permutation_server.cc
+M       C++/midastalker_ex2.cc
+M       C++/README
+M       C++/midasserver.h
+M       C++/chooseser.h
+A       C++/serialization.h
+M       CHANGES
+M       README
+M       Xm/ptools153/pythoncext/pyobjconverter.h
+M       Xm/ptools153/lib/ptools/fdtools.cc
+M       Xm/ptools153/inc/occomplex.h
+A       Xm/ptools153/inc/ocpermute.h
+M       Xm/ptools153/inc/arraydisposition.h
+M       Xm/ptools153/inc/ocport.h
+M       Xm/ptools153/inc/httplib.h
+M       Xm/ptools153/inc/chooseser.h
+A       Xm/ptools153/inc/serialization.h
+M       Xm/ptools153/inc/httptools.h
+M       Xm/ptools153/host/tab2xml.cc
+M       Xm/ptools153/host/httpclient.cc
+M       Xm/ptools153/host/keywords2tab.cc
+M       Xm/ptools153/host/xmclient.cc
+M       PythonCExt/pyobjconverter.h
+D       C++/opencontainers_1_7_8
+A  +    C++/opencontainers_1_7_9
+M  +    C++/opencontainers_1_7_9/tests/bag_test.output
+M  +    C++/opencontainers_1_7_9/include/occomplex.h
+A       C++/opencontainers_1_7_9/include/ocpermute.h
+M  +    C++/opencontainers_1_7_9/include/ocport.h
+M  +    C++/opencontainers_1_7_9/CHANGES
+M  +    C++/opencontainers_1_7_9/examples/runall
+A       C++/opencontainers_1_7_9/examples/permute_ex.cc
+M       C++/arraydisposition.h
+M       C++/httplib.h
+M       C++/chooseser.h
+M       C++/fdtools.cc
+M       C++/httptools.h
+M       Xm/ptools153/inc/shmboot.h
+M       C++/Makefile.Linux
+M       C++/Makefile.Linux.factored
+M       C++/p2_test.cc
+M       C++/shmboot.cc
+M       Java/Makefile
+M       Java/README
+M       Java/com/picklingtools/pickle/Makefile
+M       Java/com/picklingtools/midas/MidasTalker.java
+A       PythonModule
+A       PythonModule/ptools
+A       PythonModule/ptools/xmlloader_defs.py
+A       PythonModule/ptools/simplearray.py
+A       PythonModule/ptools/opalfile.py
+A       PythonModule/ptools/parsereader.py
+A       PythonModule/ptools/circularbuffer.py
+A       PythonModule/ptools/__init__.py
+A       PythonModule/ptools/midastalker.py
+A       PythonModule/ptools/occonvert.py
+A       PythonModule/ptools/XMTime.py
+A       PythonModule/ptools/prettyopal.py
+A       PythonModule/ptools/midaslistener.py
+A       PythonModule/ptools/arraydisposition.py
+A       PythonModule/ptools/seriallib.py
+A       PythonModule/ptools/midassocket.py
+A       PythonModule/ptools/midasyeller.py
+A       PythonModule/ptools/xmldumper.py
+A       PythonModule/ptools/opalfile_numeric.py
+A       PythonModule/ptools/xmldumper_defs.py
+A       PythonModule/ptools/xmltools.py
+A       PythonModule/ptools/opalfile_numpy.py
+A       PythonModule/ptools/midasserver.py
+A       PythonModule/ptools/cxmltools.py
+A       PythonModule/ptools/conforms.py
+A       PythonModule/ptools/pretty.py
+A       PythonModule/ptools/xmlloader.py
+M       Xm/ptools153/cfg/commands.cfg
+M       Xm/ptools153/cfg/primitives.cfg
+A       Xm/ptools153/mcr/t4pytest.txt
+A       Xm/ptools153/python/t4val.py
+M       Xm/ptools153/lib/ptools/t4val.cc
+A       Xm/ptools153/exp/tabgenout.exp
+A       Xm/ptools153/exp/tabinpytester.exp
+A       Xm/ptools153/host/tabinpytester.py
+A       Xm/ptools153/host/tabgenout.cc
+A       Xm/ptools153/host/tabinpytester.exe
+M       Docs/faq.pdf
+M       Docs/shm.pdf
+M       Docs/html/_sources/xmldoc.txt
+M       Docs/html/_sources/faq.txt
+M       Docs/html/_sources/usersguide.txt
+M       Docs/html/usersguide.html
+M       Docs/html/genindex.html
+M       Docs/html/java.html
+M       Docs/html/objects.inv
+M       Docs/html/_static/jquery.js
+M       Docs/html/_static/pygments.css
+M       Docs/html/_static/doctools.js
+M       Docs/html/_static/searchtools.js
+M       Docs/html/_static/basic.css
+M       Docs/html/_static/default.css
+M       Docs/html/search.html
+M       Docs/html/searchindex.js
+M       Docs/html/xmldoc.html
+M       Docs/html/faq.html
+M       Docs/html/index.html
+M       Docs/html/shm.html
+M       Docs/xmldoc.txt
+M       Docs/faq.txt
+M       Docs/usersguide.pdf
+M       Docs/PicklingTools.pdf
+M       Docs/java.pdf
+M       Docs/usersguide.txt
+M       Docs/xmldoc.pdf
+
+
+
+New Features as of version 1.5.2
+
+  Sept. 2014
+
+  Top-Level
+
+   * Updated some more documentation for NumPy
+   * Updated Makefiles to work with ARM Linux
+   * Fixed some XML processing with &amp; in attributes
+   * Fixed problem when MidasServer shuts down
+   * Added templatized thread-safe, Circular Queue class
+   * Added a bunch of new primitives for X-Midas for Tab conversions
+   * Added seriallib.py (for converting between Windows INI files and dicts)
+
+  Details:
+
+   * Updates so PicklingTools will build on ARM with Ubuntu Linux
+      * Need unistd.h in sharedmem_test.cc, shmboot.cc
+      * Line 385 and 386 of xmldump_test.cc, change s to s1
+
+   * Added serialib.py to Python area
+      * Updated documentation 
+      * Allows conversions between Windows INI files and Python
+        dictionaries
+
+   * Bug in handling of &amp; in xmlloader.cc, .py: 
+      * Any special escape sequence wasn't recognized in attributes
+      * Added xmlload_ex.py for another example
+
+   * Updated OpenContainers to 1.7.8:
+     * Added occqts.h: A templatized version of occq.h, so you can
+       have a synchronized (threadsafe) circular queue of any type
+       (rather than just Vals from occq.h).
+     * Updated occq.h to have an empty() method.
+     * Made it so once an OCThread is started, can't keep creating threads
+
+   * Updated MidasServer (C++) so shutsdown correctly even when not started.
+
+   * X-Midas:
+     * Added keywords2tab primitive (and explain page): allows converting  
+       between keywords in files to Python dicts (Tab) and vice-verse
+     * Added tab2xml primitive (and explain page):  allows converting
+       between tabs and XML (as an X-Midas primitive)
+     * Updated commands.cfg/primitives.cfg 
+     * Updated tab2opal to handle more cases back and forth
+     
+   * Doc update
+     * Updates so that NumPy support is more prevelant throughout
+     * Clarified many points in usersguide, updated XML conversion guide,
+       added serialib
+
+
+New Features as of version 1.5.1
+
+  March 2014
+
+  Top-Level
+
+   * Complete NumPy transition  (Python)
+   * Move timeout send/recv code from child MidasTalker to parent MidasSocket 
+     so MidasServers can have access to timed send/recv code.
+     (only MidasTalkers had access to those routines before)
+   * Updated VALPIPE primitive so wouldn't seg-fault upon exit
+   * Updated documentation to fix spelling errors
+   * Updated C++ so can compile with -Wextra for better warning coverage
+       
+
+  Details:
+
+   * prettyopal.py :
+     * fixed long-standing problem with opal tables having too much space by ,
+     * fixed so works with numpy
+
+   * pretty.py, xmlloader.py, xmldumper.py
+     * prefer numpy (only import numpy even if Numeric is present)
+
+   * midassocket.py
+     * small doc update, using numpy instead
+
+   * opalfile.py
+     * added opalfile_numpy.py, opalfile_numeric.py
+     * kept old modulem, with Numeric hard-coded and add
+       new version with numpy hard-coded.  The opalfile.py
+       simply chooses the right one.
+
+   * midassocket.h, midassocket.cc
+     * Moved the guts of send/recv (with the timeouts)
+       up into MidasSocket so that MidasServers can 
+       use the timeout code as well.  (No interface changes,
+       just augmented MidasSocket with recvTimed_ and sendTimed_)
+
+   * Files changed for get rid of -Wextra warnings
+     M  +    opencontainers_1_7_7/include/ocproxy.h
+     M  +    opencontainers_1_7_7/include/ocnumerictools.h
+     M  +    opencontainers_1_7_7/include/occonvert.h
+     M  +    opencontainers_1_7_7/include/ocval.h
+     M  +    opencontainers_1_7_7/include/ocbiguint.h
+     M  +    opencontainers_1_7_7/CHANGES
+     M       m2convertrep.cc
+     M       Makefile.Linux
+     M       xmlload_test.cc
+     M       httplib.h
+     M       valprotocol2.cc
+     M       sharedmem_test.cc
+     M       fdtools.cc
+     M       p2_test.cc
+     M       pickleloader.h
+     M       httptools.h
+     M       xmlloader.h
+
+
+
+New Features as of version 1.5.0
+
+  Feb 2013
+
+  Top-Level:
+
+   * Java Support
+   * Documentation for new Java support
+
+  Details:
+
+
+   * Added new Java directory containing the first version of the 
+     PicklingTools for Java.  
+
+     - Added MidasTalker_ex.java showing a simple version of 
+       the Java Midastalker
+     - Cleaned up Java structure:
+         - pythonesque: gives you python-like data structures from Java
+         - pickle:  pickle libraries from pyro-lite
+         - midas:   socket comms for talking like a MidasTalker
+     - Added command-line java testing suite with Makefile
+
+   * The "java.pdf" covers most of the Java 
+
+   * Minor fix to XMLDumper: wasn't outputting _ on tag correctly
+     if we were dumping numbers.
+
+   * Fixed a few spelling errors in documentation.
+
+New Features as of version 1.4.2
+
+   December 2012
+
+  Top-Level:
+
+   * Added a thread-safe "Bag" data structure 
+   * Change so MidasTalker works with Jython
+   * Using Py_ssize_t correctly (previously would have compile error on newer Pythons)
+
+  Details:
+
+   * MidasTalker can use non-blocking sockets to
+     make sure an "open" can have a reasonable timeout,
+     but the Jython socket module (by default) requires
+     the non-blocking socket for select to work.  There is a
+     CPython compatible select (called cpython_compatible_select)
+     in Jython that allows things to work.  To see which select
+     to use, we look for "Java" in the sys.version string.
+
+   * Added several abstractions for a thread-safe Bag:
+     the idea is that several threads are reaching into a bag,
+     all at the same time, and we want to allow each thread
+     to pull out one piece of work at a time.  A simple idea,
+     but making it thread-safe and thread-hot is the challenge.
+     
+     The first key aha! is that we only need to supply a bag of 
+     ints from [0..n) : By putting everything we want served out
+     into an array, we simply grab the int we want from the bag
+     and index into the array.  With this key simplification, we
+     can take advantage of atomic increment instructions to make
+     Bags easy, thread-safe, quick, and (most important) avoid 
+     excessive collateral damage (collateral damage here would
+     be preventing others from enetering the bag).
+
+     iDrawer: The first abstraction is the primitive on which all other
+     Bag abstractions are built-on: the iDrawer: it is a
+     thread-safe bag that deals out integers from start to start+length.
+     It has no notion of how many threads are looking in the bag:
+     it simply locks a counter and only increments it if there
+     are more ints to deliver.  If FASTREFCNT is set, it uses the
+     atomic instructions to implement the iDrawer so that it uses
+     atomic increment.   For small bags of ints with a few workers,
+     this is probably the best abstraction to use.
+
+     iCupboard: The second abstraction keeps a notion of how many
+     workers are reaching into the bag.  The metaphor is that
+     you have a large cupboard where each worker gets his own
+     drawer in the cupboard (where all the integers are scattered
+     among the cupboards pretty evenly).  For most of the
+     life of the worker, he only looks in the one drawer assigned
+     to him.  It's only when his drawer becomes empty that he starts
+     rummaging through other drawers.   For larger numbers of workers,
+     this is a better abstraction to use for a bag because it keeps
+     the workers from bumping into each (i.e,, reduces collateral damage).
+     This interface is slightly clumsy to use, because each worker
+     must have it's own drawer number to start in. (It's not
+     hard, just slightly more clumsy).
+
+     Which bag to use?  Probably start with the iDrawer,
+     and if timing results tell you you can't pull fast enough
+     from the bag, consider using an iCupboard.
+     If you pulling VERY FAST from a bag (i.e., pull, do a small amount
+     of work and pull again), it's possible no bag will work well:
+     heap pressure (too many news or mallocs) can really kill thread 
+     performance.  If you suspect this is an issue, you can set the
+     iCupboard to set "protect" to false (which basically turns the
+     iCupboard into a barrier sychronizer where NO sync has to be
+     done) and the bag overhead is minimal.  A slight rewriting
+     of your work to avoid heap pressure can make a huge difference
+     in performance.
+     
+  * Updated the Python C Extension module:
+     fixed a compiler error on newer platforms (as I didn't use Py_ssize_t
+     correctly) and a small warning on Python 2.7
+     
+
+
+New Features as of version 1.4.1
+
+   November 2012
+
+  Top-Level:
+
+   * Added Python C-extension module for converting between dicts and XML. 
+     There is now a "cxmltools" module which uses the C++ code to do the
+     conversions between dicts and XML: dict to XML is 10x faster,
+     XML to dict is 100x faster.
+
+   * Changed default top_level_key of all dict -> XML conversions
+     from None to "top". *This is a minor interface change*!  Why?  
+     Using "top" caused too many user problems (the output XML had no 
+     outer level key, and would cause confusion with other XML tools). 
+     It was a bad default: it would confuse users.
+     This affects a bunch of routines:
+
+        C++: WriteValToXMLString, WriteValToXMLString, WriteValToXMLStream,
+             WriteValToXMLFile, WriteValToXMLFILEPointer
+        Python: WriteToXMLStream, WriteToXMLFile, WriteToXMLStream
+        Python C Ext: CWriteToXMLStream, CWriteToXMLFile, CWriteToXMLStream
+
+     This change shouldn't affect users too much:
+     Almost *all* of the example programs show canonical use of using
+     "top" anyway as the top-level key: this just makes it the 
+     default.  This really only affects the convenience routines,
+     all of the XMLDumper examples in the documentation explicitly
+     set all of the options anyway.
+
+   * int_n and int_un interface changes: we *should* change major version 
+     number for PicklingTools, but these interface changes fix broken
+     behavior anyway.  Problem: When working with int_un/int_n classes
+     with normal classes, conversion were happening the wrong way:
+     we would downconvert big ints to small ints instead
+     of the other way around.  Three major changes:
+      (a) added construction of int_n/int_un from string: i.e,,
+               int_n i = "100000000000000000000000000000000"; 
+      (b) Allowed mixing of ints and int_n/int_un correctly:, i.e.
+              int_n i = int_n("100000000000000000") + 100; 
+          Now works and works as expected.  Previously, it would
+          compile but DOWNCAST the int_n to an int_8 instead
+          of UNPCONVERTING the 100!  Currently, the 100 gets upconverted
+          to an int_n, just like expected.
+      (c) Disallowed casting out from int_n to int_8 (sim.for int_un to int_u8).
+          Too many problems using that with mixed mode int/int_n, as the
+          downcast would confuse the overloading, and many things that
+          SHOULD compiled would complain there were multiple overloads.
+          I.e., 
+                  int_un in = "1000000000000000000000000000000000"; // ok
+                  int_u8 i = in; // WILL NO LONGER COMPILE! 
+
+          To get around this. use "as()":
+
+                  int_un in = "1000000000000000000000000000000000"; // ok
+                  int_u8 i = in.as(); // ok: new way to get value
+
+          This is probably the biggest interface change. (If we had
+          C++11 everywhere and the "explicit" for user-defined conversions, we
+          wouldn't need to do this.  As it is, this is the best
+          way to handle this interface change untill C++11 is ubiquitous).
+
+      (d) Minor updates to int_un/int_n work with the serverside, middleside
+          and clientside shared memory servers across processes.
+
+  Details:
+
+   * C++: Updated to OpenContainers 1.7.5
+      * Added FILEPointerReader so we can deal with FILE* as input for XML
+      * Updated ocport.h to add a new switch so that "long" can be supported
+        with Val, i.e.:  Val v = long(1);  long vl = v;
+        This works on some platforms, but not all.  We discovered when
+        mixing with Python (where longs are everywhere)
+      * Enabled using long, unsigned long, long long, unsigned long long with 
+        Val.  Any conversions to and from these types will now work correctly
+        from Val.  I.e., "Val v = long(1); long ll = v;" should work fine
+        (before you would have to change to one of int_4 or whatever).
+      * Updated the int_n and int_un to work with strings better:
+        before the syntax was "int_un a = MakeBugUIntFromString("123");"
+        Now, we can use "int_un a = "123";".  This is a delicate balance
+        of overloaded constructors and Val overloading.
+      * Updated a bunch of tests to test these features and make sure
+        we didn't break anything.
+      * Major surgery on BigUInt and BigInt to fix conversion problems
+        and mixing ints/int_un (see major headlines above).  Fixing
+        these required adding a bunch of default constructors for all
+        different types, instantiating all the mathops and comp. operations
+        (so they could participate in overloading better), and removing
+        the user-defined operations.  
+      * Also cleaned-up BigUInt and BigInt to work better with the
+        shared memory allocator pool.
+      * Updated array so that 0 length arrays DO NOT allocate resources:
+        this helps speed up the empty array construction and destruction
+  
+   * XMLLoader:
+      * Added ReadFromXMLString and ReadFromXMLFILE, partly for completeness
+        and partly so the Python C-Extension module can deal with
+        Python style streams (which are FILE*)
+
+   * XMLLoader:
+      * Added WriteToXMLString for completeness for writing to strings
+   
+   * Added PythonCExt directory: This directory contains the Python
+     C extension module.  To build the C Extension module, it includes
+     much of the code from opencontainers1_7_5 and the C++ area.  
+     
+      * The approach taken by this module is an "adapter"
+        approach: rather than rewrite all the C++ routines in 
+        Pythonesque C, we reuse the code and "adapt" it by
+        converting from PyObject* to Val (and vice-verse) to
+        use the C++ XMLDumper and C++ XMLLoader.  The conversion
+        between the two object modules (Val/PyObject) is 
+        surprisingly cheap: it's cheaper to convert from PyObject*
+        to Val and convert from Val back to PyObject* than deepcopy!
+        With this approach, we get to reuse all the C++ goodness
+        for the XMLTools.
+
+      * Added xmltimingtests.py so we can see how expensive the
+        C Extension module and the Python modules are.  As of this
+        date, the  Python C Extension module for the XMLdumper
+        is about 6x faster and the Python C Extension for the
+        XMLLoader is about 60x faster.
+
+      * Added support for NumPy and Numeric inside the C Extension
+        modules.  Because when this module is compiled, it's 
+        difficult to tell if Numeric or NumPy is supported,
+        we use dynamic techniques (import and see if it fails)
+        to check for Numeric and Numpy support.  
+ 
+      * Added plenty of testing (convert_test.py) to make sure
+        we can convert between Val and PyObject and preserve
+        information: this includes preserving structure like
+        deep_copy would.
+
+      * Added a README to demonstrate usage and how to build
+
+      * Added documentation to the Docs area for the C-Extension
+        module
+
+   * Python
+      * Added cxmltools.py: this is the "wrapper" around the
+        pyobjconvert Python C-extension module that makes
+        the conversion tools look like the xmltools.py module.
+
+      * Moved the definitions of the options for both the XMLDumper
+        and XMLLoader to xmldumper_def.py and xmlloader_def.py so
+        that the xmltools.py and the cxmltools.py could share the 
+        definitions
+
+      * Updated the xml2dict.py and dict2xml.py to try to use the
+        cxmltools (if they are available), otherwise use the pure Python
+        version
+
+    * X-Midas
+      * Added the pythoncext directory to the X-Midas tree 
+        (with everything underneath it as in PythonCExt).
+      * Updated the builtopt.txt macro to build the Python C extension
+        module.  Because X-Midas inserts both "python" and "python/lib"
+        on the X-MIdas PYTHONPATH automatically, the C extension module
+        "pyobjconvert.so" is inserted into "python/lib" directly.
+
+    * Updated Python XMLLoader so it worked better with 
+      complex->string compares (in Python 2.4)
+      
+New Features as of version 1.4.0
+
+  Top-Level:
+
+   * C++: Newer mechanisms for passing tables across processes in shared memory
+   * Added new option to allow XML parameters to accept digits as keys
+   * Better error message if ThreadWorker throws exception
+   * Updates so that NumPy works better with prettyPrint and XML tools
+        
+  Details:
+
+   * C++: Updated to OpenContainers 1.7.4
+     * Updated CHANGES
+     * Updated CircularBuffer to be able to specify an allocator
+     * Updated StreamingPool to use cross-process Mutex by default
+     * Updated CondVar:
+       * Fixed so timedwait works
+       * Added timedwait_sec (waits for real number of seconds: 2.3, 4.5, etc)
+     * Updated CQ intensely:
+       * Added so CQ can be placed in shared memory by specifying
+         an allocator as well as giving the CondVar and Mutex shared 
+         process option
+       * Added enqueue method which has a timeout in seconds
+       * Added dequeue method which has a timeout in seconds
+   * C++:  Added shared memory helper classes via "shmboot.h,.cc"
+     * Added SHMMain class: this encapsulates creating a shared memory
+       section and manages the lower level calls to shared memory.
+     * Added ServerSide class: This allows the user to create the
+       server side of a pipe in shared memory
+     * Added ClientSide class: This allows the user to create the
+       client side of a pipe in shared memory
+     * Added InSHM routines to help detect if a table is fully contained
+       in Shared Memory (and thus will slide across shared memory correctly)
+  
+   * X-Midas:  Added Shared memory class examples
+     * serverside: shows how to create an X-Midas primitives using serverside
+       abstraction
+     * clientside: shows how to create an X-Midas primitives using serverside
+       abstraction
+
+   * Documentation:  Shared Memory abstractions
+     * Added a new document: shm.txt,.pdf which describes how to use the
+       SHMMain, ServerSide and ClientSide abstractions.
+
+   * XML conversion tools:  Even though keys starting with digits are illegal,
+     some dictionaries use these as keys.  This simply allows them in the
+     XML, even though (strictly speaking) that is illegal XML.  By 
+     specifying the XML_DIGITS_AS_TAGS.  Fixed both Python and C++.
+     * Python: also fixed so only used ast.literal_eval if complexes work
+
+  * Python MidasServer:
+    * in cleanUp, problems closing
+       * Should have used self.s instead of plain s, and clean up fd
+
+  * Better Error Message for HTTPServer (ThreadedWorker):
+    * Previously, if a ThreadedWorker (in say, HTTPServer) were to throw
+      an exception, it would look like the HTTPServer was calling a
+      pure virtual function: in actuality, the thread had started even
+      though it was not "completely" constructed, which led to weird
+      state.   With a few mods, made it so the server would report a 
+      better error.
+      * Add optional parameter to allow SynchronizedWorker to defer
+        construction
+      * Had OCThread::join return early if never started
+      * The ThreadedServer has to explicitly start the thread now,
+        but only after it notices it in a good state.
+
+  * NumPy updates:
+
+     * updated pretty print routines so that they understand and handle
+       NumPy arrays.  Added a Global flag ArrayOutputOption and
+       three options: NATURAL, LIKE_NUMPY, LIKE_NUMERIC (both C++/Python).  
+       If you are in a system where Numeric is king, you can output NumPy
+       arrays like Numeric by setting the global pretty.ArrayOutputOption
+       (in Python) or setting the OCARRAY_OUTPUT_DEFAULT macro (C++)
+       to show how your arrays output.  By default, it does the "natural"
+       thing (NumPy arrays output like NumPy arrays, Numeric like Numeric),
+       but you force to one kind if needed.
+        * C++
+        * Python
+
+     * updated the XMLDumper to handle NumPy.  Changes weren't significant,
+       but the tests and test outputs were tedious ...
+        * C++: No need to do anything: XMLLoader handles all array
+               tags as OC tags (not numpy or Numeric), so nothing changes
+               for 
+        * Python:  Minor changes to code, tests were tedious to verify
+                   worked with Numeric and Numpy across many platforms
+
+     * updated the XMLLoader to handle NumPy.  Changes weren't significant,
+        * C++: changes mostly consisted of making we can parse
+               and output NumPy arrays if needed.
+               Tests build and run like before.
+        * Python: a few changes.  Tests build and run like before.
+
+     * BY DEFAULT, this release handles things as if they were Numeric.
+       If you want to switch to "everything is NUMPY", you need to 
+       change the ArrayDisposition everywhere AND :
+         * in C++, #define OCARRAY_OPTIONS_DEFAULT LIKE_NUMPY  or set it on the
+                    compiler flags with -DOCARRAY_OPTIONS_DEFAULT=LIKE_NUMPY
+         * in Python, it "should" work, but you may have to change
+           pretty.ArrayOutputOption = LIKE_NUMPY # By default, it is NATURAL
+
+    * Added symlink to Makefile for "Makefile.Linux" 
+
+New Features as of version 1.3.4
+
+  Top-Level:
+
+  * Allows C++ Val to read/write OpalTable as M2k Opal Array syntax
+
+  Details:
+
+  * Updated opalutils.h to allow C++ OpalReader to read the
+    array notation of Midas OpalTables "{1,2,3}" as well as allowing
+    the original {"0"=1, "1"=2, "2"=3} notation.  One or two error
+    messages changed, but in general still works as before: it simply
+    recognizes the M2k array notation as well.
+    * Updated opaltest and opaltest.output to reflect new testing
+      of new capability
+
+  * Updated opalprint.h to allow printing the M2k array notation.
+    By default, it will preserve backwards compatility with [1,2,3]
+    outputting as {"0"=1,"1"=2,"2"=3}, but a new option on the
+    pretty print allows {1,2,3} to be output instead.  
+    
+
+New Features as of version 1.3.3 
+
+  August 2012
+
+  Top-Level:
+   
+    Minor performance enhancements, added conform testing
+
+  * Made int_un/int_n division much faster (2x?) 
+  * Added XMLDumper and XMLLoader option XML_TAGS_ACCEPTS_DIGITS
+  * Added new Makefile.Linux.factored which allows faster builds
+  * Added timeout to open for HTTPClient so timeouts can be detected faster
+  * Updated M2k area with minor DR fixes
+  * Added Conforms to C++ and Python areas: XML schema-type validation for dicts
+  * minor XMTime fix in opalfile.py
+
+   June 2012
+
+  * updated opalfile.py to use XMTime directly (from XMTime import XMTime)
+  * Updated the DivMod algorithm for int_un/int_n to be faster
+    * Using a modifed "Hacker's Delight" multiword
+      division algorithm (which is an implementation of Knuth's 
+      "Seminumerical Algorithms" division (Algorithm D) from 4.3.1),
+      sped up arbitrary precision integer division by 2x or so.
+      [Modified so it can handle arbitrary base of int_u1, int_u2 or
+       int_u4: there are some casts and special cases to be wary
+       of especially when using a base holder of int_u4. This was
+       not trivial by any means]
+    * Added new tests in the biguint_test (very specific tests
+      to hit certain code paths as well as some general division
+      tests)
+    * Moved original DivMod (based on binary search for q, r)
+      to DivMod2 for a baseline to compare against.  The binary
+      search algorithm is slower but much less complex.
+    * Added singleDigitDivide for speed in that case
+
+  * Added XML_TAGS_ACCEPTS_DIGITS  for XML code
+    * When a tag/key starts with a number, rather than just
+      "give up", you can continue (adds an _ to the front
+      so it's legal XML).
+    * updated XML documentation so it at least references it.
+
+  * New Makefile.Linux.factored shows how to build a standalone .so  
+    with all the ptools code plus all the opencontainers code with
+    the OC_FACTOR_INTO_H_AND_CC option.  This typically allows you
+    to build 2x faster.
+    * Found a few bugaboos across the baseline that we had to fix to get
+      this to work: mostly just include problems
+
+  * Updated the HTTPClient so that, if a timeout is provided upon
+    open, it uses the "non-blocking" mechanisms so that a timeout
+    can be detected much faster.
+
+  * M2k area:
+     * Fixed sample unit.cfg to get genericpickleloader right
+     * Fixed m2opalprotocol2.cc to compile without warnings
+     * Added ability of OpalPythonDaemon to specify how it 
+       "envelopes" the RETURN ADDRESS InMsg/OutMsg.  In the past,
+       the RETURN ADDRESS was the file descriptor of the socket client,
+       which performed the function of a unique identifier.  Problems
+       occured if the file descriptor was closed and immediately reopened,
+       giving the same RETURN ADDRESS to a potentially different client
+       and the OLD request would be routed to the new client.  Now,
+       we changed it to up by one, so the odds of intersection are much
+       much much smaller, as we increment through all values of int_u4
+       before we repeat. Since the typical life of a packet is measured
+       in seconds, the odds of this up by one unique identifier
+       colliding with a previous one are minimal.
+    * Added m2chooser.h which makes it VERY EASY to choose one of 
+       manu serializations with which to load/dump OpalValues.
+       This includes the ability to read and write as Python
+       textual and binary dictionaries FROM M2k
+
+  * Added routine "Conforms" to C++ baseline:
+     * Implements a simple schema-like validation (akin to XML schema 
+       validation) where a input table is checked against a "valid" prototype,  
+       where the input table contains the expected keys and types of values 
+       to be expected.
+     * Added conform_test.cc/output for unit testing
+     * Added documentation to FAQ and User's Guide describing the Conforms.
+
+  * Added routine "conforms" to Python baseline:
+     * Implements a simple schema-like validation (akin to XML schema 
+       validation) where a input table is checked against a "valid" prototype,  
+       where the input table contains the expected keys and types of values 
+       to be expected.
+     * Added conform_test.py/output for unit testing
+     * Added documentation to FAQ and User's Guide describing the Conforms.
+     * The Python behaves *almost* the same as the C++: since Python
+       can have all sorts of different values (besides the limits of 
+       the C++ Val), it can handle iterables and inheritance: We did this
+       to make the Python conforms more "Pythonic".  It's also a stand-alone
+       module that can be plopped into any Python baseline.
+
+
+  * Updated and cleaned a few tests that were failing the OpenContainers tests
+     *Found/Fixed minor bug in StringToBigUInt/StringToBigInt
+     *Found/Fixed minor bug in split
+     *Found/Fixed bad output in proxy_test
+  
+  * Updated m2chooser.h to mirror what's in the m2k area.
+    Added SERIALIZE_PYTHONPRETTY (as an alias for SERIALIZE_PRETTY)
+    SERIALIZE_PYTHONTEXT (as an alias for SERIALIZE_TEXT) and
+    two new enums:  SERIALIZE_OPALPRETTY and SERIALIZE_OPALTEXT.
+    These just help wrap the OpalValue textual tools that already   
+    exist: it just makes them easier to use from 'chooseser.h'.
+
+
+New Features as of version 1.3.2 
+
+  Top-Level:
+
+  * Added some http client/server classes to the C++:
+    compatibility with Python's http classes.  These interfaces
+    are in flux, so this is included for feedback.
+  * Added JSON support
+  * Added NumPy support
+     * C++ classes can pickle and unpickle, Midas* support
+     * M2k OpalPythonDaemon can pickle and unpickle
+
+  January 2012
+
+  *Added some new OpenContainers functionality:
+    * Added python-esque Split, Strip, Lower, and Upper (with
+      identical semantics to Python's similar routines) and associated tests.
+    * Moved some synchronization code in SynchronizedWorker
+      to a helper methods "startUp" and "waitFor" which simplifies
+      the main loop of the SynchronizedWorker, and also has the added
+      benefit of exposing that code for the ThreadedServer (see below).
+      That eases managing threads that aren't in a WorkerCoordinator.
+    * Updated the ValReader so that a few methods were virtual:
+      this allows the JSONReader to slip in and re-use the majority
+      of the Python dictionary parsing.
+    * Minor error message fix
+
+  *Python:
+    * Updated so MidasSocket can support NumPy: added new ArrayDisposition
+      AS_NUMPY for this.
+
+  *Added JSON compatibility to PTOOLS C++ libraries
+    * Added JSONReader, which allows a user to read a stream
+      containing JSON and turn it into a dictionary.
+    * Added JSONPrint which allows a C++ Tab to print
+      as JSON 
+    * Added an example json_ex.cc which shows some examples
+      of how to access the JSON compatibility (printing and input).
+
+  *Adding simple HTTP Server into PTOOLS: 
+    * Augmented MidasServer to handle "NORMAL_SOCKET" (which means
+      we don't do the crazy DUAL/SINGLE socket sending) and added
+      a special constructor for that.
+    * Augmented MidasServer to allow some client to take over
+      a file descriptor so the server doesn't have to track that
+      file descriptor anymore.
+    * Added a new SimpleServer, which doesn't do any crazy Midas DUAL/SINGLE:
+      a simple server where the server gets the standard MidasServer
+      callbacks
+    * Added a new ThreadedServer, where each socket connection is dispatched
+      to a thread (one thread per connection).  A minimal threadpool is 
+      implemented to avoid the startup/shutdown of threads.  This is the
+      bare class that handles the thread management and co-ordinating
+      the threads.
+    * Added a new SimpleHTTPServer (which inherits directly from ThreadServer)
+      for parsing the basic HTTP protocols, leaving the details to 
+      clients.
+    * Added a MidasHTTPServer (which inherits directly from SimpleHTTPServer)
+      which specfically serves as a Gateway, translating from HTTP
+      POST to MidasTalker.  Upon sending a standard HTTP POST XML/HTML from 
+      some HTTP client into MidasHTTPServer, the HTTPServer converts
+      the request into a dictionary, sends that dict to some MidasServer (via
+      a Midastalker), gets the resulting dict back, converts that dict into
+      XML and sends the final XML result back to the HTTP Client. 
+  
+    Discussion:  We wanted to reuse the framework of the MidasSocket
+      and MidasServer without too much of a rewite (there are really
+      only 2 or 3 minor changes).  That way, the SimpleServer
+      and resulting framework can take advantage of the MidasServer
+      socket work that has some legacy of testing.  From an abstract
+      design aspect, this is non-optimal (as perhaps some of the MidasSocket
+      and MidasServer code should be in helper classes), but we wanted
+      to keep the Python MidasServer/MidasTalker in sync: one of the
+      minor goals of the PTOOLS is to keep the Python and C++ as close
+      as possible (for maintenance reasons).   
+
+    * Added httptools which characterizes a lot of the work that
+      HTTP has to do when parsing.
+
+    * Took a lot of functionality to do with file descriptors
+      out of MidasSocket and placed it into FDTools.  To
+      preserve backwards compatibility, MidasSocket now
+      inherits from FDTools.
+
+    * Added an HTTPConnection/HTTPResponse which resembles what 
+      Python does: this is the simple way to put together an HTTP
+      client.
+
+    * Added two sample http servers 
+        1) samplehttpserver_ex which returns time from a GET 
+        2) httpserver_ex which just shows what POST and GET send,
+            and responses with an echo
+
+    * Added sample httpclient_ex, which basically shows the
+      same examples as the Python HTTP clients.
+      It also demonstrates the chunked response stuff.
+
+  * NumPy support
+    * Added documentation
+    * Added a new array disposition to C++ code: AS_NUMPY
+      Since NumPy is the current supported standard, we had to make
+      sure we supported it
+
+    * valpickleloader uses the Val specific loader NOT the generic one
+    * load: Added NumPy array support to the genericpickleloader
+       * handles PicklingProtocol 0 and 2
+       * handle NumPy sharing with get/put
+       * added tests to pickleloader_test for all different types
+         we support (valgrind the test)
+       * Added postprocess step to pickleloader to turn all
+         "shared tups" into appropriate arrays.  
+ 
+    * dump: Added NumPy array support 
+       * Updated PythonPickler class for Protocol 0
+          * Restructured so pmstack is own data structure for handling
+            memoization.  This is for Pickling Protocol 0. 
+            This will be reused in the M2k 
+          * NumPy handles most numeric arrays
+       * Updated dumper for Protocol 2: p2common.h, valprotocol2.h,cc
+       * added tests to p2_test.cc
+    * Fixed so NumpY gets/puts work (has to do a postprocess step to 
+      do this right)
+
+    * Added NumPy to M2k, massive updates to M2k opalpython area
+       
+    
+
+New Features as of version 1.3.1
+
+  July 2011
+
+  XML conversion updates and generic speedups:  
+  * Sped up C++ XMLLoader significantly
+  * speed_test.cc is significantly faster
+  * string comparisons, string hashing faster
+  * Documentation clean-up and updates
+
+  speedtest.cc: New updates for PicklingTools 1.3.1
+      Speeds are significantly better! About 20% speedup
+  
+        Current speeds in seconds: (-O4 on 64-bit Fedora 14 machine)
+                                 C++        Python 
+                                 g++ 4.5.1   2.7   # Comments
+                                 -----------------------------
+       Pickle Text                5.90       4.82  # Python slightly faster 
+       Pickle Protocol 0         12.23      12.65  # 
+       Pickle Protocol 2          1.30       3.41  # C++ significantly faster
+       Pickle M2k                 2.98        N/A  #   
+       Pickle OpenContainers      1.25        N/A  # OC is fastest overall
+
+       UnPickle Text             23.40      38.19  # C++ faster 
+       UnPickle Protocol OLD 0   29.53       7.13  # Why OLD P0 is deprecated!
+       UnPickle Protocol NEW 0    7.24       7.13  # 
+       UnPickle Protocol OLD 2    8.23       3.66  # Why OLD P2 is deprecated!
+       UnPickle Protocol NEW 2    4.34       3.66  # Python still faster
+       UnPickle M2k               9.72        N/A  #
+       UnPickle OpenContainers    2.41        N/A  # OC is fastest overall
+
+
+   The speed of pickling2/unpickling2 in Python 2.7   = 3.41+3.66 = 7.07 secs
+   The speed of pickling2/unpickling2 in Ptools 1.3.1 = 1.30+4.34 = 5.64 secs
+
+   The round trip time of the C++ impl is about 15-20% faster than Python 2.7.
+
+  C++ XMLLoader:
+   + Sped up the XMLLoader by 8x with Eval option on (4x without):
+     + modified OCValReader to be able to return early on failed Evals
+     + updated Array so that resizes can be faster (and avoids deep-copies
+       by specializing a templatized ArrayCopy)
+   + Fixed 5 minor bugs in the XML translations
+     + handle binary escapes
+     + comments after/before XML header
+     + sees (but ignores) <? ?> other than xml (ie., ignores DTDs)
+     + recongizes namespace ':' in attributes, but limited basis
+       (full namespace support is coming in a later release)
+     + When using XML_LOAD_EVAL_CONTENT, spaces around the front
+       and back used to cause the EVAL to fail: not anymore
+   + updated xmlload_test/xmldump_test to test 5 bugs mentioned
+   + TODOS for XML: handle namespaces, DTDs better
+
+  Python XMLLoader: 
+   + Fixed same 5 minor bugs as C++ XMLLoader in XML translations 
+   + When using XML_LOAD_EVAL_CONTENT, tries to use ast.literal_eval
+     which is far safer than eval
+   + updated xmlload_test/xmldump_test to test 5 bugs mentioned
+   + Fixed bug in parsereader
+
+  Had troubles with GCC/G++ 4.5.1 20100924 on Fedora release 14
+  when ANY optimization is on: put a comment in the Makefile.Linux
+  warning people to not use FC14 with optimization 
+  (FC15 works fine with -O4 on gcc 4.6.0).
+  RedHat 6.0 works great.
+
+  + Updated opalutils.h: Used data_ instead of buffer_ (CHANGES
+    from the C++ tunings above)
+
+  + Because the Makefile.Linux64 is exactly the same as the
+    Makefile.Linux (because the tools can distinguish between
+    32 and 64-bit at compile-time), make the Makefile.Linux64 be
+    a symbolic link to the 32-bit version.  We continue to
+    update the OSF1 Makefile, but currently have no way to test it.
+
+
+  Socket shutdown issues: Updated MidasTalker/MidasServer (C++/Python)
+   + Under some systems, the close is not good enough to completely
+     force down a socket.  The most portable way to force a socket
+     down is to use "shutdown" then "close".  Originally, for backwards
+     compatibility, we were only call close, but most users may want
+     to force a shutdown when closing/cleaninup:
+
+            midasthing.forceShutdownOnClose(True);   // C++ 
+            midasthing.forceShutdownOnClose = True;  # Python
+
+     I am not entirely happy adding this in, but shutdown/close
+     seems to be the most portable way to ensure your socket goes down
+     in some cases.
+     (A few consults of other system programmers and a few Googles).    
+
+  
+  C++ OpenContainers 1.7.1 updates:
+
+  +Added ocmove.h: "Tried" to use SFINAE techniques, but found
+   inconsistencies among C++ compilers and platforms (G++ and Intel C++)
+   where it works in one case, doesn't compile in another case, and
+   compiles but gives the wrong answer.  So, in the end, just specialized
+   MoveArray for multiple datatypes.  Maybe in the future we can revisit.
+
+  +occomplex.h: Added MoveArray specialization for complex_8 and 16
+
+  +ocarray.h: When resizing an array, how do you move items from
+   one array to another?  With POD stuff, you can just memcpy,
+   and same with some data structures, but most of the time
+   you have to copy and then destroy the original.  When you specialize
+   the MoveArray template, you can do the appropriate thing for your 
+   datatype.  (When rvalue-references are more available, we'll use those)
+
+  +ocproxy.cc:  Took inline off of some templates
+
+  +ocvalreader.h: Made it so we can return "false" if an Eval fails instead of 
+   throwing an exception.  In the XML tools case, this made a significant 
+   speed difference.  Also made it so you don't have to copy the
+   input, you can just refer to the original input by reference,
+   as well as turn off the context for error messages.
+
+  +ocordavlhasht.h: minor change so you can have default empty node
+
+  +ocavlhasht.h: If someone from "old code" sets OC_BYTES_IN_POINTER
+    incorrectly for the current platform, this catches it and tells you
+    how to fix it: don't set OC_BYTES_IN_POINTER anymore!
+
+  +ocval.h: Added specialization of MoveArray for Val 
+
+  +ocreader.h: Allow the context to be turned off so that Syntax Errors
+   can be faster
+
+  +array_test.cc:  updated array test to make sure the new MoveArray
+   specializations work
+
+  +ocstringhashfunction.h:  Significant speedups by using a better
+   hash: this hash was stolen straight from Python
+
+  +ocport.h:  Updated version number
+
+  +ocstring_impl.h: Faster op== taking advantage of int_u4 is a bigger
+   granularity to do string compares
+
+  +ocavlhasht.h: Make sure that we don't have conflicting OC_BYTES_IN_POINTER
+   sizes.
+
+  +proxy_test, avlhash_test, valreader_test, tab_test, hashtable_test outputs:
+   outputs changed because hash function changed
+
+  Misc.
+  + pickleloader.cc: grammar errors in comments
+  + speed_test.cc:  Pickle 1 "looks like" a memory leak, but isn't: fixed
+  + Makefile.Linux: added icc support, -g 
+  + The FAQ and User's Guide have been updated and cleaned-up:
+    in a few places, the Python code was just wrong or confusing: those
+    have been cleaned.
+
+New Features as of version 1.3.0
+
+  May 2011
+
+  Highlights:
+    * Since XML is so pervasive, the PicklingTools toolkit has
+      embraced XML:  There are conversion tools provided.
+      In fact: you can convert back and forth between XML and Python 
+      Dictionaries easily with the new tools.  That allows you to use 
+      Python Dictionaries as your main currency, but still speak XML.
+        * Python tools for converting between XML and Python dicts
+        * C++ tools for converting between XML and Tabs
+        - TODO: M2k tools for converting between XML and OpalTables
+      A lot of care has been taken so that conversions between
+      XML and dictionaries DO NOT lose any information.  For floats
+      and complex values, numeric precision has been given strict attention.  
+      For nested lists/dicts, attention has been paid so that all
+      structure is preserved.  For POD data, the typetags and numeric
+      precision are preserved.  
+
+      Currently, the tools just allow conversion back and forth
+      between XML and Python dictionaries:
+      we don't (at the moment) use XML as another serialization.
+      If you need XML, you have to do the conversions yourself.
+      The easiest way:
+
+          #include "xmltools.h"
+          ConvertToXML(a_python_dict)     # returns XML in a string
+          ConvertFromXML(xml_in_a_string) # return a Python dictionary
+
+      There are many more options to do the conversions: 
+      see the documentation for a full discussion.
+
+    * A few minor changes so that the C++ pretty print and Python pretty
+      print output the same
+
+
+   Details:
+
+    * Updated the documentation for some discussion of the XML
+      support, including features and caveats for its usage:
+      the new document is about 20 pages of examples and
+      discussion: xmldoc.txt, xmldoc.pdf, xmldoc.html
+
+    * Cleaned up the documentation in a few places: it was
+      out of date, and mostly just pointed to the web site:
+      the web-site has much easier to read documentation
+      and is up-to-date.
+
+    * Moved to new version of opencontainers: 1.7.0:
+        * Added "pushback", "drop" to CircularBuffer, with new tests
+        * ocport.h had a syntax error that MySQL has trouble parsing: fixed
+        * changed version numbers   
+        * updated ocreader to handle pushback, read continually from strems
+          with new EOFComing() method 
+        * added tests for ocreader 
+        * Updated Makefiles for new version  
+        * Fixed a minor bug when reading complexes with an negative imaginary
+          component: it was ignoring the sign.  Added tests.
+        * Val version of cout adds 'L' suffix to int_n/un: updated a bunch
+          of tests in the tests area to deal with this.
+          Example:
+            int_n i = 100;
+            cout << i << endl;  // output 1
+            Val v = i;
+            cout << v << endl;  // outputs 1L
+          Philisophically and historically the Val version of output is more 
+          explicit so less information is lost (floats output full precision,
+          complexes output full precision, strings escape).
+        * All Val constructs output strings the same way as Python
+          (i.e., prefer single quotes, but use double-quotes on strings
+           if the string contains no double quotes itself):
+            * ocstringtools updated to allow this
+            * octup.h, ocval.h updated
+        * tests updated for output changes
+            * valreader_test, tab_test. set_test, valbigint_test
+ 
+    * A few minor changes so that the C++ pretty print and Python pretty
+      print output the same
+        * Python: 
+           * extra space in the Python (after commas) is gone
+           * Python pretty now prints Numeric arrays JUST like the C++
+        * C++: 
+           * int_un and int_n now print the suffix 'L' when printed as a Val
+             to distinguish them from other ints.  
+          
+    * Updated m2ser.cc: M2K serialization still needed two last
+      little tweaks (see PicklingTools 1.2.1) to handle Big-Endian
+      numbers.  
+        * OpalTable on the Java side doesn't necessarily iterate
+          through tables in order (which sometimes causes "obvious
+          arrays" to come over as Tables), so we let the more efficient
+          "ConvertTabToArr" handle that for us.
+        * When loading numbers, forgot to account for the endianness
+          of the numbers.  Fixed now.
+
+    * Added standalone tests for dumping and loading XML:
+      Note the C++ and Python use the same output files:
+      xmldump_test.output and xmlload_test.output
+        * C++ : 
+            * xmlload_test.cc and xmldump_test.cc
+        * Python
+            * Added parsereader.py and circularbuffer.py (with tests)
+              to mirror what the C++ does for parsing: We want the
+              Python and C++ code to be as parallel as possible for
+              maintenance reasons
+            * xmlload_test.py and xmldump_test.py
+        - M2k 
+            TODO (want to use same output file
+  
+    * Example programs in Python and C++ of how to convert xml to a dict
+      and back: 
+        * xml2dict.py and xml2dict.cc  # Command line tools for conversion
+        * dict2xml.py and dict2xml.cc  # Command line tools for conversion
+        * xmlload_ex.cc and xmldump_ex.cc  # Examples
+
+    * Added ArrayDisposition to the XML converters: this gives
+      the user some options for dealing with POD data.
+
+  
+    TODO (Do we want to do this?):
+    - MidasServer/Talker/Yeller/Listener all have incorporated
+      XML as a new serialization option. 
+        - C++
+        - Python
+    - The M2k components have embraced the XML serialization
+      protocol as well, so that the OpalPythonDaemon, OpalSocketMsg
+      and UDP components all can use XML as a new serialization.
+    
+
+New Features as of version 1.2.2
+
+  May 18th, 2011
+
+  Highlights:
+     * Minor release:
+        only includes bug-fixes when using C++ M2k BigEndian serializations
+        -Wasn't handling endianness correctly with POD data
+        -More agressive at turning an Opaltable into an Opaltable_ARRAY
+         implementation
+
+New Features as of version 1.2.1 
+
+  April 5th, 2011
+
+  Highlights:  
+     * PicklingTools C++ M2k serialization supports big endian:
+       this allows a particular Java client to work
+       (email me if you want this client!)
+     * Added workaround for Intel 10.0.12 compiler
+
+  When the code for M2k serialization was ported from M2k to 
+  PicklingTools, it missed the endianness code.  The Java client
+  for talking to M2k uses big-endian, so M2k serialization needs
+  to support big-endian.  To support this, we have to modify a number
+  of files:
+     chooseser.h:  Added a new argument (defaults to MachineRep_EEEI,
+                   little-endian, which is most Linux intel boxes)
+                   which allows M2k serialization to specify.  This
+                   simply gets passed through to the new M2k routines.
+     m2ser.h,.cc:  Added new MachineRep_e argument to a bunch of 
+                   the serializations to allow the M2k serialization
+                   to use Big (IEEE) or Little (EEEI) endian.
+     midassocket.h,cc:  Added endian code.
+  In the future, other protocols need to respect this, but right
+  now, only the M2k serialization "respects" the endianness (the
+  Pickling Protocol 2 is always little-endian, so that shouldn't 
+  be an issue for that).
+
+  Intel 10.0.12 C++ compiler seems to be too "agressive" at instantiating
+  templates: some templates shouldn't be instantatied.  This caused problem 
+  with the compare operations (operator<, >, etc) for complex_8, complex_16
+  operations.   By default, complex compares shouldn't be supported 
+  (Do you compare my magnitude? point-wise?  Python throws an exception:
+  It seems the "right choice" that a C++ should simply not allow the
+  instantiation; however, in the Intel 10.0.12 compiler, this philosophy 
+  makes it so NOTHING can build, so for that compiler we have instantiate 
+  some extra templates to get everything to build).  Some major customers 
+  work with Intel 10.0.12 and we need to make them happy, so we have added 
+  some truly heinous #ifdefs to deal with that compiler problem:
+     We changed ocproxy.h, occomplex.h and ocarray.h: if you see
+     __ICC==1010 && __INTEL_COMPILER_BUILD==20080112 in those files,
+    it's solely to deal with Intel compiler 10.0.12.
+
+  In the M2k area, the components don't build out of the box
+  in release 1.2.0:  that should be fixed now.
+
+  Testing: 
+        RH6 32-bit wth GCC
+        Fedora Core 14 64-bit with GCC 4.5.1
+        RedHat 5.3 32-bit with Intel
+
+  Updated Docs (for new release)
+  Updated version numbers
+
+New features as of version 1.2.0
+
+  November 7th, 2010
+
+  This is a fairly large release:
+    + adding C++ Ordered Dictionaries  (OTab: works will Val)
+    + adding C++ Tuples                (Tup: works with Val)
+    + adding C++ arbirary sized integers (int_un and int_n: works with Val)
+    + Python Pickling Protocol 0,1,2 Loader rewritten to be faster, stabler
+    + adding support for nan, inf, and -inf in Python dictionaries
+    + CHANGE: Array<POD> now prints out as Python Numeric repr would: See below
+    + CHANGE: Valreader (Eval, etc). sees "1L" as an int_n (used to be int_8),
+    + CHANGE: large ints (70127340817203478192) become int_n instead of real_8
+    + DEPRECATE: Because the array module in Python 2.7 changes how Pickling
+                 works from 2.6, we deprecate the ArrayDisposition
+                 AS_PYTHON_ARRAY: we can detect and load both versions 
+                 (Python 2.6 and Python 2.7) of a pickled table easily, 
+                 but we currently dump the arrays as Python 2.6 
+                 does (not 2.7).  See below for more discussion.
+
+  Because Tup and OTab and BigInt are new features, there are some
+  tools to convert them back and forth (to Arr, Tab, Str respectively);
+  however we have gone to some lengths to make sure that conversion happens
+  automatically in case you are talking to a "legacy" server/client
+  that can't support OTab or Tup.
+
+  +Added: The LoadValFromFile and DumpValToFile (and LoadValFromArray
+   and DumpValToArray): these are convenience routines for the user
+   to allow them to dump/load any Val from C++ to any of the
+   supported serialization through one interface.  In other words:
+   We can choose easily HOW to serialize to a file:
+
+      DumpValToFile(some_val, "dumpfile.p0",     SERIALIZE_P0);
+      DumpValToFile(some_val, "dumpfile.p2",     SERIALIZE_P2);
+      DumpValToFile(some_val, "dumpfile.bintbl", SERIALIZE_M2K);
+      DumpValToFile(some_val, "dumpfile.oc",     SERIALIZE_OC);
+      DumpValToFile(some_val, "dumpfile.oc",     SERIALIZE_TEXT);
+      DumpValToFile(some_val, "dumpfile.tab",    SERIALIZE_PRETTY);
+
+   All Midas thingees use the DumpVal/LoadVal routines now. There
+   is also a test called chooseser_test.cc where we test all sorts
+   of different serializations and make sure legacy conversion (see below) 
+   works.
+
+  + Compatibility concerns: Throughout the baseline, the new PickleLoader 
+    (in pickleloader.h) has replaced the previous two Pickling loaders:
+       -PythonDepicklerA for Pickling Protocol 0 - DEPRECATED
+       -P2LoadVal for Pickling Protocol 2)       - DEPRECATED
+    In general, the new loader is faster, simpler, handles both
+    protocols, and handles the new data structures of 1.2.0 (OTab, Tup, int_n).
+    By default, anyplace where you load P0 or P2 will use the new
+    loader.  The original code has been included in the baseline
+    if you need it, and you can set your seralization to 
+    SERIALIZE_P0_OLDIMPL or SERIALIZE_P2_OLDIMPL to pick up the old
+    behavior, but in general you shouldn't need to (in fact, the
+    older load protocols don't support the new features of 1.2.0).
+
+  + The M2k components do not currently understand the int_n
+    or OTab or Tup, as there is no equivalent structure in M2k.
+    Future releases will have M2k handle them and convert them.
+    In general, this shouldn't be a problem: ALWAYS choose
+    compatibility mode when you talk to an M2k thingee, or simply
+    don't pass it OTab/Tup/BigInt.
+
+  +INTERFACE CHANGE and BUG FIX: 
+     C++ and Python dicts were previously not completely interchangable!
+
+     From C++: How POD arrays print out is different:
+      Array<real_8> a = Eval("array([1,2,3], 'd')");
+      cout << a << endl;   // as before: 1 2 3
+      
+      Val v = a;
+      cout << v << endl;   // OLD:          array([1 2 3])
+                           // NEW as 1.2.0: array([1,2,3], 'd')
+    The new way DOES BREAK INTERFACE, but 
+      (a) The Python output and the C++ output are NOW the same (they weren't
+          before)
+      (b) From Python you can now input Numeric arrays and not lose precision
+      (c) more consistent with repr
+
+    The real reason is because you lose information and you couldn't
+    read Numerics from C++.  Now, you can:
+     
+     # Python
+     >>> t = { 'a': array([1,2,3], 'i') }
+     >>> eval(repr(t)) == t
+     True
+
+     // C++
+     Val t = Tab("{ 'a': array([1,2,3], 'i') }");
+     cout << bool(Eval(Stringize(t)) == t) << endl;  // True
+ 
+    Before, the Python repr and C++ Stringize were NOT the same,
+    and you couldn't pass them between each other.  Now, you should
+    be able to read C++ produced tables with Array<POD> and not
+    lose (too much) information.         
+
+
+  +Also added support for nan, inf, +inf, -inf when real values print out,
+   as when they read from files.
+  +Complete C++ rewrite of the loader for Pickling Protocol 0 and 2: 
+   smaller footprint (both runtime and codespace), easier to maintain and 
+   augment, just as fast.  There are still some unimplemented features,
+   but in general it is better and much more complete.
+  +Stringize for any integer type is now 2x faster
+  +Added an Ordered AVLHashT (preserves insertion order, not sorted) 
+     +Added ordavlhasht_test and ordavlhash_test
+     +Updated the occontainer_test slightly for OrdAVLHashT
+  +Added OTab to Val framework (Ordered Tab, ordered by insertion order):
+     this is essentially a Python (2.7 and up) OrderedDict. 
+     +Added otab_test
+  +Added Tup to Val framework(essentially a Python tuple). 
+     +Also added tup_test
+  +Added a Randomizer class (allows you to see all random numbers between
+     0 and n-1 with O(1) space and amortized O(1) generation
+     +Added randomizer_test
+  +Added conversion routines to occonvert.h to allow converting Tup to Arr
+     and OTab to Tab for someone who needs backwards compatibility.
+     +The top-level (shallow) converters: ConvertOTabToTab/ConvertTabToOTab 
+     +The recursive (deep-copy) convert: ConvertAllOTabTupToTabTup
+     +Added conversion tests to otab_test, tab_test
+     +Updated ConvertTabsToArr (etc.) to understand OTab and Tup.
+  +Made it so MOST of the Pickling protocols all understand OrderedDict/OTab
+   and tuples/Tup.  This includes:
+      + A compatability mode: The protocols previously approximated
+        Tuples with Arr, so we have to make sure we can talk to old
+        servers as well (and "force" the Tuple->Arr, OTab->Tab, BigInt->str.
+      + Backwards compat to Text processing for C++
+      - Backwards compat to Text processing for M2k OpalTables
+      + Pickling Protocol 0 on C++ side
+      + Pickling Protocol 2 on C++ side (w/ new loader, limited w/ old loader)
+      + very limited Pickling Protocol -2 on C++ side (not supported anymore)
+      + OpenContainers serialization on C++ side
+
+      ALL generic serialization goes through the chooseser.h files,
+      (i..e, DumpValToArray and LoadValFromArray interfaces).
+      which has a default parameter where you can "request" conversion
+      of Otab->Tab, Tup->Arr and BigInt->Str.  This gives us a higher
+      degree of confidence this works because we can test it separately
+      from the socket comms.
+
+       Midask 2K:
+         Since M2k doesn't have anything like OTab, BigInt, Tup,
+         they serialization ALWAYS converts to Tab, Str, Arr.  In the future
+         we will revisit the M2k components and use the new loader.  For now,
+         we have the old M2k components as is, but the raw C++ will
+         always convert.
+       Pickling Protocol -2 DOES NOT support any of the new features:
+         as of this release we officially deprecate that code.
+       
+
+  +The text parsing now understands 2 forms of OrderedDict:
+    OrderedDict([('a':1), ('b':2')])  # The long-winded, but Python compat. way
+    o{ 'a':1, 'b':2 }                 # New idea 
+    [ 'a':1, 'b': 2 ]                 # TODO New idea ... maybe in future?
+
+  +Augmentation: Added "remove" method to Val so Tab,Arr,and OTab understand it
+  +Augmentation: Added swapInto method to all AVLTreeT, AVLHashT, OrdAVLHashT
+  +Augmentation: Added ConvertOTabToTab and ConvertTabToOTab for easy
+                 conversions.  Also added the unsafe SwapInto, which allows
+                 conversion, but at the cost of the other data structure.
+                 SwapInto allows only the destruction of the other when
+                 it's done.
+  +Augmentation: Minor revamps to make all three AVLX classes more consistent
+
+  +Bug Fix: Made it so select traps exception instead of runtime_error only
+            inside of MidasServer
+  +Bug Fix: Early return inside of MidasSocket in case file descriptor
+            already disappeared: this fix allows the user to call
+            disconnectClient manually.
+  +Bug Fix: Make it so AVLTreeT, AVLHashTreeT, and OrdAVLHashT 
+            (and thus Tab and OTab) can use <,<=,>,>= without seg faulting: 
+            added to pre-existing tests as well.  Comparison is very
+            similar to how Python does it.
+  +Bug Fix: Pickling Protocol 0 had trouble loading tuples because it
+            forgot to remove the PY_MARK from dict and list puts
+  +Added documentation to document the new OTab and Tup and int_n and
+            DumpValToFile, LoadValFromFile, DumValToArray, LoadValFromArray
+
+
+  +Need some global message to show we are in "compatibility mode"
+   when using OTab and Tup so it is very clear they are being converted
+   for you: All the examples show this.
+  +Allow the clients/servers to choose a compatibility mode: all examples
+   in X-Midas and standalone.
+  +Updated X-Midas and tried with X-Midas 4.4.4 and 4.6.3
+
+  +Output chooses between OrderedDict and o{ } 
+  +Added ability to go back to OC_USE_OC_STRING (we had lost that ability
+   a while ago), but its use requires setting a bunch of flags at once: 
+   -DOC_USE_OC_STRING -DOC_USE_OC_EXCEPTIONS -DOC_ONLY_NEEDED_STL -DOC_NEW_STYLE_INCLUDES
+   Added a "commented out" version of this in the Makefile.Linux
+
+  +Added arbitrary sized signed and unsigned integers: BigInt and BigUInt: 
+   the user uses int_un and int_n respectively (the best implementation
+   is chosen for 32-bit or 64-bit machines).  
+  +Added a large suite of tests for BigInts.
+  +Added the int_un and int_n into the suite of values supported by Val,
+   and some tests (esp. for comparing).
+  +BUG FIX: complex compare (<. <=, etc.) used to seg-fault.  Now, just
+   like Python, they throw an exception; We wanted them to "not compile",
+   but all the type conversion did "too much", so we do what Python
+   does: throw an exception.
+  +Adding valreader_test, and changing so we reognize L as int_n
+  +Added the ability to build a shared libptools.so 
+  +Added the 'speed_test.cc' into the C++ area and 'speed_test.py' in the
+   Python area so you can compare speeds of different serializations:
+   both versions use "about" the same table, so you can compare the
+   relative Python speed vs. the C++ speed as well as the different protocols
+
+    Current speeds in seconds: (-O4 on 64-bit Fedora 13 machine)
+                             C++        Python 
+                             g++ 4.4.4   2.6   # Comments
+                             -----------------------------
+   Pickle Text                5.64       5.12  # About equiv
+   Pickle Protocol 0         14.56      12.70  # Python slightly faster
+   Pickle Protocol 2          1.36       8.05  # C++ significantly faster
+   Pickle M2k                 3.03        N/A      
+   Pickle OpenContainers      1.31        N/A  # OC is fastest overall
+
+   UnPickle Text             32.55      38.23  # About equiv
+   UnPickle Protocol OLD 0   36.66       7.20  # Why OLD P0 is deprecated!
+   UnPickle Protocol NEW 0    7.48       7.20  # About equiv
+   UnPickle Protocol OLD 2    9.24       4.46  # Why OLD P2 is deprecated!
+   UnPickle Protocol NEW 2    6.24       4.46  # Python still faster
+   UnPickle M2k               9.00        N/A
+   UnPickle OpenContainers    4.12        N/A  # OC is fastest overall
+
+   These numbers show we are, in general, on par with the Python serialization:
+   in some cases we are faster (the dump for P2 is 5x faster in C++
+   than Python) and some cases slower (load for P2).  
+
+  + Added UDP Clients and Servers from M2k that can talk to 
+    MidasYellers and MidasListeners.
+    + Updated the M2k area to reflect there are two units now:
+      udpif and opalpython
+    + Moved all the opalpython stuff to that dir, udpif to its own dir
+
+  + Bug-fix and DEFAULT CHANGE for MidasServer shutdown:  
+    When a MidasServer does an open, it passes a timeout value which is how 
+    long the MidasServer should "watch" the socket port  for activity before
+    it looks around to see if it shutdown.
+    The default was None, which means it watches the socket forever:
+    this is almost never what you want: you want the server
+    to wake up occasionally to make sure you haven't been told to shutdown.
+    It you wake up too often, it wastes CPU: too rarely, and you aren't
+    responsive.  Changed the default to 1.0 (for 1.0 seconds).  This,
+    incidentally fixes the X-Midas server primitives 
+    (xmserver and permserver) which have trouble responding to ^C (they
+    would apparently ignore it):  Explicitly added the shutdown
+    to both xmserver and permserver, and made sure they fixed the problem.
+
+  + Fixed all the X-Midas primitives, server, and talker examples
+    to be able to Ctrl-C out of them.  Mostly, this meant adding
+    something like:
+          import time
+          while 1:
+             time.sleep(1)
+          a.shutdown()
+          a.waitForMainLoopToFinish()
+
+    Coupled with the MidasServer change (the open takes 1 as default,
+    see above), all primitives can be escaped via a ctrl-C.
+
+  + Updated the pickledloader_test to test for user-defined classes
+    and complicated data structures.
+
+  + Moved IsLittleEndian to opencontainers from m2pythontools.h
+
+  + Changed the MidasSocket to use the PickleLoader BY DEFAULT:
+    this makes the Pickling Loading for Protocol 0 and 2 much 
+    faster and more robust.
+
+  + Moved all the Pickle Opcodes into cpickle.h, and changed the
+    names ALL OVER THE BASELINE to be PY_NAME instead of just NAME.
+    This gets rid of some redundancy as the names were also in
+    m2pythonpickler.h
+
+  + Made it so we can pickle BigInt in both Pickling Protocol 0 and 2
+
+  + Updated valreader and valreader_test: whenever an L is at the end
+    of an integer, it becomes an int_n or int_un.  THIS BREAKS
+    BACKWARDS COMPATIBILITY: those used to be converted to real_8, but
+    now they are converted to int_ns.
+
+  + Tested conversion to/from Val/int_n/int_un/real_8/plainint/string
+    to make sure that all works as expected.
+
+  + Added tests for different conversions to/from BigInt/BigUInt
+    and real_8/binary (streams)
+
+  + X-Midas libraries.cfg:  Newer X-Midas's need to explicitly declare the
+    libpend on ptools on oc, so we explicitly added that to libraries.cfg
+
+  + Added a decimal printer so you can print out int_un/int_un to
+    any precision you want.
+
+  + Added Pickling Protocol 0 (and presumably Protcol 1 now works too) 
+     to new loader: updated tests and output.
+
+  + Added the ability of the C++ Pickle Loader to handle user-defined REDUCEs
+    and BUILDs: by default, a Pickled class becomes a dictionary.  
+
+  + The whole purpose of adding the ArrayDisposition AS_PYTHON_ARRAY
+    was because, in Python 2.6, it was a binary dump: dumping arrays
+    of POD (Plain Old Data, like real_4, int_8, complex_16) was blindingly
+    fast (as it was basically a memcpy): This was to help Python users who 
+    didn't necessarily have the Numeric module installed.  As of Python 2.7, 
+    however, the Pickling of Arrays has changed: it turns each element into a 
+    Python number and INDIVIDUALLY pickles each element (much like the AS_LIST
+    option).  The new Pickleloader DOES DETECT AND WORK with both 2.6
+    and 2.7 pickle streams, but we currently only dump as 2.6: this change
+    in Python 2.7 (and also Python 3.x) defeats the whole purpose of 
+    supporting array .. we wanted a binary protocol for dumping large amounts 
+    of binary data!  As of this release, we deprecate the AS_PYTHON_ARRAY
+    serialization, but will keep it around for a number of releases. 
+
+  + BUG FIX: The M2k Components, when using OpenContainers serialization
+    miscomputed the size of an M2_TIME, causing an underestimate which
+    would cause a seg fault.
+
+New features as of version 1.11
+
+  -Added OC namespace for C++ (minor ripples throughout baseline, esp. Xm area)
+  -Minor bug fix for Numeric array pickling, 
+  -Fixed some warnings and minor bugs exposed by g++ 4.4.x (on FC 12 and 13)
+  -In Pickling Protocol 0, wasn't handling strings with embedded ctl-sequences
+  -In Pickling Protocol 2, underestimated size of buffer to dump to,
+      fixed M2k code and raw C++ code 
+  -Added some catches to server examples to show how to keep the server up
+      if client disconnects
+
+  May 18th, 2010
+
+  Code tested on RedHat 4.4, 5.3, Fedora Core 12, 13 and Tru64 OSF1.
+
+  Namespace work in the C++ area:
+   * Added the ABILITY to put all the OpenContainers code and
+     PicklingTools code into a C++ namespace. 
+
+     The older versions of the OC library (and PTOOLS) were in the
+     "global" space, not protected by a C++ namespace.  We have added
+     namespaces to OC as of version 1.6.7 (with PicklingTools 1.1.1),
+     but in a backwards compatible way.  Old code should be completely
+     backwards compatible: it should still compile and and link and run
+     the same.  The namespaces have the extra benefit that all the link
+     symbols are encapsulated in the the OC namespace so as not to
+     conflict with similar symbols.
+
+     The way this works: by default, namespaces are turned on in the new
+     version, but with a default "using namespace oc;" here in ocport.h:
+     Thus the names are all available at the global level as before, but
+     link symbols are protected inside the OC namespace.  If you wish to
+     force the user to deal with the OC namespace (so the user has to do
+     "using"s manually), you can:
+
+        #define OC_FORCE_NAMESPACE   // See below
+
+     You can completely also turn off the namespace declarations
+     to completely eliminate any namespace constructs (for severe backwards
+     compatibility constraints) by asserting:
+
+        #define OC_NAMESPACE_EXPERT__NO_NAMESPACES // shouldn't need to do this
+
+     but you are very very unlikely to need to do that.  The default
+     (with the namespace constructs in-place and the "using namespace
+     OC") should work with old code without any code changes (just a
+     recompile/relink).  This is a mechanism for when that doesn't work.
+
+
+     **EXPERT USERS: By default, we insert a "using namespace OC" into a
+     .h file (ocport.h), which is usually a no-no in C++
+     circles: we only do it to preserve backwards compatibility with
+     previous versions of the library.  We do, however, allow control
+     over the 'using' via a special macro to turn "off" the using:
+
+       #define OC_FORCE_NAMESPACE      // force user to do 'using' himself  
+
+     Really, you should only use this if you are trying to combine this
+     library with another library (MITE, Midas 2k) in the same .cc file,
+     but you also may just want to force the user to use namespaces and
+     have them deal with them appropriately. In a perfect world, all the
+     PTOOLS code would have been namespaced already and this wouldn't be
+     an issue: a good chunk of this code, however, migrated from ARM C++
+     code.  You can, for example, turn off the 'using' on a file-by-file 
+     basis like:
+
+       #include "mite.h"           Has conflicting symbols, like HashTableT
+       #define OC_FORCE_NAMESPACE
+       #include "ocport.h"
+       using OC::HashTableT;       Forces user to manually use/qualify OC  
+
+     In general, the default should work fine: you probably only need
+     this if (a) you want to force your user to deal with manual
+     namespaces or (b) link OC with MITE or M2k in the same process/file
+
+     
+   * All the C++ code in this distribution are by default in the 
+     OC namespace, with a using opening it up for all users.  All
+     tests and examples in the baseline have an #ifdef that allows 
+     the user to compile in either mode.  The default is namespacing 
+     turned off for backwards compatibility, otherwise it opens up 
+     all names in the namespace:
+
+       #if defined(OC_FORCE_NAMESPACE)
+       using namspace OC; // open up OC namespace 
+       #endif
+
+     The purpose of this is two-fold: allow the PTOOLS option
+     tree to link with the MITE option tree (they have a LOT of
+     code in common) or to simply link PicklingTools code with
+     any baseline with name conflicts (esp. M2k).
+
+  * Fixed multiple minor warnings (discovered by g++ 4.4.3 and 4.4.4)
+    when using char* when should be using const char *.
+
+  * Added a comment in ocstring.h to show how to turn off the
+    strict aliasing warning/detection for OCString (g++ 4.4.x seems to
+    be extra zealous in finding these).  Also added (in a comment)
+    the option to the Makefile.Linux to show you might set the flags
+    if this is a problem.
+
+  * Found a bug in the p2common.h file (this affects all C++ versions):
+    the dump4byteInteger and dump8ByteInteger were checking integers
+    incorrectly and dumping incorrectly in one instance.  It was a latent
+    error spotted by the g++ 4.4.3: the "bug" was actually masked because
+    the if test was malformed and caused it to do the right thing most of
+    the time.  
+  
+  * Moved OpenContainers 1.6.6. to OpenContainers 1.6.7 (namespace changes),
+    updating version numbers.
+    Changed the runall scripts to run all tests and examples with all
+    three models: 
+     o default (namespace OC with 'using namespace OC;' in ocport.h),
+     o strict via -DOC_FORCE_NAMESPACE (nameapace OC with no default using)
+     o severe backwards compatible cia -DOC_EXPERT_NAMESPACE__NO_NAMESPACES
+         (which completely turns off namespaces)
+
+  Numeric array work in the C++ area:
+   * When using Pickling Protocol 0 _or_ 2, if the array has no shape::
+          (Numeric.zeros((), typecode='i'))     # no shape
+     then Python pickles the Numeric array slightly differently than
+     if the user specifies a shape::
+          (Numeric.zeros((2,2), typecode='i'))  # 2x2 Numeric array of int
+
+     It's rare that a user should do a no-shape array, but if the user wants
+     to use an "empty Numeric array" with type as a placeholder, it should
+     still be legal.   This affects all the C++ code that deals with
+     dumping and loading Numeric arrays (both protocol 0 and 2).
+     This seems to happen in 2.4-2.6 for sure.
+
+     This causes fixes to be needed in two places: how PicklingProtocol 
+     0 loads and Protocol 2 loads (we don't need to fix dumps, be cause
+     we can't produce shapeless arrays from C++ with Array<>).
+
+   * Added some Numeric shapeless arrays to midastalker_ex2.py for 
+     some testing for Protocol 0 and 2, 
+
+   * Added test for shapeless arrays in p2_test.cc
+
+  Pickling Protocol 0 work in the C++ area:
+   * Discovered we weren't handling strings with binary data correctly:
+     Python turns those escape sequences back into binary data.  Fixed.
+
+  Pickling Protocol 2 work in the C++ area:
+   * When using an ArrayDisposition of Numeric or Array with Protocol 2,
+     we underestimate the size of the buffer needed for a dump.  Fixed.
+
+  All server examples: Xm, Python and C++
+   * Added an exception catch block: All servers have an "active thread",
+     so an exception can cause the server to come down.  The sendBllocking
+     will throw an exception if a client fails, so updated all examples
+     to show how to handle this.
+
+  In the M2k area:
+   * same problem as the C++ area with Numeric arrays with no shape
+     (see above).  
+
+     This causes fixes to be needed in two places: how PicklingProtocol 
+     0 loads and Protocol 2 loads: very similar fixes as above
+     (P0 reuses the code, so only added a functional TupleLength:
+      P2 required a little code change).
+
+   * same problem with Pickling Protocol 0: minor change to m2opalpython.h
+     to handle fix to Pickling Protocol 0.
+   * adjusted the m2protocol2.cc so as to have the buffer size adjustments
+     (buffer was being underestimated)  
+
+
+  In the Xm area:
+   * By default, the new PTOOLS option tree should work with
+     old code (you will need to recompile and relink everything
+     that uses the PTOOLS option tree, but no code changes).
+     There are directions on how to deliver a version of the
+     option tree with strict namespacing enforced, see the README
+     in the Xm area.  The default should fix any link problems
+     PTOOLS had when linking with MITE/M2k.
+
+   * Added the t4val, t4tab, pipetab as part of the conditional
+     OC namespace 
+
+   * Fixed all host primitives to compile with/without namespaces, i.e.:
+      #if defined(OC_FORCE_NAMESPACE)
+      using namspace OC; // open up OC namespace 
+      #endif
+
+   * Updated the libraries.cfg and primitives.cfg.
+
+   * all fixes from C++ and opencontainers 1.6.7 area (see above) 
+     forwarded to Xm area
+
+
+
+New features as of version 1.10
+
+  Minor bug fix for M2k and some build/version fixes
+
+  May 11th, 2010
+
+  In the M2k area:
+   * When using Pickling Protocol 2 reading from (any source) to
+     M2k OpalTables would fail on some valid data (usually by an
+     empty list).  The fix was a single character: an exception was 
+     being caught by pointer instead of by reference (and thus
+     not being caught and propagating too far).  The C++ code for
+     X-Midas and raw C++ **DO NOT** have this problem: only the M2k.
+
+  In the Docs area:
+   * Moved the faq.rst to faq.txt and usersguide.rst to usersguide.txt
+     (people more familiar with .txt extension that rst)
+   * Updated the documentation to refer to 1.10
+
+  In the Xm area:
+   * Moved the faq.rst to faq.txt and usersguide.rst to usersguide.txt
+     (people more familiar with .txt extension that rst)
+   * Updated the documentation to refer to 1.10
+
+  In the C++ area:
+   * The Makefiles didn't reflect the new opencontainers (1.6.6)
+   * In opencontainers_1_6_6: updated ocport.h so that 
+     OC_USE_OC is 1_6_6 (instead of 1_6_4).
+
+
+
+New features as of version 1.09
+
+  Documentation updates and move to ReStructured Text, minor M2k fix
+
+  May 4th, 2010
+
+  Documention:  Moved the FAQ and UsersGuide to a new area
+  called Docs/.  The faq.rst and usersguide.rst and the generated
+  faq.pdf and usersguide.pdf have been moved to the Docs area.
+  Using Sphinx, the FAQ and User's Guide have been created 
+  and put into the Docs/html area.   Point your web browser
+  to PicklingTools109/Docs/html/index.html
+
+  X-Midas:
+    Moved the faq.rst and usersguide.rst into the hlp 
+    area, so X-Midas users are more aware of the documentation.
+
+  M2k:
+    Changed a warning to a DEBUG COARSE message for OpalPythonDaemon
+    as requested by the main user of OpalPythonDaemon (GALACTUS),
+    added a new Attribute called CurrentQueued to show state of queue.
+    This makes PicklingTools 109 in sync with the latest version of
+    GALACTUS.
+
+
+New features as of version 1.08
+
+  Minor fixes so thread code works with X-Midas.
+
+  April 29th, 2010
+
+  In the C++ area: upgraded from OpenContainers 1.6.5 to 1.6.6:
+  
+   * The template classes for supporting multiple threads (both the
+     WorkerCoordinatorT and the ThreadedWorkerT) from 1.6.5 didn't compile
+     with X-Midas option trees due only to template instantation issues.  
+     Since they are simple templates, the easiest thing to do is force 
+     them to use the simple template inclusion model (that is; include all 
+     code from the .cc in the .h) to avoid any strange template 
+     instantiation/linking issues.
+
+   * Updated a few comments in the SynchronizedWorker.
+
+  In the Xm area: upgraded option tree to use C++ changes from above
+
+
+New Features as of version 1.07
+
+  Minor augmentations.
+
+  April 15th, 2010
+
+  In the C++ area: upgraded from OpenContainers 1.6.4 to 1.6.5:
+
+   * Added binary search capability to the OpenContainers: this is code
+     from the original M2k plus its test and output
+
+   * Augmented the CircularBuffer class from OpenContainers: the put
+     method used to return void, it now returns a T&, indicating where
+     it put the new value in its Array.    
+ 
+   * Added a Combinations generator, similar to the Permutations
+     generator.  Usage is pretty straight forward:
+        Combinations c(n,k);  // Allow to compute all n choose k comb of 1..n
+        do {
+           int* a = c.currentCombination();
+           for (int ii=0; ii<k; ii++) 
+              cout << a[ii] << " ";    // print current combination
+        } while (c.nextCombination());
+
+     Added a test which allows both performance testing and
+     correctness testing.
+
+  In the Python area: 
+
+   * Added XMTime.py: Allows a NON-MIDAS user to use XMTime completely
+     divorced of X-Midas.  The newer version of opalfile uses this 
+     (see below)
+
+   * upgraded to a newer version of opalfile.py which fixes a few bugs.
+     We have added xtime.py, which allows a user to use the opalfile
+     module without needing X-Midas access to XMTime.  Also updated so
+     that opalfile can read OpalArrays: 
+       {1,2,3} instead of requiring the keys: {"0":1, "1":2, "2": 3} 
+
+     Fixes:
+       1. Allow OpalTable list syntax { value, value, value } as well
+          as mixed { key=value, value, key=value... }
+
+       2. Parse embedded quotes in quoted key names, links and values
+          more robustly explicitly matching the trailing quote skipping over
+          escaped quotes (formerly simple greedy and non-greedy .* matches were
+          used)
+
+       3. Correctly parse string values followed by comments also
+          containing quotes (before it would include part of the comment 
+          through use of a greedy .* match)
+
+       4. Allow numeric values that do not require a trailing comma to
+          be directly followed by a comment , e.g. D:123//comment ... (formerly
+          the comment would be included)
+
+       5. Fail when a key name within quotes does not have both quotes
+          and require that non-quoted key names be proper identifiers
+
+  Upgraded the ptools option tree to reflect new changes.
+
+
+New Features as of version 1.06
+
+  Feb. 23, 2010
+
+  This is a true Bug Fix release.  It's kind of a big bug,
+  so we recommend updating or patching an earlier release.
+
+  A true bug in the C++ code for Python Pickling Protocol 0.
+  This affects all the C++ implementations:  the M2k, the X-Midas 
+  option tree and of course just the raw C++:
+
+    If you serialize a table with lots of repeated strings from
+    Python using Python Pickling Protocol 0, it is possible
+    that a reader using C++ to deserialize the table will seg fault.
+    The problem is intermittent, but a one-file fix will fix the
+    problem:  m2pythonpickler.h
+
+  Note that going from C++->Python or Python->Python or
+  C++->C++ shouldn't have any problems.  It's ONLY when
+  Python serializes using Python Pickling 0 and C++ tries to 
+  deserialize it.
+
+  Full Discussion:  When Python pickles tables, it tries to
+  to "reuse" values it has already put in the serialization
+  string. In particular, the strings that get memoized
+  are cached on the stack for speed.  The memo "cache" 
+  is implemented as an Array which can *occasionally* resize:
+  if the resize happens, all the memos go bad.  To fix it,
+  we note when the resize is about to happen and adjust 
+  all the memos appropriately.  It happens very infrequently,
+  so it's not an expensive fix.
+  
+  Added a new Midas 2k component: OpalPythonServer.  The original
+  OpalPythonDaemon uses file descriptors to manage connections,
+  and can occasionally go wonky if an old client disconnects and 
+  a new client immediately reconnects, getting the same file descriptor.
+  The OpalPythonServer fixes this bug.  It should be a plug in
+  replacement, but does not require BlockingConduits: if your old code
+  use BlockingConduits when connecting to the OpalPythonServer,
+  simply comment them out (you'll get a warning) and everything
+  should work fine.
+  
+ 
+
+New Features as of version 1.05
+
+  A potential backwards-compatibility issue:  When printing Vals
+  as doubles/real_8 (or pretty printing, or opal printing, or printing in
+  Tabs), real_8 use 15 places of precision.  This is a conservative
+  estimate, as you can argue the number of decimal digits of precision
+  of a real_8 is between 15 and 16 digits: log10(2^53) is about 15.95,
+  where 53 is the number of bits (with hidden bit) in the mantissa).
+  After discussion, it probably makes sense by default to make it print 
+  16 digits, but we allow the user to select 15 in cases there are issues.
+  The value is encapsulated in the new macro OC_DBL_DIGITS, which
+  if not set from the compile command line, will be 16.  Note that
+  there exists a OC_FLT_DIGITS as well, but it's pretty firmly
+  established that a float has a good 7 decimal digits of precision
+  (log10(2^24) is about 7.22).  As usual, this went into ocport.h,
+  which cascaded in ocval.cc and occomplex.h
+
+  Updated valreader_test, tab_test, opaltest (outputs) to reflect new 16 
+  decimal digits of precision
+ 
+  Update to opencontainers 1.6.4 (which is only the real_8 precision above), 
+  which caused changes to Makefiles and the X-Midas option tree.  
+
+  Added occonvert.py:  This Python script mirrors the occonvert.h/.cc
+  in the C++ area and gives the Python user the same capabilities:
+  the user can recursively convert Python Lists to corresponding Dictionaries
+  (and vice-versa, if the conversion makes sense).  There are some users
+  who prefer dealing with dictionaries with keys of 0..n rather
+  than Lists, and this new Python file supports those users.
+
+  
+New Features as of version 1.04
+
+  Added Python module prettyopal which *DOES NOT* require XMPY:
+  It allows you to print out Python dictionaries as OpalTables
+  without needing any XMPY (or M2kInter) or any other weird dependencies.
+  Note that we already *HAVE* this capability in C++ (opalprint.h).
+
+  Moved to OpenContainers 1.6.3: the OpenContainers now supports
+  -Wall (and -Wextra).   By default the tests in the test area now
+  all use -Wall.
+
+  C++:  All code now works with -Wall, and the default Makefiles
+  all use the -Wall option.   You can turn it on or off as you wish:
+
+    * If you do a lot of array stuff, you may want to keep it off: -Wall 
+      annoyingly flags a lot of loops like 
+             for (int ii=0; ii<a.length(); i++) ; 
+      as warnings for combining unsigned and signed types (because
+      length returns a size_t).
+    * The -Wextra option will work, but there are two instances
+      where it emits incorrect warnings, so we discourage -Wextra.
+
+  X-Midas option trees by default now use -Wall, but you may choose
+  whether or not to use -Wall in your code that uses PTOOLS option tree.
+  
+  On some platforms using X-Midas (64-bit), the size_t does not
+  correspond to either and int_u4 or an int_8 (in particular, an
+  int_u8 is an unsigned long long and a size_t is a an unsigned long,
+  but they are still the same size).  Thus, code like
+         size_t ii = 17;  Val v = ii;   // Used to cause overload problems
+  used to cause compiler errors because, strictly speaking, int_u8
+  and size_t and int_u4 are all different types.   To handle this,
+  we detect that size_t isn't either an int_u4 or int_u8 and 
+  make Val recognize size_t (and turn it into an int_u8).  This
+  all happens automatically and shouldn't require the user to do
+  anything ... if you are using a compiler that can't use Modern
+  C++ Design template tricks, you can explicitly set -DOC_SIZE_T_ADD
+  to 0 or 1 (see ocport.h) to get the same effect.
+
+  Minor bug fixes for reading OpalTables from C++.  Updated the
+  opaltest.cc for the fix and added the expected output for it to the 
+  C++ area.
+
+  OpalReader can now handle reading textual MultiVectors.
+
+  In case it wasn't clear: the PicklingTools C++ tools are MEANT
+  to be used with "valgrind" to find memory leaks and memory
+  errors.  This is now spelled out in the Users Guide.
+
+
+New Features as of version 1.03
+
+  Augmented prettyPrint routine in C++ and Python to be able to 
+  change the indentation: old interfaces are still the same, we've
+  just added a new default parameter (how far in to indent).  Cleaned-up
+  and fixed a few minor bugs.  Added tests as well.
+
+  Augmented prettyPrintOpal routine in C++ to be able to change
+  the indentation (like prettyPrint above, except for OpalTables).
+
+  Oversight: Added close method to the C++ version of MidasTalker 
+  and MidasServer (just aliases for cleanUp)
+
+  Python/C++: Made it so the "open" on the MidasTalker/Server/Listener/Yeller
+  really does pay attention to the timeout value passed in
+  (before it was sort of awkwardedly put in on the DUAL/SINGLE
+  negotiation): This requires using non-blocking I/O on the socket.
+  This shouldn't break anyone; it simply fixes the open so it works
+  correctly with a timeout.  (Had trouble with Python 2.2, so
+  Python 2.2 doesn't support this feature).
+
+  Python: When Midas* socket components throw exceptions, they now
+  throw more informative exceptions: they all still inherit from
+  the same base (socket.error) so no old code will have to change,
+  but anyone who wishes to catch more informative exceptions can.
+  The open can return a socket.gaierror, herror, or timeout (as
+  used by the socket module).  The midastalker_ex2.py shows how
+  you may reconsider these errors (and codes around them 
+  for Python2.2).
+
+  C++: When the Midas* socket components throw exceptions,
+  there is a simple new hierarchy: timeout, gaierror, herror
+  all inheriting from runtime_error.  This corresponds to Python
+  exceptions.  Note that since they all inherit from runtime_error,
+  there are no backward compatibility concerns as they originally
+  threw runtime_error.  To see sample usage of the new hierarchy,
+  take a look at midastalker_ex2.cc
+
+  In MidasServer (both Python and C++), a *broken pipe* would
+  cause the main thread to exit, thus aborting the MidasServer.
+  Fixed by catching the exception with the broken pipe.
+
+  dataReady_ in MidasSocket (C++/Python) needs to throw an exception
+  when passed a closed file descriptor
+
+  Added the ability of the OpenContainers to set automatically the
+  OC_BYTES_IN_POINTER and OC_LONGINT_IS_64BIT so the user doesn't
+  have to worry about it.   This caused a few minor ripples, but
+  most handled easily.  In general, this makes it easy for a new
+  user to get on board: we figure this out for the user at 
+  compile-time so they don't have to.
+
+  Updated the X-Midas option tree build flags so it doesn't need
+  to set OC_BYTES_IN_POINTER/OC_LONGINT_IS_64BIT etc. anymore.
+  This allows us to simplify the cfg scripts as well as get rid
+  of the LINUX_BYTES in the build script.    Also made it so
+  the oc_port uses the X-Midas typedefs.
+
+  New OpenContainers changes:
+    Tab has a method called "get" which is like Python's dict get,
+    where you lookup a key, and if it is not in there, it returns
+    a default value instead without modifying the Table.
+    Tab t;
+    cout << t.get("not there", None); // outputs None, default value
+    Tests were added.
+
+    Added a new global method called "MakeTabInPlace" which will force
+    a Val to be a Tab, no matter what it is.  It is an inplace
+    operation.  If the Val is a Tab, no change.  Otherwise, it
+    creates a Table with a single key: "VALUE" with the new
+    Value.  Note that is a constant time operation, as no linear
+    copies are made.  A new test was created.  Also added "MakeTab"
+    which always returns a Tab from a Val (similarly).
+
+
+ Testing with X-Midas 4.6.0, 4.4.4 with 32-bit and 64-bit.
+ Minor Testing with OSF1.
+ Testing with RedHat Enterprise 4 and 5.  
+
+New Features as of version 1.02
+
+  Copied the pretty.py Python module to the python area of the X-Midas 
+  option tree: it was previously missing
+
+  Created an enumeration for DUAL_SOCKET and SINGLE_SOCKET so
+  constructors (for MidasTalker, MidasServer, etc.) are easier to read
+  and immediately see which mode you are using (both C++ and Python).
+
+  Added a "dataReady" method to the C++ and Python MidasTalker:
+  It allows users to poll a socket for data without actually
+  having to read anything.  Implemented using a "dataReady_"
+  method in MidasSocket_.
+
+  Added two new global functions to the C++ and Python MidasTalker:
+   * DistributedWaitForReadyMidasTalker 
+   * WaitForReadyMidasTalker
+  These functions allow users to pass a list of MidasTalkers in
+  and it will return a list of all MidasTalkers that are ready
+  to return data.  This takes advantage of the "dataReady" method
+  above.
+
+  Fixed a bug in the M2k area: If the OpalPythonDaemon uses the
+  Pickling Protocol 2, and tries to send an empty Multivector,
+  a dynamic-cast would fail and stop the component.  Simple fix,
+  an MV is forced to ALWAYS be a OpalTableImpl_GRAPHARRAY.  
+  
+
+New Features as of version 1.01
+
+  This is a very minor bug fix release.
+
+  Documentation fixes:  Updated the User's Guide adding Appendix A
+  (which discusses how to do User-Defined types in C++ with Vals).  
+  Also fixed some spelling and minor grammar errors.  Updated 
+  various READMEs and documentation to reflect new version numbers.
+
+  Updated the midassocket.h so that the one example in the baseline
+  that uses User-Defined types (namely the SockAddr_) properly handles
+  strings [the underlying type of string in a Val is an OCString as of
+  release 1.0.0].
+
+  Updated the occonvert.h so that ConvertAllArrsToTabs uses a default
+  argument consistently for ConvertAllArrsToTabs (like all other  
+  bool keys_as_strings=false).  This is not an interface change,
+  just an interface augmentation ... all code from 1.0.0 should still
+  work.
+
+
+New Features as of version 1.00
+
+  This is a major release with the addition of some major new features.
+  Most, if not all, previous interfaces have been preserved.  
+
+  A UsersGuide.txt has been added at the top-level.  It is still rough
+  in some areas, but it should have enough information to help you
+  get going.
+
+  A Frequently Asked Questions (FAQ) text file has been added at the
+  top-level.  There are sections for General, C++, Python, X-Midas, M2k and
+  finally Proxies.  This should help learning the general use of 
+  PicklingTools and its features.  There is also an html version (FAQ.html)
+  for viewing from your web browser.
+
+  Added the ability to "iterate" through Arrs.  Previously, the
+  only way to iterate through an Arr was to loop through it. For example:
+    // Arr& a; for (int ii=0; ii<a.length(); ii++) { cout << a[ii] << endl; }
+  That still works, but now both the "It" and "Sit" support Arrs as well
+  as Tabs.  So now you can:
+    Val v = IsItAnArrOrTab();
+    It ii(v);  
+    while (ii()) {
+	cout << ii.key() << " ";  // If Arr, keys are 0..a.length()-1
+        cout << ii.value();       // If Arr, then a[ii] 
+    }
+  The "Sit" iterator can now iterate through the Arr as if the keys
+  were sorted (but without changing the Arr in question).
+
+  We have added the ability to "share" tables and arrays using the
+  Proxy.  This is a new feature supported by OpenContainers 1.6.0.
+  At a higher level, PicklingTools has introduced some shared
+  memory (across processes) support.
+
+  Highlights from OpenContainers 1.6.0
+    * Create a reference counted table to share:  
+
+        Val a = new Tab("{ }");
+        Val b = a;
+        a["INSERT"] = 18;          // Use just like Vals and Tabs
+          // Both a and b have been changed!
+
+    * Create a reference counted table, with locks, so threads 
+      so that the table can be shared cleanly
+
+        Val b = Locked(new Tab("{'a': 1}");
+        Val c = b;                 // Proxies copied atomically
+
+    * Allow mutual exclusive access to the table
+      
+        Val b = Locked(new Tab("{'a': 1}");
+        {
+          TransactionLock tl(b);  // Only one thread access this subtable
+
+          Tab& t = b;
+          t["INSERT"] = 17;
+          t["AGAIN"] = 18;
+        } // Locked until TransactionLock destructs
+
+    * Ability to create tables in shared memory pools
+
+        Val c = Shared(pool, Tab("{'d':17'}"));
+        c["IN SHM"] = Tab("{ 'ALL IN SHM': 100 }"); // All in shared memory
+    
+    * Ability to create memory pools for allocation/deallocation
+
+        StreamingPool* pool = 
+          StreamingPool::CreateStreamingPool(new char[8192], 8192);
+
+    * Many new examples demonstrating how to use Proxies and threads
+      and perform synchronization.  There is an entire subdirectory
+      in the C++ area called "Examples" which demonstrates many
+      of the new features:  Proxy, Barrier Synchronization helper classes,
+      Pipeline Synchronization helper classes, plus many examples.
+
+    * All serialization protocols (OpenContainers, Python Pickling 0,
+      Python Pickling 2 (also -2), and M2k binary serialization) all support
+      serialization and deserialization of Proxys.   See the FAQ
+      for more discussion on "serialization".
+             
+
+  With the ability to use Shared Memory in OpenContainers, Pickling
+  Tools has added some tools to be able to use Shared Memory (where the
+  shared memory can be used across processes).  Since this is a more
+  system-level functionality, it has been added to PicklingTools proper
+  rather than OpenContainers.  See the sharedmem_test for an
+  example of how you might use this.
+
+  Misc:  
+   * All C++ Midastalker/Server/Listener/Yeller classes can use the
+     OpenContainers serialization as yet another serialization
+   * Updated midastalker_ex2 (Python and C++) to use Proxies in their
+     example requests and other more complex features.
+   * macro OC_USE_OC defined as version (eg., 1_6_0) to indicate 
+     if we are using OC or not
+   * Updated the OpalPythonDaemon to handle Links and Headers
+     better if using M2k serialization
+   * Added Eval function (simple wrapper for ValReader) for converting
+     strings to Val easily:  Val v = Eval("1.0");
+   * Added the length (and entries) field to Val:  If the underlying 
+     data is a container (Tab, Arr, Array<POD>, string or Proxy to), then it
+     returns the length, otherwise throws a runtime exception.
+   * Fixed a bug with PicklingProtocol0 when requesting Numeric
+   * Updated the M2k Pickler so that you have better control over the
+     warnings coming out when serializing OpalHeaders, OpalLinks, etc.
+     It does something reasonable, but users complained there were
+     too many messages.  
+   * Added Proxyize to Val so you can turn a plain-by-value Val into
+     a Proxy in O(1) time without having to do a full copy.
+   * The M2k area has been updated so that the OpalPythonDaemon supports
+        -proxies (at least reading them, it doesn't create a true proxy,
+                  just a copy)
+        -OpenContainers serialization
+   * Updated the append and appendStr for Tab so that they throw an
+     exception in case you are going to overwrite a previous value
+   * Added a little better support for Array<string> and Array<Tab>.
+     TODO: Update all the protocols (from the Val side) so they have
+     that support.  Next release?
+   * Updated the error message in Python when trying ARRAYDISPOSITION_AS_ARRAY
+     to indicate it's really Python 2.5 where it works (not 2.4)
+   * In C++ area: The pretty.h and opalprint.h are redundant: deprecate the 
+     pretty.h and pretty.cc files and have them include opalprint.h directly.
+     We will remove them from a future baseline.
+   * Even though PicklingTools 0.95 reported that we updated tab2opal to give
+     better syntax errors, apparently that primitive didn't make it into the
+     ptools option tree.  All fixed now.
+   * Consistent support for M2Time, M2Duration, EventData, TimePackets, 
+     and MultiVectors when coming from M2k across all serializations
+   * C++ tests run on RedHat Enterprise 3,4 and 5 (3 was slightly problematic).
+   * Added routines to convert from M2Time's int_u8 to a standard formatted
+     string down to quarter nano-seconds.
+   * Added "contains" to the top-level Val (so Tab and Arr and Array<POD>
+     can access it easily)
+   * Fixed bug to allow setting a tab from a sub-tab:  For example:
+       Tab t = {'nest': {'here':1}} ; t = t["nest"]; 
+     Also fixed for Arr and Val.
+   * Added WriteValToFile and ReadValFromFile at the ValReader level
+     to augment the already existing WriteTabToFile and ReadTabFromFile
+   * Added conversion routines for explicitly trying to convert between Tabs
+     and Arrs:  ConvertTabToArr and ConvertArrToTab
+   * Added a fill method on Array<T> as a convenience to fill
+     an Array<T> (including Arr) with the same Value:  usually used
+     after a constructor to fill the array to capacity.
+   * Made it so Protocol 2 always unserializes small ints (when
+     it compresses them) as the larger int that "Python" likes.
+     This is so 7000 becomes L:7000 instead of UI:7000.  This is 
+     more backwards compatible with what Protocol 0 does anyway, and
+     more in line with what Python would do.  Updated p2_test.cc to test.
+   * Bug fix:  Numeric arrays (with P2WithNumeric serializarion) larger than 
+     65536 would throw an exception.  Fixed.
+   * Documentation fix: Made MidasTalker (C++/Python) show the numbers
+     corresponding to the enumerations in the right order. 
+   * Slightly better error message on OpalPythonDaemon if Client talks first.
+   * Added pretty module for doing prettyPrint from Python like we would
+     in M2k prettyPrint or OpenContainers prettyPrint
+   * Made sure everything still works for OSF1 (aka Tru64): both X-Midas 
+     C++ primitives and standalone C++.  Version tested with:
+     [Compaq C++ V6.5-033 for Compaq Tru64 UNIX V5.1B (Rev. 2650)]
+     TODO: Fix pool_test.cc 
+   * Fixed long standing bug in ocvalreader so it could read large ints
+   
+  There has been considerable testing of this release for Backwards
+  Compatibility as well as stability especially with respect to the
+  OpalPythonDaemon and talking to it.
+
+  --POSSIBLE BACKWARDS COMPATIBILITY ISSUES---
+
+  If you depend on the implementation of Val, you may get bitten:
+    Consider:
+
+      Val v = GiveMeSomeVal();
+      if (v.tag=='t') {
+        Tab* tp = (Tab*)v.u.t;  // Only works if v is NOT a proxy.  
+        ProcessTab(*tp);        //      If a Proxy, SEG FAULT
+      }
+
+    The above will work, but only if v is NOT a proxy.  You should use the 
+    more "implementation agnostic" way to get the Table: ask for a Tab&
+    (or Arr& or Array<T>&):
+
+      Val v = GiveMeSomeVal();
+      if (v.tag=='t') {
+        Tab& tr = v;    // Works if v is a Proxy OR Tab
+        ProcessTab(tr);
+      }
+
+    We have changed the "internal" string of a Val to ALWAYS be
+    an OCString (to avoid execessive heap usage).  Again, if you depend 
+    on the implementation (like in the example below) you will seg fault:
+
+      string *sp = (string*)&v.u.a;  
+      cerr << *sp << endl;  // SEG FAULT:  v.u.a is an OCString, 
+                            // may or may not be the same as a string
+    
+    You should simply ask for a string directly out.
+
+      string s = v;
+      cerr << s << endl;  // Works fine
+
+   Note that you can't ask for a string& out.
+
+
+
+New Features as of version 0.96
+
+  This release is a bug-fix release, fixing two minor bugs so we can compile
+  on 64-bit Linux platforms (OSF is already 64-bit)
+
+   PTOOLS:  Updated the X-Midas build macros and cfg/*.cfg files so X-Midas
+            will properly set OC_BYTES_IN_POINTER to 4 for a 32-bit platform
+            and 8 for a 64-bit platform.  Unfortunately, anyone who wrote
+            their own primitive will have to update their library.cfg and
+            primitives.cfg files as done here.
+
+   C++:  Added Makefile.Linux64 for 64-bit Linux platforms
+
+
+New Features as of version 0.95
+
+  This release is a bug-fix release, fixing three minor bugs
+
+  The ValReader and OpalReader (which are responsible for reading and
+  parsing the text versions of Python Dictionaries and OpalTables 
+  respectively) had a memory leak due to a non-virtual destructor.  Fixed. 
+  This required an update to opencontainers so it has moved to 
+  opencontainers 1.5.7
+
+  When doing adaptive serialization, serialization history is based on
+  the file descriptor.  Once a file descriptor is closed, its associated 
+  information needs to be thrown away so adaptive serialization can be 
+  re-negotiated (otherwise it will get the serialization of the previous 
+  file descriptor).  This bug should now be fixed:  This required some
+  small code changes to the MidasSocket, MidasTalker and MidasServer.  To 
+  test this feature, we augmented both the midasserver_ex.cc,.py so
+  that at connect time they send out a table (also updated the X-Midas
+  xmserver host primitive, which is the server example in X-Midas).
+
+  The tab2opal primitive in the X-Midas area was augmented to show
+  where syntax errors occurred when reading malformed text tables 
+  (taking advantage of the new syntax error checking feature of 0.94).
+
+  Minor documentation and spelling fixes.  
+  
+
+New Features as of version 0.94
+
+  One main feature of this release is that the C++ versions of
+  MidasTalker and MidasServer are more adaptive to the serialization
+  they support.  In particular, a MidasServer can be talking to all sorts 
+  of different clients, each having its own different serializations:  
+  BY DEFAULT THIS JUST WORKS.  If you have written a C++ MidasServer
+  or MidasTalker in the past for a previous release, you will not have
+  to change any code to get this feature, it just works.  Some of 
+  the MidasSocket code has changed to support this feature, but none
+  of the MidasTalker or MidasServer interfaces have changed at all.
+  THIS IS ALL BACKWARDS COMPATIBLE WITH OLD PTOOLS:  If you have
+  a running MidasServer running at (say) PTOOLS 0.86, that server will 
+  still talk correctly to a MidasTalker from 0.94.  The only difference 
+  is that the newer version is smarter on how to handle MidasTalkers who
+  connect with "different than default" serializations.
+
+   *Detail: By default, "adaptive" is turned on in both the MidasTalker and
+   MidasServer.  This means that when there is a question of how to talk 
+   because no conversation has begun between the client and server 
+   (thus, the type of serialization is still in question), the default language
+   (serialization) of the conversation will be the default 
+   serializations set-up in the constructor. Once someone has initiated 
+   a conversation, then that sets the language of the conversation.
+
+   *Detail:  You can turn "adaptive" off.  This forces you to ALWAYS use
+   the serialization set in the constructor.  The only time you
+   may want to do this is if you are sending raw strings and don't
+   want anything to be misconstrued as a serialization type.
+   
+   *Detail:  In a MidasTalker/Server pair, typically the client
+   "talks first", sending a header which describes the serialization.
+   Hisorically, the header was mostly a sanity check and usually 
+   ignored.  Now, we take that header and the server notices 
+   "Oh, the client is talking M2k Binary, okay, when I talk back
+   to him, I will speak M2k Binary as well."  The MidasServer
+   can also talk first, but this is rare:  in that case, the
+   server will establish the communication type.
+
+   *Detail:  Note that the Python versions of MidasTalker and MidasServer
+   still DO NOT support adapative serialization.  Why?  Because
+   a version of Python has certain capabilites established by
+   the version of Python, the presence of absence of the Numeric
+   library, etc.  It's much more difficult for the Python Talker/Server
+   to be adaptive because it can't typically support all the different
+   range of serializations.  Note that the Python MidasTalker and
+   MidasServer are "sort of" adaptive because they can support
+   usually both Python Protocol 0 and Python Protocol 2, but
+   usually not M2k serialization and "old" Python Protocol 2.
+
+   *Detail: Note that the UDP MidasYeller and MidasListener ARE NOT 
+   adaptive because of backwards compatibility concerns with M2k.  
+
+  Another main feature of this release is that the C++ MidasTalker, Server,
+  Yeller and Listener classes can all use M2k Binary serialization:
+  The M2k  binary serialization is about as fast as the Python Pickling 
+  Protocol 2, but this new serialization protocol is M2k specific.  While some
+  applications find this support necessary, we tend to steer people
+  to use Python Pickling Serialization Protocol 2.
+
+    *Detail: The M2k serialization support is equivalent to serialization 
+    used in the newer versions of M2k (M2k 3.22.0 and up).  Because this 
+    feature *requires* some C++ code, we currently aren't supporting this 
+    type of serialization from Python (but we will in the future).
+
+  C++ Area:
+
+    Small bug:  None of the MidasTalker, Midaserver or MidasListener
+    "select" calls did the proper thing in the presence of EINTR.  Fixed.
+
+    Small bug: Cleaned up permutation_server so it handles disconnects
+    without bringing down the entire server. Changed threads to join so 
+    can clean up resources better
+
+    Fix OCArray for removeAll to be faster.  Added a 'const' version
+    of the data() method to ocarray as well to avoid strange const casts.
+
+    Update the operator== for AVLHashT to be faster.
+
+    Change request from users:
+    Update the opalutils.h so you have more control over how Tabs can be 
+    converted to Arrs in the ReadTabFromOpalFile and ReadValFromOpal
+    routines. ReadTabFromOpalFile now has a parameter that allows you 
+    to control how such conversions occur (it defaults to the old behavior).  
+    ReadValFromOpalFile now works correctly (recursively) converting: 
+    before, it only did Tab->Arr conversions at the top-level only 
+    (not recursively).
+
+    Added the capability for better error messages from OpalReader
+    and ValReader (string and stream version).  When a logic_error
+    is thrown when we try to parse either Opal Dictionaries
+    or Python Dictionaries, a better error message describing
+    where the error occurred will be emitted (from .what() method
+    of logic_error).
+
+    All examples can now use --ser=4 for M2k Binary Serialization.
+    Again, currently this is ONLY for the C++ examples (in both X-Midas
+    and plain C++) but not Python.
+
+    Refactored the ValReader and OpalValReader to reuse code for
+    the stream/string readers as well as the syntax error reporting
+    code: there was previously too much replicated code between the two 
+
+  Python Area:
+
+    Small bug:  None of the MidasTalker, Midaserver or MidasListener
+    "select" calls did the proper thing in the presence of EINTR.  Fixed.
+
+  Xm Area:
+    Added all new opencontainers work into ptools option tree
+    Added all new C++/M2k binary serialization into ptools option tree
+    Updated relevant explain pages, adding new /SER=4 option (for
+       M2k serialization) to relevant primitives
+    All MidasServers and MidasTalkers can be adaptive.
+    Cleaned up permserver so works better when client disconnects:
+    Changes so OSF1 versions will work
+    Testing under X-Midas 4.4.4 only, others should work, but your
+       mileage may vary
+
+
+New Features as of version 0.93
+
+  The main feature of this release is allowing all components
+  to support Python Pickling Version 2 (the binary protocol that
+  tends to be a lot faster for serialization).  Most versions
+  of Python in the last few years support Python Pickling Protocol 2
+  as a built-in, and since it is at least typically 2x faster, we
+  recommend using this protocol.
+
+  NOTE: In order to have MidasTalker/Server/Yeller/Talker code
+  use the new Python Pickling Protocol 2, you need to revisit code
+  that use those classes and __FORCE__ them to use the new Serialization
+  (and probably ArrayDisposition).  Otherwise, ALL CLASSES default
+  to Python Pickling Protocol 0 for backwards compatibility.  The old
+  interfaces still work, but they have been augmented to enable 
+  new options for the serialization protocol.
+  
+  Python Area:  All MidasTalker and MidasListeners now support
+    using Pickling Protocol 2.  All examples have the serialization
+    as an option so you can see how to set the different serialization.
+    Also, all MidasListeners and MidasYellers support Pickling Protocol 2,
+    as do the examples.  For example:
+    >>> from midastalker import *   # Make sure PYTHONPATH is set properly
+    >>> a = MidasTalker("somehost", 6666, SERIALIZE_P2)
+        # This midastalker will talk to a server that uses Pickling Pro. 2
+      
+    All the Midas* classes have been slightly rewritten so that their 
+    help pages from Python are cleaner. I.e.:
+    >>> import midastalker   
+    >>> help(midastalker)
+
+    A new feature is that the serialization allows Python arrays 
+    (import array) to be shuttled around.  When using  any of the 
+    Midas* classes, you can specify your "array disposition":
+    for sending homogeneous data (i.e., Vectors from M2k or
+    Array<T> from OpenContainers).  Thus, you can send Vectors as 
+    (1) plain Python Lists (inefficient but supported on all platforms),
+    (2) Numeric Arrays (efficient but requires you build your Python
+                        Numeric package support so you can import Numeric)
+    (2) Python Arrays (efficient and usually built-in but doesn't
+                       work well with cPickle on versions 2.3.x and below).
+
+     If a Midas* asks for a feature it can't support (for example,
+     asking for SERIALIZE_P2 on Python 2.2.x), it will throw an
+     exception indicating what options you need to choose instead (for example,
+     choose SERIALIZE_P2_OLD instead for Python 2.2.x).
+
+     Most of the examples (ending with _ex*.py) support several options for 
+     controlling how data is sent around.   By default, all data is
+     serialized using Python Pickling Protocol 0, which is the most backwards
+     compatible protocol but also the slowest.   You can manually change
+     how data flows in all the examples by setting one of three
+     options on the command line:
+
+      --ser=n    - Set the serialization type of how the example sends data
+                   over the socket:  this can have a huge performance
+                   difference.  The options are:
+                    0 :  Use Python Pickling Protocol 0
+                         - slower, but works w/all versions of PTOOLS, Python
+                    1 :  Use no serialization (just send the string data)
+                         - useful if you want to send raw data
+                    2 :  Use Python Pickling Protocol 2
+                         - fast, but doesn't work with all versions
+                   -2 :  As Python Pickling Protocol 2, but as Python 2.2.x
+                         - Python 2.2.x dumps Protocol 2 subtlely differently
+                           so this allows you to talk to older versions
+                   The default is Python Pickling Protocol 0 for backwards
+                   compatibility but it is strongly suggested moving to
+                   Protocol 2 for speed.
+     --sock=n    - Set whether socket communications use dual socket
+                   (--sock=2) or single socket (--sock=1) mode.  To get
+                   around a bug in VMS TCP/IP, dual sockets needed to
+                   be used for biderectional communication.  Modern
+                   sockets don't have this problem.  Dual socket is the
+                   usual default, as that's the default of Midas 2K
+                   and X-Midas, but we suggest using Single Socket mode
+                   when you can.  Most examples default to --sock=2
+     --arrdisp=n - Set the array disposition if you use serialization
+                   (Pickling Protocol 0 or 2). This is how the examples sends
+                   'homogeneous data' around the system (i.e., M2k Vectors,
+                   PTOOLS Arrays, Python arrays, Numeric arrays).
+                   The options are:
+                    0 : Shuttle all homogeneous data as Numeric Arrays
+                        (like the Numeric package from Python)
+                    1 : Shuttle all homogeneous data as Python Lists
+                        (this loses their 'array-like' quality but
+                         is the most backwards compatible because all
+                         versions of PTOOLS and Python support Python Lists)
+                    2 : Shuttle all homogeneous data as Python Arrays
+                        (like the Array package from Python)
+                   The default is 1 for backwards compatibility, but if
+                   you are using XMPY, Numeric comes built and it is strongly
+                   recommended to use 0 (for speed). If you are using Python
+                   but do not have the Numeric package AND you have
+                   Python 2.4.x or above, it is recommended to use 2
+
+
+  C++ Area:  All C++ Midas* classes support Protocol 2 and can talk
+    directly to any of the Python classes.  There are also options
+    for specifying the (a) the serialization you want and (b) the
+    'array disposition'.  Note that the C++ classes should echo
+    the structure of the Python classes.
+
+    Added valprotocol2.h.cc, p2common.h, cpickle.h files to support
+    the new protocol 2.
+
+    Added the p2_test.cc,output and the P2TestFiles for repeatable
+    tests to make sure the Pickling Protocol 2 works for Vals.
+
+    All the C++ examples have added --ser, --sock and --arrdisp
+    options to the command line parameters, just like the Python
+    examples.  See above for a full description.  Added a README to 
+    the C++ area which describes these options.
+
+    A minor interface change from the C++/opalutils.h:
+    Use ReadTabFromOpalFile and ReadValFromOpalFile (with a capital 
+    'F' in file) instead of ReadTabFromOpalfile and ReadValFromOpalfile.  
+    Minor bug fix in the same file:  extraneous output to cerr has been
+    deleted.
+
+
+  M2k Area:  Updated the OpalPythonDaemon and OpalSocketMsg so
+    that they can use now use PythonP2, PythonP2WithNumeric, 
+    PythonP2WithArray, PythonP2Old or PythonP2OldWithNumeric 
+    as their serialization.  The Adaaptive serialization also recognizes
+    the new Python Protocol 2 (as well as the older Python 2.2.x protocol 2
+    which we number -2).  The code for OpalPythonDaemon
+    and OpalPythonSocketMsg is untouched, but the m2opalsockmsgnethdr
+    .h and .cc had to be changed (and 4 new files p2common.h, cPickle.h,
+    m2opalprotocol2.h,.cc).  The unit.cfg was updated to reflect these
+    changes and additions.  We also added a Midas2k test (opalp2_test)
+    and associated output.
+
+  X-Midas Area:  All the Python Pickling Protocol 2 from the C++
+    area has been folded into the Midas* classes in the ptools
+    option tree.
+
+    Updated primtives valpipe, fanintab and pipe2tab tab2opal with 
+    changes from Chuck Pendergraph and John Goodell
+     
+    Most host primitives have been updated to allow you to select
+    a Python Pickling Protocol. The explain pages have been updated
+    as well.  All primitives which use the Midas* classes
+    support the X-Midas switches /SER=n, /SOCK=n and /ARRDISP=n
+    just like the C++ and Python examples (see the Python area above).
+
+
+ Extensive testing has been done to make sure Python and C++ and
+ Midas 2k and X-Midas all talk together.  Certain large scale apps
+ have served as a testbed to allow us a large degree of confidence
+ in this release.
+
+ TODO:  We are hoping a future version of MidasServer and MidasTalker
+ can use SERIALIZE_DISCOVER and be able to detect the serialization being used
+ and just do the right thing.
+ TODO:  Add better error messages for when Tabs and Arrs don't parse correctly
+ TODO:  Update Tabs to make copies and compares slightly faster
+ TODO:  Fix OCArray for removeAll to be faster
+
+New Features as of version 0.92
+  Experimental - not released
+
+New Features as of version 0.91
+  Experimental - not released
+
+New features as of version 0.90
+
+  Augmented the OpalTable reader for C++ so that when it reads
+  in an OpalTable with all keys 0..n, it will turn it into
+  an Arr.  I.e., OpalTable {"0":D:1, "1":D:2 } becomes [1,2].
+  You can choose to preserve the "tableness" of the OpalTable,
+  but the default will be to become an Arr.  This was done so
+  that ASCII OpalTables convert to Tabs and back without 
+  losing too much information.  (The "Pickling" transformations
+  do not have this problem).
+   -Added the "ReadValFromOpalfile" routine, which can handle
+    the embedded Array-like OpalTables, and updated opal2dict
+    to use that routine instead.
+   -expectTab now returns a flag indicating whether or not
+    it could be converted to an Arr
+   -expectAnything has a flag to indicate whether or not to
+    convert from Tab to Arr:  by default it does.
+
+  Added the MidasYeller and MidasListener:  A UDP server and
+  client that "feel like" the MidasServer and MidasTalker.
+  This is a preliminary version that should work, but will have
+  expanded functionality in the future.  Modified the MidasSocket_
+  to factor some common code from all the Midas* classes.
+  The MidasYeller and MidasListener have both a Python and C++
+  version, and should be interchangable.  
+
+  In restructuring MidasSocket_ (see above), added helper functions to
+  the .cc of the MidasSocket_ which allows the C++ Midastalker
+  to be completely inline (i.e., removed the midastalker.cc file).
+  Moved a lot of the name server querying and socket creation
+  to MidasSocket_. 
+
+  Added 'close' method as an alias for "cleanUp" in all
+  the Python and C++ Midastalker and MidasServer code.
+  
+  Added the opalfile Python module.  This is a fairly complete
+  Python module that allows manipulation of OpalTables and Opal files,
+  but currently requires the Python "Numeric module".
+  This is a natural addition since we can manipulate OpalTables
+  within C++ in earlier releases.  This is just the 'opalfile'
+  module from XMPY.  Future releases will have remove the
+  Numeric dependance.
+
+  Allowed possibility of a timeout in the "open" of the
+  MidasTalker (both Python and C++) so that when the socket
+  protocol (dual or single socket), a timeout can occur can
+  really occur so a Midastalker won't hang on open.
+
+  Added some new examples to the C++, Python and X-Midas
+  area to show how the MidasYeller and MidasListener work.
+
+  
+New features as of version 0.86
+
+  Added routine called WriteTabToOpalFile (added for consistency).
+
+  Fixed a bug in WriteTabToOpalFile, ReadTabFromOpalFiles so that they
+  throw exceptions if the file has problems opening.
+
+  Updated to opencontainers_1_5_5:
+    -Fixed a bug in WriteTabToFile, ReadTabFromFile
+     so that they throw exceptions if the file opening has problems.
+
+  Bug: In opalprint.h, forgot to make a routine inline, so it
+  caused linkage errors
+
+
+
+New Features as of version 0.85
+
+  Added C++ routines to allow to convert from OpalTables in literal
+  (i.e., text) format to Tabs.  The OpalReader class
+  and support routines are in opalutils.h:
+   -ReadTabFromOpalfile
+  
+  Added C++ routines to write Tab files as Opaltables.
+  The main routine in opalprint.h:
+   -prettyPrintOpal(Val&v, ostream& os)
+
+  Added some new test utilities to convert to/from Opaltables/Tab.
+   -opal2dict: convert from text file with Opaltable 
+               to text file of Python dictionary
+   -dict2opal: convert from text file containg Python Dictionary (Tab)
+               to text file with an Opaltable
+
+  Updated to opencontainers 1.5.4. New bugs and feature fixes:
+   -Fixed a bug where very large integers would truncate to 0 when
+    reading from literals (files or strings).
+   -Floating point quantities will always output a decimal point
+    when printed as a literal so you can differentiate between
+    '1' and '1.0' (as an int_4 and real_8 respectively) when
+    looking at input strings/files.  
+   -Added the ability of Tabs and Arrs to have an extra ,
+    when specifying literals (instead of a syntax error)
+
+  Updated the X-Midas ptools option tree to contain opencontainers 1.5.4,
+  as well as adding the new Python<->OpalTable libraries.
+
+  
+New Features as of Version 0.84
+
+  Updating the MidasServer to fix a problem on shutdown:
+  a hang, or possibly seg fault would happen on shutdown.
+  Fixed both the C++ and Python versions.
+
+  Updating X-Midas ptools option tree
+  -Updating MidasServer to fix shutdown problem (see above)
+  -Adding new routines to access T4000 files with Tabs.
+  -Adding new primitive playtab (with explain files).  The playtab
+   primitive was designed to send a Tab through a T4000
+   file/pipe. There are three modes to send the Tab data contained in
+   <tabfile> through the <output> file/pipe.
+  -Adding new primitive valpipe (with explain files).  The valpipe
+   primitive transfers X-MIDAS T4000 pipes containing Vals between
+   computers
+  -Bug fix for pipetab.h users, even though pipetab is now deprecated,
+   in favor of the type 4000 primitives and routines (see above).
+ 
+
+New Features as of Version 0.83
+
+  Using OpenContainers 1.5.3
+   -Fixed a bug in Val for prettyPrint under X-Midas:  it uses
+    the operator<< of X-Midas for complex numbers rather than 
+    oc version (ValReader can no longer read those in).
+   -Added a new method to Tab: appendStr.  Rather than appending a new
+    entry whose key is an integer, it appends the same key as
+    a string.  (Thus Tab t; t.appendStr(777) ends up { "0":777 } vs.
+    Tab t; t.append(888); end up { 0: 888 } )
+
+  Updating X-Midas ptools option tree
+  -Updated to opencontainers 1.5.3
+  -Added a python directory to the ptools X-Midas option tree so that
+   when you add PTOOLS to your X-Midas option trees, you automatically
+   pick up midastalker(midasserver) when you "import midastalker"
+   from Python.  This just makes it easier to use the MidasTalker
+   with XMPY.
+  -The X-Midas PipeTab routines (for type 4000) files have been
+   slightly rewritten to be more X-Midas like.  If you just use
+   the functions as given with no other X-Midas type 4000isms, 
+   there shouldn't be any changes to your code.
+  -In the X-Midas option tree, there were multiple copies of 
+   ocserialize.cc, ocval.cc and pipetab.cc
+   in lib/ptools and lib/oc.  Removed the ones out of lib/ptools.
+  -Added explain pages for all four primitives: xmclient, xmserver
+   permclient and permserver
+  -Changed the xmclient and permclient code to reflect the
+   interface change (announced back in 0.80) and made to 
+   the "Numeric" argument.  
+
+New Features as of Version 0.82
+
+  Using OpenContainers 1.5.2
+   -Fixed a bug with swap on AVLNR so that Sorted Iteration works
+   -Made operator() on AVLHashT, AVLTreeT and HashTableT to be const
+   -Added #ifndef protections to ocstringtools.h
+   -Included ocstringtools.h in ocvalreader.h 
+
+  Fixed a Pickling problem that occurs when Pickling 
+  a Numeric Array:  It may be fixed here, but make sure
+  your applications picks up the new code for the fix
+  (SSGS 2.22.1 does not have the fix yet, so don't try
+  to use Numeric with that version of SSGS).  This means
+  either getting the new Midas 2k tree (with the fix
+  in the M2k directory) or getting the new m2pythonpickler.{h,cc}
+  files in your C++ code (from the C++ directory).
+
+  Changes to ptools X-Midas option tree organization:  
+  (these two changes have NO EFFECT to non X-Midas users)
+
+    (1) Based on user feedback, moved all files in ptools/inc/oc into just
+    the inc directory so there is no need to add the extra -I (in
+    your primitives.cfg) into the oc directory. 
+
+    (2) Also, we are separating the ptools library (which was just
+    one library) into two libraries: oc and ptools.  The oc library
+    contains the stuff needed to link only the OpenContainers libraries,
+    and the ptools libraries.   This shouldn't affect anyone,
+    as ptools depends on oc library. (But this gives added flexibility
+    to those who just want the oc functionality to just link against
+    that library)
+  
+
+New Features as of Version 0.81
+
+  Inside the PTOOLS X-Midas distribution, added some routines 
+  for serializing Vals/Tabs to type 1000 files.  This was a specific
+  request from a main user.  Also added the buildopt macro as its easier
+  to build the tree.
+
+  Fixed a serialization error when serializing M2k Headers (specifically,
+  links would error out in certain DataObjects).  If you never saw this
+  error, this fix should not affect you.
+
+  The C++ code for MidasTalker and MidasServer now understands host
+  names (up till now, it only understood the "dot notation" when 
+  specififying hosts, e.g. 127.0.0.1---The Python MidasTalker and MidasServer 
+  never had this problem).  Had to write a re-entrant (thread-safe)
+  version of gethostbyname_r and put it into midassocket.h
+
+  Updated code to use the "None" instead of Val() (to specify
+  and empty Val) for better readability
+
+  Many problems dealing with building on Tru64 fixed:
+
+    Problems compiling examples on Linux because WriteTabToFile and
+    ReadTabFromFile were not using inline:  fixed.
+
+    Fixed several bugs in building the Tru64 (DECUnix) C++ area, including
+    changing the template instantiation model (for the examples) to
+    use -tlocal.  The default instantiation model is problematic.
+
+    Added new OpenContainers 1.5.1.  Contains minor bug fixes, mostly
+    so Tru64 (DECUnix) will work.
+
+    Separated MidasSocket and MidasTalker into .h and .cc file because
+    on some platforms (Tru64 with X-Midas in particular), the use of
+    #include <netdb.h> has names collide and cause compilation errors.
+    Mostly the gethostbyname_r code has been seperated out into the .cc
+    files.
+
+    Fixed makefiles to reflect midastalker.h,cc/midassocket.h,cc split
+  
+
+New Features as of Version 0.80
+ 
+  Added the MidasServer to the Python and C++ areas.  The MidasServer
+  is the other side of the MidasTalker:  Until now, MidasTalkers could
+  only talk to the OpalPythonDaemon from M2k.  Now, you can have your
+  own server in either Python or C++ (X-Midas).
+
+  =====POSSIBLE INTERFACE CHANGE======
+  The C++ MidasTalker constructor arguments were inconsistent with the Python
+  constructor arguments:  in particular, the C++ MidasTalker constructor
+  used "supports_numeric=false" where the Python used 
+  "force_numeric_off=true".  The default effect is the same on both,
+  but they are inconsistent.  So, we changed the C++ to be consistent,
+  so you may have to invert the sense of Numeric.  We suggest
+  you don't use Numeric for the time being.
+
+  Made easier to use "user-level" Python Pickling routines: 
+   PickleToBuffer, DepickleFromBuffer
+
+  Updated OpenContainers to version 1.5.0.  The main new features:
+     -wrappers for POSIX thread mechanisms (mutex, condvars, threads)
+     -added append to all tables
+     -added the None constant
+     -added the (infinite, finite) circular buffer
+     -added the ability to read Vals from streams
+     -added the ability to read tables from files: 
+	ReadTabFromFile, WriteTabToFile
+
+  Added the OpalPythonSocketMsg to the M2k area: this is a replacement
+  for the OpalSocketMsg that can talk to either MidasServers or 
+  OpalPythonDaemons.
+
+  Updated the ptools080 X-Midas option tree to contain several
+  examples of MidasServers and MidasTalkers
+
+
+New Features as of Version 0.74
+
+  Updated OpenContainers to version 1.4.4.  This adds some new
+  features (see CHANGES in the OpenContainers directory).
+  Most important:
+     -added support for prettyPrint
+     -allow comments (# to end of line) for literal Tabs, Arrs, and Vals
+     -added better support for X-Midas: specifically,
+      so complexs work with X-Midas and Vals and comparisons
+     -Added Image and DeImage to allow strings to be printed
+      properly with escape sequences
+
+  Updated the ptools option tree to the OpenContainers option
+  OC_FACTOR_INTO_H_AND_CC to speed-up compiles.  Also uses the
+  new opencontainers_1_4_4 for better compatibility with X-Midas.
+  Due to strangeness of the Tru64 interactions with X-Midas,
+  the OC_FACTOR_INTO_H_AND_CC option doesn't work, but the same
+  option tree given works for both Linux X-Midas and Tru64 X-Midas.
+
+
+New Features as of Version 0.73
+
+  Updated OpenContainers to version 1.4.3.  This adds some new
+  features (see CHANGES in the OpenContainers directory).
+  Most important:
+     -added support for separated .h and .cc files for Val
+     -added total ordering for Vals to fix SortedIterator bug.
+     -added operator() for Val,HashTableT,AVLTreeT,andAVLHashT
+      to throw an out_of_range exception when a key is not
+      in the table (rather than inserting a default value).
+     -added <,<=,>,>= for Array
+     -added None, True, False to ValReader constants
+
+
+New Features as of Version 0.72
+
+  PicklingTools 4 does NOT work with PicklingTools 7 :
+     Thus the major version change.  Any applications
+     (such as SSGS versions < 2.21.4) using PicklingTools4
+     should make sure they update.  SSGS version 2.21.4 and
+     above should work fine with PicklingTools 0.71 or 0.72     
+     Initially we were going to support both, but that's more
+     problematic than simply upgrading.
+
+  Added support for X-Midas :
+     Included the entire X-Midas option tree "ptools" to show
+     how to build an X-Midas C++ primitive that uses the MidasTalker.
+     OpenContainers 1.4.1 has been updated to support use with 
+     X-Midas (in particular, the define -DOC_SUPPORT_XM).  There
+     are example primitives, build options and explain files 
+     included in the option tree.
+
+  *****POTENTIAL INTERFACE CHANGE*****
+  Changed the default to be WITHOUT Numeric :
+     Due to some formats of Numeric not being supported, we 
+     changed the default serialization to be PythonNoNumeric
+     on the MidasTalkers and most components.  You have to
+     specifically ask for Numeric in a MidasTalker or OpalPythonDaemon.  
+     Normally we hate changing defaults like this, but it's caused a number
+     of problems for people not understanding why it was 
+     failing.  PythonNoNumeric is more likely to work:  once you get
+     it working, you can add Numeric if you like to see if works for you.
+
+  *****POTENTIAL INTERFACE CHANGE*****
+  Made the constructors for MidasTalker less confusing (hopefully): 
+     The fourth parameter in the MidasTalker (for both Python and C++) 
+     is confusing: Serialization.  The only purpose was to allow a 
+     MidasTalker to avoid serialization and just send ASCII strings.  
+     Added a new constructor that uses the more informative field 
+     "send_strings_as_is_without_serialization" field, and deprecates
+     the other constructor with a warning.
+
+  Added "cleanUp" to the MidasTalker :
+     There was a request to expose the close routine so that a 
+     user can manually close the sockets if necessary.  The 
+     "cleanUp" routine on the MidasTalker (.cc,.py) does that.
+
+
+New Features as of Version 0.71:
+
+  Further testing :
+     Extensive testing has been done on both Linux and Tru64:
+     Linux Enterprise 3, update 4 and Enterprise 4, update 3,
+     Tru64 5.1a.  Endurance testing (running for days on end),
+     multiple client testing (multiple clients with multiple 
+     serializations), cross-platform (with clients and servers
+     on same/different machines as well as different types of 
+     machines) as well as reconnect testing (to ensure we don't
+     run out of file descriptors if we used recommended reconnect
+     techniques).  Different versions of Python have been tested as well: 
+     Python 2.3.4, 2.2, 2.1
+
+  Shared files truly shared:
+     The C++ and M2k areas have some shared files in common, but
+     they were just copies before--This could lead to multiple 
+     maintenance of the files.  In this distribution, they
+     are symbolic links (to the C++ dir).  Added a simple
+     check to see if we were using OpenContainers or M2k in order
+     to be shared.  
+
+  Fixed a serialization bug :
+     If a string contained a ' when it was pickled, Python 2.2
+     raised a ValueError, but Python 2.3.4 ignored it.  Fixed the
+     problem by making sure every string pickled has proper characters
+     escaped correctly. 
+
+  Fixed server-talks-first bug :
+     Generally, the OpalPythonDaemon responds to requests, and notices
+     what kind of serialization is used (in adaptive mode) to respond
+     back.  But if an OpalSocketMsg connects without sending a message,
+     the OpalPythonDaemon has to guess what kind of serialization to use.
+     First of all, this now works (and reports a warning), and second
+     of all, there is a new Attribute on the OpalPythonDaemon to choose
+     what kind of "default serialization" to talk to to Clients who don't
+     tell you what they are at first: the default is BINARY because that's
+     the default for OpalSocketMsg.
+ 
+New Features as of Version 0.7:
+
+  Supports both dual-socket and single-socket :
+     Originally, version 0.4 only supported single-socket protocol:
+     This limited us to working only with single-socket clients, but
+     many X-Midas and Midas 2k clients must use dual-socket mode.  
+     Dual-socket mode is now the default (instead of single-socket),
+     as it is more prevalent.
+
+  Better error handling : 
+     On most reasonable errors, handling is better tested.  For example,
+     a server simple going away will throw an exception which is easily
+     handled.  See the examples midastalker_ex2.py,cc for more details.
+
+  Non-blocking calls :
+     The MidasTalker send() and recv() methods now support a 'timeout'
+     option so the call can be blocking (timeout=None) or non-blocking
+     (timeout=some number of seconds).  
+
+  Support for Python literals in C++:
+     OpenContainers 1.4.0 supports literals for specifying complex
+     tables or arrays; For example:  Tab t = "{ '1':1, '2':2.1, '3':[] }";
+     See the examples for more details.
+
+  Adaptive Serialization:
+     The OpalPythonDaemon now can recognize different serialization
+     protocols and can, per-client, have different serialization
+     protocols.   Thus, one client can be using the Python pickling
+     format, one client can be using M2k binary, one client can be
+     using M2k ASCII, and all three can be talking to the same 
+     OpalPythonDaemon on the same host and port.
+
+Potential gotchas:
+  
+  Although we have adaptive serialization, we can currently
+  only support Dual-socket _OR_ single-socket clients.  Not BOTH.
+  OpalPythonDaemons can support only one of single/dual socket
+  per port (but two different OpalPythonDaemons, one can be 
+  dual-socket, one can be single-socket).
+  
+
+  The protocol for PYTHON_SUPPORTS_NUMERIC/PYTHON_NO_NUMERIC
+  has changed slightly over sockets so that there is a 4-byte
+  header.  As long as you use all the tools in this distribution,
+  you should be fine, but these tools will NOT work with 
+  PicklingTools4.
+
+

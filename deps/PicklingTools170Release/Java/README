@@ -1,0 +1,77 @@
+
+
+The Java support is still in its infancy, but it has been working for us.
+What's here:
+
+   com/picklingtools/pythonesque:
+ -----------------------------------
+   pythonesque:  Java package: Java code for data structures in Java 
+                 (Tab, Arr, PTools) that give us Python-like access in Java. 
+                 This Java package allows reading and writing textual Python 
+                 dicts and lists
+                 (to files and strings).
+
+
+   com/picklingtools/pickle:
+ -----------------------------------
+   pickle:       Java package: Basically lifted from the pyro-lite distribution
+                 with a few bug fixes.  This would work with Python 2.6 and 
+                 Python 2.7.  THIS IS THE DIR YOU SHOULD BE USING 
+                 (not the pyrolite).
+
+   com/picklingtools/midas:
+ -----------------------------------
+   midas:        Java package: implementing the Socket reader (MidasTalker).
+                 Some good example code in MidasTalker_ex.java and 
+                 MidasTalker_ex2.java.
+
+
+
+
+   pyrolite:     Open Source distribution, included ONLY FOR INFORMATIONAL
+                 PURPOSES, as you should be using the pickle dir (above)
+
+
+   Makefile:     command-line Java for building MidasTalker_ex and 
+                 MidasTalker_ex2.  
+
+
+
+You'll probably just want to import the three packages: pythonesque, pickle,
+and midas into your Java appropriately.
+
+There is some documentation in the Docs area. 
+
+
+EXAMPLE:
+
+The MidasTalker_ex.java and MidasTalker_ex2.java in the com/picklingtools/midas
+directories show two examples of how to use the MidasTalker.  The first one
+is the more "simplified" version, which shows a few ways to interact with
+Tab, Arr, and Object within Java. The example2 shows how to deal
+with timeouts on recvs, timeouts on connects, and problems connecting.
+
+To try out:
+
+  Over on some host, run a midasserver.
+  
+   % cd PicklingTools150/Python
+   % python midasserver_ex.py --ser=2 --sock=2 --arrdisp=2 --server_send_message_at_connect=0 localhost 8888
+
+
+  Over on you client, build the MidasTalker_ex or MidasTalker_ex2
+  (You may need to edit the Makefiles to change JAVAPLACE to be the top-level)
+  % cd PicklingTools/150/Java
+  % make midastalker_ex2
+  % java -cp "/home/rts/Pickling/PicklingTools150/Java" com.picklingtools.midas.MidasTalker_ex2 localhost 8888 2 1 2
+
+    ... make sure your SocketDuplex is reported as DUAL_SOCKET ...
+
+
+This should give you some confidence that you can send messages back and
+forth between Python and Java (sim. for C++).  Note that --ser=2, --sock=2 
+and --arrdisp=2:  unfortunately, the PicklingTools library is not as
+full featured (yet) as the C++ one, so we only support serialization 2,
+dualsocket and array disposition of AS_LIST (--arrdisp=1) and AS_PYTHON_ARRAY 
+(--arrdisp=2).
+

@@ -1,0 +1,19 @@
+FANINTAB - Takes many Tab pipes in and outputs a singe Tab pipe
+ 
+<input(s)> - input Tab pipes '|' delimited
+<output>   - output Tab pipe
+ 
+FANINTAB was designed to take many Tabs pipes and output a single
+Tab pipe.  This comes in handy if many primitives have output Tab pipes
+that need to be sent to another process on a different machine.  Works
+well in combination with VALPIPE.
+ 
+WARNING - In order for FANINTAB to work, all /VRBKEY switches need to be
+the same.
+ 
+Switches:
+  /VRBKEY - string to filter the Tabs.
+  
+Usage:
+  FANINTAB _in1|_in2|...|_inN _out
+ 

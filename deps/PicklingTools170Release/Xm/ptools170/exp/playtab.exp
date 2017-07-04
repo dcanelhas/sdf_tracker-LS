@@ -1,0 +1,26 @@
+PLAYTAB - Outputs a Tab file to a T4000 pipe.
+ 
+<tabfile> - file that contains Tab data
+<output>  - T4000 output pipe.
+ 
+PLAYTAB was designed to send a Tab through a T4000
+file/pipe.  There are three modes to send the Tab
+data contained in <tabfile> through the <output>
+file/pipe.
+
+1. Normal Mode: Sends the whole file as one Tab.
+2. Entry Mode:  Sends the entries of the Tab file
+                one at a time.
+3. Log Mode:    The input Tab file is a log from
+                a series of prettyPrints.  Each
+                prettyPrint will be sent one at a
+                time.
+
+Switches:
+  /VNAME=a  - used to set the vrb key name.  Is used
+              as a way to filter data from the file/pipe.
+  /LOGPP    - Sets the Log Mode to on.
+  /ENTRIES  - Sets the Entries Mode to on.
+  /WAIT     - Wait time between sent Tabs (only used if
+            - /LOGPP or /ENTRIES is set)
+ 

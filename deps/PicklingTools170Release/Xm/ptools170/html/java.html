@@ -1,0 +1,448 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Java support for PicklingTools: New as of PicklingTools 1.5.0 &mdash; PicklingTools v1.6.0 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.6.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PicklingTools v1.6.0 documentation" href="index.html" />
+    <link rel="prev" title="C++ Cross-Process Shared Memory Tools" href="shm.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="shm.html" title="C++ Cross-Process Shared Memory Tools"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">PicklingTools v1.6.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="java-support-for-picklingtools-new-as-of-picklingtools-1-5-0">
+<h1>Java support for PicklingTools: New as of PicklingTools 1.5.0<a class="headerlink" href="#java-support-for-picklingtools-new-as-of-picklingtools-1-5-0" title="Permalink to this headline">¶</a></h1>
+<p>As of PicklingTools 1.5.0, there is support for Java: this means
+that Java can handle Python dictionaries and pickle them
+into files or sockets.</p>
+<ol class="arabic">
+<li><p class="first">What does it means that PicklingTools 1.5.0 supports Java?</p>
+<p>Short Answer: In general, Java is supported like C++, but since
+the Java baseline isn&#8217;t quite as fleshed out as the C++ baseline,
+there are some missing features.</p>
+<p>Long Answer.</p>
+<blockquote>
+<ol class="loweralpha">
+<li><p class="first">Java can talk to MidasServers using a Java MidasTalker
+(i.e., we can have a Java client talking to any C++/Python
+MidasServer or M2k OpalPythonDaemon).  There is currently no support for
+Java MidasServers, Midasyellers or MidasListeners, but that will
+be available in a future release.  MidasTalker simple example:</p>
+<div class="highlight-python"><pre>MidasTalker mt = new MidasTalker("localhost", 8888);
+mt.open();
+mt.send(new Tab("{'a':1, 'b':2.2, 'c':'three'}");
+Object o = mt.recv(5.0);  // block upto 5 seconds waiting
+Tab result = (Tab)o;
+result.prettyPrint(System.out);  // print as Python dict</pre>
+</div>
+</li>
+<li><p class="first">Java can read Python dictionaries from files or sockets.
+See below for examples with textual and binary (pickled) data.</p>
+</li>
+<li><p class="first">Java can read/write pickled data.</p>
+</li>
+<li><p class="first">Java can read/write textual Python dictionaries.  Example:</p>
+<div class="highlight-python"><pre>import pythonesque.*;
+
+// Create text dictionary from a Python compatible string
+Tab t = new Tab("{'a':1, 'b':2.2, 'c':'three', 'arr':[1,2.2,'t']}");
+
+// Write a textual Python dict to a file
+Ptools.WritePythonTextFile("python_dict.txt", t);
+
+// Read a text Python dictionary from a file
+Object o = Ptools.ReadPythonTextFile("python_dict.txt");
+Tab res = (Tab)o;
+
+// Write a pretty printed textual Python dict to output
+res.prettyPrint(System.out);
+
+// Write python dict to output (no extra spaces)
+System.out.println(res);</pre>
+</div>
+</li>
+<li><p class="first">Java can manipulate Python-esque dict and lists.  Example:</p>
+<div class="highlight-python"><pre>Tab t = new Tab("{'a':1, 'nest':{'b':2.2, 'c':'three'}");
+t.put("newkey", 16);          // Insert new key at top level
+t.put("nest", "newer", 2.2);  // Cascading insert into nested dict
+
+Arr a = new Arr("[10000, 2.2, 'three', [1,2,3]]");
+int ii = (Integer)a.get(1);     // get int
+int ii = (Integer)a.get(3, 0);  // get nested int</pre>
+</div>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p class="first">Where does the Pickling support come from?</p>
+<p>The Pyro project released an OpenSource pickling package
+which PicklingTools 1.5.0 has embraced and is working with.
+The Pyro project has a similar license as the PicklingTools.</p>
+</li>
+<li><p class="first">How do you handle Python types in Java?</p>
+</li>
+</ol>
+<blockquote>
+<p>Directly from the Pyro documentation:</p>
+<div class="highlight-python"><pre>Pyrolite does the following type mappings:
+
+PYTHON    ----&gt;     JAVA
+------              ----
+None                null
+bool                boolean
+int                 int
+long                long or BigInteger  (depending on size)
+string              String
+unicode             String
+complex             net.razorvine.pickle.objects.ComplexNumber
+datetime.date       java.util.Calendar
+datetime.datetime   java.util.Calendar
+datetime.time       java.util.Calendar
+datetime.timedelta  net.razorvine.pickle.objects.TimeDelta
+float               double   (float isn't used)
+array.array         array of appropriate primitive type (char, int, short, long, float, double)
+list                java.util.List&lt;Object&gt;
+tuple               Object[]
+set                 java.util.Set
+dict                java.util.Map
+bytes               byte[]
+bytearray           byte[]</pre>
+</div>
+<p>The unpickler simply returns an Object. Because Java is a statically
+typed language you will have to cast that to the appropriate type.
+Refer to this table to see what you can expect to receive.:</p>
+<div class="highlight-python"><pre>JAVA     ----&gt;      PYTHON
+-----               ------
+null                None
+boolean             bool
+byte                int
+char                str/unicode (length 1)
+String              str/unicode
+double              float
+float               float
+int                 int
+short               int
+BigDecimal          decimal
+BigInteger          long
+any array           array if elements are primitive type (else tuple)
+Object[]            tuple
+byte[]              bytearray
+java.util.Date      datetime.datetime
+java.util.Calendar  datetime.datetime
+Enum                the enum value as string
+java.util.Set       set
+Map, Hashtable      dict
+Vector, Collection  list
+Serializable        treated as a JavaBean, see below.
+JavaBean            dict of the bean's public properties + __class__ for the bean's type.</pre>
+</div>
+</blockquote>
+<ol class="arabic" start="4">
+<li><p class="first">Does the Java support Python Object, dict, and list?</p>
+<p>Short Answer: Yes and No.</p>
+<p>PicklingTools wants to make Java programmers as comfortable
+with native Java types and
+tools as much as possible, so choices have been made that tend to
+fit the Java model.  See below.</p>
+</li>
+<li><p class="first">Is there an equivalent for C++ Val?</p>
+<p>Short Answer: No, we use the Java Object instead.</p>
+<p>There is no equivalent Val in Java: the Val in C++ was required because
+C++ doesn&#8217;t have a heterogeneous, dynamic container type (as C++ is very
+statically typed, and the library predates the C++ <tt class="docutils literal"><span class="pre">any</span></tt> class).
+Java <em>already</em> has a heterogeneous, dynamic container:
+the <tt class="docutils literal"><span class="pre">Object</span></tt>.   Most types inherit from <tt class="docutils literal"><span class="pre">Object</span></tt>, and can be cast
+down from <tt class="docutils literal"><span class="pre">Object</span></tt> to the appropriate type easily.</p>
+</li>
+<li><p class="first">Is there a Java equivalent for a Python dict?</p>
+<p>Yes.</p>
+<p>By default, a Java Tab &#8220;is-a&#8221; <tt class="docutils literal"><span class="pre">HashMap&lt;Object,</span> <span class="pre">Object&gt;</span></tt>.  So, Tab
+inherits all the interface from HashMap.  BUT: Tab extends
+the interface significantly to make the Java Tab feel much more
+like the Python dict.</p>
+</li>
+<li><p class="first">What does Tab add to <tt class="docutils literal"><span class="pre">HashMap&lt;String,</span> <span class="pre">Object&gt;</span></tt>?</p>
+<p>Five things.</p>
+<blockquote>
+<ol class="arabic">
+<li><p class="first">Less typing.  Seriously, which would you rather type?:</p>
+<div class="highlight-python"><pre>HashMap&lt;String, Object&gt; m = new HashMap&lt;String, Object&gt;();
+Tab t = new Tab();</pre>
+</div>
+</li>
+<li><p class="first">The constructor supports creating a literal from a string, i.e.,:</p>
+<div class="highlight-python"><pre>Tab t = new Tab("{'a':1, 'somefloat':2.2, 'nest':{'oo':'str'} }");
+// Constructs same table as above</pre>
+</div>
+<p>This is exactly the syntax of dictionary literals in Python, so these
+tables can be cut-and-pasted between Python and Java.</p>
+</li>
+<li><p class="first">Supports pretty print that looks EXACTLY like Python dictionaries
+so you can cut and paste Python dicts between Python and Java:</p>
+<div class="highlight-python"><pre>t.prettyPrint(System.out);
+// overrides toString to System.out.println(t) also works</pre>
+</div>
+</li>
+<li><p class="first">Support for cascading lookup:</p>
+<div class="highlight-python"><pre>Tab t = new Tab("{'a':1, 'somefloat':2.2, 'nest':{'oo':'str'} }");
+String s = (String)t.get("nest", "oo");</pre>
+</div>
+</li>
+<li><p class="first">Support for cascading insertion:</p>
+<div class="highlight-python"><pre>Tab t = new Tab("{'nest':{ 'nest2':{} }");
+t.put("nest", "nest2", "value");</pre>
+</div>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p class="first">How do Java Tab interactions compare with Python dicts?</p>
+<p>They are similar in many ways.  Newer features of Java (such as boxing
+and unboxing) make it a little easier to get stuff in and out
+of Tabs.   For example, In Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="p">[</span><span class="s">&#39;b&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">17.7</span>
+</pre></div>
+</div>
+<p>The equivalent in Java:</p>
+<div class="highlight-python"><pre>Tab a = new Tab("{'a':1}");
+a.put("b", 17.7);             // Because of boxing, don't have to type
+                              // a.put("b", new Double(17.7));</pre>
+</div>
+<p>Overloading and variable number of arguments make it
+easier to represent cascading lookups and inserts.  In Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;nest&#39;</span><span class="p">:{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span> <span class="o">=</span>  <span class="n">t</span><span class="p">[</span><span class="s">&#39;nest&#39;</span><span class="p">][</span><span class="s">&#39;a&#39;</span><span class="p">]</span>    <span class="c"># Cascading Lookup</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">lookup</span>                <span class="c"># output: 1</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="p">[</span><span class="s">&#39;nest&#39;</span><span class="p">][</span><span class="s">&#39;a&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">777</span>        <span class="c"># Cascading insert</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">t</span>                     <span class="c"># output: { &#39;nest&#39;: {&#39;a&#39;: 777} }</span>
+</pre></div>
+</div>
+<p>In Java:</p>
+<div class="highlight-python"><pre>Tab t = new Tab("{'nest': {'a':1}}");
+Object lookup = t.get("nest", "a");   // Cascading lookup
+System.out.println(lookup);           // output: 1
+
+t.put("nest", "a", 777);              // Cascading insertin
+System.out.println(t);                // output: { 'nest': {'a': 777 } }</pre>
+</div>
+<p>Note that Java uses double quotes (&#8220;&#8221;) for strings and Python
+can use both single and double quotes (&#8220;&#8221;, &#8216;&#8217;) for strings.
+In general, it&#8217;s easier to type single quotes inside the literal
+string of the Tab.</p>
+</li>
+<li><p class="first">How do we get types out of Java?</p>
+<p>Use the type-casting of Java.  For example, to get a nested
+Tab from another Tab:</p>
+<div class="highlight-python"><pre>Tab t = new Tab("{'a':1, 'b':2.2, 'c':'three', 'nest':{} }");
+Object o = t.get("nest");
+Tab nest = (Tab)o;</pre>
+</div>
+<p>Or, a little less typing:</p>
+<div class="highlight-python"><pre>Tab t = new Tab("{'a':1, 'b':2.2, 'c':'three', 'nest':{} }");
+Tab nest = (Tab)t.get("nest");</pre>
+</div>
+<p>With unboxing, getting POD types like int and floats out isn&#8217;t
+quite perfect: they have to go through the Object version.  For example:</p>
+<div class="highlight-python"><pre>int i = (int)t.get("a");      // SYNTAX ERROR: too much unboxing to do
+
+int i = (Integer)t.get("a");  // Okay, unboxing helps</pre>
+</div>
+<p>So, primitive types can work, but do require a cast.  (C++ gets
+around this extra cast because C++ supports a language feature called
+user-defined conversion).  This isn&#8217;t ideal, but it is a reasonably
+small amount of typing.</p>
+</li>
+<li><p class="first">Is there an equivalent for a Python list?</p>
+</li>
+</ol>
+<blockquote>
+<p>Yes.</p>
+<p>By default, an Arr &#8220;is-a&#8221; <tt class="docutils literal"><span class="pre">ArrayList&lt;Object&gt;</span></tt>.  So, Arr
+inherits all the interface from ArrayList.  BUT: Arr extends
+the interface significantly to make the Java Arr feel much more
+like the Python list.</p>
+</blockquote>
+<ol class="arabic" start="11">
+<li><p class="first">What does Arr add to <tt class="docutils literal"><span class="pre">ArrayList&lt;Object&gt;</span></tt>?</p>
+<p>Five Things.  The Arr adds some features to the ArrayList that make it
+easier to manipulate.  The Arr &#8220;is-a&#8221; ArrayList&lt;Object&gt; so it still
+supports all the same methods, as well as:</p>
+<blockquote>
+<ol class="arabic">
+<li><p class="first">Less typing:</p>
+<div class="highlight-python"><pre>ArrayList&lt;Object&gt; a = new ArrayList&lt;Object&gt;();
+Arr a = new Arr();</pre>
+</div>
+</li>
+<li><p class="first">Support for string literals, where string literals
+can be cut-and-paste directly between Java and Python:</p>
+<div class="highlight-python"><pre>Arr a = new Arr("[1, 2.2, 'three', [44]]");</pre>
+</div>
+</li>
+<li><p class="first">Supports pretty print that looks EXACTLY like Python dictionaries
+so you can cut and paste Python dicts between Python and Java:</p>
+<div class="highlight-python"><pre>Arr a = new Arr("[1, 2.2, 'three', [44]]");
+a.prettyPrint(System.out);
+// overrides toString to System.out.println(a) also works</pre>
+</div>
+</li>
+<li><p class="first">Supports cascading lookups in nested Arr/Tab:</p>
+<div class="highlight-python"><pre>a.get(3, 0);
+//  --&gt; gets 44 from nested array</pre>
+</div>
+</li>
+<li><p class="first">Supports cascading inserts into nested Arr/Tab:</p>
+<div class="highlight-python"><pre>a.put(3, 0, 777);
+// --&gt; results in [1, 2.2, 'three', [777]]</pre>
+</div>
+</li>
+</ol>
+</blockquote>
+</li>
+<li><p class="first">How do Java Arr interactions compare with Python lists?</p>
+<p>Like Tabs, boxing and unboxing make it easier to deal
+with heterogeneous types in Java.  Consider a Python list:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="s">&#39;three&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Similarly in Java:</p>
+<div class="highlight-python"><pre>Arr a = new Arr("[1, 2.2, 'three']");
+a.add(6);        // Because of boxing, don't have to do
+                 //    a.add(new Integer(6));</pre>
+</div>
+<p>Overloading get and put, along with Java supporting a variable
+number of arguments (as well as boxing/unboxing) make
+cascading gets and puts (that Python deals with so easily)
+easy to deal with.  Consider Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">aa</span> <span class="o">=</span> <span class="p">[</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">11</span><span class="p">]</span> <span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lookup</span> <span class="o">=</span>  <span class="n">aa</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>     <span class="c"># Cascading lookup: 10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">lookup</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">aa</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="mi">100</span>     <span class="c"># Cascading inserts: [5,6, [100,11]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">aa</span>
+</pre></div>
+</div>
+<p>In Java, the equivalent is:</p>
+<div class="highlight-python"><pre>Arr aa = new Arr("[5,6, [10,11]]");
+Object lookup = aa.get(2,0);    // Cascading lookup
+System.out.println(lookup);
+
+aa.put(2, 0, 100);              // Cascading insert: [5,6, [100,11]
+System.out.println(aa);</pre>
+</div>
+</li>
+<li><p class="first">Is there support for Tuples and OTabs?</p>
+<p>Tuples: yes, limited.  This will be expanded in a later version.
+OTab.  No.  May be added later.</p>
+</li>
+<li><p class="first">What&#8217;s missing?</p>
+<p>There&#8217;s still some development to do.</p>
+<blockquote>
+<ol class="arabic simple">
+<li>No MidasServer.  This is currently no MidasServer like in C++/Python
+there is only the client.</li>
+<li>No Numeric or NumPy support.   The original Pyrolite dist.
+only supported Python Arrays.</li>
+<li>No &#8220;shared&#8221; data structures.  The pytolite dist. did not implement
+the get/put feature of pickling which allows dictionaries
+to be shared (i.e., only deep copies are made).</li>
+<li>No Unicode support.  The C++/Python tools were developed to
+work with Python 2.x series, where strings where ASCII.
+The unicode support for PTOOLS is non-existant currently:
+this is a PTOOLS problem, not a Java problem.</li>
+<li>No byte array support.  It becomnes unicode, which (4) can&#8217;t handle.</li>
+<li>Can&#8217;t read textual arrays. Cannot currently read arrays from strings
+or files.</li>
+<li>No MidasYeller or MidasListener.</li>
+</ol>
+</blockquote>
+<p>These are the major missing pieces, which we will flesh out
+as people need them.  This is a first release to get the
+basic functionality out the door so we can get feedback.</p>
+</li>
+</ol>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="shm.html"
+                                  title="previous chapter">C++ Cross-Process Shared Memory Tools</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/java.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="shm.html" title="C++ Cross-Process Shared Memory Tools"
+             >previous</a> |</li>
+        <li><a href="index.html">PicklingTools v1.6.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, Richard T. Saunders.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.6.
+    </div>
+  </body>
+</html>

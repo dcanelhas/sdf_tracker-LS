@@ -1,0 +1,135 @@
+
+Comments on the code contained here in the PicklingTools.
+
+Python:  The Python subdirectory is all raw Python code.
+         You don't need to build any C-extension modules.
+         If you put that dir on your PYTHONPATH,  you should
+         be able to pick up all modules with an import and use 
+         it immediately.
+
+           % setenv PYTHONPATH "${PYTHONPATH}:/home/me/PicklingTools160/Python"
+           % python
+           >>> import midastalker # should pick it up
+
+C++:    This C++ subdirectory is all raw C++ code.  There are no
+        external dependencies (besides standard UNIX socket code) or libraries
+        the C++ area needs.
+
+        The Makefile.Linux gives examples how to build some code:
+          
+          % make -f Makefile.Linux all
+
+        ... will build a bunch of sample programs as well 'libptools.so',
+        a standalone library for PicklingTools you can link against.
+         
+        Probably the easist way to use Ptools in your own code is 
+        to compile the libptools.so (using the given Makefile) 
+        and link against it.
+
+           % Make -f Makefile.Linux libptools.so
+ 
+        In your own code, make sure you include the following flags to the
+        compiler (should work for Intel compiler and GNU compiler):
+
+            -fno-strict-aliasing -DLINUX_ -DOC_NEW_STYLE_INCLUDES -Wno-deprecated -I/home/me/PicklingTools160/C++/opencontainers_1_8_2/include -I/home/me/PicklingTools160/C++ -pthread -D_REENTRANT
+
+        ---------------------------------------------------------------------
+        Now. the C++ area is made up of two codebases: 
+
+           OpenContainers: this which contains the Tab/Arr/Val code for the 
+                    generic heterogeneous containers as well as some 
+                    threading code
+           PicklingTools: serialization and socket code
+
+        The PicklingTools proper depends on OpenContainers code.
+        The OpenContainers code is standalone and can be used without
+        the PicklingTools stuff.
+
+        A few options are always needed from the compile command-line
+        (take a look at Makefile.Linux)
+
+             -DLINUX_    # for Linux machines
+                or
+             -DOSF1_     # For Tru64 
+
+             -DNEW_STYLE_INCLUDES    # Make sure use #include <iostream>
+                                     # instead of #include <iostream.h>
+                                     # inside of OpenContainers.
+
+             -pthread -D_REENTRANT   # This is thread based code: we 
+                                     # depend on Pthreads for our threading
+ 
+             -fno-strict-aliasing    # Some opencontainers use funky aliasing
+
+        Strictly speaking, you can just use the OpenContainers standalone
+        for containers and threading if you don't like the STL.
+        The user's guide on the web site http://www.picklingtools.com
+        discusses the Tab/Arr/Val classes in more detail.
+
+        -------------------------------------------------------------------
+        The code for OpenConatiners is all in opencontainers_1_8_2/include
+        and can be compiled two ways:
+
+               Standalone (all inline), no linking required:
+               ---------------------------------------------
+              The code for OpenContainers is completely inlineable.
+              That means all you you need to do is use -I (from g++
+              and icc) to tell where the includes are
+              
+                % g++ -I/home/me/PicklingTools132/opencontainers_1_8_2/include myprog.cc
+        
+             In this mode, there is no linkage step against 
+             the opencontainers code.  This is what the sample 
+             Makefile.Linux does for all opencontainers code.
+
+                Some object files, some linking required:
+                -----------------------------------------
+             If you use all inline code for OpenContainers,
+             the compilation process can be a lot slower.  Select
+             files have been separated into .h/.cc files and
+             if you turn on OC_FACTOR_INTO_H_AND_CC, you can
+             compile a number of .cc files into object files
+             and link against those:
+              
+               % g++ -DOC_FACTOR_INTO_H_AND_CC -I/home/me/PicklingTools160/opencontainers_1_8_2/include val.cc -o val.o
+
+             This will create on object file for val which you 
+             can link against.  This can significantly speed up 
+             the compilation process.  The Xm area (below) uses
+             this method of compilation.
+
+        -------------------------------------------------------------------
+        Much of the code for the Picklingtools socket/serialization code
+        is inline, but a few places HAVE to have .cc files (globals, certain
+        circular dependencies).  The 'Makefile.Linux' is the place
+        to go for samples.  Basically, the COM_OBJS are all files
+        that need to be compiled and linked against (and they form 
+        the nucleus of the libptools.so):
+
+           COM_OBJS = m2pythontools.o valpython.o midassocket.o valprotocol2.o m2ser.o m2streamdataenc.o m2convertrep.o timeconv.o fdtools.o
+
+        Using the Picklingtools requires you to use the Opencontainers,
+        so you will have to choose how to compile the Opencontainers
+        code as well:  inline-only or not.
+
+
+M2k:    You can use the M2k in any MITE or Midas 2k dir:
+        there are two subirectories: the opalpython
+        contains the OpalPythonDaemon (the equivalent of the
+        MidasServer) and the OpalPythonSocketMsg (the equivalent
+        of the MidasTalker).  The udpif contains components
+        to talk over UDP.
+
+        The unit.cfg are provided:  just copy all the directory
+        with the unit.cfg: don't forget to change the using
+        in the unit.cfg!
+
+Xm:     Copy the ptools160 option tree directory to your
+        X-Midas option tree area (NOTE: because PicklingTools160
+        contains capital letters, you have to copy it out 
+        because X-Midas doesn't like upper and lower case).
+        Then 'xmbopt ptools'
+
+Java:
+        Check the README file in the Java directory
+

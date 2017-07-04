@@ -1,0 +1,21 @@
+
+// This is an example of a M2k script where this is a client listening
+// to a main server (on port 9000), and my current port on my machine is 9000.
+
+// Note you set the Serialization specifically .. adaptive isn't supported 
+// here ...
+
+HOST = get("HOST")  // Host we are trying to listen to
+PORT = get("PORT")  // Port on ME 
+
+use UDPPythonClient c begin
+   Serialization=PythonNoNumeric 
+   // Host  ... This is the current host this client is running on: a readout
+   Port= PORT
+   RemoteHost=HOST 
+   // RemotePort=REMOTE_PORT  // CONFUSING: Left over from inherited server, don't use
+end
+
+use handler h
+connect c.OutMsg to h.InMsg
+

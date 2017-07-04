@@ -1,0 +1,91 @@
+KEYWORDS2TAB - Converts keywords attached to an X-Midas file to a Tab file
+ 
+<bluefile>    X-Midas filename
+<tabfile>     Output Python dictionary (Tab) filename
+
+
+KEYWORDS2TAB Is a simple primitive that converts keywords attached to an X-Midas
+file to a text file formatted as a Python dictionary (Tab).  It supports up to
+1000 levels of nesting, where the scoping keyword (TAG) can be passed into the
+primitive on the /KTAG switch.
+
+By default, TAG would be the top level scoping word.  To add to the nesting,
+TAGn would need to be added.  See examples below.
+
+Switches:
+   /KTAG   - Sets the primary scoping keyword prefix (default='TAG')
+   /FPUT   - Put the Python dictionary <tabfile> onto the bluefile.
+             Bluefile must exists.
+
+Examples:
+  Going from keyfile to tabfile:
+  ----------------------------------
+  fcreate testfile
+  key testfile add "TEST" 1
+  key testfile add "TAG" "LEVEL1"
+  key testfile add "TEST" 1
+  key testfile add "TAG1" "LEVEL2"
+  key testfile add "TEST" 1
+  key testfile add "TAG1" "LEVEL2END"
+  key testfile add "TAG" "LEVEL1END"
+  key testfile
+  keywords2tab testfile "test.tab"
+  erase testfile
+  cat test.tab
+    {
+        'IO':'X-Midas',
+        'LEVEL1':{
+            'LEVEL2':{
+                'TEST':1.0
+            },
+            'TEST':1.0
+        },
+        'TEST':1.0,
+        'VER':'1.1'
+    }
+
+
+
+
+  Going from tabfile to keyfile:
+  ----------------------------------
+  sample.tab:
+    {
+      'TEST1':1,
+      'PETS': {
+        'CAT':2,
+        'DOGS': {
+           'FIDO':1,
+           'BRUCE':1,
+        }
+      },
+      'TEST2':1,
+    }
+
+  fcreate testfile
+  keywords2tab/fput testfile sample.tab
+  key testfile
+    VER=1.1
+    IO=X-Midas
+    TAG==PETS
+    TAG1==DOGS
+    FIDO==1
+    BRUCE==1
+    TAG1==DOGSEND
+    CAT==2
+    TAG==PETSEND
+    TEST1==1
+    TEST2==1
+  keywords2tab testfile sample_o.tab
+  cat sample_o.tab
+    {
+        'IO':'X-Midas',
+        'PETS':{
+            'CAT':2,
+            'DOG':4
+        },
+        'TEST1':1,
+        'TEST2':1,
+        'VER':'1.1'
+    }
+

@@ -1,0 +1,9 @@
+#ifndef CONFIG_H
+#define CONFIG_H
+#include <cstring>
+
+//These variables are filled in by CMAKE during the configuration process
+
+	const std::string pca_dictionary_path = "@pca_dictionary_path@";
+	const std::string nn_definitions_path = "@nn_definitions_path@";
+#endif

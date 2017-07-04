@@ -1,0 +1,72 @@
+This directory contains all sorts of Python code and examples for
+using the MidasTalker and MidasServer (client and server over TCP/IP
+socket) and MidasListener and MidasYeller (client and server over UDP).
+
+All the Python code should have reasonable help files from Python, i.e.:
+
+% python
+>>> import midastalker   # Make sure your PYTHONPATH to have the current dir
+>>> help(midastalker)
+
+
+Most of the examples (ending with _ex*.py) support several options for
+controlling how data is sent around.  By default, all data is
+serialized using Python Pickling Protocol 0, which is the most
+backwards compatible protocol but also the slowest.  You can manually
+change how data flows in all the examples by setting one of three
+options on the command line:
+
+
+      --ser=n    - Set the serialization type of how the example sends data
+                   over the socket:  this can have a huge performance
+                   difference.  The options are:
+                    0 :  Use Python Pickling Protocol 0
+                         - slower, but works w/all versions of PTOOLS, Python
+                    1 :  Use no serialization (just send the string data)
+                         - useful if you want to send raw data
+                    2 :  Use Python Pickling Protocol 2
+                         - fast, but doesn't work with all versions
+                   -2 :  As Python Pickling Protocol 2, but as Python 2.2.x
+                         - Python 2.2.x dumps Protocol 2 subtlely differently
+                           so this allows you to talk to older versions
+                    5 : For OC Serialization.  This is your only option
+                        if you want VERY BIG arrays/data.  This is a
+                        Python C Extension module, and has to be built
+                        before it can be used.
+                   The default is Python Pickling Protocol 0 for backwards
+                   compatibility but it is strongly suggested moving to
+                   Protocol 2 for speed.
+
+     --sock=n    - Set whether socket communications use dual socket
+                   (--sock=2) or single socket (--sock=1) mode.  To get
+                   around a bug in VMS TCP/IP, dual sockets needed to
+                   be used for biderectional communication.  Modern
+                   sockets don't have this problem.  Dual socket is the
+                   usual default, as that's the default of Midas 2K
+                   and X-Midas, but we suggest using Single Socket mode
+                   when you can.  Most examples default to --sock=2
+
+                   New feature: This can also be 777 (which means 
+                   NORMAL_SOCKET) and avoids all the Midas socket
+                   protocol nonsense.  With 777, you can talk to normal
+                   sockets that do typical socket stuff (like CURL, etc.)
+
+     --arrdisp=n - Set the array disposition if you use serialization
+                   (Pickling Protocol 0 or 2). This is how the examples sends
+                   "homogeneous data" around the system (i.e., M2k Vectors,
+                   PTOOLS Arrays, Python arrays, Numeric arrays).
+                   The options are:
+                    0 : Shuttle all homogeneous data as Numeric Arrays
+                        (like the Numeric package from Python)
+                    1 : Shuttle all homogeneous data as Python Lists
+                        (this loses their "array-like" quality but
+                         is the most backwards compatible because all
+                         versions of PTOOLS and Python support Python Lists)
+                    2 : Shuttle all homogeneous data as Python Arrays
+                        (like the Array package from Python):DEPRECATED!!!
+                    4 : Use NumPy. RECOMENDED!!!!!  
+                   The default is 1 for backwards compatibility, but if
+                   you are using XMPY, Numpy now comes built and it is strongly
+                   recommended to use 4 (for speed). If you are using Python
+                   but do not have the NumPy package AND you have
+                   Python 2.4.x or above, it is recommended to use 1.

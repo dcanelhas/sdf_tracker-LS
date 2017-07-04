@@ -1,0 +1,14 @@
+OPAL2DICT - Demonstrate how to read OpalTables from X-Midas
+ 
+<filename>   Filename: automatically uppercased:  DOES NOT USE AUXES
+
+This simply shows how to go about reading OpalTables an converting
+them into Tabs.  Note that some type information is lost when printing
+an OpalTable as a Python Dictionary (i.e., if a quantity was a real_4
+in an OpalTable it prints out and would be read back in as a real_8).
+
+This example also shows that, if a parsing error is encountered,
+the routines do a pretty good job of telling you where the issue
+is (by putting the traceback in that .what() method of logic_erro).
+
+

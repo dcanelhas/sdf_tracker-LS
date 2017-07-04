@@ -1,0 +1,2 @@
+#!/bin/sh
+xmpy /home/rts/xmidas/xm4_12_2/ptools153/host/tabinpytester.py $*

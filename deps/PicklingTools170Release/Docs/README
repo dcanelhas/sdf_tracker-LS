@@ -1,0 +1,8 @@
+
+The PicklingTools, starting with version 1.0.9, is embracing 
+the ReStructured Text format for Documentation.  Both the FAQ
+and the User's Guide have been slightly rewritten so that 
+both the html (that is also on the web site) and the pdfs have
+been generated from the txt documents.
+
+Point your web browser at PicklingTools160/Docs/html/index.html

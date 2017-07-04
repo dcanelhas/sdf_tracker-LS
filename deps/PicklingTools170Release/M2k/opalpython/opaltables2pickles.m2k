@@ -1,0 +1,28 @@
+
+// Usage:  m2shell opaltables2pickles.m2k IN=infile.txt OUT=outfile.pickle
+// This script helps convert from a text file containing
+// ASCII OpalTables to a pickle file.  If there are multiple
+// ASCII OpalTables, we will pickles and read each one
+
+use OpalTableReader otr  DoneValue=666
+use OpalPythonTableWriter otw
+
+connect otr.StreamOutput to otw.StreamInput
+
+otr.FileName=IN
+otw.FileName=OUT
+
+connect otr.StreamOutput to h.InMsg
+
+while (otr.DoneValue!=666) 
+  mesg = "Waiting ..."
+  show mesg
+  oscall sleep 1
+endwhile
+
+otw.closestream = 1
+
+oscall sleep 5
+
+stop *
+

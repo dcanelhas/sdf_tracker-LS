@@ -1,0 +1,42 @@
+startmacro a:optname
+
+  ! build C-extension module
+  
+  ! In case XMSRC not defined in X-Midas 4.4
+  import/nowarn XMSRC_PTOOLS xmsrc
+  if xmsrc eqs " " then
+     import/nowarn XMAREA_PTOOLS xmarea
+     export/nowarn xmarea XMSRC_PTOOLS
+  endif
+
+  ! clean up first
+  $(echo '... cleaning up old Python C extension module build ...')
+  $(mkdir -p $XMAREA_PTOOLS/python; cd $XMAREA_PTOOLS/python; /bin/rm -rf lib)
+  $(mkdir -p $XMAREA_PTOOLS/pythoncext; cd $XMAREA_PTOOLS/pythoncext; /bin/rm -rf build;)
+
+  ! build cextension module
+  $(echo '... building new Python C extension module ...')
+  $(echo '     make sure you build this AFTER your XMPY has been set-up and your pyenv')
+  $(echo '     has been run so this picks up the right version of python')
+  ! Have to split this line up for older systems
+  $(cd $XMSRC_PTOOLS/pythoncext; python setup.py build &
+    --build-base=$XMAREA_PTOOLS/pythoncext/build && cd &
+    $XMAREA_PTOOLS/pythoncext && python $XMSRC_PTOOLS/pythoncext/setup.py &
+    install --install-lib=$XMAREA_PTOOLS/python/lib --skip-build)
+
+  ! This also puts a lib in the Python dir: X-Midas automatically puts
+  ! that on the PYTHONPATH
+
+
+  ! Define option tree dependencies
+  xmp ^optname sys
+
+  ! Build the libraries
+  xmblib *;^{optname}
+
+
+  ! Build the primitives
+  xmbld * ,, h ^{optname}
+
+
+endmacro

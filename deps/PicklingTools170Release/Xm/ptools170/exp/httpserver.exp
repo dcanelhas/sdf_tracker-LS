@@ -1,0 +1,30 @@
+XMSERVER - Simple example of a C++ primitive using the HTTPServer
+ 
+<host>   Hostname of host the server is running on.  This is
+         always the localhost, but is here for future expansion in
+         case you want to specify which interface on the current host
+         you which to run.
+<port>   Port number the server is running on
+
+ 
+This C++ primitive provides an example to follow for writing your
+own HTTPServers.  This is a very simple server that takes client's
+request and simply sends the same data back to them.  It continues
+to run until you hit ^C
+
+Example:
+
+   ! In session 1, run the httpserver
+   X-Midas> httpserver localhost, 8888
+   Opening MyServer on host LOCALHOST port 8888
+
+   ! In session 2, running the httpclient 
+   X-Midas> httpclient localhost, 8888
+   Opened connection to host:LOCALHOST port:8888
+
+
+This is a very simple example, but
+it does spawn a thread per connection so that the server
+itself is not a bottleneck. The PicklingTools distribution
+has some more complicated examples (if not necessarily
+X-Midas examples).

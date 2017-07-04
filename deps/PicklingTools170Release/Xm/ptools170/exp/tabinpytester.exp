@@ -1,0 +1,21 @@
+TABINPYTESTER - Python primitive reading dictionaries from a T4000 pipe
+ 
+<input>  Input pipe to read from
+
+The main purpose of this primitive is to show an example of how
+a Python X-Midas primitive could read Tabs (aka dictionaries) from
+X-Midas pipes.  
+
+There's an example the t4pytest.txt in the macro area
+showing how this works, (replicated here as well)
+
+startmacro
+
+  xpipe on
+    tabgenout _out       ! This is a C++ primitive
+    tabinpytester _out   ! This is a Python primitive
+  xpipe off
+
+endmacro
+
+ 

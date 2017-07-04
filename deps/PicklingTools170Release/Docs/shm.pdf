@@ -1,0 +1,2196 @@
+%PDF-1.4
+%“Œ‹ž ReportLab Generated PDF document http://www.reportlab.com
+% 'BasicFonts': class PDFDictionary 
+1 0 obj
+% The standard fonts dictionary
+<< /F1 2 0 R
+ /F2 3 0 R
+ /F3 4 0 R
+ /F4 5 0 R >>
+endobj
+% 'F1': class PDFType1Font 
+2 0 obj
+% Font Helvetica
+<< /BaseFont /Helvetica
+ /Encoding /WinAnsiEncoding
+ /Name /F1
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F2': class PDFType1Font 
+3 0 obj
+% Font Helvetica-Bold
+<< /BaseFont /Helvetica-Bold
+ /Encoding /WinAnsiEncoding
+ /Name /F2
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F3': class PDFType1Font 
+4 0 obj
+% Font Helvetica-Oblique
+<< /BaseFont /Helvetica-Oblique
+ /Encoding /WinAnsiEncoding
+ /Name /F3
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'F4': class PDFType1Font 
+5 0 obj
+% Font Courier
+<< /BaseFont /Courier
+ /Encoding /WinAnsiEncoding
+ /Name /F4
+ /Subtype /Type1
+ /Type /Font >>
+endobj
+% 'Page1': class PDFPage 
+6 0 obj
+% Page dictionary
+<< /Contents 35 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 34 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page2': class PDFPage 
+7 0 obj
+% Page dictionary
+<< /Contents 36 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 34 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page3': class PDFPage 
+8 0 obj
+% Page dictionary
+<< /Contents 37 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 34 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page4': class PDFPage 
+9 0 obj
+% Page dictionary
+<< /Contents 38 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 34 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page5': class PDFPage 
+10 0 obj
+% Page dictionary
+<< /Contents 39 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 34 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page6': class PDFPage 
+11 0 obj
+% Page dictionary
+<< /Contents 40 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 34 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page7': class PDFPage 
+12 0 obj
+% Page dictionary
+<< /Contents 41 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 34 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page8': class PDFPage 
+13 0 obj
+% Page dictionary
+<< /Contents 42 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 34 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page9': class PDFPage 
+14 0 obj
+% Page dictionary
+<< /Contents 43 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 34 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page10': class PDFPage 
+15 0 obj
+% Page dictionary
+<< /Contents 44 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 34 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'Page11': class PDFPage 
+16 0 obj
+% Page dictionary
+<< /Contents 45 0 R
+ /MediaBox [ 0
+ 0
+ 595.2756
+ 841.8898 ]
+ /Parent 34 0 R
+ /Resources << /Font 1 0 R
+ /ProcSet [ /PDF
+ /Text
+ /ImageB
+ /ImageC
+ /ImageI ] >>
+ /Rotate 0
+ /Trans <<  >>
+ /Type /Page >>
+endobj
+% 'R17': class PDFCatalog 
+17 0 obj
+% Document Root
+<< /Outlines 19 0 R
+ /PageLabels 46 0 R
+ /PageMode /UseNone
+ /Pages 34 0 R
+ /Type /Catalog >>
+endobj
+% 'R18': class PDFInfo 
+18 0 obj
+<< /Author ()
+ /CreationDate (D:20161222084537+07'00')
+ /Creator (\(unspecified\))
+ /Keywords ()
+ /Producer (ReportLab PDF Library - www.reportlab.com)
+ /Subject (\(unspecified\))
+ /Title (C++ Cross-Process Shared Memory Tools) >>
+endobj
+% 'R19': class PDFOutlines 
+19 0 obj
+<< /Count 17
+ /First 20 0 R
+ /Last 32 0 R
+ /Type /Outlines >>
+endobj
+% 'Outline.0': class OutlineEntryObject 
+20 0 obj
+<< /Dest [ 6 0 R
+ /XYZ
+ 62.69291
+ 653.0236
+ 0 ]
+ /Next 21 0 R
+ /Parent 19 0 R
+ /Title (Reminder) >>
+endobj
+% 'Outline.1': class OutlineEntryObject 
+21 0 obj
+<< /Count 4
+ /Dest [ 6 0 R
+ /XYZ
+ 62.69291
+ 297.6236
+ 0 ]
+ /First 22 0 R
+ /Last 25 0 R
+ /Next 26 0 R
+ /Parent 19 0 R
+ /Prev 20 0 R
+ /Title (SHMMain, ServerSide and ClientSide) >>
+endobj
+% 'Outline.15.0': class OutlineEntryObject 
+22 0 obj
+<< /Dest [ 6 0 R
+ /XYZ
+ 62.69291
+ 201.4236
+ 0 ]
+ /Next 23 0 R
+ /Parent 21 0 R
+ /Title (SHMMain) >>
+endobj
+% 'Outline.15.1': class OutlineEntryObject 
+23 0 obj
+<< /Dest [ 7 0 R
+ /XYZ
+ 62.69291
+ 246.6236
+ 0 ]
+ /Next 24 0 R
+ /Parent 21 0 R
+ /Prev 22 0 R
+ /Title (ServerSide) >>
+endobj
+% 'Outline.15.2': class OutlineEntryObject 
+24 0 obj
+<< /Dest [ 8 0 R
+ /XYZ
+ 62.69291
+ 201.7213
+ 0 ]
+ /Next 25 0 R
+ /Parent 21 0 R
+ /Prev 23 0 R
+ /Title (ClientSide) >>
+endobj
+% 'Outline.15.3': class OutlineEntryObject 
+25 0 obj
+<< /Dest [ 9 0 R
+ /XYZ
+ 62.69291
+ 167.8236
+ 0 ]
+ /Parent 21 0 R
+ /Prev 24 0 R
+ /Title (Middleside) >>
+endobj
+% 'Outline.2': class OutlineEntryObject 
+26 0 obj
+<< /Dest [ 10 0 R
+ /XYZ
+ 62.69291
+ 443.8236
+ 0 ]
+ /Next 27 0 R
+ /Parent 19 0 R
+ /Prev 21 0 R
+ /Title (Timeouts and External Shutdown Conditions) >>
+endobj
+% 'Outline.3': class OutlineEntryObject 
+27 0 obj
+<< /Count 3
+ /Dest [ 11 0 R
+ /XYZ
+ 62.69291
+ 508.6467
+ 0 ]
+ /First 28 0 R
+ /Last 30 0 R
+ /Next 31 0 R
+ /Parent 19 0 R
+ /Prev 26 0 R
+ /Title (Complex Interactions) >>
+endobj
+% 'Outline.16.0': class OutlineEntryObject 
+28 0 obj
+<< /Dest [ 12 0 R
+ /XYZ
+ 62.69291
+ 360.6236
+ 0 ]
+ /Next 29 0 R
+ /Parent 27 0 R
+ /Title (Address Randomization) >>
+endobj
+% 'Outline.16.1': class OutlineEntryObject 
+29 0 obj
+<< /Dest [ 13 0 R
+ /XYZ
+ 62.69291
+ 462.6236
+ 0 ]
+ /Next 30 0 R
+ /Parent 27 0 R
+ /Prev 28 0 R
+ /Title (Examples) >>
+endobj
+% 'Outline.16.2': class OutlineEntryObject 
+30 0 obj
+<< /Dest [ 14 0 R
+ /XYZ
+ 62.69291
+ 765.0236
+ 0 ]
+ /Parent 27 0 R
+ /Prev 29 0 R
+ /Title (Five Biggest Headaches) >>
+endobj
+% 'Outline.4': class OutlineEntryObject 
+31 0 obj
+<< /Dest [ 15 0 R
+ /XYZ
+ 62.69291
+ 485.8236
+ 0 ]
+ /Next 32 0 R
+ /Parent 19 0 R
+ /Prev 27 0 R
+ /Title (Tips and Tricks) >>
+endobj
+% 'Outline.5': class OutlineEntryObject 
+32 0 obj
+<< /Count 1
+ /Dest [ 15 0 R
+ /XYZ
+ 62.69291
+ 133.2236
+ 0 ]
+ /First 33 0 R
+ /Last 33 0 R
+ /Parent 19 0 R
+ /Prev 31 0 R
+ /Title (Conclusion) >>
+endobj
+% 'Outline.17.0': class OutlineEntryObject 
+33 0 obj
+<< /Dest [ 16 0 R
+ /XYZ
+ 62.69291
+ 765.0236
+ 0 ]
+ /Parent 32 0 R
+ /Title (Known Bugs:) >>
+endobj
+% 'R34': class PDFPages 
+34 0 obj
+% page tree
+<< /Count 11
+ /Kids [ 6 0 R
+ 7 0 R
+ 8 0 R
+ 9 0 R
+ 10 0 R
+ 11 0 R
+ 12 0 R
+ 13 0 R
+ 14 0 R
+ 15 0 R
+ 16 0 R ]
+ /Type /Pages >>
+endobj
+% 'R35': class PDFStream 
+35 0 obj
+% page stream
+<< /Length 5314 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 741.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 4 Tm /F2 20 Tf 24 TL 35.43488 0 Td (C++ Cross-Process Shared Memory Tools) Tj T* -35.43488 0 Td ET
+Q
+Q
+q
+1 0 0 1 62.69291 707.0236 cm
+q
+BT 1 0 0 1 0 14 Tm 1.726412 Tw 12 TL /F1 10 Tf 0 0 0 rg (The C++ Cross-Process Shared Memory Tools is new In PicklingTools 1.4.0. There have been some) Tj T* 0 Tw (extensive updates as of PicklingTools 1.6.2.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 665.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.329269 Tw (Although the PicklingTools library has had tools to handle cross process shared memory for sometime) Tj T* 0 Tw .388651 Tw (\(since 1.0.0\), this release introduces some simple abstractions to help make using shared memory a little) Tj T* 0 Tw (bit easier.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 632.0236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Reminder) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 590.0236 cm
+q
+BT 1 0 0 1 0 26 Tm .964692 Tw 12 TL /F1 10 Tf 0 0 0 rg (First, a quick reminder: C++ Vals ) Tj /F3 10 Tf (can ) Tj /F1 10 Tf (be used with shared memory: this is the reason the ) Tj /F4 10 Tf (Allocator) Tj T* 0 Tw .413876 Tw /F1 10 Tf (became an inherent part of the PicklingTools back in 1.0.0. For example, to create a Tab in some shared) Tj T* 0 Tw (memory region:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 520.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F4 10 Tf 12 TL (char* mem = ... create/attach shared memory across processes ...) Tj T* (StreamingPool *shm=StreamingPool::CreateStreamingPool\(mem, bytes, 8\);) Tj T* (Val v = Shared\(shm, Tab\(\)\);) Tj T* (v["a"] = "hello";   // Table and keys and values in shared memory) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 476.8236 cm
+q
+BT 1 0 0 1 0 26 Tm .500651 Tw 12 TL /F1 10 Tf 0 0 0 rg (The shared memory can be created with ) Tj /F4 10 Tf (SHMCreate ) Tj /F1 10 Tf (or connected to with already created memory with) Tj T* 0 Tw 1.760574 Tw /F4 10 Tf (SHMAttach) Tj /F1 10 Tf (, but it's tricky to get this right with the basic tools provided by the simple abstractions in) Tj T* 0 Tw ("sharedmemory.h":) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 395.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 72 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 50 Tm /F4 10 Tf 12 TL (size_t bytes = 1024*1024;) Tj T* (char* mem = SHMCreate\("shm_region", bytes\);) Tj T* (// Created, but is it available yet?  Do you have to check) Tj T* (// if the entire shared memory has been mapped into the process) Tj T* (// with SHMInitialized, etc.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 339.6236 cm
+q
+BT 1 0 0 1 0 38 Tm .964104 Tw 12 TL /F1 10 Tf 0 0 0 rg (The process for using shared memory is a little clumsy: Who creates and who attaches? The creator is) Tj T* 0 Tw .27229 Tw (responsible for calling ) Tj /F4 10 Tf (SHMInitialize ) Tj /F1 10 Tf (and the user is responsible for called ) Tj /F4 10 Tf (SHMInitialized ) Tj /F1 10 Tf (to see) Tj T* 0 Tw .225444 Tw (if the region is ready, even it already mapped it. But these have to done in the right order, and it's not well) Tj T* 0 Tw (documented.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 309.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .88311 Tw (To address these concerns, there are three new abstractions that handle Vals in shared memory a little) Tj T* 0 Tw (better.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 276.6236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (SHMMain, ServerSide and ClientSide) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 246.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.499984 Tw (There are three new classes that make using shared memory a lot easier: SHMMain, ServerSide and) Tj T* 0 Tw (ClientSide. These all come from:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 213.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F4 10 Tf 12 TL (#include "shmboot.h"   // Gets defn of SHMMain, ClientSide and ServerSide) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 183.4236 cm
+q
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (SHMMain) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 153.4236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .363735 Tw (SHMMain is responsible for creating the shared memory region of the proper size that all ServerSide and) Tj T* 0 Tw (ClientSides can use. And that's it. It needs to be called exactly once.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 123.4236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .431235 Tw (Ideally, the SHMMain gets called exactly once in a startup process that gets called before everyone else:) Tj T* 0 Tw (frequently at the start of some main process that has to be started before anything else in the app:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 78.22362 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F4 10 Tf 12 TL (#include "shmboot.h") Tj T*  T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R36': class PDFStream 
+36 0 obj
+% page stream
+<< /Length 5128 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 607.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 156 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 134 Tm /F4 10 Tf 12 TL (int main \(int argc, char**argv\)) Tj T* ({) Tj T* (   int bytes = atoi\(argv[1]\);) Tj T*  T* (   // Initial set-up code) Tj T* (   bool debug = true;) Tj T* (   SHMMain mem\("shm_region", bytes, debug\);) Tj T* (   mem.start\(\);  // Actually calls and creates region) Tj T*  T* (   ... start rest of application, fork processes, etc. ...) Tj T*  T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 551.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL 1.906412 Tw (Sometimes, if an application is built piecewise, the model described above won't quite work: imagine) Tj T* 0 Tw .203984 Tw (something similar to a UNIX pipeline where each process may be communicating piecewise to server and) Tj T* 0 Tw 1.016488 Tw (a client. In a case like that, the "head" of the pipeline would be where the SHMMain should have to be) Tj T* 0 Tw (created.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 497.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL 1.841318 Tw (Once the SHMMain is created \(and started\), this establishes a shared memory zone or "pool" where) Tj T* 0 Tw .127882 Tw (queues and Vals can be used. Note that the SHMMain can be created from any process, even if there are) Tj T* 0 Tw .627356 Tw (no servers or clients in it: its sole purpose is to create and establish the shared memory region that later) Tj T* 0 Tw (ServerSides and ClientSides use.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 395.8236 cm
+q
+BT 1 0 0 1 0 86 Tm .27683 Tw 12 TL /F1 10 Tf 0 0 0 rg (Expert Notes: If you are creating a system where the clients and servers all are all created from one main) Tj T* 0 Tw 1.839985 Tw (process, then that makes things easier: you don't ) Tj /F3 10 Tf (have ) Tj /F1 10 Tf (to specify a region, as all clients/servers that) Tj T* 0 Tw 1.926235 Tw (inherit from the main process can use the region already mapped in the main process: assuming all) Tj T* 0 Tw .219318 Tw (clients/servers ) Tj /F4 10 Tf (fork ) Tj /F1 10 Tf (from the main above and don't ) Tj /F4 10 Tf (exec) Tj /F1 10 Tf (, the shared memory set-up from SHMMain will) Tj T* 0 Tw .116179 Tw (be inherited \(in a process sense, not in a OOP sense\) and be in the same address space in all the clients.) Tj T* 0 Tw 2.537318 Tw (However, if \(like all the examples in the baseline\), the clients and servers are completely separate) Tj T* 0 Tw .129461 Tw (processes, they HAVE to be mapped to the same area: in this case, you want to specify where in memory) Tj T* 0 Tw (to map:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 314.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 72 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 50 Tm /F4 10 Tf 12 TL (// On a 32-bit i386 Linux machine, force into a pretty unused area) Tj T* (SHMMain mem\("shm_region_32bit", bytes, debug, \(void*\)0xB0000000\);) Tj T*  T* (// On a 64-bit x86_64 Linux machine, force into pretty unused area) Tj T* (SHMMain mem\("shm_region_64bit", bytes, debug, \(void*\)0x700000000000ULL\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 258.6236 cm
+q
+BT 1 0 0 1 0 38 Tm 1.497984 Tw 12 TL /F1 10 Tf 0 0 0 rg (Although the small standalone programs tend to work without forcing to use a particular region, larger) Tj T* 0 Tw .15936 Tw ("real" applications tend to need to be forced. Although the ServerSide and ClientSide ) Tj /F3 10 Tf (can ) Tj /F1 10 Tf (explicitly set the) Tj T* 0 Tw .123488 Tw (memory needed, usually you only want to do this in the SHMMain \(which sets it up in the right region\) and) Tj T* 0 Tw (that forces all clients and servers to attach to the right region.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 228.6236 cm
+q
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (ServerSide) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 186.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .07881 Tw (The ServerSide presents the abstraction of a server, although strictly speaking it can also be either side of) Tj T* 0 Tw .849985 Tw (a communication. The most important thing a ServerSide does is to create the pipe \(in shared memory\)) Tj T* 0 Tw (which will be used for queuing and enqueueing.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 156.6236 cm
+q
+BT 1 0 0 1 0 14 Tm 1.72683 Tw 12 TL /F1 10 Tf 0 0 0 rg (To create a pipe, you have to give it a string name \(in the example below, ) Tj /F4 10 Tf (pipename) Tj /F1 10 Tf (\) and start the) Tj T* 0 Tw (ServerSide:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 87.42362 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+BT 1 0 0 1 0 38 Tm 12 TL /F4 10 Tf 0 0 0 rg (// Create a pipe in the shared memory region \(string name used in SHMMain\)) Tj T* (// The pipe has the given capacity \(capacity is in packets\).) Tj T* (bool debug = true;) Tj T* (int packet_capacity = 4;) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R37': class PDFStream 
+37 0 obj
+% page stream
+<< /Length 4538 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 691.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 50 Tm 12 TL /F4 10 Tf 0 0 0 rg (ServerSide server\("shm_region",) Tj T* (                  "pipename", packet_capacity. true\);) Tj T*  T* (server.start\(\);   // pipe only created when started) Tj T* (CQ) Tj (&) Tj ( pipe = server.pipe\(\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 635.8236 cm
+q
+BT 1 0 0 1 0 38 Tm 2.85811 Tw 12 TL /F1 10 Tf 0 0 0 rg (Once the pipe has been created, it can be enqueued or dequeued from: ) Tj /F3 10 Tf (Note that queueing and) Tj T* 0 Tw .74229 Tw (dequeueing is thread-safe) Tj /F1 10 Tf (: I.e., you can have multiple processes operating on the queue simultaneously) Tj T* 0 Tw .41284 Tw (and its state is never inconsistent. Typically, the ServerSide enqueues and the ClientSide dequeues from) Tj T* 0 Tw (the given CQ:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 353.7213 cm
+q
+q
+.988825 0 0 .988825 0 0 cm
+q
+1 0 0 1 6.6 6.674587 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 474 276 re B*
+Q
+q
+BT 1 0 0 1 0 254 Tm 12 TL /F4 10 Tf 0 0 0 rg (// ServerSide enqueues) Tj T* (for \(int seq=0; ; seq++\) {) Tj T*  T* (   // Create the value to enqueue in shared memory) Tj T* (   Val data = Shared\(server.pool\(\), Tab\(\)\);  // Create a Tab in shared memory) Tj T* (   data["sequence_number"] = seq;) Tj T*  T* (   // Now enqueue) Tj T* (   bool enqueued = false;) Tj T* (   real_8 timeout_in_seconds = 3.2;) Tj T* (   while \(!enqueued\) {) Tj T* (       enqueued = pipe.enqueue\(data, timeout_in_seconds\);) Tj T* (       if \(!enqueued\) {) Tj T* (           cerr ) Tj (<) Tj (<) Tj ( "Failed to enqueue after " ) Tj (<) Tj (<) Tj ( timeout_in_seconds) Tj T* (                ) Tj (<) Tj (<) Tj ( " in seconds ... trying again ..." ) Tj (<) Tj (<) Tj ( endl;) Tj T* (       } else {) Tj T* (           cout ) Tj (<) Tj (<) Tj ( "Enqueued! Going to next packet" ) Tj (<) Tj (<) Tj ( endl;) Tj T* (           break;) Tj T* (       }) Tj T* (   }) Tj T*  T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 285.7213 cm
+q
+BT 1 0 0 1 0 50 Tm .29908 Tw 12 TL /F1 10 Tf 0 0 0 rg (Note that the enqueue has a timeout: in case the queue is full and the Val can't be placed in the queue, it) Tj T* 0 Tw 1.119431 Tw (will wait up to ) Tj /F4 10 Tf (timeout_in_seconds ) Tj /F1 10 Tf (for some space to open up. If the space opens up in the given) Tj T* 0 Tw .451751 Tw (time, the data is enqueued and enqueue returns true: the data has now been enqueued. If space doesn't) Tj T* 0 Tw 1.743516 Tw (open up in the given time, enqueue returns false. In the example code above, the sender just keeps) Tj T* 0 Tw (retrying, but gives a warning every 3.2 seconds warning indicating the queue is full.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 243.7213 cm
+q
+BT 1 0 0 1 0 26 Tm 1.059985 Tw 12 TL /F1 10 Tf 0 0 0 rg (Although typically the ServerSide is used as the ) Tj /F3 10 Tf (send ) Tj /F1 10 Tf (side only, there's no reason the ServerSide can't) Tj T* 0 Tw 1.092765 Tw (dequeue as well \(see below for examples of how to dequeue\). This ability might be useul if that queue) Tj T* 0 Tw (needed to be cleaned as part of a shutdown or restart.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 213.7213 cm
+q
+BT 1 0 0 1 0 14 Tm .436235 Tw 12 TL /F1 10 Tf 0 0 0 rg (There is another call to enqueue data ) Tj /F4 10 Tf (pipe.enq\(data\) ) Tj /F1 10 Tf (which will block forever; this is simpler and will) Tj T* 0 Tw (work but makes it harder to detect error conditions and/or gracefully exit.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 183.7213 cm
+q
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (ClientSide) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 153.7213 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.037988 Tw (The ClientSide is the other end of the pipe: if the ServerSide creates the pipe and writes to it, then the) Tj T* 0 Tw (ClientSide waits for the pipe to be created so it can attach and read from the pipe:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 84.52126 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+BT 1 0 0 1 0 38 Tm 12 TL /F4 10 Tf 0 0 0 rg ( ClientSide client\("shm_region", "pipename", true\);) Tj T* ( client.start\(\); // blocks waiting for pipe to be created) Tj T*  T* ( CQ) Tj (&) Tj ( pipe = client.pipe\(\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R38': class PDFStream 
+38 0 obj
+% page stream
+<< /Length 4742 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 487.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 276 re B*
+Q
+q
+BT 1 0 0 1 0 254 Tm 12 TL /F4 10 Tf 0 0 0 rg  T* ( // Once pipe is available, we can read from it) Tj T* ( real_8 timeout_in_seconds = 5.5;) Tj T* ( while \(1\) {) Tj T*  T* (   // Try to dequeue a single packet) Tj T* (   Val packet;) Tj T* (   bool valid=false;) Tj T* (   while \(!valid\) {) Tj T*  T* (       valid = pipe.dequeue\(timeout_in_seconds, packet\);) Tj T* (       if \(!valid\) {) Tj T* (             cerr ) Tj (<) Tj (<) Tj ( "Couldn't dequeue after " ) Tj (<) Tj (<) Tj ( timeout_in_seconds) Tj T* (                  ) Tj (<) Tj (<) Tj ( " ... trying to dequeue again ... " ) Tj (<) Tj (<) Tj ( endl;) Tj T* (             continue;) Tj T* (       } else {) Tj T* (             cout ) Tj (<) Tj (<) Tj ( "Got packet!" ) Tj (<) Tj (<) Tj ( endl;) Tj T* (             break;) Tj T* (       }) Tj T*  T* (   }) Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 455.8236 cm
+q
+BT 1 0 0 1 0 14 Tm 1.427488 Tw 12 TL /F1 10 Tf 0 0 0 rg (Note that the client \(in order to read from the proper pipe\) has to match ) Tj /F3 10 Tf (both ) Tj /F1 10 Tf (the name of the shared) Tj T* 0 Tw (memory region ) Tj /F3 10 Tf (and ) Tj /F1 10 Tf (the pipename the server writes to.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 401.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .782927 Tw (In the above example, if the client can't get something from the pipe immediately, thee queue blocks for) Tj T* 0 Tw .997209 Tw (up to a few seconds. If something appears on the pipe before the timeout, then that value is dequeued) Tj T* 0 Tw 1.385777 Tw (and taken off the pipe and valid becomes true. If after those few seconds the pipe is still empty, valid) Tj T* 0 Tw (becomes false and the dequeue fails.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 371.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.092651 Tw (This is basic paradigm: Use SHMMain to create the shared memory region before anything else starts,) Tj T* 0 Tw (start and create a sender with a ServerSide and client with ClientSide.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 269.8236 cm
+q
+BT 1 0 0 1 0 86 Tm .50311 Tw 12 TL /F1 10 Tf 0 0 0 rg (Note that the ClientSide and ServerSide will block until SHMMain is called and creates the memory pool.) Tj T* 0 Tw .044431 Tw (The ClientSide will block and wait until the the ServerSide creates the pipe. The only way this can become) Tj T* 0 Tw 1.638651 Tw (problematic if the shared memory pool has a "unclean" shutdown: if you can't guarantee SHMMain is) Tj T* 0 Tw .09881 Tw (called before all the clients and servers are created, it's important to make sure the shared memory region) Tj T* 0 Tw 2.862485 Tw (has been destroyed, otherwise the client and server may pick up the shared pool from the LAST) Tj T* 0 Tw .848735 Tw (invocation. To make sure the shared memory is clean, make sure /proc/shm does has been cleaned up) Tj T* 0 Tw 1.87881 Tw (and does NOT contain the memory pools; this is discussed a bit more in the ) Tj /F3 10 Tf (Five Major Headaches) Tj T* 0 Tw /F1 10 Tf (section below later.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 179.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 74 Tm /F1 10 Tf 12 TL .732488 Tw (When the Val is dequeued from the pipe, it is copied out using the copy constructor of the Val. So, Vals) Tj T* 0 Tw .351318 Tw (with Proxys simply increase/ decrease reference counts. Prior to PicklingTools 1.6.0, the value was left in) Tj T* 0 Tw 1.942619 Tw (the pipe until it was overwritten by later puts to the pipe. As of PicklingTools 1.6.0, when a value is) Tj T* 0 Tw 1.462765 Tw (dequeued, the value is copied out and then the Val in the pipe is immediately destructed. Why is this) Tj T* 0 Tw .399988 Tw (important? If your Val uses a lot of shared memory, letting a copy live in the pipe after a dequeue wastes) Tj T* 0 Tw 2.157674 Tw (resources. By immediately destructing after the dequeue copies it out, its resources are immediately) Tj T* 0 Tw (released.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 149.8236 cm
+q
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Middleside) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 107.8236 cm
+q
+BT 1 0 0 1 0 26 Tm 1.123488 Tw 12 TL /F1 10 Tf 0 0 0 rg (Many times a server is also a client: it reads from one queue and posts to another queue \(like a UNIX) Tj T* 0 Tw .78186 Tw (pipeline\): this role is frequently called a ) Tj /F3 10 Tf (transformer ) Tj /F1 10 Tf (in X-Midas or M2k speak. The example below show) Tj T* 0 Tw (how to ) Tj /F3 10 Tf (both ) Tj /F1 10 Tf (read from a client and post to a server in the same process:) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+% 'R39': class PDFStream 
+39 0 obj
+% page stream
+<< /Length 4825 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 499.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 264 re B*
+Q
+q
+BT 1 0 0 1 0 242 Tm 12 TL /F4 10 Tf 0 0 0 rg (ClientSide client\("shm_region", "pipe_0", true\);) Tj T* (client.start\(\); // read from this pipe) Tj T* (CQ) Tj (&) Tj ( input = client.pipe\(\);) Tj T*  T* (ServerSide server\("shm_region", "pipe_1", 4, true\);) Tj T* (server.start\(\); // write to this pipe) Tj T* (CQ) Tj (&) Tj ( output = server.pipe\(\);) Tj T*  T* (while \(1\) {) Tj T*  T* (    // Read from input pipe) Tj T* (    Val in_packet;) Tj T* (    if \(!input.dequeue\(.1, in_packet\)\)) Tj T* (        continue; // retry to get input) Tj T*  T* (    // Write to output pipe) Tj T* (    bool enqueued = false;) Tj T* (    while \(!enqueued\) {) Tj T* (      enqueued = out.enqueue\(in_packet, .1\);) Tj T* (    }) Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 455.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.14856 Tw (In this way, a client and server can be used together. In fact, there is no apriori limit on the number of) Tj T* 0 Tw .107765 Tw (clients and servers that can be in a single process \(limited only by the amount of memory\). Multiple clients) Tj T* 0 Tw (and/or servers allows programming any type of semantics you want: see the upcoming section.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 422.8236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Timeouts and External Shutdown Conditions) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 392.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .059269 Tw (The SHMMain \(and ServerSide and ClientSide\) all take the same last two \(normally defaulted\) arguments:) Tj T* 0 Tw (an external break checker and microsecond sleep period:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 335.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+BT 1 0 0 1 0 26 Tm 12 TL /F4 10 Tf 0 0 0 rg (SHMMain \(const string) Tj (&) Tj ( memory_pool_name, size_t bytes,) Tj T* (         bool debug=false, void* forced_addr=0,) Tj T* (         BreakChecker external_break=0, int_8 micro_sleep=int_8\(1e5\)\)) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 279.6236 cm
+q
+BT 1 0 0 1 0 38 Tm .08436 Tw 12 TL /F1 10 Tf 0 0 0 rg (Some of the internal routines to the SHMMain \(and ServerSide and ClientSide\) have loops where they are) Tj T* 0 Tw 1.199988 Tw (waiting for things to happen \(shared memory to come up, first time it's zero filled, wait for that, etc\). In) Tj T* 0 Tw .74436 Tw (case there are problems, there is a systematic way to monitor a global shutdown conition and shutdown) Tj T* 0 Tw (an application cleanly. The ) Tj /F3 10 Tf (external_break ) Tj /F1 10 Tf (is simply a typedef for a pointer to a function:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 246.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F4 10 Tf 12 TL (typedef bool \(*BreakChecker\)\(\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 142.4236 cm
+q
+BT 1 0 0 1 0 86 Tm .080542 Tw 12 TL /F1 10 Tf 0 0 0 rg (If the user has somehow set an external condition that signifies "time to shutdown", the user can wrap that) Tj T* 0 Tw .859988 Tw (check in a routine and pass it to the SHMMain. How often that external condition is checked is the next) Tj T* 0 Tw 1.475366 Tw (arguments ) Tj /F3 10 Tf (micro_sleep) Tj /F1 10 Tf (: How many microseconds we sleep before we check \(a\) coming up conditions) Tj T* 0 Tw .112262 Tw (and \(b\) external break. You have to be a little careful with this: if you set it too big, the SHMMain will come) Tj T* 0 Tw .441353 Tw (up quickly, but there will be a lot of polling \(potentially taking too much CPU\). If you set it too small, it will) Tj T* 0 Tw 2.65436 Tw (take longer to come up and you will might miss external shutdown conditions. The default, 1e5 in) Tj T* 0 Tw .239984 Tw (microseconds \(thus, .1 seconds\) is a fairly reasonable compromise. By default, there is no break checker:) Tj T* 0 Tw (it's a hook the user can fill in.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 100.4236 cm
+q
+BT 1 0 0 1 0 26 Tm 2.369984 Tw 12 TL /F1 10 Tf 0 0 0 rg (Example: In X-Midas, there is a global flag called ) Tj /F3 10 Tf (Mc-) Tj (>) Tj (break) Tj /F1 10 Tf (. When an application is coming down) Tj T* 0 Tw 1.572765 Tw (\(because contrl-C was hit, or an error happened\), the ) Tj /F3 10 Tf (Mc-) Tj (>) Tj (break ) Tj /F1 10 Tf (is set for about 5 seconds to tell all) Tj T* 0 Tw (primitives to come down. The external break checker for X-Midas would look something like:) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+% 'R40': class PDFStream 
+40 0 obj
+% page stream
+<< /Length 3868 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 564.6467 cm
+q
+q
+.976496 0 0 .976496 0 0 cm
+q
+1 0 0 1 6.6 6.758862 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 480 204 re B*
+Q
+q
+BT 1 0 0 1 0 182 Tm 12 TL /F4 10 Tf 0 0 0 rg (// Wrap the break checker into a pointer to function we can call) Tj T* (inline bool Mc_break_checker \(\)) Tj T* ({) Tj T* (  // memory barrier before fetch: may not need ... may be able to comment) Tj T* (  // out if we don't have gcc atomics ...) Tj T* (  __sync_synchronize\(\);) Tj T*  T* (  volatile bool_4* volatile mcb = ) Tj (&) Tj (Mc-) Tj (>) Tj (break_;) Tj T* (  volatile bool_4 br = *mcb;) Tj T* (  if \(br\) {) Tj T* (    return true;) Tj T* (  } else {) Tj T* (    return false;) Tj T* (  }) Tj T* (  // return Mc-) Tj (>) Tj (break_; // this is volatile, but only this routine needs that!) Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 520.6467 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 2.116654 Tw (It's a simply hook that allows an application to get out if there are problems; without this check, it's) Tj T* 0 Tw .402485 Tw (possible for an app to "hang" waiting for something to happen. Another possible break checker would be:) Tj T* 0 Tw (if a total of n seconds have elapsed and the app still hasn't come up, kill the app.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 487.6467 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Complex Interactions) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 409.6467 cm
+q
+BT 1 0 0 1 0 62 Tm .604985 Tw 12 TL /F1 10 Tf 0 0 0 rg (By default, the CQ class \(so-called because it is a Queue that preserves thread-safety using a Condition) Tj T* 0 Tw 1.129398 Tw (variable: CQ\) has a simple interface: Vals \(which exist in shared memory, this is critical!\) can either be) Tj T* 0 Tw 2.364597 Tw (enqueued or dequeued. Period. There can be any number of processes enqueueing or dequeueing) Tj T* 0 Tw 1.746457 Tw (simultaneously, but \(this is important\) ) Tj /F3 10 Tf (there is no notion of multicast) Tj /F1 10 Tf (: once a Val is dequeued by any) Tj T* 0 Tw .71881 Tw (reader, it's gone, even if there are twelve readers. If we wanted to support multicast, or any complicated) Tj T* 0 Tw (semantics for multiple readers, we have to enforce those ourselves.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 367.6467 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL 1.157633 Tw (For example, if we wanted to have the multicast semantics to only dequeue when all the readers have) Tj T* 0 Tw .167765 Tw (read the packet \(or anything more complicated\), we could put all the logic in a simple component with one) Tj T* 0 Tw (input and multiple outputs:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 88.96206 cm
+q
+q
+.976496 0 0 .976496 0 0 cm
+q
+1 0 0 1 6.6 6.758862 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 480 276 re B*
+Q
+q
+BT 1 0 0 1 0 254 Tm 12 TL /F4 10 Tf 0 0 0 rg (// Implement a simple multicast with n clients where) Tj T* (// all clients see all data that is dequeued.) Tj T*  T* (// Start up the single input) Tj T* (ClientSide single_input\("shm_region", "pipe_input", true\);) Tj T* (single_input.start\(\);) Tj T* (CQ) Tj (&) Tj ( input = single_input.pipe\(\);) Tj T*  T* (// Array of outputs: each output queue will see the input exactly once) Tj T* (Array) Tj (<) Tj (ServerSide*) Tj (>) Tj ( outputs;) Tj T* (for \(int ii=0; ii) Tj (<) Tj (number_of_outputs; ii++\) {) Tj T* (   ServerSide* ssp=new ServerSide\("shm_region", "out"+Stringize\(ii\), 4, true\);) Tj T* (   ssp-) Tj (>) Tj (start\(\);) Tj T* (   outputs.append\(ssp\);) Tj T* (}) Tj T*  T* (while \(1\) {) Tj T*  T* (   // Pull input off the input queue) Tj T* (   Val in_packet;) Tj T* (   if \(!input.dequeue\(.1, in_packet\)\) {) Tj T* (      continue;  // nothing available, try again) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R41': class PDFStream 
+41 0 obj
+% page stream
+<< /Length 4987 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 607.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 156 re B*
+Q
+q
+BT 1 0 0 1 0 134 Tm 12 TL /F4 10 Tf 0 0 0 rg (   }) Tj T*  T* (   // Got input: implement multicast semantics so) Tj T* (   // all outputs see the same input) Tj T* (   for \(int ii=0; ii) Tj (<) Tj (outputs.length\(\); ii++\) {) Tj T* (      ServerSide* ssp = outputs[ii];) Tj T* (      CQ) Tj (&) Tj ( out = ssp-) Tj (>) Tj (pipe\(\);) Tj T*  T* (      // Try to enqueue; blocks until delivered) Tj T* (      out.enq\(in_packet\);) Tj T* (   }) Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 575.8236 cm
+q
+BT 1 0 0 1 0 14 Tm 1.297356 Tw 12 TL /F1 10 Tf 0 0 0 rg (With the example above, all outputs see a copy of the input. Since ) Tj /F3 10 Tf (hopefully ) Tj /F1 10 Tf (the input packet is just a) Tj T* 0 Tw (proxy \(where the underlying Tab is shared\), this should be a quick and easy dispersal.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 521.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .179398 Tw (Although this abstraction makes it a little harder to implement multiple readers and writers, it gives you full) Tj T* 0 Tw 2.996412 Tw (mechanism to implement any policy for multiple readers. For example, in the example above, the) Tj T* 0 Tw 1.09332 Tw (multicast can get stuck if one the readers never reads its pipe: the enqueue blocks forever. What if we) Tj T* 0 Tw (wanted data to drop if the reader hadn't read it after 5 seconds?:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 440.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 72 re B*
+Q
+q
+BT 1 0 0 1 0 50 Tm 12 TL /F4 10 Tf 0 0 0 rg (bool enqueued = out.enqueue\(in_packet, 5.0\);) Tj T* (if \(!enqueued\) {) Tj T* (   cerr ) Tj (<) Tj (<) Tj ( "Reader " ) Tj (<) Tj (<) Tj ( ii " ) Tj (<) Tj (<) Tj ( is too slow, dropping packet" ) Tj (<) Tj (<) Tj ( endl;) Tj T* (   continue;) Tj T* (}) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 372.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 50 Tm /F1 10 Tf 12 TL 1.569269 Tw (Thus with a simple change, we have implemented a custom multi-cast semantics. For systems where) Tj T* 0 Tw .350651 Tw (dropped data is okay, we can implement whatever semantics we need with whatever time constraints are) Tj T* 0 Tw .506098 Tw (relevant. If dropped data is not okay, we can keep retrying to send data, with some messages. We could) Tj T* 0 Tw .567356 Tw (also implement a nice GUI to show the status of a pipe. Whatever is needed can be built on ServerSide,) Tj T* 0 Tw (ClientSide and timeouts.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 342.6236 cm
+q
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Address Randomization) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 276.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 50 Tm /F1 10 Tf 12 TL 2.254147 Tw (Many Linuxes today implement the Address Randomization "feature" to stop hackers from exploiting) Tj T* 0 Tw .56881 Tw (address space regularity. In other words, the code and data part of your program can be randomly place) Tj T* 0 Tw 1.509318 Tw ("anywhere" in main memory. This can be problematic for systems where shared memory needs to be) Tj T* 0 Tw .948409 Tw (mapped in: What if regions conflict? What part of memory is used? To that end, you may have to force) Tj T* 0 Tw (your processes to turn off this feature. This feature can be turned off on a per-process basis easily:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 219.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F4 10 Tf 12 TL (% setarch i386 -L -R serverside_ex ...    # 32-bit machine) Tj T* (       or) Tj T* (% setarch x86_64 -L -R serverside_ex ...  # 64-bit machine) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 187.4236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .15436 Tw (Frequently, the simple examples work without the above, but the more complex programs may need to do) Tj T* 0 Tw (the above. Note that the examples remind you to use setarch when you run them.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 157.4236 cm
+q
+BT 1 0 0 1 0 14 Tm .814987 Tw 12 TL /F1 10 Tf 0 0 0 rg (If you forget to turn off the feature, then each of the SHMMain, ClientSide and ServerSide will ) Tj /F3 10 Tf (warn ) Tj /F1 10 Tf (you) Tj T* 0 Tw (with a large message to standard error:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 88.22362 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 60 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F4 10 Tf 12 TL (% serverside_ex ...   # forgot to run with setarch!) Tj T*  T* (!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!) Tj T* (! It appears that the address randomization feature is still on.) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+ 
+endstream
+endobj
+% 'R42': class PDFStream 
+42 0 obj
+% page stream
+<< /Length 5576 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 643.8236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 120 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 98 Tm /F4 10 Tf 12 TL (! Your SHMMain/ServerSide/ClientSide is unlikely to work correctly.) Tj T* (! Program will continue running ... but may not run correctly ...) Tj T* (!) Tj T* (! Make sure the process that's gets started up has this feature) Tj T* (! turned off using setarch.  For example:) Tj T* (!  % setarch i386 -L -R startup_program     # 32-bit machine) Tj T* (!           or) Tj T* (!  % setarch x86_64 -L -R startup_program   # 64-bit machine) Tj T* (!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 587.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .536457 Tw (Detecting the absence of the Address Randomization feature is a bit tricky, so you may be using setarch) Tj T* 0 Tw .81561 Tw (correctly but it still outputs the warning. Lots of false positive warning messages are clumsy and messy,) Tj T* 0 Tw 2.019987 Tw (so there is a mechanism to turn off the potential warning. For example, to turn off this message for) Tj T* 0 Tw (SHMMain:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 530.6236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 48 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F4 10 Tf 12 TL (SHMMain mem\(...\);) Tj T* (mem.warning\(false\);  // Turn off warning message above) Tj T* (mem.start\(\);         // Warning message above suppressed) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 474.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .665868 Tw (Both ClientSide and ServerSide have the same method. By default, the warning is turned on: the idea is) Tj T* 0 Tw 1.316988 Tw (that it is better to get a warning message when you are first starting so you can figure out how things) Tj T* 0 Tw 1.039985 Tw (work; Once you are comfortable and always turning on the setarch feature, you don't need the warning) Tj T* 0 Tw (anymore and can turn it off if needed.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 444.6236 cm
+q
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Examples) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 414.6236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 3.725814 Tw (There are three standalone examples and three X-Midas examples in the PicklingTools baseline) Tj T* 0 Tw (demonstrating the shared mem client/server tools.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 384.6236 cm
+q
+BT 1 0 0 1 0 14 Tm 2.346342 Tw 12 TL /F1 10 Tf 0 0 0 rg (In the C++ area are serverside_ex.cc, middleside_ex.cc and clientside_ex.cc examples. These three) Tj T* 0 Tw (examples should be run together ) Tj /F3 10 Tf (on the same machine) Tj /F1 10 Tf (:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 339.4236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F4 10 Tf 12 TL (# In one shell prompt) Tj T* (% setarch i386 -L -R serverside_ex mempool 1000000 pipe1 4) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 307.4236 cm
+q
+BT 1 0 0 1 0 14 Tm .029983 Tw 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F4 10 Tf (serverside_ex ) Tj /F1 10 Tf (creates the shared memory region \(called ) Tj /F4 10 Tf (mempool) Tj /F1 10 Tf (\) of one million bytes. The pipe) Tj T* 0 Tw (the server will write to is ) Tj /F4 10 Tf (pipe1 ) Tj /F1 10 Tf (and it will have a capacity of four packets:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 262.2236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F4 10 Tf 12 TL (# In another shell prompt) Tj T* (% setarch i386 -L -R middleside_ex mempool pipe1 pipe2 4) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 230.2236 cm
+q
+BT 1 0 0 1 0 14 Tm .769318 Tw 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F4 10 Tf (middleside_ex ) Tj /F1 10 Tf (waits for the shared memory region \(called ) Tj /F4 10 Tf (mempool) Tj /F1 10 Tf (\) to be available. Once it is,) Tj T* 0 Tw (the middleside reads from ) Tj /F4 10 Tf (pipe1 ) Tj /F1 10 Tf (and writes to ) Tj /F4 10 Tf (pipe2) Tj /F1 10 Tf (; ) Tj /F4 10 Tf (pipe2 ) Tj /F1 10 Tf (also has a capacity of four packets:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 185.0236 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 468.6898 36 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F4 10 Tf 12 TL (# In yet another shell prompt) Tj T* (% setarch i386 -L -R clientside_ex mempool pipe2) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 62.69291 153.0236 cm
+q
+BT 1 0 0 1 0 14 Tm 1.835984 Tw 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F4 10 Tf (clientside_ex ) Tj /F1 10 Tf (waits for the memory pool, waits from ) Tj /F4 10 Tf (pipe2 ) Tj /F1 10 Tf (to be created, then reads from) Tj T* 0 Tw /F4 10 Tf (pipe2) Tj /F1 10 Tf (.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 123.0236 cm
+q
+BT 1 0 0 1 0 14 Tm .402488 Tw 12 TL /F1 10 Tf 0 0 0 rg (This will cause the server to talk the middle and the middle will talk to the final client. Note that SHMMain) Tj T* 0 Tw (is created ) Tj /F3 10 Tf (exactly once ) Tj /F1 10 Tf (by serverside_ex.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 105.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Also note that the X-Midas primitives can talk to the standalone executables.) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+% 'R43': class PDFStream 
+43 0 obj
+% page stream
+<< /Length 6562 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 747.0236 cm
+q
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Five Biggest Headaches) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 729.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (The five biggest problems getting shared memory across platforms to work are:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 723.0236 cm
+Q
+q
+1 0 0 1 62.69291 723.0236 cm
+Q
+q
+1 0 0 1 62.69291 687.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 21 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .966651 Tw (Memory size: Most Linuxes are constrained by how much shared memory they can allocate. If the) Tj T* 0 Tw .168221 Tw (allocation is too big, then Linux will simply fail. Carefully try larger and larger sizes of shared memory) Tj T* 0 Tw (from SHMMain to make sure that your box can legally create and use that much shared memory.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 681.0236 cm
+Q
+q
+1 0 0 1 62.69291 477.8236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 188.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 164.2 cm
+q
+BT 1 0 0 1 0 26 Tm .68881 Tw 12 TL /F1 10 Tf 0 0 0 rg (Using Vals in shared memory. Once a Val is created in shared memory, most updates on the table) Tj T* 0 Tw .494987 Tw (will cause the new keys/values to be created in the same shared memory. If you wish to enqueue a) Tj T* 0 Tw (table or Array, make ) Tj /F3 10 Tf (sure ) Tj /F1 10 Tf (the entire table is in shared memory:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 59 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 445.6898 96 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 74 Tm /F4 10 Tf 12 TL (// Okay) Tj T* (Val data = Shared\(shm, Tab\(\)\);  // created in shared memory) Tj T* (pipe.enqueue\(data\);             // Okay, because data in shared memory) Tj T*  T* (// !!!! NOT OKAY!!!) Tj T* (Val data2 = Tab\(\);  // data2 NOT in shared memory!!) Tj T* (pipe.enqueue\(data2\);  // Will seg fault) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 38 Tm .122485 Tw 12 TL /F1 10 Tf 0 0 0 rg (There is a routine called ) Tj /F4 10 Tf (IsSHM ) Tj /F1 10 Tf (from #include "checkshm.h" which allows the user to check and see) Tj T* 0 Tw .618876 Tw (if a Val is completely contained in shared memory. In debug mode, this is a very useful tool; before) Tj T* 0 Tw .789461 Tw (data is enqueued on a shared memory pipe, the table can be checked to make sure all of its parts) Tj T* 0 Tw (are in shared memory.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 471.8236 cm
+Q
+q
+1 0 0 1 62.69291 202.6236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 254.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (3.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 206.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 50 Tm /F1 10 Tf 12 TL 1.14811 Tw (Left-Over files. By default, the shared memory regions have an file in the /dev/shm area. There is) Tj T* 0 Tw .832765 Tw (good news and bad news about this. If you do not destruct SHMMain \(in the C++ sense\), then the) Tj T* 0 Tw .891318 Tw (region persists. This can be good because your queues can persist across time: assuming a client) Tj T* 0 Tw 1.558651 Tw (connect and disconnects frequently, this can just work as the new connection will simply pick up) Tj T* 0 Tw (where the last one left off.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 188.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (This can be horrible if the queues get into an inconsistent state: then every client will simply break.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 158.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .799985 Tw (It can be useful to completely clean /dev/shm of your shared memory. By default, when you create) Tj T* 0 Tw (shared memory region like the "shm_region" in all the examples above, two files are created:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 113 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 445.6898 36 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F4 10 Tf 12 TL (/dev/shm/shm_region_boot) Tj T* (/dev/shm/shm_region) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 51 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 38 Tm /F1 10 Tf 12 TL .19881 Tw (The boot region is very small and used only to pass global information to each client \(where memory) Tj T* 0 Tw .322093 Tw (should be mapped, the size of the memory, where to find the pipes, etc\). The boot is first mapped in) Tj T* 0 Tw .394104 Tw (anywhere in memory. The data in the boot informs where to map the main section: the main section) Tj T* 0 Tw (contains the giant memory pool.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 38 Tm 6.91152 Tw 12 TL /F1 10 Tf 0 0 0 rg (To make sure your application starts in a fresh start, it's probably worth removing) Tj T* 0 Tw 2.227109 Tw /F4 10 Tf (/dev/shm/shm_region_boot ) Tj /F1 10 Tf (and ) Tj /F4 10 Tf (/dev/shm/shm_region ) Tj /F1 10 Tf (before starting, or restarting your) Tj T* 0 Tw 1.431412 Tw (application. Note that ) Tj /F3 10 Tf (by default) Tj /F1 10 Tf (, SHMMain will completely clean-up for you when you create and) Tj T* 0 Tw (start the SHMMain component.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 196.6236 cm
+Q
+q
+1 0 0 1 62.69291 83.42362 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 98.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (4.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 98.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Forgetting About Address Randomization) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 56.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .517674 Tw (Frustratingly, sometimes things will work with the address randomization on, then one small change) Tj T* 0 Tw .14332 Tw (will cause everything to stop working. It's best put this as part of a start-up script where all processes) Tj T* 0 Tw (will "inherit" this attribute:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 23 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 445.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F4 10 Tf 12 TL (% setarch i386 -L -R startup_process) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 2 Tm 12 TL /F1 10 Tf 0 0 0 rg (See the ) Tj /F3 10 Tf (Address Randomization ) Tj /F1 10 Tf (section above.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 77.42362 cm
+Q
+ 
+endstream
+endobj
+% 'R44': class PDFStream 
+44 0 obj
+% page stream
+<< /Length 5674 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 557.8236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 192.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (5.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 192.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Holding On Too Long or Letting Go Too Soon) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 150.2 cm
+q
+BT 1 0 0 1 0 26 Tm 2.63998 Tw 12 TL /F1 10 Tf 0 0 0 rg (What does ) Tj /F4 10 Tf (Shared\(client.pool\(\),) Tj ( ) Tj (Tab\(\)\) ) Tj /F1 10 Tf (return? A proxy to a Tab in shared memory) Tj T* 0 Tw 1.24229 Tw (protected by a process-safe reference count. Remember, that every copy of the proxy increments) Tj T* 0 Tw (the reference count:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 445.6898 144 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 122 Tm /F4 10 Tf 12 TL (// Serverside) Tj T* ({) Tj T* (  Val v = Shared\(shm, Tab\(\)\);  // ref count at 1) Tj T* (  pipe.enq\(v\);                 // ref count at 2) Tj T* (} // Val destructed, ref count at 1) Tj T*  T*  T* (// Clientside) Tj T* ({) Tj T* (  Val off = pipe.deq\(\);  // Ref count at 1) Tj T* (}  // Val destructed, ref count at 0, memory reclaimed) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 557.8236 cm
+Q
+q
+1 0 0 1 62.69291 551.8236 cm
+Q
+q
+1 0 0 1 62.69291 497.8236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 30 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.70832 Tw (Thus, once you have enqueued your shared Tab, you can let go of the packet and let the client) Tj T* 0 Tw (dequeue it. Once the client dequeues it and is done, it will be reclaimed by the pool.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 20 0 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.092765 Tw (Be careful not to keep your Tab alive after you have enqueued it, or that could become a memory) Tj T* 0 Tw (growth.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 497.8236 cm
+Q
+q
+1 0 0 1 62.69291 464.8236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Tips and Tricks) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 446.8236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (Here's a collection of tricks and tips that can make your life easier.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 440.8236 cm
+Q
+q
+1 0 0 1 62.69291 175.2236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+BT 1 0 0 1 0 2 Tm  T* ET
+q
+1 0 0 1 20 259.6 cm
+Q
+q
+1 0 0 1 20 259.6 cm
+Q
+q
+1 0 0 1 20 176.4 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 68.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 68.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (You can always ask any of the SHMMain, ClientSide or ServerSide for it's allocator:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 23 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 425.6898 36 re B*
+Q
+q
+BT 1 0 0 1 0 14 Tm 12 TL /F4 10 Tf 0 0 0 rg (ServerSide server_side\(...\);) Tj T* (Allocator *a = server_side-) Tj (>) Tj (pool\(\); // Get the allocator) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (That way you can be assured to get the right allocator.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 170.4 cm
+Q
+q
+1 0 0 1 20 75.2 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 80.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 80.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (You can ask a Val for it's allocator:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 35 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 425.6898 36 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F4 10 Tf 12 TL (Val v = ...;) Tj T* (Allocator *a = v.allocator\(\);) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 1.522619 Tw (If the value was from a SharedPool, it will give you access to that. If this Val was using the) Tj T* 0 Tw ("standard" heap, a will be NULL.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 69.2 cm
+Q
+q
+1 0 0 1 20 0 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 54.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (3.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 30.2 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 26 Tm /F1 10 Tf 12 TL .093876 Tw (If you have an allocator, you can call allocate to get some memory from it, and deallocate to free) Tj T* 0 Tw .370542 Tw (it. If you are just using Vals/Tabs/etc. with it, you should be able to use the Shared or Protected) Tj T* 0 Tw (stubs:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+q
+1 0 0 1 0 0 cm
+q
+1 0 0 1 6.6 6.6 cm
+q
+.662745 .662745 .662745 RG
+.5 w
+.960784 .960784 .862745 rg
+n -6 -6 425.6898 24 re B*
+Q
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F4 10 Tf 12 TL (Val v = Shared\(a, Tab\(\)\);  // Give me a Tab from allocator a) Tj T* ET
+Q
+Q
+Q
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 20 0 cm
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 175.2236 cm
+Q
+q
+1 0 0 1 62.69291 145.2236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL 2.11332 Tw (Just a few tricks and tips. The SHMQ X-Midas option tree shows one way to use these routines to) Tj T* 0 Tw (implement a shared memory system.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 112.2236 cm
+q
+BT 1 0 0 1 0 3.5 Tm 21 TL /F2 17.5 Tf 0 0 0 rg (Conclusion) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 94.22362 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL (With three simple abstractions, tables across shared memory can be much easier to manipulate.) Tj T* ET
+Q
+Q
+ 
+endstream
+endobj
+% 'R45': class PDFStream 
+45 0 obj
+% page stream
+<< /Length 1484 >>
+stream
+1 0 0 1 0 0 cm  BT /F1 12 Tf 14.4 TL ET
+q
+1 0 0 1 62.69291 747.0236 cm
+q
+BT 1 0 0 1 0 3 Tm 18 TL /F2 15 Tf 0 0 0 rg (Known Bugs:) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 717.0236 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 14 Tm /F1 10 Tf 12 TL .233988 Tw (There are still some known bugs: we prefer to release early so as to get feedback, even if there are some) Tj T* 0 Tw (known issues.) Tj T* ET
+Q
+Q
+q
+1 0 0 1 62.69291 711.0236 cm
+Q
+q
+1 0 0 1 62.69291 711.0236 cm
+Q
+q
+1 0 0 1 62.69291 687.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (1.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 14 Tm .027045 Tw 12 TL /F1 10 Tf 0 0 0 rg (The ) Tj /F4 10 Tf (int_un ) Tj /F1 10 Tf (and ) Tj /F4 10 Tf (int_n ) Tj /F1 10 Tf (DO NOT work with shared memory. A future version will fix this. ) Tj /F2 10 Tf (FIXED: in) Tj T* 0 Tw (PicklingTools 1.4.1) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 681.0236 cm
+Q
+q
+1 0 0 1 62.69291 657.0236 cm
+0 0 0 rg
+BT /F1 10 Tf 12 TL ET
+q
+1 0 0 1 6 9 cm
+q
+0 0 0 rg
+BT 1 0 0 1 0 2 Tm /F1 10 Tf 12 TL 5.66 0 Td (2.) Tj T* -5.66 0 Td ET
+Q
+Q
+q
+1 0 0 1 23 -3 cm
+q
+BT 1 0 0 1 0 14 Tm 1.017485 Tw 12 TL /F1 10 Tf 0 0 0 rg (Should a Val initialized from a Proxy copy the allocator? This makes the ) Tj /F4 10 Tf (IsSHM ) Tj /F1 10 Tf (check without an) Tj T* 0 Tw (explicit work-around for Proxies.) Tj T* ET
+Q
+Q
+q
+Q
+Q
+q
+1 0 0 1 62.69291 657.0236 cm
+Q
+ 
+endstream
+endobj
+% 'R46': class PDFPageLabels 
+46 0 obj
+% Document Root
+<< /Nums [ 0
+ 47 0 R
+ 1
+ 48 0 R
+ 2
+ 49 0 R
+ 3
+ 50 0 R
+ 4
+ 51 0 R
+ 5
+ 52 0 R
+ 6
+ 53 0 R
+ 7
+ 54 0 R
+ 8
+ 55 0 R
+ 9
+ 56 0 R
+ 10
+ 57 0 R ] >>
+endobj
+% 'R47': class PDFPageLabel 
+47 0 obj
+% None
+<< /S /D
+ /St 1 >>
+endobj
+% 'R48': class PDFPageLabel 
+48 0 obj
+% None
+<< /S /D
+ /St 2 >>
+endobj
+% 'R49': class PDFPageLabel 
+49 0 obj
+% None
+<< /S /D
+ /St 3 >>
+endobj
+% 'R50': class PDFPageLabel 
+50 0 obj
+% None
+<< /S /D
+ /St 4 >>
+endobj
+% 'R51': class PDFPageLabel 
+51 0 obj
+% None
+<< /S /D
+ /St 5 >>
+endobj
+% 'R52': class PDFPageLabel 
+52 0 obj
+% None
+<< /S /D
+ /St 6 >>
+endobj
+% 'R53': class PDFPageLabel 
+53 0 obj
+% None
+<< /S /D
+ /St 7 >>
+endobj
+% 'R54': class PDFPageLabel 
+54 0 obj
+% None
+<< /S /D
+ /St 8 >>
+endobj
+% 'R55': class PDFPageLabel 
+55 0 obj
+% None
+<< /S /D
+ /St 9 >>
+endobj
+% 'R56': class PDFPageLabel 
+56 0 obj
+% None
+<< /S /D
+ /St 10 >>
+endobj
+% 'R57': class PDFPageLabel 
+57 0 obj
+% None
+<< /S /D
+ /St 11 >>
+endobj
+xref
+0 58
+0000000000 65535 f
+0000000113 00000 n
+0000000245 00000 n
+0000000410 00000 n
+0000000585 00000 n
+0000000766 00000 n
+0000000925 00000 n
+0000001204 00000 n
+0000001483 00000 n
+0000001762 00000 n
+0000002041 00000 n
+0000002321 00000 n
+0000002601 00000 n
+0000002881 00000 n
+0000003161 00000 n
+0000003442 00000 n
+0000003723 00000 n
+0000004004 00000 n
+0000004163 00000 n
+0000004448 00000 n
+0000004574 00000 n
+0000004742 00000 n
+0000004996 00000 n
+0000005166 00000 n
+0000005354 00000 n
+0000005542 00000 n
+0000005712 00000 n
+0000005929 00000 n
+0000006170 00000 n
+0000006355 00000 n
+0000006542 00000 n
+0000006725 00000 n
+0000006916 00000 n
+0000007132 00000 n
+0000007273 00000 n
+0000007468 00000 n
+0000012881 00000 n
+0000018108 00000 n
+0000022745 00000 n
+0000027586 00000 n
+0000032510 00000 n
+0000036477 00000 n
+0000041563 00000 n
+0000047238 00000 n
+0000053899 00000 n
+0000059672 00000 n
+0000061259 00000 n
+0000061483 00000 n
+0000061560 00000 n
+0000061637 00000 n
+0000061714 00000 n
+0000061791 00000 n
+0000061868 00000 n
+0000061945 00000 n
+0000062022 00000 n
+0000062099 00000 n
+0000062176 00000 n
+0000062254 00000 n
+trailer
+<< /ID 
+ % ReportLab generated PDF document -- digest (http://www.reportlab.com) 
+ [(%?\346\\\255M&E\251\025\024c\236\370e\037) (%?\346\\\255M&E\251\025\024c\236\370e\037)] 
+
+ /Info 18 0 R
+ /Root 17 0 R
+ /Size 58 >>
+startxref
+62302
+%%EOF

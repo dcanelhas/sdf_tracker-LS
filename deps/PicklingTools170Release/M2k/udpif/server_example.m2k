@@ -1,0 +1,17 @@
+
+// Simple example of how to use the UDP Server (yeller). 
+
+use UDPPythonServer s begin
+   Serialization=PythonNoNumeric 
+   Port=9000 
+   // RemotePort=9711 
+   UDPClientTable= { {"Host"="brhrts", "Port"=9711} }  
+end
+
+
+show s
+
+// Put something on this attribute to send messages
+s.InMsg = {1,2,3}
+s.InMsg = {4,5,6}
+

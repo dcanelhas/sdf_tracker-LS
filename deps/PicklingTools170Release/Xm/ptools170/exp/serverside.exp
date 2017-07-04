@@ -1,0 +1,15 @@
+SERVERSIDE - Simple example showing C++ ServerSide abstraction
+ 
+<shm_name>  String name of the shared memory region used
+<bytes>     Amount of memory to allocate for the shared memory pool
+<pipename>  The string name of the pipe (used by client to get other end)
+<capacity>  Number of packets can be put on CQ before blocking
+
+This primitive shows a simple example of how to 
+(1) Create a shared memory region using the C++ SHMMain class
+(2) Create a server that can send tables across processes using shared memory
+(3) Show how to create tables in shared memory
+
+See the clientside explain page for more details.
+
+

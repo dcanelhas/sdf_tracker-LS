@@ -1,0 +1,42 @@
+//
+// probably want to edit RemoteHost & RemotePort
+// & maybe ServerMachineType
+//
+
+server     = "dewey"
+serverport = 9142
+servertype = "VAX"
+localport  = 9113
+
+unitpath + handlers gui gcrews itx::udpif
+datapath + $ITX_TBL_ROOT
+//autostart off
+
+//
+//Main-
+//
+use ITX_XINT_UDPClient   UDP    RemoteHost        = server       \
+                                RemotePort        = serverport   \
+                                ServerMachineType = servertype   \
+                                Port              = localport    \
+                                DebugMask         = 0
+
+  //DEBUG-
+  //const int_u4  UDPDBG_NETIN  (0x0001); brief recvs
+  //const int_u4  UDPDBG_NETOUT (0x0002); brief sends
+  //const int_u4  UDPDBG_DETAIL (0x0004); byte dump of above selected
+  //const int_u4  UDPDBG_TIMERS (0x0008); show timer
+
+
+use prettyhandler        p
+
+connect UDP.Output to p.InMsg
+
+
+//Notify Info    LogNotifier
+//Notify Warning OpalTableNotifier
+Notify Warning UserNotifier
+
+//start *
+
+UDP.RemotePort = 9141

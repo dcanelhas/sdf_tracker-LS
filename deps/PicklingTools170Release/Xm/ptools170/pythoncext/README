@@ -1,0 +1,187 @@
+
+README: This is the README for building the Python C-extension modules: 
+        * pyobjconvert (which is used for the Python module cxmltools)
+        * pyocser      (gives the User OC (OpenContainers) serialization)	
+
+This README describes how to create the pyobjconvert and pyocer modules.
+
+  pyobjconvert
+  ===========
+  The pyobjconvert module has the XML conversion wrappers:
+    CReadXMLFromStream, CReadXMLFromString, CReadXMLFromFile
+    CWriteXMLToStream, CWriteXMLToString, CWriteXMLToFile
+
+  The C extension module for pyobjconvert increases the speed of the
+  XML to dict conversion by 60x-100x and the dict to XML conversion by 6-10x. 
+
+  The user probably doesn't want to use the pyobjconvert module directly 
+  (as it has a different API than the previous xmltools.py): instead, 
+  the user will `import cxmltools` which brings all the appropriate definitions
+  in and the interfaces/names are converted to interfaces that are consistent
+  with the xmldumper.py and xmlloader.py.
+
+pyocser
+=======
+The pyocer module has the following routines:
+   serialized_str = ocdumps(obj) : Using OC Serialization, dump obj to a string
+   obj = ocloads(serialized_str) : Using OC Serialization, load obj from string
+
+
+  HOW TO BUILD
+
+ (1) Check 'setup.py':
+
+     Make sure it includes the paths to the code in
+     `PicklingTools161/C++` and `PicklingTools161/C++/opencontainers1_8_2/include`
+     (of course, the version numbers may change in later releases).
+
+     By default, this should work, but these are relative paths from
+     the PicklingTools main directory.  You may want to move those
+     directories.
+
+ (2) Once you are sure those are correctly set-up, type::
+
+       % python setup.py build   # % is the UNIX prompt
+
+     This starts the build process and builds the C extension module
+     for you.  You should see something like this (and notice that
+     it creates three sub-directories)::
+
+        running build
+        running build_ext
+        building 'pyobjconvertmodule' extension
+        creating build
+        creating build/temp.linux-x86_64-2.6
+        gcc -pthread -fno-strict-aliasing -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -DNDEBUG -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -fPIC -I../C++ -I../C++/opencontainers_1_8_2/include -I/usr/include/python2.6 -c pyobjconvertmodule.cc -o build/temp.linux-x86_64-2.6/pyobjconvertmodule.o
+        gcc -pthread -fno-strict-aliasing -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -DNDEBUG -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -fPIC -I../C++ -I../C++/opencontainers_1_8_2/include -I/usr/include/python2.6 -c pyobjconverter.cc -o build/temp.linux-x86_64-2.6/pyobjconverter.o
+        creating build/lib.linux-x86_64-2.6
+        g++ -pthread -shared build/temp.linux-x86_64-2.6/pyobjconvertmodule.o build/temp.linux-x86_64-2.6/pyobjconverter.o -L/usr/lib64 -lpython2.6 -o build/lib.linux-x86_64-2.6/pyobjconvertmodule.so
+        running build
+        running build_ext
+        building 'pyocsermodule' extension
+        gcc -pthread -fno-strict-aliasing -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -DNDEBUG -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -fPIC -I../C++ -I../C++/opencontainers_1_8_2/include -I/usr/include/python2.6 -c pyocsermodule.cc -o build/temp.linux-x86_64-2.6/pyocsermodule.o
+        gcc -pthread -fno-strict-aliasing -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -DNDEBUG -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fwrapv -fPIC -I../C++ -I../C++/opencontainers_1_8_2/include -I/usr/include/python2.6 -c pyocser.cc -o build/temp.linux-x86_64-2.6/pyocser.o
+g++ -pthread -shared build/temp.linux-x86_64-2.6/pyocsermodule.o build/temp.linux-x86_64-2.6/pyocser.o -L/usr/lib64 -lpython2.6 -o build/lib.linux-x86_64-2.6/pyocsermodule.so
+
+ (3) Underneath PythonCExt should be three new subdirs with names "something" like below::
+
+       build 
+       build/temp.linux-x86_64-2.6
+       build/lib.linux-x86_64-2.6
+
+    Take a look at the `build/lib.linux-x86_64-2.6` dir: under there should
+    be two files:  pyobjconvertmodule.so  pyocsermodule.so
+    These files contain the two different modules.
+
+    Note these names aren't likely to be the same on your installation.
+    The 'x86' means the machine is a 64-bit installation: yours may be 
+    a 32-bit installation and would be 'i686'.  The '2-6' means this
+    is for Python 2.6; you are probably using a newer version of Python
+    like 2.6 or 2.7.  
+
+    Use the appropriate names for your system.
+
+
+ (4) Set your PYTHONPATH so it picks up the .so when you import::
+
+       % setenv PYTHONPATH "/full/path/to/PicklingTools161/PythonCExt/build/lib.linux-x86_64-2.6"
+
+       % python
+       >>> import pyobjconvert  # without PYTHONPATH, it probably won't find your .so
+       >>> dir(pyobjconvert)
+       ['CReadFromXMLFile', 'CReadFromXMLStream', 'CReadFromXMLString', 'CWriteToXMLFile', 'CWriteToXMLStream', 'ConvertToVal', '__doc__', '__file__', '__name__', 'deepcopy_via_val']
+
+ (5) Try it out!  An easy way to see if it works is to run the xmltimingtools.py
+     script which shows the relative times of xmldumper vs. C XMLDumper, etc::
+
+      % python xmltimingschecks.py 
+      Time to create big table 0.00489687919617
+      Time to deepcopy big table 0.0030460357666
+      ...time to convert PyObject to Val ... 0.00101280212402
+      ...time to convert PyObject to Val and back... 0.00146102905273
+      Time for Python XMLDumper to dump an XML file 0.0433909893036
+      Time for C XMLDumper to dump an XML file: 0.00465703010559
+       -----------
+       *Warning: This version of Python doesn't support ast.literal_eval, so XML_LOAD_EVAL_CONTENT can be an unsafe option in malicious input/XML
+      Time for Python Loader to load an XML file 0.61283493042
+      Time for C Ext Loader to load an XML file 0.00649094581604
+
+     Note the C XMLDumper is about 10x faster than the Python version
+     and the C XMLLoader is about 100x faster than the Python version
+
+     Surprisingly, converting from PyObject->Val->PyObject (which accomplishes
+     a deep copy) is faster than the Python deepcopy (!)
+
+ (6) To use the C version of the XML tools, try using ``cxmltools``
+
+     The ``cxmltools`` requires the 'PicklingTools141/Python' to be on the 
+     Python path along with the extension module::
+
+        % setenv PYTHONPATH "${PYTHONPATH}:/full/path/PicklingTools141/Python"
+        % python
+        >>> from cxmltools import *   # make sure cxmltools.py is on PYTHONPATH
+        ...                           # as is
+
+        >>> d = {'a':1, 'b':2 }
+        >>>
+        >>> a = WriteToXMLFile(d, 'top')   # Don't forget the "top"
+        >>> print a
+        <?xml version="1.0" encoding="UTF-8"?>
+        <top>
+          <a>1</a>
+          <b>2</b>
+        </top>
+
+        >>> res = ReadFromXMLString(a)
+        >>> print res
+        {'a': 1, 'b': 2}
+
+     In case the ``cxmltools`` aren't built, you can `import xmltools` and get
+     the same behavior as above, just not as fast!
+
+Note that the ``cxmltools`` does NOT have everything the ``xmltools`` has:
+it only has the simplified wrappers (listed below). These are the same 
+simplified wrappers that the xmldumper/xmlloader have as well.  
+Really, the only thing you *don't* have are the classes (XMLDumper/XMLLoader)
+that implements the conversions: all the functionality is still available, 
+but through the easier-to-use wrappers.
+
+For converting from XML to dict, the simplified wrappers are::
+
+   ReadFromXMLFile(filename, options, array_disp, prepend_char);
+   ReadFromXMLStream(stream, options, array_disp, prepend_char);
+   ReadXMLString(xml_string, options, array_disp, prepend_char);
+
+   defaults:
+        options=XML_STRICT_HDR | XML_LOAD_DROP_TOP_LEVEL | XML_LOAD_EVAL_CONTENT
+        array_disp=AS_NUMERIC
+        prepend_char=XML_PREPEND_CHAR
+
+For converting from dict to XML, the simplified wrappers are::
+
+   WriteToXMLFile(dict_to_convert, filename, top_level_key, options, array_disp, prepend_char)
+   WriteToXMLStream(dict_to_convert, stream, top_level_key, options, array_disp, prepend_char)
+   WriteToXMLString(dict_to_convert, top_level_key, options, array_disp, prepend_char)
+
+   defaults:
+        top_level_key=None   (this should probably always be "top" instead)
+        options=XML_DUMP_PRETTY | XML_STRICT_HDR | XML_DUMP_STRINGS_BEST_GUESS
+        array_disp=AS_NUMERIC
+        prepend_char=XML_PREPEND_CHAR    
+
+Note that the ``WriteToXMLString`` returns the string of interest, whereas the
+WriteToXMLFile/Stream instead both write to the given entity (and return None).
+
+The interfaces for pyocser are simple:  
+
+  % python
+  Python 2.6.6 (r266:84292, Jul 23 2015, 15:22:56) 
+  [GCC 4.4.7 20120313 (Red Hat 4.4.7-11)] on linux2
+  Type "help", "copyright", "credits" or "license" for more information.
+  >>> import pyocser
+  >>> a = pyocser.ocdumps({'a':1, 'b':2.0, 'c':'three'})
+  >>> print repr(a)
+  'P\x00\x00\x00\x00\x01\x01 t\x03\x00\x00\x00a\x01\x00\x00\x00aS\x01a\x01\x00\x00\x00ca\x05\x00\x00\x00threea\x01\x00\x00\x00bd\x00\x00\x00\x00\x00\x00\x00@'
+  >>> pyocser.ocloads(a)
+  {'a': 1, 'c': 'three', 'b': 2.0}
+

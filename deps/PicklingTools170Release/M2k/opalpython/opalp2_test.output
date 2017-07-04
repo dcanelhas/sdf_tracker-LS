@@ -1,0 +1,798 @@
+"\x80\x02K\x01."
+Original:Number{
+    "0"=L:1
+}
+
+Result:Number{
+    "0"=UB:1
+}
+
+Dumped 1 and got back:1 ==?0
+"\x80\x02K\xFF."
+Original:Number{
+    "0"=L:255
+}
+
+Result:Number{
+    "0"=UB:255
+}
+
+Dumped 255 and got back:255 ==?0
+"\x80\x02M\x00\x01."
+Original:Number{
+    "0"=L:256
+}
+
+Result:Number{
+    "0"=UI:256
+}
+
+Dumped 256 and got back:256 ==?0
+"\x80\x02K\x7F."
+Original:Number{
+    "0"=L:127
+}
+
+Result:Number{
+    "0"=UB:127
+}
+
+Dumped 127 and got back:127 ==?0
+"\x80\x02K\x80."
+Original:Number{
+    "0"=L:128
+}
+
+Result:Number{
+    "0"=UB:128
+}
+
+Dumped 128 and got back:128 ==?0
+"\x80\x02M\x00\x01."
+Original:Number{
+    "0"=L:256
+}
+
+Result:Number{
+    "0"=UI:256
+}
+
+Dumped 256 and got back:256 ==?0
+"\x80\x02J\x01\xFF\xFF\xFF."
+Original:Number{
+    "0"=L:-255
+}
+
+Result:Number{
+    "0"=L:-255
+}
+
+Dumped -255 and got back:-255 ==?1
+"\x80\x02J\x81\xFF\xFF\xFF."
+Original:Number{
+    "0"=L:-127
+}
+
+Result:Number{
+    "0"=L:-127
+}
+
+Dumped -127 and got back:-127 ==?1
+"\x80\x02J\x80\xFF\xFF\xFF."
+Original:Number{
+    "0"=L:-128
+}
+
+Result:Number{
+    "0"=L:-128
+}
+
+Dumped -128 and got back:-128 ==?1
+"\x80\x02\x8A\b\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x7F."
+Original:Number{
+    "0"=X:9223372036854775807
+}
+
+Result:Number{
+    "0"=X:9223372036854775807
+}
+
+Dumped 9223372036854775807 and got back:9223372036854775807 ==?1
+"\x80\x02\x8A\b\x01\x00\x00\x00\x00\x00\x00\x80."
+Original:Number{
+    "0"=X:-9223372036854775807
+}
+
+Result:Number{
+    "0"=X:-9223372036854775807
+}
+
+Dumped -9223372036854775807 and got back:-9223372036854775807 ==?1
+"\x80\x02\x8A\b\x02\x00\x00\x00\x00\x00\x00\x80."
+Original:Number{
+    "0"=X:-9223372036854775806
+}
+
+Result:Number{
+    "0"=X:-9223372036854775806
+}
+
+Dumped -9223372036854775806 and got back:-9223372036854775806 ==?1
+"\x80\x02\x8A\t\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x00."
+Original:Number{
+    "0"=UX:18446744073709551615
+}
+
+Result:Number{
+    "0"=UX:18446744073709551615
+}
+
+Dumped 18446744073709551615 and got back:18446744073709551615 ==?1
+"\x80\x02J\x80\xFF\xFF\xFF."
+Original:Number{
+    "0"=L:-128
+}
+
+Result:Number{
+    "0"=L:-128
+}
+
+Dumped -128 and got back:-128 ==?1
+"\x80\x02\x8A\b\x01\x00\x00\x00\x00\x00\x00\x00."
+Original:Number{
+    "0"=UX:1
+}
+
+Result:Number{
+    "0"=X:1
+}
+
+Dumped 1 and got back:1 ==?0
+"\x80\x02\x8A\t\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF\x00."
+Original:Number{
+    "0"=UX:18446744073709551615
+}
+
+Result:Number{
+    "0"=UX:18446744073709551615
+}
+
+Dumped 18446744073709551615 and got back:18446744073709551615 ==?1
+"\x80\x02\x8A\b\xFF\xFF\xFF\xFF\xFF\xFF\xFF\xFF."
+Original:Number{
+    "0"=X:-1
+}
+
+Result:Number{
+    "0"=X:-1
+}
+
+Dumped -1 and got back:-1 ==?1
+"\x80\x02\x8A\b\x00\x80\x00\x00\x00\x00\x00\x00."
+Original:Number{
+    "0"=UL:32768
+}
+
+Result:Number{
+    "0"=X:32768
+}
+
+Dumped 32768 and got back:32768 ==?0
+"\x80\x02G@\t!\xFA\xFC\x8B\x00z."
+Original:Number{
+    "0"=D:3.141592
+}
+
+Result:Number{
+    "0"=D:3.141592
+}
+
+Dumped 3.141592 and got back:3.141592 ==?1
+"\x80\x02U\vhello there."
+Original:String{
+    "0"="hello there"
+}
+
+Result:String{
+    "0"="hello there"
+}
+
+Dumped hello there and got back:hello there ==?1
+"\x80\x02\x88."
+Original:Bool{
+    "0"=UL:1
+}
+
+Result:Bool{
+    "0"=UL:1
+}
+
+Dumped true and got back:true ==?1
+"\x80\x02\x89."
+Original:Bool{
+    "0"=UL:0
+}
+
+Result:Bool{
+    "0"=UL:0
+}
+
+Dumped false and got back:false ==?1
+"\x80\x02N."
+Original:Text{
+    "0"="None"
+}
+
+Result:Text{
+    "0"="None"
+}
+
+Dumped None and got back:None ==?1
+"\x80\x02}(U\x012U\x05thereU\x011U\x05hellou."
+Original:Table{
+    "0"={
+        "1"="hello",
+        "2"="there"
+    }
+}
+
+Result:Table{
+    "0"={
+        "1"="hello",
+        "2"="there"
+    }
+}
+
+Dumped {
+    "1"="hello",
+    "2"="there"
+}
+ and got back:{
+    "1"="hello",
+    "2"="there"
+}
+ ==?1
+"\x80\x02](U\x05helloU\x05theree."
+Original:Table{
+    "0"={
+        "0"="hello",
+        "1"="there"
+    }
+}
+
+Result:Table{
+    "0"={
+        "0"="hello",
+        "1"="there"
+    }
+}
+
+Dumped {
+    "0"="hello",
+    "1"="there"
+}
+ and got back:{
+    "0"="hello",
+    "1"="there"
+}
+ ==?1
+"\x80\x02c__builtin__\ncomplex\nq\x01G@i\x00\x00\x00\x00\x00\x00G@r\xC0\x00\x00\x00\x00\x00\x86R."
+Original:Number{
+    "0"=CD:(200, 300)
+}
+
+Result:Number{
+    "0"=CD:(200, 300)
+}
+
+Dumped (200, 300) and got back:(200, 300) ==?1
+"\x80\x02}(U\x03100](c__builtin__\ncomplex\nq\x01G@i\x00\x00\x00\x00\x00\x00G@r\xC0\x00\x00\x00\x00\x00\x86Rh\x01G@i\x00\x00\x00\x00\x00\x00G@r\xC0\x00\x00\x00\x00\x00\x86Reu."
+Original:Table{
+    "0"={
+        "100"={
+            "0"=CD:(200, 300),
+            "1"=CD:(200, 300)
+        }
+    }
+}
+
+Result:Table{
+    "0"={
+        "100"={
+            "0"=CD:(200, 300),
+            "1"=CD:(200, 300)
+        }
+    }
+}
+
+Dumped {
+    "100"={
+        "0"=CD:(200, 300),
+        "1"=CD:(200, 300)
+    }
+}
+ and got back:{
+    "100"={
+        "0"=CD:(200, 300),
+        "1"=CD:(200, 300)
+    }
+}
+ ==?1
+"\x80\x02](G@.\x00\x00\x00\x00\x00\x00G@.\x00\x00\x00\x00\x00\x00G@.\x00\x00\x00\x00\x00\x00e."
+Original:Vector{
+    "0"=D:<15, 15, 15>
+}
+
+Result:Table{
+    "0"={
+        "0"=D:15,
+        "1"=D:15,
+        "2"=D:15
+    }
+}
+
+Dumped D:<15, 15, 15> and got back:{
+    "0"=D:15,
+    "1"=D:15,
+    "2"=D:15
+}
+ ==?0
+"\x80\x02](K\x0FK\x0FK\x0Fe."
+Original:Vector{
+    "0"=UB:<15, 15, 15>
+}
+
+Result:Table{
+    "0"={
+        "0"=UB:15,
+        "1"=UB:15,
+        "2"=UB:15
+    }
+}
+
+Dumped UB:<15, 15, 15> and got back:{
+    "0"=UB:15,
+    "1"=UB:15,
+    "2"=UB:15
+}
+ ==?0
+"\x80\x02](c__builtin__\ncomplex\nq\x01G@i\x00\x00\x00\x00\x00\x00G@r\xC0\x00\x00\x00\x00\x00\x86Rh\x01G@i\x00\x00\x00\x00\x00\x00G@r\xC0\x00\x00\x00\x00\x00\x86Rh\x01G@i\x00\x00\x00\x00\x00\x00G@r\xC0\x00\x00\x00\x00\x00\x86Re."
+Original:Vector{
+    "0"=CD:<(200, 300), (200, 300), (200, 300)>
+}
+
+Result:Table{
+    "0"={
+        "0"=CD:(200, 300),
+        "1"=CD:(200, 300),
+        "2"=CD:(200, 300)
+    }
+}
+
+Dumped CD:<(200, 300), (200, 300), (200, 300)> and got back:{
+    "0"=CD:(200, 300),
+    "1"=CD:(200, 300),
+    "2"=CD:(200, 300)
+}
+ ==?0
+"\x80\x02](c__builtin__\ncomplex\nq\x01G@\x84\xD0\x00\x00\x00\x00\x00G@\x88H\x00\x00\x00\x00\x00\x86Rh\x01G@\x84\xD0\x00\x00\x00\x00\x00G@\x88H\x00\x00\x00\x00\x00\x86Rh\x01G@\x84\xD0\x00\x00\x00\x00\x00G@\x88H\x00\x00\x00\x00\x00\x86Re."
+Original:Vector{
+    "0"=CF:<(666, 777), (666, 777), (666, 777)>
+}
+
+Result:Table{
+    "0"={
+        "0"=CD:(666, 777),
+        "1"=CD:(666, 777),
+        "2"=CD:(666, 777)
+    }
+}
+
+Dumped CF:<(666, 777), (666, 777), (666, 777)> and got back:{
+    "0"=CD:(666, 777),
+    "1"=CD:(666, 777),
+    "2"=CD:(666, 777)
+}
+ ==?0
+"\x80\x02](U 1950:01:01::00:01:40.00000000000U 1950:01:01::00:01:40.00000000000U 1950:01:01::00:01:40.00000000000e."
+Original:Vector{
+    "0"=T:<1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000>
+}
+
+Result:Table{
+    "0"={
+        "0"="1950:01:01::00:01:40.00000000000",
+        "1"="1950:01:01::00:01:40.00000000000",
+        "2"="1950:01:01::00:01:40.00000000000"
+    }
+}
+
+Dumped T:<1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000> and got back:{
+    "0"="1950:01:01::00:01:40.00000000000",
+    "1"="1950:01:01::00:01:40.00000000000",
+    "2"="1950:01:01::00:01:40.00000000000"
+}
+ ==?0
+"\x80\x02carray\narray\nq\x01U\x01dU\x18\x00\x00\x00\x00\x00\x00.@\x00\x00\x00\x00\x00\x00.@\x00\x00\x00\x00\x00\x00.@\x86R."
+Original:Vector{
+    "0"=D:<15, 15, 15>
+}
+
+Result:Vector{
+    "0"=D:<15, 15, 15>
+}
+
+Dumped D:<15, 15, 15> and got back:D:<15, 15, 15> ==?1
+"\x80\x02carray\narray\nq\x01U\x01BU\x03\x0F\x0F\x0F\x86R."
+Original:Vector{
+    "0"=UB:<15, 15, 15>
+}
+
+Result:Vector{
+    "0"=UB:<15, 15, 15>
+}
+
+Dumped UB:<15, 15, 15> and got back:UB:<15, 15, 15> ==?1
+"\x80\x02carray\narray\nq\x01U\x01DU0\x00\x00\x00\x00\x00\x00i@\x00\x00\x00\x00\x00\xC0r@\x00\x00\x00\x00\x00\x00i@\x00\x00\x00\x00\x00\xC0r@\x00\x00\x00\x00\x00\x00i@\x00\x00\x00\x00\x00\xC0r@\x86R."
+Original:Vector{
+    "0"=CD:<(200, 300), (200, 300), (200, 300)>
+}
+
+Result:Vector{
+    "0"=CD:<(200, 300), (200, 300), (200, 300)>
+}
+
+Dumped CD:<(200, 300), (200, 300), (200, 300)> and got back:CD:<(200, 300), (200, 300), (200, 300)> ==?1
+"\x80\x02carray\narray\nq\x01U\x01FU\x18\x00\x80&D\x00@BD\x00\x80&D\x00@BD\x00\x80&D\x00@BD\x86R."
+Original:Vector{
+    "0"=CF:<(666, 777), (666, 777), (666, 777)>
+}
+
+Result:Vector{
+    "0"=CF:<(666, 777), (666, 777), (666, 777)>
+}
+
+Dumped CF:<(666, 777), (666, 777), (666, 777)> and got back:CF:<(666, 777), (666, 777), (666, 777)> ==?1
+"\x80\x02carray\narray\nq\x01U\x01LU\x18\x00\xA0\xDB!]\x00\x00\x00\x00\xA0\xDB!]\x00\x00\x00\x00\xA0\xDB!]\x00\x00\x00\x86R."
+Original:Vector{
+    "0"=T:<1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000>
+}
+
+Result:Vector{
+    "0"=UX:<400000000000, 400000000000, 400000000000>
+}
+
+Dumped T:<1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000> and got back:UX:<400000000000, 400000000000, 400000000000> ==?0
+"\x80\x02cNumeric\narray_constructor\nq\x01(K\x03\x85U\x01dU\x18\x00\x00\x00\x00\x00\x00.@\x00\x00\x00\x00\x00\x00.@\x00\x00\x00\x00\x00\x00.@\x88tR."
+Original:Vector{
+    "0"=D:<15, 15, 15>
+}
+
+Result:Vector{
+    "0"=D:<15, 15, 15>
+}
+
+Dumped D:<15, 15, 15> and got back:D:<15, 15, 15> ==?1
+"\x80\x02cNumeric\narray_constructor\nq\x01(K\x03\x85U\x01bU\x03\x0F\x0F\x0F\x88tR."
+Original:Vector{
+    "0"=UB:<15, 15, 15>
+}
+
+Result:Vector{
+    "0"=UB:<15, 15, 15>
+}
+
+Dumped UB:<15, 15, 15> and got back:UB:<15, 15, 15> ==?1
+"\x80\x02cNumeric\narray_constructor\nq\x01(K\x03\x85U\x01DU0\x00\x00\x00\x00\x00\x00i@\x00\x00\x00\x00\x00\xC0r@\x00\x00\x00\x00\x00\x00i@\x00\x00\x00\x00\x00\xC0r@\x00\x00\x00\x00\x00\x00i@\x00\x00\x00\x00\x00\xC0r@\x88tR."
+Original:Vector{
+    "0"=CD:<(200, 300), (200, 300), (200, 300)>
+}
+
+Result:Vector{
+    "0"=CD:<(200, 300), (200, 300), (200, 300)>
+}
+
+Dumped CD:<(200, 300), (200, 300), (200, 300)> and got back:CD:<(200, 300), (200, 300), (200, 300)> ==?1
+"\x80\x02cNumeric\narray_constructor\nq\x01(K\x03\x85U\x01FU\x18\x00\x80&D\x00@BD\x00\x80&D\x00@BD\x00\x80&D\x00@BD\x88tR."
+Original:Vector{
+    "0"=CF:<(666, 777), (666, 777), (666, 777)>
+}
+
+Result:Vector{
+    "0"=CF:<(666, 777), (666, 777), (666, 777)>
+}
+
+Dumped CF:<(666, 777), (666, 777), (666, 777)> and got back:CF:<(666, 777), (666, 777), (666, 777)> ==?1
+"\x80\x02cNumeric\narray_constructor\nq\x01(K\x03\x85U\x01iU\f\x00\xA0\xDB!\x00\xA0\xDB!\x00\xA0\xDB!\x88tR."
+Original:Vector{
+    "0"=T:<1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000>
+}
+
+Result:Vector{
+    "0"=L:<568041472, 568041472, 568041472>
+}
+
+Dumped T:<1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000> and got back:L:<568041472, 568041472, 568041472> ==?0
+"](K\x01J\xFF\xFF\xFF\xFFK\x7FK\x80J\x80\xFF\xFF\xFFJ\x7F\xFF\xFF\xFFK\xFFM\x00\x01J\x01\xFF\xFF\xFFJ\xFF\xFF\xFF\x7FL2147483648L\nL-2147483648L\nL-2147483649L\nL9223372036854775807L\nL-9223372036854775807L\nL-9223372036854775808L\nL9223372036854775808L\nL18446744073709551615L\ne."
+Original:Table{
+    "0"={
+        "0"=L:1,
+        "1"=L:-1,
+        "2"=L:127,
+        "3"=L:128,
+        "4"=L:-128,
+        "5"=L:-129,
+        "6"=L:255,
+        "7"=L:256,
+        "8"=L:-255,
+        "9"=L:2147483647,
+        "10"=UX:2147483648,
+        "11"=X:-2147483648,
+        "12"=X:-2147483649,
+        "13"=X:9223372036854775807,
+        "14"=X:-9223372036854775807,
+        "15"=X:-9223372036854775808,
+        "16"=UX:9223372036854775808,
+        "17"=UX:18446744073709551615
+    }
+}
+
+Result:Table{
+    "0"={
+        "0"=UB:1,
+        "1"=L:-1,
+        "2"=UB:127,
+        "3"=UB:128,
+        "4"=L:-128,
+        "5"=L:-129,
+        "6"=UB:255,
+        "7"=UI:256,
+        "8"=L:-255,
+        "9"=L:2147483647,
+        "10"=UX:2147483648,
+        "11"=X:-2147483648,
+        "12"=X:-2147483649,
+        "13"=UX:9223372036854775807,
+        "14"=X:-9223372036854775807,
+        "15"=X:-9223372036854775808,
+        "16"=UX:9223372036854775808,
+        "17"=UX:18446744073709551615
+    }
+}
+
+Dumped {
+    "0"=L:1,
+    "1"=L:-1,
+    "2"=L:127,
+    "3"=L:128,
+    "4"=L:-128,
+    "5"=L:-129,
+    "6"=L:255,
+    "7"=L:256,
+    "8"=L:-255,
+    "9"=L:2147483647,
+    "10"=UX:2147483648,
+    "11"=X:-2147483648,
+    "12"=X:-2147483649,
+    "13"=X:9223372036854775807,
+    "14"=X:-9223372036854775807,
+    "15"=X:-9223372036854775808,
+    "16"=UX:9223372036854775808,
+    "17"=UX:18446744073709551615
+}
+ and got back:{
+    "0"=UB:1,
+    "1"=L:-1,
+    "2"=UB:127,
+    "3"=UB:128,
+    "4"=L:-128,
+    "5"=L:-129,
+    "6"=UB:255,
+    "7"=UI:256,
+    "8"=L:-255,
+    "9"=L:2147483647,
+    "10"=UX:2147483648,
+    "11"=X:-2147483648,
+    "12"=X:-2147483649,
+    "13"=UX:9223372036854775807,
+    "14"=X:-9223372036854775807,
+    "15"=X:-9223372036854775808,
+    "16"=UX:9223372036854775808,
+    "17"=UX:18446744073709551615
+}
+ ==?0
+"](G@.\x00\x00\x00\x00\x00\x00G@.\x00\x00\x00\x00\x00\x00G@.\x00\x00\x00\x00\x00\x00e."
+Original:Vector{
+    "0"=D:<15, 15, 15>
+}
+
+Result:Table{
+    "0"={
+        "0"=D:15,
+        "1"=D:15,
+        "2"=D:15
+    }
+}
+
+Dumped D:<15, 15, 15> and got back:{
+    "0"=D:15,
+    "1"=D:15,
+    "2"=D:15
+}
+ ==?0
+"](K\x0FK\x0FK\x0Fe."
+Original:Vector{
+    "0"=UB:<15, 15, 15>
+}
+
+Result:Table{
+    "0"={
+        "0"=UB:15,
+        "1"=UB:15,
+        "2"=UB:15
+    }
+}
+
+Dumped UB:<15, 15, 15> and got back:{
+    "0"=UB:15,
+    "1"=UB:15,
+    "2"=UB:15
+}
+ ==?0
+"](c__builtin__\ncomplex\nq\x01G@i\x00\x00\x00\x00\x00\x00G@r\xC0\x00\x00\x00\x00\x00\x86Rh\x01G@i\x00\x00\x00\x00\x00\x00G@r\xC0\x00\x00\x00\x00\x00\x86Rh\x01G@i\x00\x00\x00\x00\x00\x00G@r\xC0\x00\x00\x00\x00\x00\x86Re."
+Original:Vector{
+    "0"=CD:<(200, 300), (200, 300), (200, 300)>
+}
+
+Result:Table{
+    "0"={
+        "0"=CD:(200, 300),
+        "1"=CD:(200, 300),
+        "2"=CD:(200, 300)
+    }
+}
+
+Dumped CD:<(200, 300), (200, 300), (200, 300)> and got back:{
+    "0"=CD:(200, 300),
+    "1"=CD:(200, 300),
+    "2"=CD:(200, 300)
+}
+ ==?0
+"](c__builtin__\ncomplex\nq\x01G@\x84\xD0\x00\x00\x00\x00\x00G@\x88H\x00\x00\x00\x00\x00\x86Rh\x01G@\x84\xD0\x00\x00\x00\x00\x00G@\x88H\x00\x00\x00\x00\x00\x86Rh\x01G@\x84\xD0\x00\x00\x00\x00\x00G@\x88H\x00\x00\x00\x00\x00\x86Re."
+Original:Vector{
+    "0"=CF:<(666, 777), (666, 777), (666, 777)>
+}
+
+Result:Table{
+    "0"={
+        "0"=CD:(666, 777),
+        "1"=CD:(666, 777),
+        "2"=CD:(666, 777)
+    }
+}
+
+Dumped CF:<(666, 777), (666, 777), (666, 777)> and got back:{
+    "0"=CD:(666, 777),
+    "1"=CD:(666, 777),
+    "2"=CD:(666, 777)
+}
+ ==?0
+"](U 1950:01:01::00:01:40.00000000000U 1950:01:01::00:01:40.00000000000U 1950:01:01::00:01:40.00000000000e."
+Original:Vector{
+    "0"=T:<1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000>
+}
+
+Result:Table{
+    "0"={
+        "0"="1950:01:01::00:01:40.00000000000",
+        "1"="1950:01:01::00:01:40.00000000000",
+        "2"="1950:01:01::00:01:40.00000000000"
+    }
+}
+
+Dumped T:<1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000> and got back:{
+    "0"="1950:01:01::00:01:40.00000000000",
+    "1"="1950:01:01::00:01:40.00000000000",
+    "2"="1950:01:01::00:01:40.00000000000"
+}
+ ==?0
+"carray\narray\nq\x01U\x01dU\x18\x00\x00\x00\x00\x00\x00.@\x00\x00\x00\x00\x00\x00.@\x00\x00\x00\x00\x00\x00.@\x86R."
+Original:Vector{
+    "0"=D:<15, 15, 15>
+}
+
+Result:Vector{
+    "0"=D:<15, 15, 15>
+}
+
+Dumped D:<15, 15, 15> and got back:D:<15, 15, 15> ==?1
+"carray\narray\nq\x01U\x01BU\x03\x0F\x0F\x0F\x86R."
+Original:Vector{
+    "0"=UB:<15, 15, 15>
+}
+
+Result:Vector{
+    "0"=UB:<15, 15, 15>
+}
+
+Dumped UB:<15, 15, 15> and got back:UB:<15, 15, 15> ==?1
+"carray\narray\nq\x01U\x01DU0\x00\x00\x00\x00\x00\x00i@\x00\x00\x00\x00\x00\xC0r@\x00\x00\x00\x00\x00\x00i@\x00\x00\x00\x00\x00\xC0r@\x00\x00\x00\x00\x00\x00i@\x00\x00\x00\x00\x00\xC0r@\x86R."
+Original:Vector{
+    "0"=CD:<(200, 300), (200, 300), (200, 300)>
+}
+
+Result:Vector{
+    "0"=CD:<(200, 300), (200, 300), (200, 300)>
+}
+
+Dumped CD:<(200, 300), (200, 300), (200, 300)> and got back:CD:<(200, 300), (200, 300), (200, 300)> ==?1
+"carray\narray\nq\x01U\x01FU\x18\x00\x80&D\x00@BD\x00\x80&D\x00@BD\x00\x80&D\x00@BD\x86R."
+Original:Vector{
+    "0"=CF:<(666, 777), (666, 777), (666, 777)>
+}
+
+Result:Vector{
+    "0"=CF:<(666, 777), (666, 777), (666, 777)>
+}
+
+Dumped CF:<(666, 777), (666, 777), (666, 777)> and got back:CF:<(666, 777), (666, 777), (666, 777)> ==?1
+"carray\narray\nq\x01U\x01LU\x18\x00\xA0\xDB!]\x00\x00\x00\x00\xA0\xDB!]\x00\x00\x00\x00\xA0\xDB!]\x00\x00\x00\x86R."
+Original:Vector{
+    "0"=T:<1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000>
+}
+
+Result:Vector{
+    "0"=UX:<400000000000, 400000000000, 400000000000>
+}
+
+Dumped T:<1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000> and got back:UX:<400000000000, 400000000000, 400000000000> ==?0
+"cNumeric\narray_constructor\nq\x01((K\x03tU\x01dU\x18\x00\x00\x00\x00\x00\x00.@\x00\x00\x00\x00\x00\x00.@\x00\x00\x00\x00\x00\x00.@K\x01tR."
+Original:Vector{
+    "0"=D:<15, 15, 15>
+}
+
+Result:Vector{
+    "0"=D:<15, 15, 15>
+}
+
+Dumped D:<15, 15, 15> and got back:D:<15, 15, 15> ==?1
+"cNumeric\narray_constructor\nq\x01((K\x03tU\x01bU\x03\x0F\x0F\x0FK\x01tR."
+Original:Vector{
+    "0"=UB:<15, 15, 15>
+}
+
+Result:Vector{
+    "0"=UB:<15, 15, 15>
+}
+
+Dumped UB:<15, 15, 15> and got back:UB:<15, 15, 15> ==?1
+"cNumeric\narray_constructor\nq\x01((K\x03tU\x01DU0\x00\x00\x00\x00\x00\x00i@\x00\x00\x00\x00\x00\xC0r@\x00\x00\x00\x00\x00\x00i@\x00\x00\x00\x00\x00\xC0r@\x00\x00\x00\x00\x00\x00i@\x00\x00\x00\x00\x00\xC0r@K\x01tR."
+Original:Vector{
+    "0"=CD:<(200, 300), (200, 300), (200, 300)>
+}
+
+Result:Vector{
+    "0"=CD:<(200, 300), (200, 300), (200, 300)>
+}
+
+Dumped CD:<(200, 300), (200, 300), (200, 300)> and got back:CD:<(200, 300), (200, 300), (200, 300)> ==?1
+"cNumeric\narray_constructor\nq\x01((K\x03tU\x01FU\x18\x00\x80&D\x00@BD\x00\x80&D\x00@BD\x00\x80&D\x00@BDK\x01tR."
+Original:Vector{
+    "0"=CF:<(666, 777), (666, 777), (666, 777)>
+}
+
+Result:Vector{
+    "0"=CF:<(666, 777), (666, 777), (666, 777)>
+}
+
+Dumped CF:<(666, 777), (666, 777), (666, 777)> and got back:CF:<(666, 777), (666, 777), (666, 777)> ==?1
+"cNumeric\narray_constructor\nq\x01((K\x03tU\x01iU\f\x00\xA0\xDB!\x00\xA0\xDB!\x00\xA0\xDB!K\x01tR."
+Original:Vector{
+    "0"=T:<1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000>
+}
+
+Result:Vector{
+    "0"=L:<568041472, 568041472, 568041472>
+}
+
+Dumped T:<1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000, 1950:01:01::00:01:40.00000000000> and got back:L:<568041472, 568041472, 568041472> ==?0

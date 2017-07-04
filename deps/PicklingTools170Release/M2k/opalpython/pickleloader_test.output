@@ -1,0 +1,749 @@
+***Make sure we can load integers for Protocol 0
+ ... okay: 'Number'0
+ ... okay: 'Number'1
+ ... okay: 'Number'-1
+ ... okay: 'Number'255
+ ... okay: 'Number'-255
+ ... okay: 'Number'32768
+ ... okay: 'Number'-32768
+**Make sure we can do LONG integers for Protocol 0
+ ... okay: 'String'10L
+ ... okay: 'String'1L
+ ... okay: 'String'0L
+ ... okay: 'String'-1L
+ ... okay: 'String'-10L
+ ... okay: 'String'340282366920938463463374607431768211456L
+ ... okay: 'String'-340282366920938463463374607431768211456L
+**Make sure we can do string for P0
+ ... okay: 'String'abc
+ ... okay: 'String'
+ ... okay: 'String'
+ ... okay: 'String'
+ ... okay: 'String'
+ ... okay: 'String''
+ ... okay: 'String'"
+ ... okay: 'String'"Don't!"
+ ... okay: 'String'þÍ«˜vT2
+**Make sure we can do reals for P0
+ ... okay: 'Number'1.1
+ ... okay: 'Number'1.23456789123456
+ ... okay: 'Number'1.234567891234567
+ ... okay: 'Number'1.234567891234568
+ ... okay: 'Number'-1.2
+ ... okay: 'Number'0
+ ... okay: 'Number'1.238458972635762e+18
+ ... okay: 'Number'inf
+ ... okay: 'Number'-inf
+Oops! Expected:
+nan
+ but saw 
+nan
+ ... we actually expect nan != nan, so this error okay
+**Make sure we can do complexes for P0
+ ... okay: 'Number'(1, 2)
+ ... okay: 'Number'(-827345872.7863479, 2394750234)
+ ... okay: 'Number'(0, -1)
+ ... okay: 'Number'(0, 0)
+**Make sure we can do tuples for P0
+matching GraphArray
+ ... okay: 'Table'{ }
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=X:1
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=X:1,
+    "1"=X:2
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=X:1,
+    "1"=D:2.2,
+    "2"="three"
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"={ },
+    "1"={
+        "0"=X:1,
+        "1"=X:2,
+        "2"={ },
+        "3"=X:3
+    },
+    "2"={ },
+    "3"=X:4
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=X:1,
+    "1"={
+        "0"=X:1
+    }
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=X:1,
+    "1"={
+        "0"=X:1
+    },
+    "2"={
+        "0"=X:1
+    }
+}
+
+**Make sure we can do dict for P0
+matching GraphHash
+ ... okay: 'Table'{ }
+
+matching GraphHash
+ ... okay: 'Table'{
+    a=X:1,
+    b=D:2.2,
+    c="ree"
+}
+
+matching GraphHash
+ ... okay: 'Table'{
+    a=X:1
+}
+
+matching GraphHash
+ ... okay: 'Table'{
+    a=X:1,
+    b={
+        n=X:6
+    }
+}
+
+**Make sure we can do None for P0
+ ... okay: 'Text'None
+**Make sure we can do list for P0
+matching GraphArray
+ ... okay: 'Table'{ }
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"={ },
+    "1"={
+        "0"={ },
+        "1"={ }
+    },
+    "2"={
+        "0"={ }
+    },
+    "3"={ }
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=X:1,
+    "1"=X:2,
+    "2"=X:3
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"={
+        a=X:1
+    },
+    "1"={
+        b={ }
+    },
+    "2"={
+        "0"=X:1,
+        "1"=X:2
+    },
+    "3"=CD:(1, 2),
+    "4"=D:17.2348979283
+}
+
+**Make sure we can do longs for P2
+ ... okay: 'String'1L
+ ... okay: 'String'-1L
+ ... okay: 'String'127L
+ ... okay: 'String'129L
+ ... okay: 'String'1234567890123456789L
+ ... okay: 'String'32317006071311007300714876688669951960444102669715484032130345427524655138867890893197201411522913463688717960921898019494119559150490921095088152386448283120630877367300996091750197750389652106796057638384067568276792218642619756161838094338476170470581645852036305042887575891541065808607552399123930385521914333389668342420684974786564569494856176035326322058077805659331026192708460314150258592864177116725943603718461857357598351152301645904403697613233287231227125684710820209725157101726931323469678542580656697935045997268352998638215525166389437335543602135433229604645318478604952148193555853611059596230656L
+**Make sure we can put gets and puts with P0
+matching GraphArray
+ ... okay: 'Table'{
+    "0"={ },
+    "1"={ }
+}
+
+{
+    "0"={ },
+    "1"={ }
+}
+{ }
+{ }
+
+**Make sure the Protocol note works for P2
+ ... okay: 'Number'1
+***Make sure we can load all the integers for Protocol 2
+ ... okay: 'Number'1
+ ... okay: 'Number'127
+ ... okay: 'Number'128
+ ... okay: 'Number'255
+ ... okay: 'Number'256
+ ... okay: 'Number'32767
+ ... okay: 'Number'32768
+ ... okay: 'Number'65535
+ ... okay: 'Number'65536
+ ... okay: 'Number'-65536
+ ... okay: 'Number'2147483647
+ ... okay: 'Number'-2147483648
+***Misc
+ ... okay: 'Text'None
+matching GraphHash
+ ... okay: 'Table'{ }
+
+matching GraphArray
+ ... okay: 'Table'{ }
+
+ ... okay: 'Bool'true
+ ... okay: 'Bool'false
+***Strings for Protocol 2
+ ... okay: 'String'abc
+ ... okay: 'String'
+ ... okay: 'String'***************************************************************************************************************************************************************************************************************************************************************
+ ... okay: 'String'****************************************************************************************************************************************************************************************************************************************************************
+***tuples for Protocol 2
+matching GraphArray
+ ... okay: 'Table'{ }
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=UB:1
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=UB:1,
+    "1"=UB:2
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=UB:1,
+    "1"=UB:2,
+    "2"=UB:3
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=UB:1,
+    "1"=UB:2,
+    "2"=UB:3,
+    "3"=UB:4
+}
+
+*** nastier tuples
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=UB:1,
+    "1"=UB:2,
+    "2"=UB:3,
+    "3"={
+        "0"=UB:4,
+        "1"=UB:5
+    }
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=UB:1,
+    "1"=UB:2,
+    "2"=UB:3,
+    "3"={
+        "0"=UB:4,
+        "1"=UB:5
+    },
+    "4"={
+        "0"=UB:6
+    },
+    "5"={
+        "0"=UB:7,
+        "1"=UB:8,
+        "2"=UB:9,
+        "3"=UB:10
+    }
+}
+
+*** dictionaries
+matching GraphHash
+ ... okay: 'Table'{
+    a=UB:1
+}
+
+matching GraphHash
+ ... okay: 'Table'{
+    a=UB:1,
+    b=UB:2
+}
+
+matching GraphHash
+ ... okay: 'Table'{
+    a=UB:1,
+    b=UB:2,
+    c=UB:3
+}
+
+*** nested dictionaries
+matching GraphHash
+ ... okay: 'Table'{
+    a={ },
+    b={
+        N=UB:8
+    },
+    c={
+        O="None",
+        P={
+            "0"=UB:1,
+            "1"=UB:2,
+            "2"=UB:3
+        }
+    }
+}
+
+matching GraphHash
+ ... okay: 'Table'{
+    "1"={ },
+    "2"={ },
+    "5"={ }
+}
+
+*** real numbers
+ ... okay: 'Number'1
+ ... okay: 'Number'-1
+ ... okay: 'Number'100.25
+*** complex numbers
+ ... okay: 'Number'(1, 2)
+ ... okay: 'Number'(-1.5, -0.5)
+*** lists
+matching GraphArray
+ ... okay: 'Table'{ }
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=UB:1
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=UB:1,
+    "1"=UB:2
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=UB:1,
+    "1"=UB:2,
+    "2"=UB:3
+}
+
+*** nested lists for P2
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=UB:1,
+    "1"=UB:2,
+    "2"={
+        "0"=UB:3,
+        "1"=UB:4,
+        "2"={
+            "0"=UB:5
+        },
+        "3"={
+            "0"=UB:6,
+            "1"=UB:7,
+            "2"=UB:8
+        },
+        "4"={
+            "0"={ }
+        }
+    },
+    "3"={ },
+    "4"={
+        "0"=UB:1
+    }
+}
+
+*** orderered dicts for P0
+matching GraphHash
+ ... okay: 'Table'{ }
+
+matching GraphHash
+ ... okay: 'Table'{
+    a=X:1
+}
+
+matching GraphHash
+ ... okay: 'Table'{
+    a=X:1,
+    b=X:2
+}
+
+*** orderered dicts for P2
+matching GraphHash
+ ... okay: 'Table'{ }
+
+matching GraphHash
+ ... okay: 'Table'{
+    a=UB:1
+}
+
+matching GraphHash
+ ... okay: 'Table'{
+    a=UB:1,
+    b=UB:2
+}
+
+*** proxies and replicated data (puts/gets)
+matching GraphArray
+ ... okay: 'Table'{
+    "0"={ },
+    "1"={ }
+}
+
+{
+    "0"={ },
+    "1"={ }
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=CD:(1, 2),
+    "1"=CD:(3, 4)
+}
+
+matching GraphArray
+ ... okay: 'Table'{
+    "0"={
+        "0"=UB:1,
+        "1"={
+            "0"=UB:2
+        },
+        "2"="three"
+    },
+    "1"={
+        "0"=UB:1,
+        "1"={
+            "0"=UB:2
+        },
+        "2"="three"
+    },
+    "2"={
+        a=UB:1,
+        b=UB:2
+    },
+    "3"={
+        a=UB:1,
+        b=UB:2
+    },
+    "4"={
+        "0"=UB:1,
+        "1"={
+            "0"=UB:2,
+            "1"=UB:2
+        },
+        "2"="three"
+    },
+    "5"={
+        "0"=UB:1,
+        "1"={
+            "0"=UB:2,
+            "1"=UB:2
+        },
+        "2"="three"
+    },
+    "6"={
+        "0"=UB:1,
+        "1"={
+            "0"=UB:2,
+            "1"=UB:2
+        },
+        "2"="three"
+    }
+}
+
+*** Numeric arrays: P0 and P2
+ ... okay: 'VectorBYTE'B:<1, 2, 3>
+ ... okay: 'VectorBYTE'B:<1, 2, 3>
+ ... okay: 'VectorUBYTE'UB:<1, 2, 3>
+ ... okay: 'VectorUBYTE'UB:<1, 2, 3>
+ ... okay: 'VectorINTEGER'I:<1, 2, 3>
+ ... okay: 'VectorINTEGER'I:<1, 2, 3>
+ ... okay: 'VectorUINTEGER'UI:<1, 2, 3>
+ ... okay: 'VectorUINTEGER'UI:<1, 2, 3>
+ ... okay: 'VectorLONG'L:<1, 2, 3>
+ ... okay: 'VectorLONG'L:<1, 2, 3>
+ ... okay: 'VectorULONG'UL:<1, 2, 3>
+ ... okay: 'VectorULONG'UL:<1, 2, 3>
+ ... okay: 'VectorXLONG'X:<1, 2, 3>
+ ... okay: 'VectorXLONG'X:<1, 2, 3>
+ ... okay: 'VectorFLOAT'F:<1, 2, 3>
+ ... okay: 'VectorDOUBLE'D:<1, 2, 3>
+ ... okay: 'VectorCX_FLOAT'CF:<(1, 0), (2, 0), (3, 0)>
+ ... okay: 'VectorCX_DOUBLE'CD:<(1, 0), (2, 0), (3, 0)>
+matching GraphArray
+ ... okay: 'Table'{
+    "0"=B:<1, 2, 3>,
+    "1"=UB:<1, 2, 3>,
+    "2"=B:<1, 2, 3>
+}
+
+*** Functions with no registered reducer
+matching GraphArray
+ ... okay: 'Table'{
+    "0"="__main__\nJacob\n",
+    "1"={
+        "0"={
+            x=UB:100
+        }
+    }
+}
+
+** Functions with no registered BUILD function
+matching GraphArray
+ ... okay: 'Table'{
+    "0"={
+        "0"="__main__\nScott\n",
+        "1"={ }
+    },
+    "1"={
+        data=UB:100
+    }
+}
+
+** Functions with registered BUILD functions
+SCOTT:type_object:{
+    "0"="__main__\nScott\n",
+    "1"={ }
+}
+
+SCOTT:input:{
+    data=UB:100
+}
+
+name:__main__
+Scott
+ args:{ }
+
+ ... okay: 'Number'100
+**P0 doesn't intercept this just yet, but at least it parses ...
+matching GraphArray
+ ... okay: 'Table'{
+    "0"={
+        "0"="copy_reg\n_reconstructor\n",
+        "1"={
+            "0"="__main__\nScott\n",
+            "1"="__builtin__\nobject\n",
+            "2"="None"
+        }
+    },
+    "1"={
+        data=X:100
+    }
+}
+
+** Complex tables with P0
+matching GraphHash
+ ... okay: 'Table'{
+    a=CF:<(0, 0)>,
+    b=CF:<(0, 0), (0, 0), (0, 0)>,
+    hello={
+        "0"=D:3.3,
+        "1"=D:4.4,
+        "2"=D:5.5
+    },
+    nest={
+        cc=X:17
+    },
+    proxy1={
+        shared=X:1
+    },
+    proxy2={
+        shared=X:1
+    }
+}
+
+** Complex tables with P2
+matching GraphHash
+ ... okay: 'Table'{
+    a=CF:<(0, 0)>,
+    b=CF:<(0, 0), (0, 0), (0, 0)>,
+    hello={
+        "0"=D:3.3,
+        "1"=D:4.4,
+        "2"=D:5.5
+    },
+    nest={
+        cc=UB:17
+    },
+    proxy1={
+        shared=UB:1
+    },
+    proxy2={
+        shared=UB:1
+    }
+}
+
+** array module
+..This is how Python 2.7 does it: P0
+ ... okay: 'VectorXLONG'X:<100, 200, 300>
+..This is how Python 2.6 does it: P0
+ ... okay: 'VectorXLONG'X:<100, 200, 300>
+..This is how Python 2.7 does it: P2
+ ... okay: 'VectorBYTE'B:<65, 55>
+ ... okay: 'VectorXLONG'X:<100, 200, 300>
+..This is how Python 2.6 does it: P2
+ ... okay: 'VectorBYTE'B:<65, 55>
+ ... okay: 'VectorXLONG'X:<100, 200, 300>
+**Numeric module P2 FROM A 32_BIT MACHINE
+...The load below represents loading a Numeric array from a 
+   32-bit machine: it had the Numeric typecode 'l', which means 'long'
+   in Numeric land, but sizeof(long)==4 on the original 32-bit machine
+   and 'more frequently', the sizeof(long)==8).
+   We can detect this on the load and correct the problem.
+   When we dump, however, we currently (at least from C++)
+   ALWAYS dump a Numeric 'l' as a int_8 array.
+ ... okay: 'VectorLONG'L:<1, 2, 3>
+**NumPy, empty array test pickle 2
+ ... okay: 'VectorDOUBLE'D:<>
+**NumPy, empty array test pickle 0
+ ... okay: 'VectorDOUBLE'D:<>
+**NumPy floats test pickle 2
+ ... okay: 'VectorFLOAT'F:<100, 200, 300, 400>
+**NumPy floats test pickle 0
+ ... okay: 'VectorFLOAT'F:<100, 200, 300, 400>
+**NumPy complex_16 test pickle 2
+ ... okay: 'VectorCX_DOUBLE'CD:<(1, 0), (2, 0), (3, 0), (4, 0)>
+**NumPy complex_16 test pickle 0
+ ... okay: 'VectorCX_DOUBLE'CD:<(1, 0), (2, 0), (3, 0), (4, 0)>
+**NumPy complex_8 test pickle 2
+ ... okay: 'VectorCX_FLOAT'CF:<(1, 0), (2, 0), (3, 0), (4, 0)>
+**NumPy complex_8 test pickle 0
+ ... okay: 'VectorCX_FLOAT'CF:<(1, 0), (2, 0), (3, 0), (4, 0)>
+**NumPy int_u1 test pickle 2
+ ... okay: 'VectorUBYTE'UB:<1, 2, 3, 4>
+**NumPy int_u1 test pickle 0
+ ... okay: 'VectorUBYTE'UB:<1, 2, 3, 4>
+**NumPy int_1 test pickle 2
+ ... okay: 'VectorBYTE'B:<1, 2, 3, 4>
+**NumPy int_1 test pickle 0
+ ... okay: 'VectorBYTE'B:<1, 2, 3, 4>
+**NumPy int_u2 test pickle 2
+ ... okay: 'VectorUINTEGER'UI:<1, 2, 3, 4>
+**NumPy int_u2 test pickle 2
+ ... okay: 'VectorUINTEGER'UI:<1, 2, 3, 4>
+**NumPy int_2 test pickle 2
+ ... okay: 'VectorINTEGER'I:<1, 2, 3, 4>
+**NumPy int_2 test pickle 0
+ ... okay: 'VectorINTEGER'I:<1, 2, 3, 4>
+**NumPy, int_u4 pickle 2
+ ... okay: 'VectorULONG'UL:<15, 16, 17>
+**NumPy, int_u4 pickle 0
+ ... okay: 'VectorULONG'UL:<15, 16, 17>
+**NumPy, int_4 pickle 2
+ ... okay: 'VectorLONG'L:<15, 16, 17>
+**NumPy, int_4 pickle 0
+ ... okay: 'VectorLONG'L:<15, 16, 17>
+**NumPy, int_u8 pickle 2
+ ... okay: 'VectorUXLONG'UX:<1, 18446744073709551615, 0>
+**NumPy, int_u8 pickle 0
+ ... okay: 'VectorUXLONG'UX:<1, 18446744073709551615, 0>
+**NumPy, int_8 pickle 2
+ ... okay: 'VectorXLONG'X:<1, -1, 0>
+**NumPy, int_8 pickle 0
+ ... okay: 'VectorXLONG'X:<1, -1, 0>
+**NumPy, bool pickle 2
+ ... okay: 'VectorUBYTE'UB:<1, 1, 0>
+**NumPy, bool pickle 0
+ ... okay: 'VectorUBYTE'UB:<1, 1, 0>
+*** Dump NumPy real_8 P0
+ ... okay: 'VectorDOUBLE'D:<1, 2, 3>
+*** Dump NumPy real_8 P2
+ ... okay: 'VectorDOUBLE'D:<1, 2, 3>
+*** Dump NumPy real_4 P0
+ ... okay: 'VectorFLOAT'F:<1, 2, 3>
+*** Dump NumPy real_4 P2
+ ... okay: 'VectorFLOAT'F:<1, 2, 3>
+*** Dump NumPy complex_8 P0
+ ... okay: 'VectorCX_FLOAT'CF:<(1, 0), (2, 0), (3, 0)>
+*** Dump NumPy complex_8 P2
+ ... okay: 'VectorCX_FLOAT'CF:<(1, 0), (2, 0), (3, 0)>
+*** Dump NumPy complex_16 P0
+ ... okay: 'VectorCX_DOUBLE'CD:<(1, 0), (2, 0), (3, 0)>
+*** Dump NumPy complex_16 P2
+ ... okay: 'VectorCX_DOUBLE'CD:<(1, 0), (2, 0), (3, 0)>
+*** Dump NumPy int_1  P0
+ ... okay: 'VectorBYTE'B:<1, 2, 3>
+*** Dump NumPy int_1  P2
+ ... okay: 'VectorBYTE'B:<1, 2, 3>
+*** Dump NumPy int_u1 P0
+ ... okay: 'VectorUBYTE'UB:<1, 2, 3>
+*** Dump NumPy int_u1 P2
+ ... okay: 'VectorUBYTE'UB:<1, 2, 3>
+*** Dump NumPy int_2 P0
+ ... okay: 'VectorINTEGER'I:<1, 2, 3>
+*** Dump NumPy int_2 P2
+ ... okay: 'VectorINTEGER'I:<1, 2, 3>
+*** Dump NumPy int_u2 P0
+ ... okay: 'VectorUINTEGER'UI:<1, 2, 3>
+*** Dump NumPy int_u2 P2
+ ... okay: 'VectorUINTEGER'UI:<1, 2, 3>
+*** Dump NumPy int_4 P0
+ ... okay: 'VectorLONG'L:<1, 2, 3>
+*** Dump NumPy int_4 P2
+ ... okay: 'VectorLONG'L:<1, 2, 3>
+*** Dump NumPy int_u4 P0
+ ... okay: 'VectorULONG'UL:<1, 2, 3>
+*** Dump NumPy int_u4 P2
+ ... okay: 'VectorULONG'UL:<1, 2, 3>
+*** Dump NumPy int_8 P0
+ ... okay: 'VectorXLONG'X:<1, 2, 3>
+*** Dump NumPy int_8 P2
+ ... okay: 'VectorXLONG'X:<1, 2, 3>
+*** Dump NumPy int_u8 P0
+ ... okay: 'VectorUXLONG'UX:<1, 2, 3>
+*** Dump NumPy int_u8 P2
+ ... okay: 'VectorUXLONG'UX:<1, 2, 3>
+*** Dump NumPy bool P0
+ ... okay: 'VectorBYTE'B:<1, 2, 3>
+*** Dump NumPy bool P2
+ ... okay: 'VectorBYTE'B:<1, 2, 3>
+**NumPy, sharing pickle 0
+matching GraphHash
+ ... okay: 'Table'{
+    a=L:<1>,
+    b=L:<1>
+}
+
+**NumPy, sharing pickle 2
+matching GraphHash
+ ... okay: 'Table'{
+    a=L:<1>,
+    b=L:<1>
+}
+
+**NumPy, multiple sharing pickle 0
+matching GraphHash
+ ... okay: 'Table'{
+    a=L:<1>,
+    b=L:<1>
+}
+
+**NumPy, multiple sharing pickle 2
+matching GraphHash
+ ... okay: 'Table'{
+    a=L:<1>,
+    b=L:<1>
+}
+

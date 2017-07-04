@@ -1,0 +1,139 @@
+PERMSERVER - Example of a MidasServer serving permutations to multiple clients
+ 
+<host>   Hostname of host the server is running on.  This is 
+         always the localhost, but is here for future expansion in
+         case you want to specify which interface on the current host
+         you which to run.
+<port>   Port number the server is running on
+
+
+Running the permserver primitive (usually in /bg mode) sets-up a server
+than any number of clients connect to.  Each client sends an array
+of n items that it wants permuted, and the server responds with
+n! responses, one response for each of the n! permutations.  See
+the explain page for permclient in this same section.
+
+  Example:
+
+    ! In session 1, set-up a server running in the background
+    ! waiting for requests
+    X-Midas> permserver/bg localhost,9999  
+    Opening up the server on LOCALHOST 9999
+
+    ! In session 2, on the same machine, run a client asking
+    ! for all permutations of 1,2,3
+    X-Midas> permclient localhost,9999,3
+    Trying to connect to server LOCALHOST on port 9999
+    Opened connection to host:LOCALHOST port:9999
+    Sending request:[1, 2, 3]
+    [1, 2, 3]
+    [2, 1, 3]
+    [3, 2, 1]
+    [1, 3, 2]
+    [3, 1, 2]
+    [2, 3, 1]
+
+    ! ...meanwhile is session 1, you see the client connect with the inital
+    ! request, then disconnect when it has all 3!=6 permutations of [1,2,3]
+    Permutations:Connection (5,6)
+    Permutations:Client (5,6)
+    Permutations: Client (5,6)
+                   disconnected.
+
+
+The server spawns a thread for a each client connection, so that each client
+continues in parallel.  Thus, multiple connections will have multiple
+threads, one for each client.
+
+Some technical notes:  The permserver runs in dual-socket mode, because that's
+the default of most X-Midas socket routines and M2k socket routines.  
+The (5,6) are the file descriptors of the two dual sockets.  In single socket
+mode, they would be the same.  
+
+NOTE: You can set the serialization options (below: /SER /SOCK /ARRDISP)
+and these are what the socket conversation will use when there's a question.
+The good news is that, by default, this will use adaptive serialization.
+The server recognizes the serialization of the client and simply talks
+back in the same serialization.  Most of the time, the client (using its
+serialization options) talks to the server first and sets the serialization. 
+Occasionally, the server talks first (using its serialization options)
+and sets the tone of the conversation.  Note that this is backwards compatible
+with previous releases. Also, the server can have MULTIPLE TYPES of 
+serializations with different clients happening concurrently.
+
+
+Switches:
+      /SER=n     - Set the serialization type of how the PERMSERVER sends data
+                   over the socket:  this can have a huge performance
+                   difference.  The options are:
+                    0 :  Use Python Pickling Protocol 0
+                         - slower, but works w/all versions of PTOOLS, Python
+                    1 :  Use no serialization (just send the string data)
+                         - useful if you want to send raw data
+                    2 :  Use Python Pickling Protocol 2
+                         - fast, but doesn't work with all versions
+                   -2 :  As Python Pickling Protocol 2, but as Python 2.2.x
+                         - Python 2.2.x dumps Protocol 2 subtlely differently
+                           so this allows you to talk to older versions
+                    4 : Use Midas 2k Binary Serialization.  Currently,
+                        ONLY the C++ clients and servers (besides, of course,
+                        M2k) can use this serialization.  Python clients
+                        and servers do not currently support this.
+                    5 : Use OpenContainers serialization.  Currently,
+                        ONLY the M2k and C++ clients and servers can use this
+                        serialization.  Python clients and server do
+                        not currently support this.  Prefer this for
+                        speed and preservation.
+
+                   The default is Python Pickling Protocol 0 for backwards
+                   compatibility but it is strongly suggested moving to
+                   Protocol 2 for speed.
+
+     /SOCK=n     - Set whether socket communications use dual socket
+                   (/SOCK=2) or single socket (/SOCK=1) mode.  To get
+                   around a bug in VMS TCP/IP, dual sockets needed to
+                   be used for biderectional communication.  Modern
+                   sockets don't have this problem.  Dual socket is the
+                   usual default, as that's the default of Midas 2K
+                   and X-Midas, but we suggest using Single Socket mode
+                   when you can.  This primitive defaults to /SOCK=2
+
+                   New feature: This can also be 777 (which means 
+                   NORMAL_SOCKET) and avoids all the Midas socket
+                   protocol nonsense.  With 777, you can talk to normal
+                   sockets that do typical socket stuff (like CURL, etc.)
+
+     /ARRDISP=n  - Set the array disposition if you use serialization
+                   (Pickling Protocol 0 or 2). This is how PERMSERVER sends
+                   "homogeneous data" around the system (i.e., M2k Vectors,
+                   PTOOLS Arrays, Python arrays, Numeric arrays).
+                   The options are:
+                    0 : Shuttle all homogeneous data as Numeric Arrays
+                        (like the Numeric package from Python)
+                    1 : Shuttle all homogeneous data as Python Lists
+                        (this loses their "array-like" quality but
+                         is the most backwards compatible because all
+                         versions of PTOOLS and Python support Python Lists)
+                    2 : Shuttle all homogeneous data as Python Arrays
+                        (like the Array package from Python):DEPRECATED!!!
+                    3: Not supported
+                    4 : NumPy
+                   The default is 1 for backwards compatibility.
+                   NumPy has replaced Numeric as the de-facto standard
+                   (as Numeric is out of maintenance and NumPy is active),
+                   so 4 is probably your best option: make sure you have
+                   NumPy installed (import numpy).
+                   If you are using XMPY<4.0.0, Numeric comes built and it is 
+                   recommended to use 0 (for speed). 
+
+     /CONVERT=1  - This option is really only necessary if you are talking
+                   to some pre-exisiting (pre 1.2.0) PTOOLS installations.
+                   Set the compatibility mode to True if you want
+                   to convert OTab->Tab, Tup->Arr, BigInt->Str.  This
+                   is for backwards compatibility with pre-existing PTOOLS
+                   installations that don't have those data structures
+                   implemented.  By default, the value is false, which
+                   means OTab/Tup/BigInt are NOT converted (i.e, they
+                   as passed as is).  NOTE: if you use SERIALIZE_M2k,
+                   conversion ALWAYS happens because there is no
+                   equivalent in M2k.

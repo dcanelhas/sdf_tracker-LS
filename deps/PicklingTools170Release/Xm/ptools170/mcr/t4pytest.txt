@@ -1,0 +1,8 @@
+startmacro
+
+  xpipe on
+    tabgenout _out
+    tabinpytester _out
+  xpipe off
+
+endmacro

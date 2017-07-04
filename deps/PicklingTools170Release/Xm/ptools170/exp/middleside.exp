@@ -1,0 +1,20 @@
+MIDDLESIDE - Simple example usage of ClientSide and ServerSide simulataneously
+ 
+<shm_name>  String name of the shared memory region used 
+<input_pipename>  The string name of the pipe to read from
+<output_pipename>  The string name of the pipe to write to
+
+This is a simple example showing how to use both ServerSide
+and ClientSide classes to implement a transformer (i.e., a client
+and server simultaneously).  
+
+A simple example woul have the server side feeding the middle which
+feeds the client.  Each of these primitives would be started in a
+separate session:
+
+  serverside mymem, 1000000, pipe1, 10
+  middleside mymem, pipe1, pipe2, 10
+  clientside mymmem, pipe2
+
+See the serverside and clientside explain page for more details.
+

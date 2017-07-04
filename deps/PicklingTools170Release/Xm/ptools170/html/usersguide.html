@@ -1,0 +1,2392 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>The PicklingTools 1.6.0 User’s Guide &mdash; PicklingTools v1.6.0 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.6.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PicklingTools v1.6.0 documentation" href="index.html" />
+    <link rel="next" title="Frequently Asked Questions for PicklingTools 1.6.0" href="faq.html" />
+    <link rel="prev" title="Welcome to PicklingTools’s documentation!" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="faq.html" title="Frequently Asked Questions for PicklingTools 1.6.0"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to PicklingTools’s documentation!"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">PicklingTools v1.6.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="the-picklingtools-1-6-0-user-s-guide">
+<h1>The PicklingTools 1.6.0 User&#8217;s Guide<a class="headerlink" href="#the-picklingtools-1-6-0-user-s-guide" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The PicklingTools distribution is an Open Source package of tools to
+allow systems written in the Python Language and/or the C++
+Programming Language to exchange information easily.
+(Recently, some support for Java has been added as well)
+It allows:</p>
+<blockquote>
+<ul class="simple">
+<li>Socket communications<ul>
+<li>UDP                               (for speed)</li>
+<li>TCP/IP                            (for reliability)</li>
+</ul>
+</li>
+<li>Multiple file formats<ul>
+<li>text                              (for readability)</li>
+<li>binary                            (for speed)</li>
+<li>older Python formats              (for compatibility)</li>
+<li>older Midas 2K formats: OpalTable (for legacy)</li>
+<li>JSON                              (for ubiquity)</li>
+<li>XML                               (for modern systems)</li>
+</ul>
+</li>
+<li>Support for Shared Memory<ul>
+<li>Processes related by inheritance</li>
+<li>Processes unrelated</li>
+</ul>
+</li>
+</ul>
+</blockquote>
+<p>Historically, the PicklingTools was a collection of tools to allow
+non-Midas 2k clients to talk to a popular software package written in
+Midas 2k (Midas 2k is a legacy framework).  Since then, it has evolved
+into a full-fledged set of client/server and file tools to allow any
+C++ and Python applications to talk easily (whether they be raw C++,
+raw Python, Midas 2k, X-Midas C++ Primitives, or XMPY).  <em>It is worth
+noting that the PicklingTools is not tied to any particular framework,
+the PicklingTools libraries are plain C++ and Python code that any
+system can use.</em>  Java support is new as of PicklingTools 1.5.1.</p>
+<dl class="docutils">
+<dt>For example:</dt>
+<dd><ul class="first last simple">
+<li>Users who don&#8217;t care about Midas:
+A client written in raw C++ and a client written as
+a raw Python script can both talk to server written in raw C++.</li>
+<li>Users in the Midas world:
+An client written in XMPY (Python) and a client written in C++
+as an X-Midas primitive could both talk to an Midas 2k server
+(OpalDaemon or better yet, OpalPythonDaemon).</li>
+</ul>
+</dd>
+</dl>
+<p>The PicklingTools facilitates Python and C++ and Java applications
+communicating.</p>
+<p>All communication (via sockets or files) is done via <em>Python dictionaries</em>.
+An example Python dictionary looks like:</p>
+<div class="highlight-python"><pre>{'Request': { 'PING': {'TimeOut': 5.5, 'PORTS':[88, 89]} } } # Text format
+
+Figure 1:  An example of a Python dictionary in text format</pre>
+</div>
+<p>A dictionary is essentially a collection of key-value pairs where the
+values can be integers, real numbers, arrays or other dictionaries.
+Another phrase that describes Python dictionaries: dynamic, recursive
+(because it can contain other dictionaries), heterogeneous (because it
+can contain many types of objects) collections.  Python dictionaries
+provide very similar functionality to XML formats, but Python
+dictionaries tend to be easier to read and manipulate.  In fact, the
+JSON (JavaScript Object Notation) is fairly backwards compatible with Python
+Dictionaries and is a competing standard to XML (see <a class="reference external" href="http://json.org">http://json.org</a>).</p>
+<p>Python dictionaries are the <em>currency</em> of the PicklingTools.</p>
+</div>
+<div class="section" id="formats">
+<h2>Formats<a class="headerlink" href="#formats" title="Permalink to this headline">¶</a></h2>
+<p>The PicklingTools allow Python dictionaries to be exchanged in two
+major formats: text or binary (In fact, the reason this distribution
+is named &#8220;PicklingTools&#8221; is because the major binary format in Python
+are &#8220;pickled&#8221; dictionaries).  Text (like Figure 1) is a good human
+readable and editable format.  It&#8217;s easy to read, but tends to be
+slower to exchange in a file or over a socket.  The binary format
+tends to be much faster to exchange in a file or over a socket, but
+it&#8217;s harder to read/write without special editors.  The choice of
+serialization really depends on your constraints.</p>
+<blockquote>
+<ul>
+<li><p class="first">Text:  There are four &#8220;human readable&#8221; formats:</p>
+<blockquote>
+<ol class="arabic simple">
+<li><strong>Python Dictionaries:</strong> the standard Python dictionary</li>
+<li><strong>Midas 2k OpalTables:</strong>  A stovepipe construction from Midas 2K
+that mirrors Python Dictionaries.</li>
+<li><strong>JSON:</strong> A world-wide standard for recursive, heterogeneous containers</li>
+<li><strong>XML:</strong> A world-wide standard for recursive, heterogeneous containers</li>
+</ol>
+</blockquote>
+<p>There are tools in both Python and C++ to read/write both formats.</p>
+</li>
+<li><dl class="first docutils">
+<dt>Binary:  There are a myriad of choices for Binary Serialization, in order</dt>
+<dd><blockquote class="first">
+<p>from fastest to slowest:</p>
+</blockquote>
+<ol class="last arabic simple">
+<li><strong>OpenContainers Serialization:</strong>  This format exists only
+inside the PicklingTools and has been specialized for the
+C++ components.   If you want absolute speed, this is
+probably the fastest format.  New!  As of PicklingTools 1.6.0,
+there is now a Python C Extension module for this.</li>
+<li><strong>Python Pickling Protocol 2:</strong>  This is a binary serialization
+that Python has built-in.  If most of your communications
+are with Python systems, this is probably the best format
+as Python understands it natively and it is just about as fast
+as OpenContainers serialization.</li>
+<li><strong>Midas 2k Serialization:</strong>  This is the binary serialization
+taken directly from Midas 2K.  If you need to talk to legacy
+Midas 2k applications, this is a good, fast choice.</li>
+<li><strong>Python Pickling Protocol 2 for Python 2.2:</strong>  This is Protocol
+2 as implemented by Python 2.2.  Python interpreters above
+version 2.2 implement this differently.  ONLY USE this
+if you have to talk to a Python interpreter that MUST BE 2.2.</li>
+<li><strong>Python Pickling Protocol 0:</strong> Strictly speaking, this is
+an ASCII format (7-bit clean), but not nearly as readable
+as the textual formats.  This is by far the most backwards
+compatible format, as all Pythons of interest seem to
+understand this protocol well.  This is the default of
+most components in PicklingTools for compatibility
+reasons, but it definitely not the fastest.</li>
+</ol>
+</dd>
+</dl>
+</li>
+</ul>
+</blockquote>
+<p>Your choice of protocol will frequently be dictated by the components
+involved in your system.  If you must talk to a legacy M2k application
+that can&#8217;t be changed, M2k serialization is your only choice.  If you
+are using Python in your system, you are probably constrained to use
+Pickling Protocol 0 or 2 (as Python currently doesn&#8217;t understand
+OpenContainers or Midas 2k serialization).</p>
+<p>Serializations can also mix-and-match as needed: if the majority of a
+system is in C++, OpenContainers serialization is probably the best
+choice when possible, with selectively chosen Python or M2k
+serialization when needed.  Many people choose the text format
+(eschewing binary serialization altogether) for transparency.</p>
+<p>One other note: The C++ versions of the socket clients and servers
+(this includes the Midas 2k and X-Midas Primitives) use <em>adaptive</em>
+serializations: This means on a per-client basis, the servers and
+clients can recognize different serializations.  In other words, a C++
+server can simultaneously talk to a Python client using Protocol 2 and
+a M2k client using M2k serialization.  The Python servers and clients
+don&#8217;t currently support adaptive serialization because they are very
+much constrained to their native serialization (for example: Python
+2.2 supports a different version of Protocol 2 than Python 2.3, 2.4,
+etc.).</p>
+</div>
+<div class="section" id="media">
+<h2>Media<a class="headerlink" href="#media" title="Permalink to this headline">¶</a></h2>
+<p>There are two major ways to communicate with the PicklingTools: via
+files or over sockets from Python and C++ (and Java to a lesser extent).
+<em>NOTE: Whenever we say
+&#8220;Python and C++&#8221;, we mean the whole range of systems supported
+directly: XMPY, X-Midas C++ primitives, Midas 2K C++ components, raw
+C++, raw Python.</em></p>
+<p>A file can be read/written using any of the the formats (within a few
+constraints) described from the previous section: This can be done
+from Python and C++ and Java.  See later sections for example of this within
+C++, Python, etc.</p>
+<p>We can also build socket servers and clients from Python and C++ and Java:</p>
+<blockquote>
+<p>The MidasTalker/MidasServer pair are TCP/IP (respectively) clients and
+servers.  The same classes exist in both C++ and Python and they
+have very similar interfaces.</p>
+<p>The MidasListener/MidasYeller pair are UDP (respectively) clients and
+servers.  The same classes exist in both C++ and Python and they
+have very similar interfaces.</p>
+<p>The <em>OpalPythonDaemon</em> is the Midas 2K equivalent of the MidasServer.
+This replaces the original OpalDaemon, but is still backwards compatible
+with OpalDaemon.</p>
+<p>The <em>OpalPythonSocketMsg</em> is the Midas 2K equivalent of the MidasTalker.
+This replaces the OpalSocketMsg component, but is still backwards compatible
+with OpalSocketMsg.</p>
+</blockquote>
+<p>There will be more discussion and full examples later in this
+document.</p>
+</div>
+<div class="section" id="conclusion-but-keep-reading">
+<h2>Conclusion...But Keep Reading!<a class="headerlink" href="#conclusion-but-keep-reading" title="Permalink to this headline">¶</a></h2>
+<p>The primary major goal of the PicklingTools is to allow users to
+talk to legacy systems (X-Midas, Midas 2k) from systems written in
+Python or C++ or Java.  This has been accomplished: a number of users have
+been able to interface to legacy systems. [This is also the reason we
+didn&#8217;t consider Twisted as a network communication system: it didn&#8217;t
+support the legacy protocol, and it seems to be Python only].</p>
+<p>A later major goal was to allow C++ and Python (and later Java)
+systems to interact
+easily.  In other words, even if you don&#8217;t have a legacy system that
+you must talk to, the tools provided here still allow you to build new
+systems out of both C++ and Python pieces and have them communicate
+easily (over files or sockets).</p>
+<p>A minor goal of the PicklingTools was to allow the C++ experience to
+be similar to the Python experience, yet still allow threads in a C++
+system.  Anyone who wishes to use threads from Python knows that
+Python (at least CPython, the most prevalent Python implementation)
+doesn&#8217;t support truly concurrent threads.  To this end, the
+OpenContainers library has been provided within the distribution: It
+provides abstractions for both threads and dictionaries within C++.
+[This is also the reason we don&#8217;t just embed a Python interpreter
+directly within C++ to get a &#8220;Python-like&#8221; experience: The interpreter
+doesn&#8217;t support concurrent threads. ]</p>
+<p>This minor goal now extends to Java: the Python dictionary is
+fairly easy to manipulate in Java.</p>
+<p>One other minor goal when using C++ is the ability to use <em>valgrind</em>
+and other such tools.  Most tests and code in the framework should be
+valgrind-clean, and you should always be able to work with valgrind
+to help you debug.</p>
+<p>The rest of this document gives examples for many of the tools
+provided herein.  The full API for the PicklingTools distribution is
+also included in the distribution, in the &#8220;Pickling API&#8221; document.</p>
+</div>
+<div class="section" id="the-python-experience">
+<h2>The Python Experience<a class="headerlink" href="#the-python-experience" title="Permalink to this headline">¶</a></h2>
+<p>Python is the easiest place to get started and get familiar with the
+tools.  Just about everything we need is built-in to Python:
+dictionaries, socket code (<cite>import socket</cite>) and serialization code
+(<cite>import cPickle</cite>).</p>
+<p>One minor goal of the Python experience for the PicklingTools is
+that <em>any</em> Python interpreter could just use the PicklingTools:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">midastalker</span>  <span class="c"># Make sure PicklingToolsXXX/Python on PYTHONPATH</span>
+</pre></div>
+</div>
+<p>Done.  All the PythonPickling tools are written in pure Python so they
+be imported directly without worrying about any unnatural
+dependencies.  In other words, we didn&#8217;t want to write any C extension
+modules which would cause issues with linking: Who builds the
+extension module?  Which Python is it linked against?  Can you even
+build on your machine?  Luckily everything we need was built-in and
+fast enough to support the Python PicklingTools.  The NumPy or
+Numeric support
+may an issue: see the XMPY experience below.</p>
+<p>Whether you are using Python that just comes on the machine or XMPY
+(a version of Python built explicitly for X-Midas), you should
+just be able to <cite>import</cite> and it&#8217;ll work.  [Sidebar with PYTHONPATH?]</p>
+<div class="section" id="files">
+<h3>Files<a class="headerlink" href="#files" title="Permalink to this headline">¶</a></h3>
+<p>Reading and Writing Python Dictionaries from Text Files:</p>
+<p>This can be done with all built-in constructs.  If we want &#8220;rfile&#8221;
+to contain a textual Python dictionary:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Write out a text dict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">o</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span><span class="mf">2.2</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">:</span><span class="s">&#39;three&#39;</span> <span class="p">}</span>   <span class="c"># dict to write</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;rfile&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">o</span><span class="p">))</span>            <span class="c"># get the string representation to write</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="go"># The file &#39;rfile&#39; contains text:  {&#39;a&#39;:1, &#39;c&#39;:three&#39;, &#39;b&#39;:2.2 }</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># Read in a text dict</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="nb">file</span><span class="p">(</span><span class="s">&#39;rfile&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>    <span class="c"># d has the dictionary</span>
+</pre></div>
+</div>
+<p>The pretty module is very useful for writing dictionaries to files
+in a way that exposes the hierarchical structure better than a plain repr.
+There is more discussion in a section below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">o</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:{</span><span class="s">&#39;nest&#39;</span><span class="p">:</span> <span class="bp">None</span><span class="p">}</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pretty</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pretty</span><span class="o">.</span><span class="n">pretty</span><span class="p">(</span><span class="n">o</span><span class="p">)</span>       <span class="c"># Exposes nesting and structure: easier to read</span>
+<span class="go">{</span>
+<span class="go">    &#39;a&#39;:1,</span>
+<span class="go">    &#39;b&#39;:{</span>
+<span class="go">        &#39;nest&#39;:None</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;prettyout.txt&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pretty</span><span class="o">.</span><span class="n">pretty</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>                 <span class="c"># Write out file pretty</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">exit</span><span class="p">()</span>
+<span class="go">% cat prettyout.txt</span>
+<span class="go">{</span>
+<span class="go">    &#39;a&#39;:1,</span>
+<span class="go">    &#39;b&#39;:{</span>
+<span class="go">        &#39;nest&#39;:None</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>Note that the eval method still works for pretty printed dictionaries in files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="nb">file</span><span class="p">(</span><span class="s">&#39;prettyout.txt&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">d</span>
+<span class="go">{&#39;a&#39;: 1, &#39;b&#39;: {&#39;nest&#39;: None}}</span>
+</pre></div>
+</div>
+<p>Reading OpalTables from Text Files as Dictionaries:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">opalfile</span>    <span class="c"># Part of the PicklingTools distro, in Python subdir</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">opalfile</span><span class="o">.</span><span class="n">readtable</span><span class="p">(</span><span class="s">&#39;opaltextfilein.tbl&#39;</span><span class="p">)</span>
+<span class="go">*** Unfortunately, this currently only works if you are using XMPY</span>
+</pre></div>
+</div>
+<p>Writing Dictionaries to Text Files as OpalTables:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">opalfile</span>  <span class="c"># Part of the PicklingTools distro, in Python subdir</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">opalfile</span><span class="o">.</span><span class="n">writetable</span><span class="p">(</span><span class="s">&#39;opaltextfileout.tbl&#39;</span><span class="p">)</span>
+<span class="go">*** Unfortunately, this currently only works if you are using XMPY</span>
+</pre></div>
+</div>
+<p>The &#8220;opalfile.py&#8221; also contains code for reading and writing OpalFiles
+(a large data binary file format from M2k).  For more information, use the
+built-in help facility:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">opalfile</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">opalfile</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The <cite>opalfile</cite> module only works if you have Numeric (which XMPY, a
+version of Python specifically compiled with Numeric and a few X-Midas
+libraries):  there is also a module for pretty printing OpalTables
+<em>that does NOT require Numeric</em>:  <cite>prettyopal</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">prettyopal</span> <span class="kn">import</span> <span class="n">prettyOpal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prettyOpal</span><span class="p">(</span> <span class="p">[</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;two&#39;</span><span class="p">,</span> <span class="mf">3.5</span> <span class="p">]</span> <span class="p">)</span>       <span class="c"># Plain Python: no external depends</span>
+<span class="go">{</span>
+<span class="go">    &quot;0&quot; = L:1 ,</span>
+<span class="go">    &quot;1&quot; = &quot;two&quot; ,</span>
+<span class="go">    &quot;2&quot; = D:3.5</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="sockets">
+<h3>Sockets<a class="headerlink" href="#sockets" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="midastalker-tcp-ip-client">
+<h4>MidasTalker: TCP/IP client<a class="headerlink" href="#midastalker-tcp-ip-client" title="Permalink to this headline">¶</a></h4>
+<p>Always start with the built-in documentation:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">midastalker</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">midastalker</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>If you wish to create client to talk to a MidasServer or OpalPythonDaemon,
+it&#8217;s very easy.  You need to know:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>what machine the server is running on</li>
+<li>The port the server is using</li>
+<li>(probably) the type of serialization the server is using</li>
+</ol>
+</blockquote>
+<p>Once you know that, using a Midastalker is easy.  Let&#8217;s say the
+server is running on &#8220;bradmach&#8221; on port 8888 using Python Pickling 2
+serialization protocol.  Then, to create a client:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">midastalker</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">MidasTalker</span><span class="p">(</span><span class="s">&quot;bradmach&quot;</span><span class="p">,</span> <span class="mi">8888</span><span class="p">,</span> <span class="n">SERIALIZE_P2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Once you have created the client, you need to open the connection:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>  <span class="c"># tries to open, throws exception if fails</span>
+</pre></div>
+</div>
+<p>Sending and receiving is easy once the connection is open:  Remember,
+the currency of PicklingTools is Python Dictionaries, so that&#8217;s what
+flows over the socket!:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">request</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">request</span><span class="p">)</span>          <span class="c"># send a simple dictionary to server</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">mt</span><span class="o">.</span><span class="n">recv</span><span class="p">()</span>        <span class="c"># get a response dictionary back from server</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">result</span>
+<span class="go">{ &#39;a&#39;: 1, &#39;b&#39;: 2 }    # ... echoed back the same response</span>
+</pre></div>
+</div>
+<p>This is a very simple example, but shows all the major pieces of
+communicating with a server.  Of course, there are a lot of other issues
+to worry about:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>What if the server isn&#8217;t available?  (More likely, used the
+wrong server and port)</li>
+<li>What is the server goes away after it opens up?</li>
+<li>What if I want a timeout?</li>
+</ol>
+</blockquote>
+<p>A full example called <cite>midastalker_ex2.py</cite> in included in
+distribution: It&#8217;s a full Python program that shows how to deal with
+real issues: typically, if the server goes away or you can&#8217;t connect,
+an exception will be thrown and you have to deal with by trying to
+reconnect.  This is probably the best example to copy for creating a
+robust client.</p>
+<p>See the full documentation of MidasTalker in API documentation.  Note
+you can see the same documentation from Python using
+<cite>help(midastalker)</cite>.</p>
+</div>
+<div class="section" id="midasserver-tcp-ip-server">
+<h4>MidasServer: TCP/IP server<a class="headerlink" href="#midasserver-tcp-ip-server" title="Permalink to this headline">¶</a></h4>
+<p>Always start with the built-in documentation:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">midasserver</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">midasserver</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Creating a server is a little more complicated.  It requires you to
+create a class that inherits directly from the MidasServer.  When you
+create an instance, you will have three methods that get called for
+you (callbacks):</p>
+<blockquote>
+<dl class="docutils">
+<dt><tt class="docutils literal"><span class="pre">acceptNewClient_</span></tt>:</dt>
+<dd>Called for you whenever a new client connects
+to the server:  It is a callback that gives
+the file descriptors for read/write access
+to the socket</dd>
+<dt><tt class="docutils literal"><span class="pre">readClientData_:</span></tt></dt>
+<dd>Called for you whenever a client sends you data.
+The client can be uniquely identified by his
+file descriptor (the same one that was passed in
+with the <tt class="docutils literal"><span class="pre">acceptNewClient_</span></tt>)</dd>
+<dt><tt class="docutils literal"><span class="pre">disconnectClient_</span></tt>:</dt>
+<dd>Called for you whenever a client disconnects
+from socket</dd>
+</dl>
+</blockquote>
+<p>You will write a MidasServer that encapsulates the server behavior
+you want: what kind of messages you send back to clients, what to do
+when they disconnect or disconnect.  Once you have one written, you
+tend to use them like the MidasTalker:</p>
+<div class="highlight-python"><pre>from midasserver import *
+
+# New kind of Server written in Python
+class MyNewMidasServer(MidasServer) {
+    def __init__ (self, host, port, serialization) :
+        MidasServer.__init__(self, host, port, ser, 1)
+        ...
+    def acceptNewClient_(self, read_fd, read_addr, write_fd, write_addr):
+        ...
+    def readClientData_(self, read_fd, write_fd):
+        ...
+    def disconnectClient_(self, read_fd, write_fd):
+        ...
+
+# Usage
+MyNewMidasServer server("host", port, SERIALIZE_P2)
+server.open();   # To start it going, accepting clients and responding</pre>
+</div>
+<p>There is an example of a MidasServer in the Python area called
+<cite>midasserver_ex.py</cite> which shows a simple echo server (it echoes back
+what you send it).  The servers are typically written to <em>respond to
+client requests</em>, but they could very easily be active servers.
+Whenever a new client connects, you could spawn a thread that
+immediately begins talking to the client (using the file descriptor
+given).  It&#8217;s important to keep track of the file descriptor handed
+to you: it&#8217;s how you communicate back to the client: see
+<cite>midasserver_ex.py</cite>.</p>
+</div>
+<div class="section" id="midasyeller-and-midaslistener-udp">
+<h4>MidasYeller and MidasListener: UDP<a class="headerlink" href="#midasyeller-and-midaslistener-udp" title="Permalink to this headline">¶</a></h4>
+<p>The MidasListener (client) and MidasYeller (server) have very similar
+interfaces to that of MidasTalker (client) and MidasServer (server).
+The major difference is the the Yeller/Listener use UDP
+(User Datagram Protocol, frequently called Unrealiable Datagram Protocol
+because there are no guarantees on whether packets will be delivered,
+nor are there guarantees on the order).
+The listener and yeller both require the user specify a message length limit in
+the constructors: <em>both the Yeller and Listener need to match!!</em> See
+the <cite>midaslistener_ex.py</cite> and <cite>midasyeller_ex.py</cite> examples in the
+Python area.</p>
+</div>
+</div>
+<div class="section" id="pretty-printing">
+<h3>Pretty Printing<a class="headerlink" href="#pretty-printing" title="Permalink to this headline">¶</a></h3>
+<p>One output format that Midas 2k users became very comfortable with is
+the prettyPrint routine for OpalTables: it exposes nesting of
+dictionaries and lists in a very human readable way.  Below is the
+prettyPrint of an M2k OpalTable:</p>
+<div class="highlight-python"><pre>a = {
+    ATTRIBUTE_PACKET={ },
+    FILE_VERSION=UL:3,
+    GRANULARITY=UL:4096,
+    KEYWORDS={ },
+    MACHINE_REP="EEEI",
+    NAME="group(,)",
+    TIME={
+        DELTA=DUR:1,
+        KEYWORDS={ },
+        LENGTH=UX:4096,
+        NAME="Time",
+        START=DUR:0,
+        UNITS="s"
+    },
+    TIME_INTERPRETATION={
+        AXIS_TYPE="CONTINUOUS"
+    },
+    TRACKS={
+        "0"={
+            AXES={
+                "0"=@"TIME"
+            },
+            FORMAT="D",
+            KEYWORDS={ },
+            NAME="Track 0",
+            UNITS=""
+        }
+    }
+}</pre>
+</div>
+<p>Because this output format was so successful and useful with Midas 2k,
+there is a module called <cite>pretty</cite> that gives the Python user similar
+types of output for Python Dictionaries:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pretty</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">pretty</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that this is different from the built-in Python module <cite>pprint</cite>:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pretty</span> <span class="kn">import</span> <span class="n">pretty</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:{</span><span class="s">&#39;nest&#39;</span><span class="p">:</span><span class="bp">None</span><span class="p">}</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">a</span>
+<span class="go">{&#39;a&#39;: 1, &#39;b&#39;: {&#39;nest&#39;: None}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pprint</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>       <span class="c"># Built-in pretty print: Tends to keep on fewer lines</span>
+<span class="go">{&#39;a&#39;: 1, &#39;b&#39;: {&#39;nest&#39;: None}}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pretty</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>       <span class="c"># PicklingTools: Exposes list and dictionary structure</span>
+<span class="go">{</span>
+<span class="go">     &#39;a&#39;: 1 ,</span>
+<span class="go">     &#39;b&#39;: {</span>
+<span class="go">         &#39;nest&#39;: None</span>
+<span class="go">     }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>The PicklingTools pretty print exposes structure better, and tends to
+be easier to read for larger tables, although it can be more verbose.</p>
+<p>The pretty print function can also write to files:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">pretty</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;outfile&#39;</span><span class="p">,</span> <span class="s">&#39;w&#39;</span><span class="p">))</span>    <span class="c"># Write pretty repr to outfile</span>
+
+<span class="go">% cat outfile</span>
+<span class="go">{</span>
+<span class="go">    &#39;a&#39;:1,</span>
+<span class="go">    &#39;b&#39;:{</span>
+<span class="go">        &#39;nest&#39;:1</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="binary-formats">
+<h3>Binary Formats<a class="headerlink" href="#binary-formats" title="Permalink to this headline">¶</a></h3>
+<p>If you wish to read and write files in a binary format, use the
+cPickle format:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cPickle</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span> <span class="mi">2</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="c">#### SAVING</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string1</span> <span class="o">=</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span><span class="c"># binary dump a to a string using Protocol 0</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string2</span> <span class="o">=</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="c"># binary dump a to a string using Protocol 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span><span class="p">(</span><span class="s">&#39;p0format&quot;, &#39;</span><span class="n">w</span><span class="s">&#39;).write(string1)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span><span class="p">(</span><span class="s">&#39;p2format&quot;, &#39;</span><span class="n">w</span><span class="s">&#39;).write(string2)</span>
+
+<span class="gp">&gt;&gt;&gt; </span>   <span class="c">#### LOADING</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;p0format&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l1</span> <span class="o">=</span> <span class="n">cPickle</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>    <span class="c"># loads both protocol 0 and protocol 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">l1</span>
+<span class="go">{&#39;a&#39;:1, &#39;b&#39;: 2}</span>
+</pre></div>
+</div>
+<p>See the <cite>cPickle</cite> documentation that comes with Python for more
+examples.  We recommend using Python Pickling Protocol 0 for
+compatibility and Python Pickling Protocol 2 for speed.  <strong>DO NOT USE
+Python Pickling Protocol 1!!!</strong> The C++/Midas 2k/X-Midas PicklingTools
+DO NOT SUPPORT Protocol 1: Only 0 and 2.  (3 will be in a future
+release).</p>
+<p>The files produced by above technique can then be read/written by the
+C++/Midas 2k/X-Midas PicklingTools or Python.</p>
+<p>Note that when we specify SERIALIZE_P0 or SERIALIZE_P2 from the
+MidasTalker/Server/Yeller/Listener, we are simply taking the data
+passed to &#8220;send&#8221; or &#8220;recv&#8221; and calling cPickle.dumps()/loads() on it.</p>
+<p>NEW:  As of PicklingTools 1.6.0, Python now has a C Extension module
+that works with OC Serialization.</p>
+<blockquote>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">pyocser</span>  <span class="c">### Make sure build/../pyocsermodule.so on your PYTHONPATH</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span><span class="mi">2</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span>  <span class="c">##### SAVING</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">string1</span> <span class="o">=</span> <span class="n">pyocser</span><span class="o">.</span><span class="n">ocdumps</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>   <span class="c"># Binary dump using OC Serialization</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">file</span><span class="p">(</span><span class="s">&#39;something.oc&#39;</span><span class="p">,</span><span class="s">&#39;w&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">string1</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span>  <span class="c">##### LOADING</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">f</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;something.oc&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">l1</span> <span class="o">=</span> <span class="n">pyocser</span><span class="o">.</span><span class="n">ocloads</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">l1</span>
+<span class="go">{&#39;a&#39;:1, &#39;b&#39;:2}</span>
+</pre></div>
+</div>
+</blockquote>
+<p>The OC Serialization tends to be faster than pickling.
+OC Serialization also works with very large
+strings and arrays (over 4G), whereas pickling probably doesn&#8217;t (maybe will
+be fixed by the time you read this?).</p>
+</div>
+<div class="section" id="conclusion-to-the-python-experience">
+<h3>Conclusion to the Python Experience<a class="headerlink" href="#conclusion-to-the-python-experience" title="Permalink to this headline">¶</a></h3>
+<p>When in doubt, check the help page for the module of interest: there
+should be enough documentation to get you going.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">midassocket</span>  <span class="c"># Base class for ALL Midas socket thingees</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">midassocket</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We strongly suggest learning how the Python PicklingTools work first
+because they are easy to use, well documented, and easy to try.  There
+are many examples in the baseline: start by trying to copy/modify one
+of the examples to get going.</p>
+<p>Once you feel comfortable with the Python PicklingTools, many of the
+same interfaces exist for the C++ PicklingTools: the C++ experience
+will hopefully feel very similar to the Python Experience (except
+there will be more <cite>{ }</cite> and <cite>;</cite> in the C++ experience).</p>
+</div>
+</div>
+<div class="section" id="the-xmpy-experience">
+<h2>The XMPY Experience<a class="headerlink" href="#the-xmpy-experience" title="Permalink to this headline">¶</a></h2>
+<p>The only real difference between XMPY and Python is that XMPY has
+access to a few more C extension modules that are not available from a
+&#8220;standard Python&#8221; distribution: most of these are X-Midas specific and
+not of concern to this document.  The important exceptions are the
+<cite>Numeric</cite> or <cite>NumPy</cite> modules.</p>
+<div class="section" id="numeric-or-numpy">
+<h3>Numeric or NumPy<a class="headerlink" href="#numeric-or-numpy" title="Permalink to this headline">¶</a></h3>
+<p>The Numeric module (or the NumPy) allows the Python programmer to deal
+with large
+arrays of complex/real numbers and operate on them AT THE SPEED OF
+COMPILED C. The Numeric module is written in C, and implements a lot
+of common numeric operations in C.  In other words, if there is a lot
+of numeric processing (multiplying matrices, manipulating large
+arrays), the Numeric module makes that functionality fast and
+available from Python.</p>
+<p>NumPy is the current de-facto standard, but Numeric is the older,
+deprecated standard.  NumPy is in current maintenance, whereas
+Numeric has fallen out of maintenance.  Unless you have major
+backwards compatibility concerns, we strongly recommend
+using NumPy over Numeric.</p>
+<p>NumPy comes with most Linux distributions, or is easy to install.
+RedHat and Fedora both have numpy RPMs that are easy to install.
+Few machines will actually have Numeric installed by default unless
+you are XMPY (there is a Red-Hat RPM that will allow Numeric to be
+installed inside of a standard RedHat Python in /usr/bin), but most of
+the time you&#8217;ll have to install it yourself.  Again, if you use XMPY,
+Numeric comes built-in.</p>
+<p>The reason this is an issue: if you are serializing large amounts of
+POD type (Plain Old Data&#8212;this is the kind of data Numeric operates
+on: ints, float, complexes), then choosing Numeric/NumPy as your
+array serialization can make a world of difference in speed.</p>
+<p>Consider (in Python):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># Construct some data, and send it over a socket</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">midastalker</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">3.0</span><span class="p">])</span>   <span class="c"># Contiguous array of real_8s</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">MidasTalker</span><span class="p">(</span><span class="s">&quot;host&quot;</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">SERIALIZE_P2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>By default, the MidasTalker will convert the <cite>Array&lt;real_8&gt;</cite> to a Python
+List (aka. C++ Arr) and then send that converted data over the socket.
+In code, it essentially does:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="c"># When we don&#39;t use Numeric for serialization, all Arrays of POD</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># data are converted to Python Lists and THEN sent over</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">python_list</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">xrange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">a</span><span class="o">.</span><span class="n">length</span><span class="p">)</span> <span class="p">:</span>
+<span class="gp">... </span>  <span class="n">python_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">python_list</span><span class="p">)</span>
+</pre></div>
+</div>
+<dl class="docutils">
+<dt>For two reasons, this is a lot slower:</dt>
+<dd><ol class="first last arabic simple">
+<li>An extra conversion to an
+Python List has to happen</li>
+<li>copying elements one-by-one is a lot slower than copying the
+contiguous memory of an array by &#8220;BIT-BLIT&#8221;
+(which is an optimization with POD types).</li>
+</ol>
+</dd>
+</dl>
+<p>Why is &#8220;without Numeric/NumPy&#8221; the default?  That is the most backwards
+compatible way to send Array&lt;POD&gt; data because not all Pythons support
+Numeric or NumPy.  If you try to send Numeric/NumPy data to a version
+of Python that doesn&#8217;t have it built-in, the Python side will probably
+fail will an
+esoteric error message.</p>
+<p>If you are convinced that all your clients understand NumPy (all
+C++ components do, all X-Midas components do, all XMPY interpreters
+do), then using NumPy can drastically decrease your serialization
+time of large amount of scientific data:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">MidasTalker</span><span class="p">(</span><span class="s">&quot;host&quot;</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">SERIALIZE_P2</span><span class="p">,</span> <span class="n">DUAL_SOCKET</span><span class="p">,</span> <span class="n">AS_NUMPY</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>     <span class="c"># Have to open before sending ...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>    <span class="c"># Send NumPy arrays very fast</span>
+</pre></div>
+</div>
+<p>This extra argument on the Midastalker (similar for MidasServer,
+MidasListener, MidasYeller) to force the Midastalker to use NumPy is
+called the <em>ArrayDisposition</em>.  This option ONLY APPLIES if you are
+using SERIALIZE_P0 or SERIALIZE_P2&#8212;it is ignored if you use any
+other serializations.</p>
+</div>
+<div class="section" id="arraydisposition">
+<h3>ArrayDisposition<a class="headerlink" href="#arraydisposition" title="Permalink to this headline">¶</a></h3>
+<p>ArrayDisposition is how to handle Arrays of POD (Plain Old Data).
+ArrayDisposition is only relevant if you are using SERIALIZE_P0
+or SERIALIZE_P2 as your serialization (which you will be if you
+are talking to a Python client).</p>
+<p>You can ignore the discussion below on ArrayDisposition
+if you use SERIALIZE_OC or SERIALIZE_M2K.</p>
+<p>There are actually four choices for the ArrayDisposition argument
+on the MidasTalker/MidasServer/MidasListener/MidasYeller:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">AS_NUMERIC</span>      <span class="o">=</span> <span class="mi">0</span>
+<span class="n">AS_LIST</span>         <span class="o">=</span> <span class="mi">1</span>  <span class="c"># the default</span>
+<span class="n">AS_PYTHON_ARRAY</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">AS_NUMPY</span>        <span class="o">=</span> <span class="mi">4</span>
+</pre></div>
+</div>
+<p>We currently recommend AS_NUMPY, as NumPy is in active maintenance.
+Unless you have backwards compatibility issues, we recommend moving
+from Numeric (which is out of maintenance) to NumPy (actively developed).
+Even AS_PYTHON_ARRAY is deprecated, as Python changed how it
+pickles array.array from Python 2.6 to Python 2.7  (so a Python 2.6
+and 2.7 client would be incompatibile, and it is significantly slower as well).</p>
+<p>The default is usually AS_LIST.  To use NumPy:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">midastalker</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span> <span class="o">=</span> <span class="n">midastalker</span><span class="p">(</span><span class="s">&quot;host&quot;</span><span class="p">,</span> <span class="n">port</span><span class="p">,</span> <span class="n">SERIALIZE_P2</span><span class="p">,</span> <span class="n">DUAL_SOCKET</span><span class="p">,</span> <span class="n">AS_NUMPY</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">open</span><span class="p">()</span>    <span class="c"># Must open before sending</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mt</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Versions of Python prior to 2.5 do not support the serialization of
+arrays even though the Python array module has been built-in to
+the Python interpreter for ages.  This simply gives the non-XMPY
+users or users who don&#8217;t have access to Numeric another way to send
+Arrays of POD data.</p>
+<p>If you try to use AS_NUMPY, AS_NUMERIC or AS_PYTHON_ARRAY and your version of
+Python does not support it, a large error will be issued to let you
+know you can&#8217;t do this: THIS IS ON PURPOSE.  It is better to get a
+big, graphic error up front saying &#8220;you can&#8217;t use Numeric&#8221; rather than
+crashing later with an esoteric Python exception.</p>
+<p>Again, we suggest using NumPy as it is fairly ubiquitous and actively
+in maintenance:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+</pre></div>
+</div>
+<p>Contact your system administrator
+to install NumPy on your machine if the numpy import above doesn&#8217;t work.</p>
+</div>
+</div>
+<div class="section" id="the-c-experience">
+<h2>The C++ Experience<a class="headerlink" href="#the-c-experience" title="Permalink to this headline">¶</a></h2>
+<p>The work to build the PicklingTools from Python was very simple:
+After all, Python has just about everything built-in to the language,
+so making tools to handle files and sockets was straight-forward.</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Python Dictionaries:        Built-in the language</li>
+<li>File and Socket Support:    Built-in library (<cite>import socket</cite>)</li>
+<li>Serialization Support:      Built-in library (<cite>import cPickle</cite>)</li>
+</ol>
+</blockquote>
+<p>The work to build the PicklingTools from C++ was harder: much less
+was built-in.</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Python Dictionaries:     Use <cite>OpenContainers</cite> library, included in distro</li>
+<li>File and Socket Support: UNIX libraries, included on machine (hopefully)</li>
+<li>Serialization Support:   Written from scratch, included in distro</li>
+</ol>
+</blockquote>
+<div class="section" id="id1">
+<h3>Files<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>The main tools for dealing with files (as well as Arrays) are the
+routines from <cite>chooseser.h</cite>.  These routines allow you to read/write
+files (as well as Arrays) with serialized data.  The main routines are:</p>
+<div class="highlight-python"><pre>// C++
+DumpValToFile (const Val&amp; thing_to_serialize,
+               const string&amp; output_filename,
+               Serialization_e how_to_dump_the_data);
+
+LoadValFromFile (const string&amp; input_filename,
+                 Val&amp; result,
+                 Serialization_e how_data_was_dumped);</pre>
+</div>
+<p>With these routines, you can read and write data back and forth
+between Python systems (and other C++ systems of course).  The
+<cite>DumpValToFile</cite> routine writes our data (&#8220;serializes&#8221; or &#8220;pickles&#8221;) to
+a binary file. The <cite>LoadValFromFile</cite> routine reads our data
+(&#8220;deserializes&#8221; or &#8220;unpickles&#8221;) from a binary file.  Note that
+<cite>LoadValFromFile</cite> and <cite>DumpValToFile</cite> are inverses of each other so
+that a load gets back exactly what a dump did.</p>
+<p>The choices for serialization are numerous:</p>
+<blockquote>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>SERIALIZE_P0:   Serialize as Python Pickling Protocol 0 would.</dt>
+<dd><p class="first last">This is 7-bit clean and printable, so you can always
+look at this file with an editor and get an idea of
+what&#8217;s in it.  This protocol tends to be slower,
+but very backwards compatible.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>SERIALIZE_P2:   Serialize as Python Pickling Protocol 2 would.</dt>
+<dd><p class="first last">This is a binary protocol, so much more difficult
+to understand without a binary editor.  This protocol
+tends to be very fast.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>SERIALIZE_M2K:  Serialize as Midas 2k would.</dt>
+<dd><p class="first last">This uses the binary serialization of Midas 2k and is most
+useful for talking to legacy systems.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>SERIALIZE_OC:   Serialize using the OpenContainers serialization.</dt>
+<dd><p class="first last">In general, this is the fastest binary protocol,
+but currently only other C++ systems using the
+OpenContainers (like PicklingTools, PTOOLS) understand
+this.  OpenContainers comes built-in with PicklingTools.
+NEW! This now works with Python!</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>SERIALIZE_TEXT: Simply stringize the given data.</dt>
+<dd><p class="first last">This outputs 7-bit data you can then easily edit.  Not very
+fast, but very human-readable.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>SERIALIZE_PRETTY: Like SERIALIZE_TEXT, but it uses the prettyPrint option.</dt>
+<dd><p class="first last">The prettyPrint makes the tables much more human readable,
+at the cost of some extra white space.   A slightly
+more efficient way to do this is to use the
+<cite>WriteValToFile</cite> and <cite>ReadValFromFile</cite> routines
+from the <cite>ocvalreader.h</cite> file (but these routines
+are limited to ONLY prettyPrinting: no other
+serialization).</p>
+</dd>
+</dl>
+</li>
+</ol>
+</blockquote>
+<p>With these routines, you can very easily exchange file data between
+C++ and Python:  Below are a number of examples.  The first example
+shows how to write some data from C++ so that Python can read it:</p>
+<div class="highlight-python"><pre>// C++ side: Write a Value
+Val v = Tab("{ 'a':1, 'b':2.2, 'c':'three' }"); // .. something ..
+DumpValToFile(v, "state.p0", SERIALIZE_P0);
+
+# Python side: read the same value
+&gt;&gt;&gt; import cPickle
+&gt;&gt;&gt; result = cPickle.load( file('state.p0') ) # load figures out the protocol
+&gt;&gt;&gt; print result</pre>
+</div>
+<p>Another example: have C++ read a file that Python created:</p>
+<div class="highlight-python"><pre># Python side: write a file
+&gt;&gt;&gt; v = {'a':1, 'b':2.2, 'c':'three' } # ... something ...
+&gt;&gt;&gt; import cPickle
+&gt;&gt;&gt; cPickle.dump( v, file('state.p2'), 2 ) # Use Pickling Protocol 2
+
+// C++ side: read the same file
+Val result;
+LoadValFromFile("state.p2", result, SERIALIZE_P2);
+cout &lt;&lt; result &lt;&lt; endl;
+/// .. and we have the same value from Python!</pre>
+</div>
+<p>This is the best way to get started using the PicklingTools from
+C++:  See if you can write a file from C++ and have Python read it.</p>
+<p>There are some lower-level routines for serialization you may also
+find useful: You can also take your Val and load/dump it to an
+Array of char (for shoving over your own socket protocol, etc.):</p>
+<div class="highlight-python"><pre>// C++
+DumpValToArray (const Val&amp; thing_to_serialize,
+               Array&lt;char&gt;&amp; array_to_dump_to,
+               Serialization_e how_to_dump_the_data);
+
+LoadValFromArray (const Array&lt;char&gt;&amp; array_to_load_from,
+                  Val&amp; result,
+                  Serialization_e how_data_was_dumped);</pre>
+</div>
+<p>In fact, the <cite>DumpValToFile</cite> is implemented using <cite>DumpValToArray</cite>
+and <cite>LoadValFromFile</cite> is implemented using <cite>LoadValFromArray</cite>.</p>
+<p>With these routines, you should be able to get started.  Of course,
+it might useful to know what a <cite>Val</cite> is: the next section talks
+about the <cite>Val</cite>: the main currency of the C++ PicklingTools.</p>
+</div>
+<div class="section" id="opencontainers">
+<h3>OpenContainers<a class="headerlink" href="#opencontainers" title="Permalink to this headline">¶</a></h3>
+<p>A minor goal of the PicklingTools was to try to make the C++
+experience when dealing with Python Dictionaries very similar to the
+Python experience.  Python Dictionaries are the currency of
+PicklingTools, so we needed to make sure dictionaries are easy to
+manipulate from C++.</p>
+<p>Part of the problem is that Python is a dynamically-typed language
+(the type of an object is known only at runtime) and C++ is a
+statically-typed language (the type of an object is known at compile
+time).  This makes supporting the dynamic, recursive, heterogeneous
+typing of Dictionaries difficult in C++.  Consider the Python code:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">b</span> <span class="o">=</span> <span class="s">&quot;hello&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">c</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;key1&#39;</span><span class="p">:</span> <span class="mi">17</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="s">&quot;a string, not an int!&quot;</span>   <span class="c"># okay in Python</span>
+</pre></div>
+</div>
+<p>In the above Python code, each variable&#8217;s type is dynamic: <cite>a</cite> starts
+life as an int, then becomes a string.  C++ has the opposite
+philosophy: All types need to be known at compile time:</p>
+<div class="highlight-python"><pre>int a = 10;
+string b = "hello";
+Tab c("{ 'key1: 17 }");
+a = "a string, not an int!"  /// a is an int, not a string!! ERROR in C++</pre>
+</div>
+<p>To work with dynamic typing in C++, we introduce a new type called the
+<em>Val</em>: (so called because it is always passed by value or deep-copy).
+The Val represents a dynamic container that can contain a variety of
+different types:</p>
+<div class="highlight-python"><pre>Val a = 10;
+Val b = "hello";
+Val c = Tab("{ 'key1': 17 }");
+a = "a string, not an int!";    // Okay now in C++:  Val is a dynamic type</pre>
+</div>
+<p>In fact, there is only a set number of types that a Val can contain.</p>
+<blockquote>
+<ul>
+<li><dl class="first docutils">
+<dt>INTEGER types:   int_1, int_u1, int_2, int_u2, int_4, int_u4, int_8, int_u8</dt>
+<dd><p class="first last">(note that int is always typedef-ed to one of these)</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">REAL types:      real_4, real_8</p>
+</li>
+<li><p class="first">COMPLEX types:   complex_8, complex_16, and cx_t&lt;T&gt; for all INTEGER types</p>
+</li>
+<li><p class="first">MISC types:      None (empty type), string, Proxy, int_n</p>
+</li>
+<li><dl class="first docutils">
+<dt>CONTAINER types: Tab (like Python Dictionary), Arr (like Python List)</dt>
+<dd><p class="first last">OTab (like OrderedDict), Tup (like Tuple)</p>
+</dd>
+</dl>
+</li>
+<li><p class="first">ARRAY type:      Array&lt;POD&gt; where POD is any INTEGER, REAL, or COMPLEX type</p>
+</li>
+</ul>
+</blockquote>
+<p>(Sidebar: Note that the typedefs for integer/real/complex values use the
+<em>number of bytes</em> the specify the size of the numbers, as opposed to
+the number of bits in the standard C types
+(such as uint32_t which has 32 bits).
+This again belies the FORTRAN history of Midas/PTOOLS where integers and doubles
+and complex values are specified in terms of bytes: real*4, real*8,
+integer*4, complex*8, complex*16 and so on.)</p>
+<p>Note that cx_t&lt;INTEGER&gt; is new as of PicklingTools 1.6.0.
+For certain DSP operations, it&#8217;s useful to be able to represent
+what comes directly off an antenna as complex integers.
+There is not really a direct correspondance in Python or NumPy,
+but it&#8217;s useful enough for C++ where hardcore DSP happens.</p>
+<p>Vals cannot contain <em>any type</em> because we want compatibility with
+Python: with the limitations above, we can always serialize the data
+and give it to Python.  In practice, this restriction hasn&#8217;t been
+problematic: most data can be formulated in terms of Tabs, Arrs and
+elementary data types (In essence, this is the same argument of XML:
+all data can be formulated in the basic XML formats).</p>
+<p>Since Val is a dynamic type, it has a <em>tag</em> and <em>subtype</em> to tell you what
+is inside it:</p>
+<div class="highlight-python"><pre>'s' 'S' : int_1, int_u1
+'i' 'I' : int_2, int_u2
+'l' 'L' : int_4, int_u4
+'x' 'X' : int_8, int_u8
+'f' 'd' : real_4, real_8
+'c' 'C' : cx_t&lt;int_1&gt;, cx_t&lt;int_u1&gt;:    # New as of PicklingTools 1.6.0
+'e' 'E' : cx_t&lt;int_2&gt;, cx_t&lt;int_u2&gt;:    # New as of PicklingTools 1.6.0
+'g' 'G' : cx_t&lt;int_4&gt;, cx_t&lt;int_u4&gt;:    # New as of PicklingTools 1.6.0
+'h' 'H' : cx_t&lt;int_8&gt;, cx_t&lt;int_u8&gt;:    # New as of PicklingTools 1.6.0
+'F' 'D' : complex_8, complex_16
+'a'     : string (like 'a' in ASCII)
+'n'     : array  (like n elements in array) [Like Python list]
+'t'     : Tab                               [Like Python dict]
+'o'     : OTab                              [Like Python OrderedDict]
+'u'     : Tup                               [Like Python tuple]
+'q' 'Q' : int_n, int_un                     [like Python arbitrary-sized ints]
+'Z'     : None</pre>
+</div>
+<p>The tag is just a public data member on the class.  This tag belies the
+Midas history of the product: they feel very similar to the tags on
+X-Midas and Midas 2k data:</p>
+<div class="highlight-python"><pre>Val v = 10.0;   // real_8
+cout &lt;&lt; v.tag;  // letter 'D'
+
+a = int_1(10);
+cout &lt;&lt; v.tag;  // letter 's'
+
+a = None;
+cout &lt;&lt; v.tag;  // letter 'Z'</pre>
+</div>
+<p>There is another field called subtype which indicates what type an
+array is:  this field is only valid if the Val is some kind of array:</p>
+<div class="highlight-python"><pre>Val a = Array&lt;int_1&gt;(10);
+cout &lt;&lt; v.tag &lt;&lt; v.subtype;  // letters 'n' 's'
+
+a = None;
+cout &lt;&lt; v.tag &lt;&lt; v.subtype;  // letters 'Z',  subtype UNDEFINED if not array
+
+a = Arr("[1,2,3]");
+cout &lt;&lt; v.tag &lt;&lt; v.subtype;  // letter 'n', 'Z'</pre>
+</div>
+<p>Note that an Arr is essentially an Array&lt;Val&gt;, but augmented with the ability to
+parse string literals.</p>
+</div>
+<div class="section" id="val-and-conversions">
+<h3>Val and Conversions<a class="headerlink" href="#val-and-conversions" title="Permalink to this headline">¶</a></h3>
+<p>One feature of C++ that makes Vals so easy to use are the (implicit
+and explicit) conversions.  The Val has a constructor for every single
+type Vals can contain, so creating a Val from something else is simple
+and easy to read:</p>
+<div class="highlight-python"><pre>Val a = "hey";
+Val b = 3.1415;  // constructors for ALL TYPES the Val supports.
+Val c = 1;
+Val d = Arr("[1,2,3]");
+Val e = complex_8(1,2);</pre>
+</div>
+<p>Notice that we overload the constructor on ALL integer types and ALL
+real types.  Experience has shown that the compiler gets confused
+(read: compile-time errors) if you don&#8217;t have an explicit constructor
+for every single type you expect.  More important seems to be if you
+have a routine that takes a Val, the compiler won&#8217;t get confused:</p>
+<div class="highlight-python"><pre>void PrintF (Val v); // ... prototype for some function ...
+
+PrintF(1);       // no confusion
+PrintF("hello"); // no confusion</pre>
+</div>
+<p>(Incidentally, this is a type-safe way to support a better <cite>printf</cite>)</p>
+<p>The outconversion process is equally important:  Once you have placed
+a value inside a Val, how do you get it out?  Very simple: ask for it!:</p>
+<div class="highlight-python"><pre>Val a = 123.456;
+
+real_8 in = a;    // Ask for the value out!</pre>
+</div>
+<p>The Val class also contains an outconverter (read: <cite>operator T</cite> for
+some type <cite>T</cite>) for every type the Val can contain.  That&#8217;s very
+specific C++ nomenclature, but the upshot is, you can ask for any type
+out and it will convert it for you, if the conversion makes sense.
+The general rule is that the conversion will happen just like C would
+do it:</p>
+<div class="highlight-python"><pre>Val v = 1;
+
+real_8 f     = v;     // Sure, convert to 1.0
+real_4 d     = v;     // Sure, convert to real_4(1.0)
+complex_16 F = v;     // Sure, convert to 1.0+0.0i
+string s     = v;     // Sure, turn it into the string "1"
+Tab t        = v;     // DOESN'T MAKE SENSE!  runtime_error thrown
+
+Val vv = 3.3;
+int i = vv;           // Sure, truncates to 3 just like C would</pre>
+</div>
+<p>Incidentally, we see here a very simple way to stringize a Val: just
+ask for its string out:</p>
+<div class="highlight-python"><pre>Val v = ReturnSomeVal();
+string repr1 = v;              // Method 1:
+string repr2 = Stringize(v);   // Method 2:</pre>
+</div>
+<p>Method 1 and Method 2 of stringizing above do exactly the same thing,
+except if the Val v in question is a string: in that case Method 2
+puts quotes around the string, Method 1 does not:</p>
+<div class="highlight-python"><pre>Val v = string("123");
+string repr1 = v;               // repr1 is  123     (no quotes!)
+string repr2 = Stringize(v);    // repr2 is '123'</pre>
+</div>
+</div>
+<div class="section" id="c-arrs-and-python-lists">
+<h3>C++ Arrs and Python Lists<a class="headerlink" href="#c-arrs-and-python-lists" title="Permalink to this headline">¶</a></h3>
+<p>The Val supports two main kinds of containers:  The <em>Tab</em> (which is just like
+the Python Dictionaries, see below) and the <em>Arr</em>.  Arrs are just like Python
+Lists:  they are dynamically resizing arrays of Vals.</p>
+<blockquote>
+<p>Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">2.2</span><span class="p">,</span> <span class="s">&#39;three&#39;</span><span class="p">]</span>        <span class="c"># Python List</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&quot;hello&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">a</span><span class="o">.</span><span class="n">length</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>C++:</p>
+<div class="highlight-python"><pre>Arr a = "[1, 2.2, 'three']";    // C++ Arr (like Python List)
+a.append("hello");
+cout &lt;&lt; a.length() &lt;&lt; endl;</pre>
+</div>
+</blockquote>
+<p>The Array class comes from the OpenContainers collection: it is NOT
+the STL array class (there is further discussion of why we choose not
+to use in the FAQ).</p>
+<p>The OpenContainers Array class is templatized on the type
+it supports.   For using Arrays with Val, the type needs to
+be either POD (Plain Old Data which is ints, reals, or complexes)
+or Val.  For example:</p>
+<div class="highlight-python"><pre>Array&lt;real_8&gt; demod_data(10); // Initial empty: Reserve space for 10 elements
+demod_data.fill(0.0);         // Fill to capacity (10) with 0.0
+for (int ii=0; ii&lt;demod_data.length(); ii++) {
+   demod_data[ii] = demod_data[ii] + ii;
+}</pre>
+</div>
+<p>One potential gotcha with Arrays is that they are ALWAYS constructed
+empty, with an initial capacity.   If you wish to put elements in
+the array, you need to either fill the Array (as above), or
+append/prepend to the Array.  For example:</p>
+<div class="highlight-python"><pre>Array&lt;complex_8&gt; ac(100);  // Initially empty: Reserve Space for 100 elements
+for (int ii=0; ii&lt;20; ii++) {
+   ac.append(complex_8(1,0));
+}
+cout &lt;&lt; ac.length() &lt;&lt; endl;  // Only 20 items in array, space for 80 more</pre>
+</div>
+<p>or:</p>
+<div class="highlight-python"><pre>Array&lt;int_2&gt; ai(100);
+ai.fill(777);   // Fill array to capacity with 100 777s</pre>
+</div>
+<p>If you exceed the capacity of the Array when you append/prepend, then
+the class automatically doubles the capacity and copies all the old data
+into the resized memory.   This can bite you if you hold onto an element
+for too long:</p>
+<div class="highlight-python"><pre>Array&lt;int_1&gt; a(1);  // Capacity of 1, length of 0
+a.fill(127);        // Capacity of 1, length of 1
+int_1&amp; hold_too_long = a[0];  // Currently valid reference to first data
+a.append(100);      // Array resizes, hold_too_long is now INVALID
+cout &lt;&lt; hold_too_long &lt;&lt; endl; ///   ??? Seg fault ???</pre>
+</div>
+<p>The Array is implemented as a contiguous piece of memory so that
+array accesses are constant time.  This is also important if you need
+to interface with legacy C routines:</p>
+<div class="highlight-python"><pre>Array&lt;char&gt; a(5);
+a.fill('\0');
+char* data = a.data();  // Returns &amp;a[0]
+strcpy(data, "hi");     // expect contiguous piece of memory</pre>
+</div>
+<p>See C++ API document for documentation on the Array class.  It is a basic
+OpenContainers inline class.</p>
+<p>The <cite>Arr</cite> is essentially an <cite>Array&lt;Val&gt;</cite>, with one exception: it has a few
+extra methods to make them easier to use with Vals and Tabs.  The most
+important is the constructor:  If you give an Arr a string, it will
+attempt to parse it as Python would:</p>
+<div class="highlight-python"><pre>Arr a = "[1,2.2,'three']";   // Parses the string literal</pre>
+</div>
+<p>This is the same as:</p>
+<div class="highlight-python"><pre>Arr a;
+a.append(1);
+a.append(2.2);
+a.append("three");</pre>
+</div>
+<p>The string literal can be as complex as you want, with recursive Arrs
+and Tabs inside it:</p>
+<div class="highlight-python"><pre>Arr a = "[1, 2.2, ['sub',2], {'a':1, 0: None}]";</pre>
+</div>
+<p>Basically, you should be able to construct literals just as you would
+in Python.</p>
+</div>
+<div class="section" id="c-tabs-and-python-dictionaries">
+<h3>C++ Tabs and Python Dictionaries<a class="headerlink" href="#c-tabs-and-python-dictionaries" title="Permalink to this headline">¶</a></h3>
+<p>A <em>Tab</em> is the C++ equivalent of the Python Dictionary.  You may
+notice that the Val/Tab/Arr all have three letters: This is on
+purpose.  Since we are trying to emulate a dynamic language where you
+don&#8217;t need to put an explicit type on, we are trying to save typing by
+having Val/Tab/Arr all be three letters.  A <em>Tab</em> is a dynamic, recursive,
+heterogeneous container with key-value pairs.</p>
+<blockquote>
+<p>Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="p">{</span> <span class="p">}</span>                            <span class="c"># Empty Table</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">:</span> <span class="s">&#39;something&#39;</span> <span class="p">}</span>      <span class="c"># table with 2 key-value pairs</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">iteritems</span><span class="p">():</span> <span class="c"># Iterate through table</span>
+<span class="gp">... </span>  <span class="k">print</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span>
+</pre></div>
+</div>
+<p>C++:</p>
+<div class="highlight-python"><pre>Tab t;                                // Empty table
+Tab t = "{ 'a': 1, 0:'something'}";   // Table with 2 key-value pairs
+for (It ii(t); ii(); ) {              // Iterate through table
+   cout &lt;&lt; ii.key() &lt;&lt; ii.value();
+}</pre>
+</div>
+</blockquote>
+<p>A <em>Tab</em> is initially constructed empty, unless you provide a string literal
+(much like <em>Arr</em> above).  Items are usually inserted into the <em>Tab</em> one
+of two ways:</p>
+<div class="highlight-python"><pre>Tab t;
+t.insertKeyAndValue("key", 1.23);         //
+t.insertKeyAndValue(0, Arr("[1,2,3]"));   // Direct insert</pre>
+</div>
+<p>or:</p>
+<div class="highlight-python"><pre>t["key"] = 1.23;
+t[0]     = Arr("[1,2,3]");                // []</pre>
+</div>
+<p>Notice that the keys and values of the <em>Tab</em> are both of type <em>Val</em>:
+They can be any type Val supports.</p>
+<p>Values are looked up a number of ways:</p>
+<div class="highlight-python"><pre>Tab t = "{'a': 1, 'b': 2 }";
+cout &lt;&lt; t["a"];                // using [], value 1
+cout &lt;&lt; t.contains("c");       // is the key "in" there?  No in this case
+cout &lt;&lt; t.lookup("a");
+cout &lt;&lt; t("a");</pre>
+</div>
+<p>A <em>Tab</em> is implemented as an <em>AVLHashT</em>, which is an extensible HashTable
+that handles growth well, but still very fast lookups and removals.
+See the OpenContainers documentation for more discussion of the
+the different HashTables in OpenContainers.</p>
+<p>Note that <cite>[]</cite> and <cite>()</cite> for lookup have slightly different semantics: if
+the key is in the table, they do the same thing:</p>
+<div class="highlight-python"><pre>Tab t = "{ 'a':1, 'b': 2 }";
+cout &lt;&lt; t["a"];   // Okay, in there, return Val 1
+cout &lt;&lt; t("a");   // Okay, in there, return Val 1</pre>
+</div>
+<p>If, however, the key is not in there, the two do different things.  The <cite>[]</cite>
+operator will insert the key into the table and give it a default value
+of <em>None</em>:</p>
+<div class="highlight-python"><pre>cout &lt;&lt; t["NOT THERE"];  // Inserts key "NOT THERE" into table with None</pre>
+</div>
+<p>Using operator <cite>()</cite>, if the key is not there, an exception will be thrown:</p>
+<div class="highlight-python"><pre>try {
+   cout &lt;&lt; t("NOT THERE");
+} catch (exception&amp; e) {
+   cerr &lt;&lt; e.what();    // Error message describing which key was NOT THERE
+}</pre>
+</div>
+<p>The <cite>[]</cite> notation is useful for assignment, because it allows us to
+change the table using the <cite>[]</cite>.  The <cite>()</cite> notation is useful for lookup,
+because you don&#8217;t want to change anything when you are just looking up
+something:</p>
+<div class="highlight-python"><pre>Tab t;
+t["a"] = 3.3;     // Inserts "a":None into table, then overwrites with 3.3
+
+
+Val&amp; nv = t("a"); // Lookup, gives us a reference to the Val in the table
+                      // (and throws an exception if not there)</pre>
+</div>
+<p>See the FAQ for more discussion of <cite>()</cite> vs. <cite>[]</cite>.  The basic rule: use <cite>[]</cite>
+for assignment, <cite>()</cite> for lookup.</p>
+</div>
+<div class="section" id="nested-lookup-and-assignment">
+<h3>Nested Lookup and Assignment<a class="headerlink" href="#nested-lookup-and-assignment" title="Permalink to this headline">¶</a></h3>
+<p>Tabs and Arrs can also handle cascading lookups and assignments.  This
+makes it easy to get Vals in and out of nested structures: Again, this
+should feel very much like Python:</p>
+<div class="highlight-python"><pre>Tab t = "{'nest': { 'a':[0,1,2] }, 'b': 2 }";
+Val&amp; inside = t("nest")("a")(0);   // reference to the Val containing 0
+inside = 777;
+cout &lt;&lt; t;      // {'nest': { 'a':[777,1,2] }, 'b': 2 }";
+
+t["nest"]["a"][0] = 999;  // Cascading assignment</pre>
+</div>
+<p>All lookups with Tabs and Arrs typically return <cite>Val&amp;</cite> so they can
+be used for lookups and assignment like above.</p>
+</div>
+<div class="section" id="tricks-and-tips-for-efficient-tab-and-arr-usage">
+<h3>Tricks and Tips for Efficient Tab and Arr Usage<a class="headerlink" href="#tricks-and-tips-for-efficient-tab-and-arr-usage" title="Permalink to this headline">¶</a></h3>
+<p>When you start getting into more complicated <em>Arr</em> and <em>Tab</em> usage, there
+are tricks and tips that are helpful for more efficient usage.</p>
+<p>First of all, as a debug tool or simply readability tool, there is a
+prettyPrint method on <em>Val</em>, <em>Tab</em>, and <em>Arr</em>.  If there is complex, nested
+structure in a <em>Val/Tab/Arr</em>, <cite>prettyPrint</cite> is a nice human readable way
+to print the data:</p>
+<div class="highlight-python"><pre>Tab t = "{'nest': {'a',1 } }";
+
+cout &lt;&lt; t &lt;&lt; endl;
+// OUTPUT:  {'nest':{'a':1}}
+
+t.prettyPrint(cout);
+// OUTPUT:
+{
+    'nest': {
+        'a': 1
+    }
+}</pre>
+</div>
+<p>Notice that both ways are still backwards-compatible with Python
+Dictionaries (in fact, you could cut-and-paste the dictionaries
+directly into Python and they would still work), but the <cite>prettyPrint</cite>
+shows nested structure a lot better, even if it is a little wordy.</p>
+<p>If you need OpalTable output, there is a <cite>prettyPrintOpal</cite> routine as
+well.</p>
+<div class="section" id="copying">
+<h4>Copying<a class="headerlink" href="#copying" title="Permalink to this headline">¶</a></h4>
+<p>Whenever you copy a <em>Tab</em> or an <em>Arr</em>, they are copied
+by deep-copy.  This means the entire recursive structure is copied:</p>
+<div class="highlight-python"><pre>Tab t = "{'nest': {'a':1 } }";
+Tab deep_copy = t;   // Full Deep Copy
+
+t["new"] = 1;  // No effect on deep_copy table
+cout &lt;&lt; t &lt;&lt; endl;               // {'nest':{'a':1},'new':1}
+cout &lt;&lt; deep_copy &lt;&lt; endl;       // {'nest':{'a':1}}</pre>
+</div>
+<p>Once a copy is made under OpenContainers, it is a separate copy.
+(There is way to share <em>Tabs</em> and <em>Arrs</em> using Proxy: see the FAQ and
+more examples below).  Note that this is a departure from how Python
+copies lists and dictionaries around:</p>
+<div class="highlight-python"><pre># Copying in Python: by reference by default
+&gt;&gt;&gt; t = {'nest': {'a':1 } }
+&gt;&gt;&gt; copy = t;
+&gt;&gt;&gt; t["new"] = 1   // copy and t 'share' the dictionary
+&gt;&gt;&gt; print t        // {'nest':{'a':1},'new':1}
+&gt;&gt;&gt; print copy     // {'nest':{'a':1},'new':1}</pre>
+</div>
+<p>The reason for this two fold: threads and understandability.  From a
+threads perspective, it almost always makes sense to pass a separate
+copy of data so each thread can work independently on its own data.
+If you are going to share with threads, sharing should be EXPLICIT for
+the sake of human readability.  Thus, if you choose to pass a pointer
+to data, that&#8217;s fine, but experience has taught us (from the Midas 2k
+days, with systems built from 100s of threads) that threads almost
+always work better with EXPLICITLY shared data, otherwise every thread
+should have its own copy of data (to avoid problems like false
+sharing, race conditions, over-synchronization, and linearizing).
+Implicitly shared data always seems to cause collateral damage that&#8217;s
+hard to trace.</p>
+<p>We make this threads distinction for another reason: Python can be
+slow.  We encourage people to write in Python when possible: Python
+code tends to be simpler, easier to read, and easier to maintain.
+<em>But,</em> if you need all the speed of a compiled language like C++, you
+probably also need all the tools you can use in C++ to make code
+faster: one such tool is truly concurrent threads (which Python does
+not have).  So, if you are already in C++, there is a good chance you
+need to use real threads for speedup, so you should using data
+structures that are efficient and well-behaved with threads.  [The
+OpenContainers collection was extracted from Midas 2k: one of the main
+design goals of the Midas 2k collections was the ability to work with
+100s of threads in an application].</p>
+<p>Why Deep Copy by Default?</p>
+<p>If you are in Python, everything is fast enough.  If you are in C++,
+there is a good chance you need the extra speed of compiled language.
+Let&#8217;s allow the C++ programmer all the tools and abstractions needed
+to get extra speed, including threads.</p>
+</div>
+<div class="section" id="references">
+<h4>References:<a class="headerlink" href="#references" title="Permalink to this headline">¶</a></h4>
+<p>(Feel free to skip this section on first reading)</p>
+<p>We mentioned earlier that the name of basic class is <em>Val</em> to remind
+ourselves that all things are copied by value (deep-copy, see the
+previous section).  However, this sometimes means you make extra
+copies that you don&#8217;t mean to:</p>
+<div class="highlight-python"><pre>SomeFunction(Tab t);          // prototype
+
+Tab t("{'a':1 }");
+SomeFunction(t);      // Will deep copy t, so SomeFunction has own copy</pre>
+</div>
+<p>You may just need a read-reference to the given Tab, which means you could
+just as easily have SomeFunction take a <cite>Tab&amp;</cite>  (a Tab reference):</p>
+<div class="highlight-python"><pre>SomeFunction(const Tab&amp; t);   // Passes EXPLICIT reference to SomeFunction
+
+Tab t("{'a':1 }");
+SomeFunction(t);</pre>
+</div>
+<p>When you pass the reference in, we are essentially just passing the
+pointer to the Tab of interest:  this a very fast copy, and we won&#8217;t
+accidentally change the Tab because it is const Tab&amp;.  Note that
+when we do this, we are EXPLICITLY sharing the Tab.</p>
+<p>A similar problem is when you copy a Tab in or out of a Val:  you may
+be doing extra copies you don&#8217;t mean to:</p>
+<div class="highlight-python"><pre>Tab t = "{'a':1}";
+Val v = t;          // Two copies of the table: one in t, one in v
+
+Tab t_out = v;     // Three copies of the table, t, v, and t_out</pre>
+</div>
+<p>Let&#8217;s tackle the second problem first (where <cite>t_out</cite> is an extra
+copy), as it gives us a hint how to deal with the first problem.
+When we ask for t_out, we can ask EXPLICITLY to share the
+implementation of the Tab inside of v.  In other words:</p>
+<div class="highlight-python"><pre>Tab&amp; t_ref = v;    // EXPLICITLY share the copy of the table
+                   // contained inside of v
+
+t_ref["insert"] = 1;  // Inserts into table inside of v</pre>
+</div>
+<p>Strictly speaking, you can&#8217;t ask for a Tab from a Val, you can
+only ask for a Tab&amp;.  So when you ask for a Tab, what really happens
+is:</p>
+<div class="highlight-python"><pre>Tab&amp; t_ref = v;    // Can only get a Tab&amp; from a v
+Tab t_copy(t_ref); // Invoke copy constructor from reference
+
+// EQUIVALENT TO:
+
+Tab t_copy = v;</pre>
+</div>
+<p>Let&#8217;s go back to the original problem, avoiding the copy in:</p>
+<div class="highlight-python"><pre>Tab t = "{'a':1}";
+Val v = t;          // Two copies of the table: one in t, one in v</pre>
+</div>
+<p>If we just wanted one copy of a table copied into v, then we probably
+wanted something like this:</p>
+<div class="highlight-python"><pre>Val v = Tab();  // empty table
+Tab&amp; t = v;
+t["a"] = 1;     // Put things into table inside of v</pre>
+</div>
+<p>Note that when using Arrs, the same principles work: you ask for an
+Arr&amp; when you want EXPLICITLY to share.  Now of course, Val supports [],
+so sometimes it&#8217;s easier to:</p>
+<div class="highlight-python"><pre>Val v = Tab();
+t["a"] = 1;     // Put things inside table inside of v</pre>
+</div>
+</div>
+</div>
+<div class="section" id="c-otab-and-the-python-ordereddict">
+<h3>C++ OTab and the Python OrderedDict<a class="headerlink" href="#c-otab-and-the-python-ordereddict" title="Permalink to this headline">¶</a></h3>
+<p>As of PicklingTools release 1.2.0, this is a new type of container:
+the OTab (Ordered Tab), which behaves just like Python OrderedDict.
+Unfortunately, the Python OrderedDict is only supported well in Python 2.7
+and up, so your Python may not understand it yet:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">collections</span>  <span class="c"># Does My Python support the OrderedDict?</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">collections</span><span class="o">.</span><span class="n">OrderedDict</span><span class="p">(([(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s">&#39;b&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)])</span>
+<span class="go">                                   # Only in Python 2.7 and above</span>
+</pre></div>
+</div>
+<p>For all intensive purposes, OrderedDict is like the Python
+built-in dict, except that it preserves the order of insertion.
+This is most visible when iterating through the table:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">values</span><span class="p">)</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span> <span class="p">:</span>
+<span class="gp">... </span>   <span class="k">print</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span>
+<span class="go">a 1</span>
+<span class="go">b 2</span>
+</pre></div>
+</div>
+<p>The order that the key-value pairs are listed in the constructor
+is preserved.  For more information on the Python OrderedDict,
+take a look at PEP 327: Adding an ordered dictionary to collections
+at <cite>http://www.python.org/dev/peps/pep-0372/</cite>.</p>
+<p>The OTab, which in the C++ equivalent of the Python OrderedDictionary
+behaves just like its brethren.  The OTab is very much like the
+Tab, except that it preserves the order of insertion:</p>
+<div class="highlight-python"><pre>// OTab is just like Tab
+OTab o("OrderedDict(([('a', 1), ('b', 2)])");  // C++ respect Python syntax
+o["goes at end"] = 500;
+It ii(o);
+while (ii()) {
+   cout &lt;&lt; ii.key() &lt;&lt; " " &lt;&lt; ii.value();  // preserves order of insertion
+}</pre>
+</div>
+<p>The OTab has exactly the same interface as the Tab.  Adding the idea
+of order to the Tab is very simple, and doesn&#8217;t cost much in terms of
+implementation (it&#8217;s essentially just an extra doubly linked list):
+all the speed of the OTab is preserved for key-lookup, insertion, etc.
+In other words, the only real difference is that the order of insertion
+is preserved so what when you print the table, you can see the order:</p>
+<div class="highlight-python"><pre>OTab o;
+o["a"] = 10;
+o["b"] = 20;
+o["c"] = 30;
+cout &lt;&lt; o &lt;&lt; endl;  // o{ 'a':10, 'b':20, 'c':30 }</pre>
+</div>
+<p>Contrast this to a plain dictionary:</p>
+<div class="highlight-python"><pre>Tab t;
+t["a"] = 10;
+t["b"] = 20;
+t["c"] = 30;
+cout &lt;&lt; t &lt;&lt; endl;  // { 'c':30, 'a':10, 'b':20 }  // Looks "random" order</pre>
+</div>
+<p>Intuitively, the OTab is easier for beginners to understand because
+the input matches the output better (the beginner may ask &#8220;Why is my dict
+in some weird order?&#8221;).  The real utility is for bridging data structures
+in other languages.</p>
+<blockquote>
+<ol class="arabic simple">
+<li>XML is an ordered data structure: the next version of PicklingTools
+will have tools to read/write XML using OTab</li>
+<li>The C struct is inherently ordered: if you needed to go back
+and forth between some C struct and PicklingTools, an OTab
+would be essential (in fact: this was the driving need: we needed
+to be able to read/write BlueFiles which is C-struct based).</li>
+<li>Windows .ini files are ordered</li>
+</ol>
+</blockquote>
+<p>The next version of the PicklingTools will have XML parsing tools
+and will rely heavily upon the OTab.</p>
+<p>The C++ OTab currently supports a shorter syntax for OrderedDict:</p>
+<div class="highlight-python"><pre>OTab o("o{'a': 1}"); // short syntax, an o just before first {
+OTab longer( "OrderedDict([('a',1)])");  // Python syntax</pre>
+</div>
+<p>We are hoping to perhaps introduce the shorter syntax to Python:
+the longer Python syntax seems harder to read.  The nice thing
+about the shorter syntax is that it looks JUST LIKE a normal
+dictionary, with braces and such but only ONE EXTRA CHARACTER: the little
+o to indicate its ordered.  Which is easier to read?:</p>
+<div class="highlight-python"><pre>Val v1 = Eval("o{ 'a':1, 'b':2, 'c':3 }");  // short syntax: ordered dict
+
+Val v2 = Eval("OrderedDict([('a', 1), ('b',2), ('c',3)])"); // longer</pre>
+</div>
+</div>
+<div class="section" id="c-int-n-and-the-python-arbitrary-size-ints-long">
+<h3>C++ int_n and the Python arbitrary size ints (long)<a class="headerlink" href="#c-int-n-and-the-python-arbitrary-size-ints-long" title="Permalink to this headline">¶</a></h3>
+<p>Python has an arbitrary sized integer so that when you exceed the
+precision of an int_u4 or int_u8, it creates an arbitrary sized int
+(essentially implemented as an array of bytes).:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">google</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="mi">100</span>  <span class="c"># Obviously bigger than an int_u8 can hold</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">google</span>
+<span class="go">10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</span>
+</pre></div>
+</div>
+<p>The PicklingTools, as of release 1.2.0 has the <em>int_n</em> and the
+<em>int_un</em> types.  The <em>int_n</em> corresponds to the Python arbitrary type.
+The <em>int_un</em> is an unsigned version.  In general, they have just
+like other ints and can combine with other ints:</p>
+<div class="highlight-python"><pre>// Use of int_n just like normal ints
+int_n google = 1;
+for (int ii=0; ii&lt;100; ii++) {
+   google *= 10;
+}
+
+int_n top = 1+ 2;
+int_n bottom = 1000;
+int_n dd = top / bottom;</pre>
+</div>
+<p>The int_n is implemented as an array of unsigned ints.  They work
+with Vals and other ints and reals just like all the other ints:</p>
+<div class="highlight-python"><pre>Val g = int_n(100);
+int_n out = g;
+
+Val pi = 3.14159265;
+int_n three = pi;  // truncates just like any int would</pre>
+</div>
+<p>Some integers constants are too large, but that&#8217;s easy to get around
+with some strings:</p>
+<div class="highlight-python"><pre>// literal too big, compiler complains and worse, truncates the number!
+int_n t = 123456789123456789123456789;
+
+int_n a0 = StringToBigInt("123456789123456789123456789"); // Ah! Use string!
+int_n a1 = "123456789123456789123456789"; // In PicklingTools 1.4.1 &amp; above</pre>
+</div>
+<p>In general, the int_n/int_un seem to have roughly the same performance as the
+Python arbitrary ints (gleaned from an informal test computing combinatorics).</p>
+</div>
+<div class="section" id="c-tup-and-python-tuples">
+<h3>C++ Tup and Python Tuples<a class="headerlink" href="#c-tup-and-python-tuples" title="Permalink to this headline">¶</a></h3>
+<p>As of version 1.2.0, the PicklingTools supports the Tup, which behaves
+very much like the Python tuple:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mf">2.2</span><span class="p">,</span> <span class="s">&#39;three&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>   <span class="c"># 2.2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="nb">len</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="c"># 3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s">&#39;NOT ALLOWED&#39;</span><span class="p">)</span>  <span class="c"># ERROR!</span>
+
+<span class="go">// C++</span>
+<span class="go">Tup a(1, 2.2, &quot;three&quot;);</span>
+<span class="go">cout &lt;&lt; a[1];        // 2.2</span>
+<span class="go">cout &lt;&lt; a.length();  // 3</span>
+<span class="go">a.append(&quot;NOT ALLOWED&quot;);   // Syntax Error</span>
+</pre></div>
+</div>
+<p>The Tup, like the Python tuple, is just for building a &#8220;const&#8221;
+array that you can&#8217;t change.  Once gotcha: the Tup does NOT EVAL
+the string arguments like the Tab, OTab and Arr:</p>
+<div class="highlight-python"><pre>// OTab, Tab, Arr all evaluate the first argument when constructing
+OTab o("o{ 'a':1 }");  // Eval
+Tab  t("{'a': 2'} ");  // Eval
+Arr  a("[1,2,3]");     // Eval
+
+Tup  u("[1,2,3]");         // DOES NOT EVAL
+                           // So, this is a tuple of 1 argument: a string
+                           // ("[1,2,3]")
+
+Tup  uu(Eval("[1,2,3"]));  // Force Eval
+                           // So, this is a tuple of 1 argument: a list
+                           // ([1,2,3])</pre>
+</div>
+<p>Tups are most useful when just constructing long argument trains
+of very different types in C++:</p>
+<div class="highlight-python"><pre>Tup lotsa(1, 2.2, "three", Tab(), Arr("[1,2,3]"), OTab(), None);</pre>
+</div>
+<p>The Tup is implemented as an array of Vals, where the number of
+Vals is fixed at construction time.</p>
+</div>
+<div class="section" id="c-and-cx-t-int">
+<h3>C++ and cx_t&lt;INT&gt;<a class="headerlink" href="#c-and-cx-t-int" title="Permalink to this headline">¶</a></h3>
+<p>New in PicklingTools 1.6.0, a Val can carry a complex type for integers
+as well as floats and doubles.  This is in recognition that certain
+DSP operations make good use of complex integers.
+For example:  D2A sampling from an antenna: an array of data can be held
+as <tt class="docutils literal"><span class="pre">cx_t&lt;int_2&gt;</span></tt> rather than <tt class="docutils literal"><span class="pre">complex8</span></tt> for half the cost
+of memory.    For very large arrays of data, that can be a signficant
+savings.</p>
+<p>The cx_t&lt;&gt; support fewer operations, (mag2 still works but may roll over
+if the values get large) as many operations
+(such as magnitude) require floating values.  Note that
+these values can easily convert between different precisions.</p>
+</div>
+<div class="section" id="id2">
+<h3>Sockets<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>The MidasTalker in C++ in very similar to the Python MidasTalker, and
+this is on purpose.  Similarly for the MidasServer, MidasYeller and
+MidasListener.</p>
+<p>Creating and using the basic socket classes from C++ should feel
+almost exactly the same as the Python experience:</p>
+<div class="highlight-python"><pre>#include "midastalker.h"
+MidasTalker mt("host", port, SERIALIZE_M2K);
+mt.open();
+mt.send(Tab(" {'a':1} ");
+Val v = mt.recv();</pre>
+</div>
+<p>The major difference (besides the syntax) is that the C++ components
+support all the major serialization protocols: M2k, OpenContainers,
+Python P0, P2, P-2.  The Python components generally only support the Python 0
+(and maybe P2) protocols that are built-in.</p>
+<p>There are plenty of examples in the C++ area of the PicklingTools
+distribution.  The best place to start is copy one of the examples
+(following the example in the <cite>Makefile.Linux</cite>) and looking at some of
+the sample source code.</p>
+</div>
+<div class="section" id="json">
+<h3>JSON<a class="headerlink" href="#json" title="Permalink to this headline">¶</a></h3>
+<p>JSON stands for JavaScript Object Notation and comes from the dictionaries
+(or objects) in the Javascript programming Language.  Some people
+prefer JSON over XML as a language independent exchange format because
+JSON tends to be smaller, easier to read, and have less overhead.</p>
+<p>JSON is a text format for storing recursive, heterogeneous dictionaries
+and lists.   JSON is very much like text-Python dictionaries: the
+differences are minor.  In JSON, &#8216;true&#8217;, &#8216;false&#8217;, &#8216;null&#8217; replace the
+&#8216;True&#8217;, &#8216;False&#8217;, &#8216;None&#8217; of Python dictionaries.  JSON strings can
+only use double quotes (whereas Python Dictionaries can use
+either single quotes or double quotes).  Other than that, they are
+very similar.</p>
+<p>The PicklingTools C++ library has the capability to read JSON
+and write JSON.  (By default, Python has a JSON library builtin:
+the <cite>json</cite> library: &#8216;import json&#8217;) The JSON text is converted to Tab/Arr/Vals,
+so that we can use the dictionaries in the standard
+Tab manipulations.  For example, to read in file which
+contains a JSON dictionary:</p>
+<div class="highlight-python"><pre>#include "jsonreader.h"
+
+Val result;
+ReadValFromJSONFile("json.txt",
+                    result);
+// 'result' is now a plain Tab we can manipulate</pre>
+</div>
+<p>Writing JSON is even easier: anything that is a Tab/Arr
+can be written into a stream:</p>
+<div class="highlight-python"><pre>#include "jsonprint.h"
+
+Val t=Tab("{'a':1, 'b':2.2, 'c':'three'}");
+JSONPrint(std::cout, t);   // Python dictionary written as JSON dict</pre>
+</div>
+<p>These tools can also be useful when building HTTPClients and Servers.</p>
+<p>(Caveat: PicklingTools JSON doesn&#8217;t support anything other than ASCII chars)</p>
+</div>
+<div class="section" id="httpclient-and-httpserver">
+<h3>HTTPClient and HTTPServer<a class="headerlink" href="#httpclient-and-httpserver" title="Permalink to this headline">¶</a></h3>
+<p>There are currently some tools in the PicklingTools to manipulate
+HTTP.  The interfaces for the C++ are in flux to a certain extent, so they
+aren&#8217;t quite ready for full exposure yet, but they are included in
+release 1.3.2 so we can get some feedback.  The code does function.</p>
+<p>In general, the HTTPClient looks/feels very much like the HTTPClient
+of the Python library:  Take a look at the &#8220;httpclient_ex.cc&#8221;
+for a sample of how to write a simple client.</p>
+<p>The HTTPServer framework is much more complicated: the server
+framework has been overhauled and refactored so that we can
+support one connection per thread easily.  A sample
+server is written: see &#8220;httpserver_ex.cc&#8221;.</p>
+<p>Currently, there is support for HTTP 1.0 and some support for HTTP 1.1
+(including chunked encoding).  Some more work needs to be done here.</p>
+</div>
+<div class="section" id="conformance-checking">
+<h3>Conformance Checking<a class="headerlink" href="#conformance-checking" title="Permalink to this headline">¶</a></h3>
+<p>Is there a mechanism like XML schema for dictionaries?  Yes, the
+<cite>Conforms</cite> routine.  This area describes the C++ version, but there
+is a Python version which behaves almost identically.</p>
+<p>One feature that has been asked for by a number of users is the
+ability to check a dictionary for conformance.  In other words:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Does a dict have the right number of keys?</li>
+<li>Does a dict have the right structure?</li>
+<li>Does a dict have the keys with the right names?</li>
+<li>Are the types of the values the right types?</li>
+</ol>
+</blockquote>
+<p>For example, if a user wants to send a message, where the host
+and port are required keys in a message, the user wants to
+be able to &#8220;validate&#8221; a dictionary has the proper keys and/or types:</p>
+<div class="highlight-python"><pre>// C++
+Val message = Tab("{'port':8888, 'host':'ai1', 'data':'ping'}");</pre>
+</div>
+<p>A simple way to validate this message would be to manually check
+for all the keys:</p>
+<div class="highlight-python"><pre>if (message.contains("port") &amp;&amp;
+    message["port"].tag == 'i' &amp;&amp; // check for int port
+    message.contains("host") &amp;&amp;
+    message["host"].tag == 'a') { // check for string host
+    //// Valid message
+} else {
+    throw runtime_error("Invalid Message to send");
+}</pre>
+</div>
+<p>While this will work, it scales poorly for larger and larger structures.
+A simple idea is to have a &#8220;prototype&#8221; message that we try to
+match against.  If the message we want to send matches the prototype
+structure (has the same keys and types), then it is a valid message.
+As of PicklingTools 1.3.3, there is a new function called <cite>Conforms</cite>
+which checks an instance against a prototype message.
+If the message to send matches, then this is a valid message:</p>
+<div class="highlight-python"><pre>#include "occonforms.h"
+
+Val message  = Tab("{'port':8888, 'host':'ai1', 'data':'ping'}");
+Val prototype= Tab("{'port':0,    'host':'',    'data':''    }");
+
+if (Conforms(message, prototype)) {
+   //// Valid message
+} else {
+   throw runtime_error("Invalid Message to send");
+}</pre>
+</div>
+<p>Matching (by default) means that all keys of the prototype are present
+in the message and all the types (int, string, etc) of the
+message match the types of the prototype.   Note that in the
+prototype, the actual value doesn&#8217;t matter as much as the type
+of the field.</p>
+<p>If the message forgets the port, host, or data fields, then the <cite>Conforms</cite>
+check would fail.:</p>
+<div class="highlight-python"><pre>Val message  = Tab("{'port':8888}");
+Val prototype= Tab("{'port':0,    'host':'',    'data':''    }");
+
+// Conforms will return false!!
+if (Conforms(message, prototype)) {
+
+}
+// NO! this message does not conform</pre>
+</div>
+<p>There are many kinds of options in performing matches.  For instance,
+sometimes the type of the fields doesn&#8217;t matter at all: all that matters
+is the presence of the keys and that the key names match.  For instance,
+the data to send to a client may a table, a string, an int, etc.
+You can use <cite>None</cite> in the prototype to specify a key can take any
+value:</p>
+<div class="highlight-python"><pre>Val message  = Tab("{'port':8888, 'host':'ai1', 'data':'ping'}");
+Val prototype= Tab("{'port':0,    'host':'',    'data': None  }");
+
+if (Conforms(message, prototype)) {
+   //// Valid message because None in prototype matches ANY TYPE!
+} else {
+   throw runtime_error("Invalid Message to send");
+}</pre>
+</div>
+<p>Since the data field in the prototype is <cite>None</cite>, any type is valid! Thus
+the conform check above will succeed.  If we change the data to a table,
+or anything else, the conform check will still succeed:</p>
+<div class="highlight-python"><pre>Val message  = Tab("{'port':8888, 'host':'ai1', 'data':{'stuff':'123'}");</pre>
+</div>
+<p>As will:</p>
+<div class="highlight-python"><pre>Val message  = Tab("{'port':8888, 'host':'ai1', 'data':4 }");</pre>
+</div>
+<p>Of course, we can send None data as well:</p>
+<div class="highlight-python"><pre>Val message  = Tab("{'port':8888, 'host':'ai1', 'data':None }");</pre>
+</div>
+<p>There are many types of conformance matching that make sense, depending
+on what a user may be doing.  For instance, the user may only looking
+to make sure that <em>some</em> keys are there: other keys can be crucial,
+but others may be optional.  For example, a key specifying the
+sender can be useful for our message (for debugging), but not required:</p>
+<div class="highlight-python"><pre>// The sender key is optional, but both of these tables are still valid
+Val message1 = Tab("{'port':8888, 'host':'ai1', 'sender':'ai2' }");
+Val message2 = Tab("{'port':8888, 'host':'ai1'  }");</pre>
+</div>
+<p>The third argument to <cite>Conforms</cite> (called <cite>exact_structure</cite> in the code)
+controls how pedantic the check is when looking at the structure:</p>
+<blockquote>
+<ul class="simple">
+<li>If exact_structure is true, then Conforms is checking that all keys
+in the prototype MUST be present AND that only those keys are
+present.  In other words, the prototype and message must have the
+same number of keys and all keys must match.</li>
+<li>If exact_structure is false, then Conforms is simply checking
+that all the keys of the prototype are present in the
+message: if there are more keys in the message, that is not a problem.</li>
+</ul>
+</blockquote>
+<p>In summary:</p>
+<div class="highlight-python"><pre>Conforms(message, prototype, false) -&gt; all keys of prototype must be in
+                                       message and match
+
+Conforms(message, prototype, true)  -&gt; all keys of prototype must be in
+                                       message and match AND
+                                       number of keys must match prototype</pre>
+</div>
+<p>This means that:</p>
+<div class="highlight-python"><pre>Val message1 = Tab("{'port':8888, 'host':'ai1', 'data':4, 'sender':'ai2' }");
+Val prototype= Tab("{'port':0,    'host':'',    'data': None  }");
+
+
+Conforms(message1, prototype, true) -&gt; false
+// FAILS because message1 has too many keys,
+// so doesn't have EXACTLY same structure
+
+
+Conforms(messag21, prototype, false) would SUCCEED (return true)
+// SUCCEEDS because message1 has all necessary keys,
+// but message1 can have a few more (because doesn't have to
+// have EXACTLY the same structure)</pre>
+</div>
+<p>In the <cite>exact_structure</cite> parameter specifies how structure and
+keys match, the next parameter <cite>type_match</cite> specifies how <em>values</em>
+match.  In particular, the <cite>type_match</cite> parameter control
+how matching works when comparing the types of
+two entries in a table or array.  By default, types must match
+exactly:</p>
+<div class="highlight-python"><pre>Val mesg     = Tab("{'port':8888, 'host':'ai1' }");
+Val proto    = Tab("{'port':0,    'host':''    }");
+
+if (Conforms(mesg, proto, true, EXACT_MATCH)) { ... }
+// same as Conforms(mesg, proto, true)</pre>
+</div>
+<p>The above <cite>Conforms</cite> return true because (a) the structure matches
+but more importantly (b) the type of <cite>port</cite> is an <cite>int</cite> and the type of <cite>host</cite>
+is a <cite>string</cite> and that matches what&#8217;s in the prototype.
+The fourth argument to <cite>Conforms</cite> is a enumeration and defaults
+to <cite>EXACT_MATCH</cite>.  All values of the enumeration are:</p>
+<div class="highlight-python"><pre>EXACT_MATCH:  The types of compared values must match exactly
+
+LOOSE_MATCH:  All ints match each other
+              All reals match each other
+              All complexes match each other
+              Tab/OTab match other Tab/OTab
+              Arr/Tup match other Tab/OTab
+              Array&lt;POD1&gt; will match Array&lt;POD2&gt;
+                  if POD1 loose matches POD2
+
+LOOSE_STRING_MATCH:
+              Like LOOSE_MATCH, but strings in the
+              given message will match anything.</pre>
+</div>
+<p>An example showing different types of integers can match or not:</p>
+<div class="highlight-python"><pre>Val mesg1 = int_8(1);
+Val proto1 = int_4(1);
+
+
+Conforms(mesg1, proto1, true, EXACT_MATCH) -&gt; return false
+// FAILS because different types int_8 and int_4
+
+
+Conforms(mesg1, proto1, true, LOOSE_MATCH) -&gt; return true
+// SUCCEEDS because similar types (2 types of int)</pre>
+</div>
+<p>Another example showing how reals and ints don&#8217;t match:</p>
+<div class="highlight-python"><pre>Val mesg2 = real_8(1.0);
+Val proto2 = int_4(1);
+
+
+Conforms(mesg2, proto1, true, EXACT_MATCH) -&gt; return false
+// FAILS because different types real_8 and int_4
+
+
+Conforms(mesg2, proto1, true, LOOSE_MATCH) -&gt; return false
+// FAILS because reals and ints NOT really same types</pre>
+</div>
+<p>When <cite>LOOSE_STRING_MATCH</cite> is turned on, strings in the message
+will match anything:</p>
+<div class="highlight-python"><pre>Val mesg3 = "1234";
+Val proto2 = int_4(0);
+
+
+Conforms(mesg3, proto3, true, EXACT_MATCH) -&gt; return false
+// FAILS because different types string and int_4
+
+
+Conforms(mesg3, proto3, true, LOOSE_MATCH) -&gt; return false
+// FAILS because reals and ints NOT really same types
+
+
+Conforms(mesg3, proto3, true, LOOSE_STRING_MATCH) -&gt; return true
+// SUCCEEDS because strings match anything under LOOSE_STRING_MATCH</pre>
+</div>
+<p>The purpose of <cite>EXACT_MATCH</cite> is to strictly enforce matches.
+The purpose of <cite>LOOSE_MATCH</cite> is to allow some leeway so that related
+types will match.  The purpose of <cite>LOOSE_STRING_MATCH</cite> is to recognize
+that many times strings are filled into fields of a message, but
+are really supposed to be something else (like an int, a time,
+a list of people); this makes it easier to move from XML to dictionaries.</p>
+<p>If it&#8217;s not clear from the above examples, all matching is
+performed <em>recursively</em> throughout the table: if the prototype
+has a nested dictionary inside of an array inside of a dictionary,
+the message must have the same structure recursively:</p>
+<div class="highlight-python"><pre>Val instance =Tab("{'a':1, 'b':[1,2.2, {'nested': {} }] }");
+Val prototype=Tab("{'a':0, 'b':[0,0.0, {'nested': {} }] }");
+
+Conforms(instance, prototype) -&gt; true
+
+// Recursively checks that 'b' of instance matches 'b' of prototype,
+// and that 'nested' of instance matches 'nested' of prototype</pre>
+</div>
+<p>One final note: sometimes when validation fails, it&#8217;s unclear
+why the validation failed.  By default, a validation check
+simply returns <cite>false</cite> with no other information why the
+check failed:</p>
+<div class="highlight-python"><pre> Val instance = 1.0;
+ Val prototype= "";
+
+ // FAILS by returning false to show that 1.0 and "" mismatch types
+ if (Conforms(instance, prototype, 1, EXACT_MATCH)) {
+   ///  -&gt; return false
+ }
+// Why exactly did this fail?</pre>
+</div>
+<p>There is one final parameter on the <cite>Conforms</cite>
+function call called <cite>throw_exception_with_message</cite> which can
+be set to true to give more information.  By default, this
+parameter is set to false, which means failed <cite>Conforms</cite> calls
+return false to show failure.  If, on the other hand, it is set
+the true, a <cite>runtime_error</cite> is thrown instead of a false return,
+and embedded in the exception text is information about why the
+fail checked:</p>
+<div class="highlight-python"><pre>// FAILS by returning throwing runtime_error
+bool result = false;
+try {
+   result = (Conforms(instance, prototype, 1, EXACT_MATCH, true));
+} catch (const runtime_error&amp; re) {
+   cerr &lt;&lt; re.what() &lt;&lt; endl;
+}
+
+// Prints out
+*********FAILURE TO MATCH instance against prototype:
+ instance=1.0 with type:d
+ prototype='' with type:a
+ exact_structure=1
+ type_match=EXACT_MATCH
+Requested Exact Match of two primitive types that didn't match</pre>
+</div>
+<p>Inside the error message is information on what the types were
+and why they didn&#8217;t match: in this case, type &#8216;d&#8217; doesn&#8217;t match
+type &#8216;a&#8217; in an <cite>EXACT_MATCH</cite>.  In a very large table, this
+can be very useful, as it will tell you exactly what keys don&#8217;t
+match.  This avoids hunting around the table to find the problem.</p>
+<p>This debugging mechanism <em>should not be turned on by default</em>.
+It&#8217;s very expensive to build error strings, and it&#8217;s also expensive to
+throw exceptions to get information from a conformance check.
+We envision this mechanism as being most useful when debugging:
+For production code, the last parameter should probably always be false
+so that any conformance checks are fast.
+Probably only when debugging should you set the last parameter to true.</p>
+<p>The Python version of the conforms module is very similar.</p>
+<p>Test to see if an instance of a Python object conforms to the specification
+prototype.   This is similar to checking if an XML document conforms to an
+XML DTD or schema.  For example:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">conforms</span> <span class="kn">import</span> <span class="n">conforms</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">conforms</span> <span class="kn">import</span> <span class="n">EXACT_MATCH</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">conforms</span> <span class="kn">import</span> <span class="n">LOOSE_MATCH</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">conforms</span> <span class="kn">import</span> <span class="n">LOOSE_STRING_MATCH</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># EXAMPLE 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">##### At a simple level, we want to exactly match a prototype:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">instance</span>  <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span><span class="mf">2.2</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">:</span><span class="s">&#39;three&#39;</span><span class="p">}</span>   <span class="c"># value to check</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prototype</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span><span class="mf">0.0</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">:</span><span class="s">&quot;&quot;</span><span class="p">}</span>    <span class="c"># prototype to check against</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">conforms</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">prototype</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="n">EXACT_MATCH</span><span class="p">)</span> <span class="p">:</span>
+<span class="gp">... </span>      <span class="c"># should be true: all keys match, and value TYPES match</span>
+
+<span class="go">(1) Note that the instance has all the same keys as the prototype, so it</span>
+<span class="go">    matches</span>
+<span class="go">(2) Note that on the prototype table, that the VALUES aren&#39;t important,</span>
+<span class="go">    it&#39;s only matching the the TYPE of the val</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># EXAMPLE 2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#### We may not necessarily need all keys in the prototype</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">instance1</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span><span class="mf">2.2</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">:</span><span class="s">&#39;three&#39;</span><span class="p">,</span> <span class="s">&#39;d&#39;</span><span class="p">:</span><span class="mi">777</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prototype1</span><span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span><span class="mf">0.0</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">conforms</span><span class="p">(</span><span class="n">instance1</span><span class="p">,</span> <span class="n">prototype1</span><span class="p">,</span> <span class="bp">False</span><span class="p">,</span> <span class="n">EXACT_MATCH</span><span class="p">)</span> <span class="p">:</span>
+<span class="gp">... </span>   <span class="c"># should be true: instance has all keys of prototype</span>
+
+<span class="go">(1) Note that the instance has more keys than the prototype, but that&#39;s</span>
+<span class="go">    okay because we specified exact_structure to be false.</span>
+<span class="go">(2) by setting EXACT_MATCH, all the types of the values that are</span>
+<span class="go">    compared MUST match (not the value just the types of the values)</span>
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># EXAMPLE 3</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#### If you just want the structure, but don&#39;t care about the</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#### types of the keys, use None in the prototype.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">instance2</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span><span class="mf">2.2</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">:</span><span class="s">&#39;three&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prototype2</span><span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="bp">None</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span><span class="bp">None</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">:</span><span class="bp">None</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">conforms</span><span class="p">(</span><span class="n">instance2</span><span class="p">,</span> <span class="n">prototype2</span><span class="p">,</span> <span class="bp">True</span><span class="p">,</span> <span class="n">EXACT_MATCH</span><span class="p">)</span> <span class="p">:</span>
+<span class="gp">... </span>   <span class="c"># should be true, only comparing keys</span>
+
+
+<span class="gp">&gt;&gt;&gt; </span><span class="c"># EXAMPLE 4</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#### If you want to match value types, but want to be a little</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c">#### looser: sometimes your int is a long, sometimes an int_u4, etc.</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">instance3</span> <span class="o">=</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span><span class="il">2L</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">:</span><span class="s">&#39;three&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">prototype3</span> <span class="o">=</span><span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">:</span><span class="s">&#39;three&#39;</span><span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">conforms</span><span class="p">(</span><span class="n">instance3</span><span class="p">,</span> <span class="n">prototype3</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span> <span class="n">LOOSE_MATCH</span><span class="p">)</span> <span class="p">:</span>
+<span class="gp">... </span>   <span class="c"># should be true because long(2) is a LOOSE_MATCH of int(2)</span>
+</pre></div>
+</div>
+<p>The Python version of the <cite>conforms</cite> module is a standalone module
+that can easily be dropped into other Python baselines.  It is more
+general than the C++ version (because Python has a plethora of types)
+and so it returns slightly different results on things that
+are iterable: If a type is iterable, things are more easily comparable,
+and thus more likely to conform in a LOOSE_MATCH.
+In general, though, the Python and C++ versions of conforms
+will give the same results.</p>
+<p>In summary,  the purpose of the <cite>Conforms</cite> routines to all some
+simple kind of schema validation like XML has.  Enough customers
+have asked for a feature like this that we felt it was time to embrace
+some XML schema-like mechanism for Python dictionaries.
+In the end, <cite>Conforms</cite> is
+simply a tool you can use to help when you make start constructing
+bigger dictionaries to make sure structure is preserved.</p>
+</div>
+</div>
+<div class="section" id="java">
+<h2>Java<a class="headerlink" href="#java" title="Permalink to this headline">¶</a></h2>
+<p>The Java experience is discussed in a self-contained document
+in the &#8220;Docs&#8221; area of the PicklingTools distribution.
+It&#8217;s also on the <a class="reference external" href="http://picklingtools.com">http://picklingtools.com</a> website.</p>
+<p>In general, Java support is still relatively new as of PicklingTools 1.5.1,
+but it has been used in some big systems already.</p>
+</div>
+<div class="section" id="the-x-midas-ptools-experience">
+<h2>The X-Midas PTOOLS Experience<a class="headerlink" href="#the-x-midas-ptools-experience" title="Permalink to this headline">¶</a></h2>
+<p>The PicklingTools is an entire distribution with C++, Python, M2k, and
+X-Midas support.  PTOOLS is an option tree for using with X-Midas
+that comes with the PicklingTools distribution.</p>
+<p>Everything we have learned in the previous sections applies to the PTOOLS
+option tree.</p>
+<p>All of the code in the python subdirectory of PTOOLS is just a copy of
+the Python code from the distribution.  The nice thing is that you
+don&#8217;t have to set the PYTHONPATH to pick up that code from XMPY:
+X-Midas handles that for you.</p>
+<p>Most of the rest of PTOOLS is just a copy of the code from the C++
+area.  The C++ primitives in the <cite>host</cite> area of PTOOLS are essentially
+the same examples from the C++ area coded to fit inside of an X-Midas
+C++ primitive.</p>
+<p>The real reason to use PTOOLS is because you want to use the PicklingTools
+with X-Midas.  PTOOLS has been packaged to work with X-Midas as a standard
+option tree:</p>
+<div class="highlight-python"><pre>X-Midas&gt; xmopt ptools /path/to/ptools/only/lowercase/characters
+X-Midas&gt; xmp +ptools
+X-Midas&gt; xmbopt ptools</pre>
+</div>
+<p>There are plenty of examples in the host area demonstrating how to
+write an X-Midas C++ primitive with the PTOOLS libraries.  The only
+major gotcha is that you have to be sure your own X-Midas C++
+primitives use the same compiler and linking flags that the example
+host primitives do.  Take a look at the <cite>library.cfg</cite> and
+<cite>primitives.cfg files in the `cfg/</cite> area for examples before you build
+your own primitives.</p>
+</div>
+<div class="section" id="the-midas-2k-experience">
+<h2>The Midas 2k Experience<a class="headerlink" href="#the-midas-2k-experience" title="Permalink to this headline">¶</a></h2>
+<p>Recall that the original goal of the PicklingTools was to work with
+legacy M2k applications.  If you use the SERIALIZE_M2K option on your
+MidasTalker/MidasServer/MidasYeller/MidasListener, you should be able
+to talk to the legacy M2k components (OpalDaemon, OpalSocketMsg,
+UDPSocketMsg) without problems.</p>
+<p>The M2k area of the PicklingTools contains replacement components
+for some of the standard M2k components.  In particular, the
+OpalPythonDaemon is a replacement for the OpalDaemon and the
+OpalPythonSocketMsg is a replacement for OpalSocketMsg.  The original
+M2k OpalDaemon/OpalSocketMsg components works fine, but are limited:</p>
+<blockquote>
+<dl class="docutils">
+<dt>Original M2k components only supports Midas 2k serialization :</dt>
+<dd>if you want to talk to them from Python, OpenContainers, out of luck</dd>
+<dt>Original M2k components don&#8217;t support adaptive serialization:</dt>
+<dd>the newer components can adopt to the message being sent to them
+so they can understand multiple clients with multiple protocols
+AT THE SAME TIME.  Original components ONLY understand one protocol.</dd>
+</dl>
+</blockquote>
+<p>Later versions of legacy applications can use the OpalPythonDaemon
+and OpalPythonSocketMsg to open their options: adaptive serialization
+and multiple serialization choices.</p>
+<p>Essentially, the OpalPythonSocketMsg and OpalPythonDaemon close the
+loop: with them, Midas 2k can talk every serialization protocol&#8212;this
+means ANY system (XMPY, X-Midas, raw C++, raw Python, Midas 2k) can
+talk to your legacy M2k app.</p>
+<p>To use the new Components, copy everything you need out of the
+<cite>unit.cfg</cite> in the M2k area, and copy all the listed files into your own
+project.</p>
+</div>
+<div class="section" id="the-final-experience">
+<h2>The Final Experience<a class="headerlink" href="#the-final-experience" title="Permalink to this headline">¶</a></h2>
+<p>All the components from the PicklingTools system should be
+compatible.  For a final test, the examples in each of the different
+areas should work together: For example, the <cite>xmserver.cc</cite> X-Midas
+primitive from the PTOOLS option tree should work with the Python
+<cite>midastalker_ex2.py</cite> and the raw C++ <cite>midastalker_ex2.cc</cite>.</p>
+<p>In the end, this is just a set of open source tools to help you get
+your job done.  You are welcome to change them and modify them as
+needed.</p>
+</div>
+<div class="section" id="appendix-a-c-and-user-defined-types">
+<h2>Appendix A:  C++ and User-Defined Types<a class="headerlink" href="#appendix-a-c-and-user-defined-types" title="Permalink to this headline">¶</a></h2>
+<p>A frequent criticism of the <em>Val/Tab/Arr</em> is &#8220;Why can&#8217;t Vals contain
+user-defined types?&#8221;  The simple answer is that there are a lot of issues
+to be concerned with:</p>
+<blockquote>
+<ol class="loweralpha simple">
+<li>Is a new type a POD type?  (And thus bit-blittable?)</li>
+<li>How does a new type compare with other types of Vals?</li>
+<li>How does a new type serialize?</li>
+<li>How does a new type Stringize itself?</li>
+<li>How does a new type convert to other types?</li>
+<li>What happens if we have virtual functions in a type?</li>
+<li>What letter do I use for a tag?  Has it already been used?</li>
+</ol>
+</blockquote>
+<p>Certainly there are ways to handle these issues, but the philosophy
+of OpenContainers (for the moment) is that most data, if not all, can
+be represented with the core types: all ints, all floats, complexes,
+Arrs, Tabs, Array&lt;POD&gt;, strings, and None.  This is the essential
+argument of JSON and XML anyway, so we aren&#8217;t asserting anything
+controversial.</p>
+<p>One thing that has proved useful is the ability is to have classes
+that can convert to and from Vals easily so that you can take advantage
+of all the infrastructure.  For example:</p>
+<div class="highlight-python"><pre>// A class for computing simulations of a biological nature
+class BiologicalSimulation {
+  public:
+
+   Start ();  // Start the simulation
+   Stop  ();  // Stop
+   Resume (); // Very expensive, so have to stop and resume every so often
+
+  private:
+    // All sorts of data
+    real_8 start_time, real_8 stop_time;
+    float* paramecium_state;
+    int    number_of_paramecium;
+};</pre>
+</div>
+<p>It would be nice if we could convert BiologicalSimulation to and from
+Vals so we could easily serialize it and send over sockets or save it
+to files.  It&#8217;s actually pretty straight forward to do. Here&#8217;s a
+sketch of what we want:</p>
+<div class="highlight-python"><pre>// Take current BiologicalSimulation and save to file
+BiologicalSimulation b;
+Val repr = b;
+WriteValToFile(repr, "simulation_backup");
+
+...
+
+// Read Biological Simulation from file and reconstruct
+Val old_sim;
+ReadValFromFile("simulation_backup", old_sim);
+BiologicalSimulation update = old_sim;</pre>
+</div>
+<p>The idea is simple: The class of interest needs to know how to
+convert between itself and Vals.  Notice that to do this easily,
+the class has two new methods:</p>
+<blockquote>
+<ol class="loweralpha simple">
+<li>A New Constructor to create BiologicalSimulations from Vals:
+<cite>BiologicalSimulation (const Val&amp; v)</cite></li>
+<li>An outconverter to create Vals from BiologicalSimulations:
+<cite>operator Val () const</cite></li>
+</ol>
+</blockquote>
+<p>Here&#8217;s an example how we might do this: The <cite>BiologicalSimulations</cite> becomes
+a <em>Tab</em> with some keys representing state:</p>
+<div class="highlight-python"><pre>// A class for computing simulations of a biological nature
+class BiologicalSimulation {
+  public:
+
+   // Construct myself from a Val
+   BiologicalSimulation (const Val&amp; v) {
+     start_time = v("start_time");
+     stop_time  = v("stop_time");
+     Array&lt;real_4&gt;&amp; p = v("paramecium_data");
+     number_of_paramecium = p.length();
+     paramecium_state = new float[number_of_paramcium];
+     memcpy(paramecium_state, p.data(), sizeof(float)*p.length());
+   }
+
+   Start ();  // Start the simulation
+   Stop  ();  // Stop
+   Resume (); // Very expensive, so have to stop and resume every so often
+
+   // Create a Val which represents my current state
+   operator Val () const
+   {
+      Val ret_val = Tab();  // enable return value optimization
+
+      Tab&amp; table = ret_val;
+      table["start_time"] = start_time;
+      table["stop_time"]  = stop_time;
+      table["paramecium_data"] = Array&lt;real_4&gt;(number_of_paramecium);
+      Array&lt;real_4&gt;&amp; a = table("paramecium_data");
+      a.expandTo(number_of_paramecium);
+      memcpy(a.data(), paramecium_state,sizeof(real_4)*number_of_paramecium);
+
+      return ret_val;
+   }
+
+  private:
+    // All sorts of data
+    real_8 start_time, real_8 stop_time;
+    float* paramecium_state;
+    int    number_of_paramecium;
+};</pre>
+</div>
+<p>By creating a new constructor that takes a Val, you allow a Biological
+Simulation to be created from Vals.  This assumes you you have been
+able to &#8220;map&#8221; your data structure onto Val/Tab/Arr and create a
+&#8220;representation&#8221; of the BiologicalSimulation as Tab:</p>
+<div class="highlight-python"><pre>// Read Biological Simulation from file and reconstruct
+Val old_sim;
+ReadValFromFile("simulation_backup", old_sim);
+BiologicalSimulation update = old_sim;</pre>
+</div>
+<p>By creating an outconverter for Val, you allow the BiologicalSimulation
+to create a representation of itself as Vals:</p>
+<div class="highlight-python"><pre>// Take current BiologicalSimulation and save to file
+BiologicalSimulation b;
+b.Start();  b.Stop();
+Val repr = b;           // use outconverter
+WriteValToFile(repr, "simulation_backup");</pre>
+</div>
+<p>Certainly, it&#8217;s nice to be able to convert between Vals and your user
+classes, but of course, you can&#8217;t always change your classes (perhaps
+someone else owns them and doesn&#8217;t want them modified in any way).
+You can always write global routines (in another file so they don&#8217;t
+mess up the original class) that do the same thing:</p>
+<div class="highlight-python"><pre>Val CreateValFromBiologicalSimulation (const BiologicalSimulation&amp; b);
+BiologicalSimulation CreateBiologicalSimulationFromVal (const Val&amp; v);</pre>
+</div>
+<p>This isn&#8217;t quite as &#8220;compact&#8221;, but still works and you can still take
+advantage of all the PicklingTools infrastructure.</p>
+<p>There are several nice things about being able to convert between Vals
+and User types: besides the obvious (Vals can be pickled, saved to
+files, sent over sockets), this is also useful for debugging:
+PrettyPrinting a Val is a human-readable way to see the state of a
+class without attaching a complex debugger.</p>
+<p>The two most common ways to write user-defined types like this it
+are:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Represent the state as a Tab (like the <em>BiologicalSimulation</em> above).
+Simply keep all the fields of your class as entries to a table.</li>
+<li>Represent the state as a string.  This is more for situations when
+you have binary data and need to &#8220;bit-blit&#8221; the data back.  In fact,
+the <cite>SockAddr</cite> representation uses this because the socket
+data needs to be plain binary data.  See the <cite>SockAddr</cite> for an
+example.</li>
+</ol>
+</blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">The PicklingTools 1.6.0 User&#8217;s Guide</a><ul>
+<li><a class="reference external" href="#introduction">Introduction</a></li>
+<li><a class="reference external" href="#formats">Formats</a></li>
+<li><a class="reference external" href="#media">Media</a></li>
+<li><a class="reference external" href="#conclusion-but-keep-reading">Conclusion...But Keep Reading!</a></li>
+<li><a class="reference external" href="#the-python-experience">The Python Experience</a><ul>
+<li><a class="reference external" href="#files">Files</a></li>
+<li><a class="reference external" href="#sockets">Sockets</a><ul>
+<li><a class="reference external" href="#midastalker-tcp-ip-client">MidasTalker: TCP/IP client</a></li>
+<li><a class="reference external" href="#midasserver-tcp-ip-server">MidasServer: TCP/IP server</a></li>
+<li><a class="reference external" href="#midasyeller-and-midaslistener-udp">MidasYeller and MidasListener: UDP</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#pretty-printing">Pretty Printing</a></li>
+<li><a class="reference external" href="#binary-formats">Binary Formats</a></li>
+<li><a class="reference external" href="#conclusion-to-the-python-experience">Conclusion to the Python Experience</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#the-xmpy-experience">The XMPY Experience</a><ul>
+<li><a class="reference external" href="#numeric-or-numpy">Numeric or NumPy</a></li>
+<li><a class="reference external" href="#arraydisposition">ArrayDisposition</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#the-c-experience">The C++ Experience</a><ul>
+<li><a class="reference external" href="#id1">Files</a></li>
+<li><a class="reference external" href="#opencontainers">OpenContainers</a></li>
+<li><a class="reference external" href="#val-and-conversions">Val and Conversions</a></li>
+<li><a class="reference external" href="#c-arrs-and-python-lists">C++ Arrs and Python Lists</a></li>
+<li><a class="reference external" href="#c-tabs-and-python-dictionaries">C++ Tabs and Python Dictionaries</a></li>
+<li><a class="reference external" href="#nested-lookup-and-assignment">Nested Lookup and Assignment</a></li>
+<li><a class="reference external" href="#tricks-and-tips-for-efficient-tab-and-arr-usage">Tricks and Tips for Efficient Tab and Arr Usage</a><ul>
+<li><a class="reference external" href="#copying">Copying</a></li>
+<li><a class="reference external" href="#references">References:</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#c-otab-and-the-python-ordereddict">C++ OTab and the Python OrderedDict</a></li>
+<li><a class="reference external" href="#c-int-n-and-the-python-arbitrary-size-ints-long">C++ int_n and the Python arbitrary size ints (long)</a></li>
+<li><a class="reference external" href="#c-tup-and-python-tuples">C++ Tup and Python Tuples</a></li>
+<li><a class="reference external" href="#c-and-cx-t-int">C++ and cx_t&lt;INT&gt;</a></li>
+<li><a class="reference external" href="#id2">Sockets</a></li>
+<li><a class="reference external" href="#json">JSON</a></li>
+<li><a class="reference external" href="#httpclient-and-httpserver">HTTPClient and HTTPServer</a></li>
+<li><a class="reference external" href="#conformance-checking">Conformance Checking</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#java">Java</a></li>
+<li><a class="reference external" href="#the-x-midas-ptools-experience">The X-Midas PTOOLS Experience</a></li>
+<li><a class="reference external" href="#the-midas-2k-experience">The Midas 2k Experience</a></li>
+<li><a class="reference external" href="#the-final-experience">The Final Experience</a></li>
+<li><a class="reference external" href="#appendix-a-c-and-user-defined-types">Appendix A:  C++ and User-Defined Types</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="index.html"
+                                  title="previous chapter">Welcome to PicklingTools&#8217;s documentation!</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="faq.html"
+                                  title="next chapter">Frequently Asked Questions for PicklingTools 1.6.0</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/usersguide.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="faq.html" title="Frequently Asked Questions for PicklingTools 1.6.0"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Welcome to PicklingTools’s documentation!"
+             >previous</a> |</li>
+        <li><a href="index.html">PicklingTools v1.6.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, Richard T. Saunders.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.6.
+    </div>
+  </body>
+</html>

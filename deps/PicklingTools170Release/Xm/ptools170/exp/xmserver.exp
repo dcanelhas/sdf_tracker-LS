@@ -1,0 +1,144 @@
+XMSERVER - Simple example of a C++ primitive using the MidasServer
+ 
+<host>   Hostname of host the server is running on.  This is
+         always the localhost, but is here for future expansion in
+         case you want to specify which interface on the current host
+         you which to run.
+<port>   Port number the server is running on
+
+ 
+This C++ primitive provides an example to follow for writing your
+own MidasServers.  This is a very simple server that takes client's
+request and simply sends the same data back to them.  After it does
+this 10 times, it shuts down.
+
+Example:
+
+   ! In session 1, run the xmserver 
+   X-Midas> xmserver localhost, 9711
+   Opening MyServer on host LOCALHOST port 9711
+
+   ! In session 2, running the xmclient 
+   X-Midas> xmclient localhost, 9711
+   Opened connection to host:LOCALHOST port:9711
+   a 1
+   c {3: None}
+   b 2
+
+   a 1
+   c {3: None}
+   b 2
+
+   ...
+
+   a 1
+   c {3: None}
+   b 2
+
+   ...retrying to receive after 3 seconds ...
+   ...retrying to receive after 3 seconds ...
+
+
+   ! ... meanwhile in session 1, we see:
+   MYSERVER: Connection (4,5)
+   made from:¬ ­
+   MYSERVER: Client (4,5)
+             saw data:{'a': 1, 'c': {3: None}, 'b': 2}
+    ... and send the same data back!
+   MYSERVER: Client (4,5)
+            saw data:{'a': 1, 'c': {3: None}, 'b': 2}
+    ... and send the same data back!
+
+   ...
+
+   .. saw 10 messages ... shutting down
+
+
+This is a very simple example.  A more complex example, showing how
+to spawn threads for each client is the permserver (available in this
+same option tree).
+
+NOTE: You can set the serialization options (below: /SER /SOCK /ARRDISP)
+and these are what the socket conversation will use when there's a question.
+The good news is that, by default, this will use adaptive serialization.
+The server recognizes the serialization of the client and simply talks
+back in the same serialization.  Most of the time, the client (using its
+serialization options) talks to the server first and sets the serialization. 
+Occasionally, the server talks first (using its serialization options)
+and sets the tone of the conversation.  Note that this is backwards compatible
+with previous releases. Also, the server can have MULTIPLE TYPES of 
+serializations with different clients happening concurrently.
+
+Switches:
+      /SER=n     - Set the serialization type of how the XMSERVER sends data
+                   over the socket:  this can have a huge performance
+                   difference.  The options are:
+                    0 :  Use Python Pickling Protocol 0
+                         - slower, but works w/all versions of PTOOLS, Python
+                    1 :  Use no serialization (just send the string data)
+                         - useful if you want to send raw data
+                    2 :  Use Python Pickling Protocol 2
+                         - fast, but doesn't work with all versions
+                   -2 :  As Python Pickling Protocol 2, but as Python 2.2.x
+                         - Python 2.2.x dumps Protocol 2 subtlely differently
+                           so this allows you to talk to older versions
+                    4 : Use Midas 2k Binary Serialization.  Currently,
+                        ONLY the C++ clients and servers (besides, of course,
+                        M2k) can use this serialization.  Python clients
+                        and servers do not currently support this.
+                    5 : Use OpenContainers serialization.  Currently,
+                        ONLY the M2k and C++ clients and servers can use this
+                        serialization.  Python clients and server do
+                        not currently support this.  Prefer this for
+                        speed and preservation.
+
+                   The default is Python Pickling Protocol 0 for backwards
+                   compatibility but it is strongly suggested moving to
+                   Protocol 2 for speed.
+
+     /SOCK=n     - Set whether socket communications use dual socket
+                   (/SOCK=2) or single socket (/SOCK=1) mode.  To get
+                   around a bug in VMS TCP/IP, dual sockets needed to
+                   be used for biderectional communication.  Modern
+                   sockets don't have this problem.  Dual socket is the
+                   usual default, as that's the default of Midas 2K
+                   and X-Midas, but we suggest using Single Socket mode
+                   when you can.  This primitive defaults to /SOCK=2
+
+                   New feature: This can also be 777 (which means 
+                   NORMAL_SOCKET) and avoids all the Midas socket
+                   protocol nonsense.  With 777, you can talk to normal
+                   sockets that do typical socket stuff (like CURL, etc.)
+
+     /ARRDISP=n  - Set the array disposition if you use serialization
+                   (Pickling Protocol 0 or 2). This is how XMSERVER sends
+                   "homogeneous data" around the system (i.e., M2k Vectors,
+                   PTOOLS Arrays, Python arrays, Numeric arrays).
+                   The options are:
+                    0 : Shuttle all homogeneous data as Numeric Arrays
+                        (like the Numeric package from Python)
+                    1 : Shuttle all homogeneous data as Python Lists
+                        (this loses their "array-like" quality but
+                         is the most backwards compatible because all
+                         versions of PTOOLS and Python support Python Lists)
+                    2 : Shuttle all homogeneous data as Python Arrays
+                        (like the Array package from Python):DEPRECATED!!!
+                    3: Not supported
+                    4 : NumPy
+                   The default is 1 for backwards compatibility.
+                   NumPy has replaced Numeric as the de-facto standard
+                   (as Numeric is out of maintenance and NumPy is active),
+                   so 4 is probably your best option: make sure you have
+                   NumPy installed (import numpy).
+
+     /CONVERT=1  - This option is really only necessary if you are talking
+                   to some pre-exisiting (pre 1.2.0) PTOOLS installations.
+                   Set the compatibility mode to True if you want
+                   to convert OTab->Tab, Tup->Arr, BigInt->Str.  This
+                   is for backwards compatibility with pre-existing PTOOLS
+                   installations that don't have those data structures
+                   implemented.  By default, the value is false, which
+                   means OTab/Tup/BigInt are NOT converted (i.e, they
+                   as passed as is).  NOTE: if you use SERIALIZE_M2k,
+                   conversion ALWAYS happens because there is no
+                   equivalent in M2k.

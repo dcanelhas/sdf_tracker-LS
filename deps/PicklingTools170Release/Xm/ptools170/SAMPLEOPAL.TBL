@@ -1,0 +1,30 @@
+{
+    ATTRIBUTE_PACKET={ },
+    FILE_VERSION=UL:3,
+    GRANULARITY=UL:4096,
+    KEYWORDS={ },
+    MACHINE_REP="EEEI",
+    NAME="",
+    TIME={
+        DELTA=DUR:1,
+        KEYWORDS={ },
+        LENGTH=UX:4096,
+        NAME="Time",
+        START=DUR:0,
+        UNITS="s"
+    },
+    TIME_INTERPRETATION={
+        AXIS_TYPE="CONTINUOUS"
+    },
+    TRACKS={
+        "0"={
+            AXES={
+                "0"=@"TIME"
+            },
+            FORMAT="D",
+            KEYWORDS={ },
+            NAME="Track 0",
+            UNITS=""
+        }
+    }
+}

@@ -1,0 +1,1679 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>XML Support: Pickling Tools 1.6.0 &mdash; PicklingTools v1.6.0 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.6.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PicklingTools v1.6.0 documentation" href="index.html" />
+    <link rel="next" title="C++ Cross-Process Shared Memory Tools" href="shm.html" />
+    <link rel="prev" title="Frequently Asked Questions for PicklingTools 1.6.0" href="faq.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="shm.html" title="C++ Cross-Process Shared Memory Tools"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="faq.html" title="Frequently Asked Questions for PicklingTools 1.6.0"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">PicklingTools v1.6.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="xml-support-pickling-tools-1-6-0">
+<h1>XML Support: Pickling Tools 1.6.0<a class="headerlink" href="#xml-support-pickling-tools-1-6-0" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="xml-support-new-in-picklingtools-1-3-0">
+<h2>XML Support: New in PicklingTools 1.3.0<a class="headerlink" href="#xml-support-new-in-picklingtools-1-3-0" title="Permalink to this headline">¶</a></h2>
+<p>The XML format and Python dictionary
+are fairly equivalent formats: they both allow recursive,
+heterogeneous structures for storing data.  In many ways, XML is yet another
+serialization format and the PicklingTools embraces
+XML as yet another serialization (with some limitations: DTD is not
+supported (1.3.0 has no support at all, 1.3.1 reads but ignores DTD),
+although support for namespaces is coming).</p>
+<blockquote>
+New in PicklingTools 1.4.1
+is support for a Python C-Extension module that speeds up conversion
+from dict to XML by 6-10x and from XML to dict by 60-100x.</blockquote>
+<p>If you are using XML as a key-value format, then PicklingTools
+and XML are essentially equivalent.  Consider the tags and content of
+following simple XML document:</p>
+<div class="highlight-python"><pre>&lt;doc&gt;
+  &lt;chapter&gt;1&lt;/chapter&gt;
+  &lt;chapter&gt;2&lt;/chapter&gt;
+  &lt;appendix&gt;
+    &lt;A&gt;3.0&lt;/A&gt;
+    &lt;B&gt;4.0&lt;/B&gt;
+  &lt;appendix&gt;
+&lt;doc&gt;</pre>
+</div>
+<p>These are equivalent to the keys and values of the following Python dictionary:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span> <span class="s">&#39;chapter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span>
+<span class="gp">... </span> <span class="s">&#39;appendix&#39;</span><span class="p">:</span> <span class="p">{</span>
+<span class="gp">... </span>     <span class="s">&#39;A&#39;</span><span class="p">:</span> <span class="mf">3.0</span><span class="p">,</span>
+<span class="gp">... </span>     <span class="s">&#39;B&#39;</span><span class="p">:</span> <span class="mf">4.0</span>
+<span class="gp">... </span>  <span class="p">}</span>
+<span class="gp">... </span><span class="p">}</span>
+</pre></div>
+</div>
+<p>Python dictionaries tend to be easier to manipulate in Python and C++
+(which is why they are the currency of the PicklingTools).
+but XML does have some advantages over Python Dictionaries:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>XML is intrinsically ordered, whereas Python dictionaries aren&#8217;t (but can be with the OrderedDict, see below)</li>
+<li>XML can represent true documents: this is XML&#8217;s intrinsic advantage</li>
+</ol>
+</blockquote>
+</div>
+<div class="section" id="xml-dictionaries-and-ordering">
+<h2>XML, Dictionaries and Ordering<a class="headerlink" href="#xml-dictionaries-and-ordering" title="Permalink to this headline">¶</a></h2>
+<p>Consider the ordering issue: in XML, the order of tags and content is
+preserved in an XML document as the tags and content always are processed
+in the order they appear.  A Python dictionary, however, doesn&#8217;t
+necessarily preserve the order of keys-values.  Consider:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;chapter&#39;</span><span class="p">:[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">],</span> <span class="s">&#39;appendix&#39;</span><span class="p">:{</span><span class="s">&#39;A&#39;</span><span class="p">:</span><span class="mf">3.0</span><span class="p">,</span> <span class="s">&#39;B&#39;</span><span class="p">:</span><span class="mf">4.0</span><span class="p">}</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">key</span><span class="p">,</span><span class="n">value</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">iteritems</span><span class="p">()</span> <span class="p">:</span>
+<span class="gp">... </span>  <span class="k">print</span> <span class="n">key</span><span class="p">,</span>
+<span class="go"># Output:  chapter appendix        OR      appendix chapter</span>
+</pre></div>
+</div>
+<p>In the example above, &#8220;chapter appendix&#8221; is  JUST AS LIKELY as
+&#8220;appendix chapter&#8221; as output because the Python dictionary
+is a <em>hash table only</em> and doesn&#8217;t preserve order.</p>
+<p>If insertion order is really a desired feature, The OrderedDict in a new data
+structure Python 2.7 that captures this (The equivalent in C++ is the OTab and
+was introduced in PicklingTools 1.2.0).
+The OrderedDict is just like a Python dictionary (in fact, it inherits from it),  but it preserves insertion order just like XML:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span> <span class="c"># Available as of Python 2.7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">od</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([</span>
+<span class="gp">... </span>     <span class="p">(</span><span class="s">&#39;chapter&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">]),</span>            <span class="c"># Long form of the OrderedDict</span>
+<span class="gp">... </span>     <span class="p">(</span><span class="s">&#39;appendix&#39;</span><span class="p">,</span> <span class="n">OrderedDict</span><span class="p">([</span>
+<span class="gp">... </span>           <span class="p">(</span><span class="s">&#39;A&#39;</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">),</span>
+<span class="gp">... </span>           <span class="p">(</span><span class="s">&#39;B&#39;</span><span class="p">,</span> <span class="mf">4.0</span><span class="p">),</span>
+<span class="gp">... </span>     <span class="p">])),</span>
+<span class="gp">... </span><span class="p">])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">od</span><span class="p">[</span><span class="s">&#39;chapter&#39;</span><span class="p">]</span>  <span class="c"># Just like Python dict otherwise</span>
+</pre></div>
+</div>
+<p>Unfortunately,
+the default output form of OrderedDict is not as clean as the
+equivalent dictionary (as the OrderedDict is currently represented as a
+list of tuples), but it is still just as easy to manipulate in Python or C++.</p>
+<p>To be clear: <em>ordered dictionary</em> means that keys are
+ordered by insertion order <em>NOT by sorting order</em>.  You can still
+look up values via key (i.e., a[&#8216;key&#8217;]), but if you ITERATE through
+items, you iterate through them in the order they were inserted
+(or in the case of literals, the order they were listed).</p>
+<p>Python uses the above long form to represent OrderedDicts, but we are hopeful
+to upgrade Python to make OrderedDicts a more first-class object.
+The notation that C++ uses is to use &#8216;o{ }&#8217; to represent Ordered Dictionaries.
+Consider, C++ can use a little letter o to indicate it&#8217;s an ordered dictionary:</p>
+<div class="highlight-python"><pre>o{
+  'chapter': [1,2],
+  'appendix': o{        // C++ output can choose between the short
+      'A': 4.0          // form (this example) or the long form
+      'B': 3.0,         // (above) of OrderedDict.  Unfortunately,
+   }                    // Python DOES NOT understand this short form.
+}</pre>
+</div>
+<p>From Python, the OrderedDict behaves JUST like the Python dictionary,
+except for the fact that the insertion order of the keys is preserved.
+Thus, when you iterate (or print), you see the original insertion order.:</p>
+<div class="highlight-python"><pre># Python:  2.7 and above
+&gt;&gt;&gt; from collections import OrderedDict
+&gt;&gt;&gt; od = OrderedDict([('chapter',[1,2]),\
+...                   ('appendix',OrderedDict([('A',3.0),('B',4.0)]))])
+&gt;&gt;&gt; for (key, value) in od.iteritems() :
+...    print key                    # For OrderedDict, preserves
+...                                 # insertion order
+chapter
+appendix
+
+// C++:  PicklingTools 1.2.0 and above
+OTab oo = OTab("o{'chapter':[1,2], 'appendix':o{'A':4.0,'B':3.0} }");
+for (It ii(od); ii(); ) {
+    cout &lt;&lt; ii.key() &lt;&lt; endl;
+}
+// chapter
+// appendix</pre>
+</div>
+<p>By using the OrderedDict, the insertion order can be preserved.
+Many times, however, the insertion order is not relevant: a user
+may simply care for the absence/presence of keys in the table,
+in which case, a Python dictionary is fine to use.</p>
+<p>In the case ordering is an issue, XML and Python dictionaries can
+be equivalent: you just have to use the Python OrderedDict instead of the dict:
+Simply choose the XML_LOAD_USE_OTABS options in the XMLLoader when translating from
+XML to Python dictionaries.</p>
+</div>
+<div class="section" id="xml-dictionaries-and-documents">
+<h2>XML, Dictionaries, and Documents<a class="headerlink" href="#xml-dictionaries-and-documents" title="Permalink to this headline">¶</a></h2>
+<p>When it comes to representing documents, XML is the medium to use;
+This is
+XML&#8217;s raison d&#8217;etre: tags interspersed with content and data and attributes,
+Consider the very simple XML document below:</p>
+<div class="highlight-python"><pre>&lt;text&gt;It was the &lt;it color='green'&gt;best&lt;/it&gt; of times,
+      it was the &lt;it color='red'&gt;worst&lt;/it&gt; of times.
+&lt;/text&gt;</pre>
+</div>
+<p>There is no real &#8220;easy&#8221; equivalent of the above in Python dictionaries:
+you can make up a format which captures all the information, but in the end,
+it is just a hack over XML:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="p">{</span> <span class="s">&#39;text&#39;</span><span class="p">:</span> <span class="n">o</span><span class="p">{</span> <span class="mi">0</span><span class="p">:</span><span class="s">&#39;It was the &#39;</span><span class="p">,</span> <span class="s">&#39;it&#39;</span><span class="p">:{</span> <span class="s">&#39;color=&#39;</span><span class="n">green</span><span class="p">,</span> <span class="s">&#39;_&#39;</span><span class="p">:</span><span class="s">&#39;best&#39;</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="mi">2</span><span class="p">:</span><span class="s">&#39;of times</span><span class="se">\n</span><span class="s">&#39;</span><span class="p">,</span>
+<span class="gp">... </span>             <span class="mi">3</span><span class="p">:</span><span class="s">&#39;     it was the &#39;</span><span class="p">,</span> <span class="s">&#39;it&#39;</span><span class="p">:</span><span class="s">&#39;worst&#39;</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="s">&#39; of times.</span><span class="se">\n</span><span class="s">&#39;</span>  <span class="p">}</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>The above <em>kind of</em> works as a translation between XML and Python dictionaries,
+but breaks down quickly with more complex documents with
+attributes, nested tags or content interspersed.</p>
+<p>If you are manipulating documents like above, don&#8217;t use Python Dictionaries!
+Use some other format that is made for documents: XML, LaTeX, and
+REStructed Text are some alternatives for expressing documents.
+(In fact, REStructured Text permeates the PicklingTools
+documentation because it&#8217;s a simple way to produce documentation in
+text, PDF and HTML)</p>
+<p>For key-value pairs, we can translate directly between XML and
+Python dictionaries.   For documents, Python dictionaries are the
+wrong choice.</p>
+<blockquote>
+<p>Sidebar: It can make sense to have a document embedded
+with the text of a Python dictionary, if you want to keep meta-information
+around it:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">book</span> <span class="o">=</span> <span class="p">{</span>
+<span class="gp">... </span>  <span class="s">&#39;book&#39;</span><span class="p">:</span> <span class="s">&#39;A Tale of Two Cities&#39;</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="s">&#39;REStructuedText&#39;</span><span class="p">:</span> <span class="s">&#39;It was the *best* of times, it was the *worst* of times&#39;</span><span class="p">,</span>
+<span class="gp">... </span>  <span class="s">&#39;XML&#39;</span><span class="p">:</span> <span class="s">&#39;&lt;top&gt;It was the &lt;it&gt;best&lt;/it&gt; of time, it was the &lt;it&gt;worst&lt;/it&gt; of times&lt;/top&gt;&#39;</span><span class="p">,</span>
+<span class="gp">... </span><span class="p">}</span>
+</pre></div>
+</div>
+</blockquote>
+</div>
+<div class="section" id="translating-between-xml-and-python-dictionaries">
+<h2>Translating between XML and Python Dictionaries<a class="headerlink" href="#translating-between-xml-and-python-dictionaries" title="Permalink to this headline">¶</a></h2>
+<p>The PicklingTools offers tools to translate between XML and Python
+dictionaries (both directions) from both C++ and Python.  The tools
+assume one major maxim:</p>
+<div class="highlight-python"><pre>Assumption: We are using XML to represent recursive, heterogeneous
+key-values data structures.  In this case, we can translate back and forth
+between XML and Python dictionaries and not lose information.</pre>
+</div>
+<p>The interfaces are essentially the same in both Python and C++:
+there is an XMLDumper which converts from plain dictionaries
+to XML, and an XMLLoader which converts from XML to plain
+dictionaries.  The Python tools are easier to use than the C++ tools,
+so we&#8217;ll discuss those first, but all the interfaces for both are
+basically the same.</p>
+<blockquote>
+There was quite a bit of work when doing the XML tools in Python and C++
+to make sure the interfaces were the same and the outputs were
+the same as well.  There are two tests called xmldump_test.[py/cc]
+and xmlload_test.[py/cc] that use exactly the same output to compare
+against.  Although there are tools in Python and C++ to deal with
+XML separately, the C++ and Python XML tools here have been written
+completely from scratch so both the Python and C++ can be maintained in
+parallel.  The Python and C++ code in the XMLDumper/XMLLoader is remarkably
+similar for maintenance purposes: any changes in the Python can easily be
+propagated to the C++ and vice-versa.</blockquote>
+</div>
+<div class="section" id="python-tools-xmldumper">
+<h2>Python Tools: XMLDumper<a class="headerlink" href="#python-tools-xmldumper" title="Permalink to this headline">¶</a></h2>
+<p>To convert from Python dictionaries to XML, use the
+XMLdumper.  The online documentation is quite good:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xmldumper</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">xmldumper</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let&#8217;s start with a simple example and convert a simple dict
+to XML:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span> <span class="s">&#39;b&#39;</span><span class="p">:</span><span class="mf">2.2</span><span class="p">,</span> <span class="s">&#39;c&#39;</span><span class="p">:</span><span class="s">&#39;three&#39;</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xmldumper</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>    <span class="c"># for sys.stdout</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span> <span class="o">=</span> <span class="n">XMLDumper</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">)</span>      <span class="c"># dump XML to stdout</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span><span class="o">.</span><span class="n">XMLDumpKeyValue</span><span class="p">(</span><span class="s">&#39;top&#39;</span><span class="p">,</span> <span class="n">example</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output:</p>
+<div class="highlight-python"><pre>&lt;top&gt;&lt;a&gt;1&lt;/a&gt;&lt;b&gt;2.2&lt;/b&gt;&lt;c&gt;three&lt;/c&gt;&lt;/top&gt;</pre>
+</div>
+<p>This is a tad unreadable, but sometimes you may want to compress
+your XML output all together.  Most of the time, though,
+you will probably want to use the <em>pretty print</em> version, which
+indents to show nesting:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span> <span class="o">=</span> <span class="n">XMLDumper</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">XML_DUMP_PRETTY</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span><span class="o">.</span><span class="n">XMLDumpKeyValue</span><span class="p">(</span><span class="s">&#39;top&#39;</span><span class="p">,</span> <span class="n">example</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output:</p>
+<div class="highlight-python"><pre>&lt;top&gt;
+  &lt;a&gt;1&lt;/a&gt;
+  &lt;b&gt;2.2&lt;/b&gt;
+  &lt;c&gt;three&lt;/c&gt;
+&lt;/top&gt;</pre>
+</div>
+<p>Notice the top-level container: this is
+actually an XML requirement that there be exactly one
+outer tag (in this case, it is called &#8216;top&#8217;) containing
+the content.  The &#8216;top&#8217; tags
+surround the input table.
+If we want, we can just output the value:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span><span class="o">.</span><span class="n">XMLDumpValue</span><span class="p">(</span><span class="n">example</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output:</p>
+<div class="highlight-python"><pre>&lt;a&gt;1&lt;/a&gt;
+&lt;b&gt;2.2&lt;/b&gt;
+&lt;c&gt;three&lt;/c&gt;</pre>
+</div>
+<p>This isn&#8217;t legal XML by itself, but it can be part of a larger
+XML document composed piecewise.</p>
+<p>There are actually a number of options
+for the XMLDumper: each option is ored in.  For example, if we want
+pretty-printed XML and strict XML (with the header):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span> <span class="o">=</span> <span class="n">XMLDumper</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">XML_DUMP_PRETTY</span> <span class="o">|</span> <span class="n">XML_STRICT_HDR</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span><span class="o">.</span><span class="n">XMLDumpKeyValue</span><span class="p">(</span><span class="s">&#39;top&#39;</span><span class="p">,</span> <span class="n">example</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;top&gt;
+    &lt;a&gt;1&lt;/a&gt;
+    &lt;b&gt;2.2&lt;/b&gt;
+    &lt;c&gt;three&lt;/c&gt;
+&lt;/top&gt;</pre>
+</div>
+<p>In this case, we output the XML header which, strictly speaking,
+is needed to be a standard conforming XML document.  Currently, we only
+support version 1.0 and UTF-8 (namespaces are coming in a
+future release).</p>
+</div>
+<div class="section" id="attributes-and-folding">
+<h2>Attributes and Folding<a class="headerlink" href="#attributes-and-folding" title="Permalink to this headline">¶</a></h2>
+<p>Attributes are a critical part of any XML document: the XML tools here
+use a default convention that all keys that start with &#8216;_&#8217;
+are to be placed as attributes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;chapter&quot;</span><span class="p">:</span> <span class="p">{</span> <span class="s">&#39;_length&#39;</span><span class="p">:</span> <span class="mi">100</span><span class="p">,</span> <span class="s">&#39;_pages&#39;</span><span class="p">:</span><span class="mi">200</span><span class="p">,</span> <span class="s">&#39;text&#39;</span><span class="p">:</span> <span class="s">&#39;hello&#39;</span> <span class="p">}</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span><span class="o">.</span><span class="n">XMLDumpKeyValue</span><span class="p">(</span><span class="s">&quot;top&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output:</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;top&gt;
+    &lt;chapter length="100" pages="200"&gt;
+        &lt;text&gt;hello&lt;/text&gt;
+    &lt;/chapter&gt;
+&lt;/top&gt;</pre>
+</div>
+<p>Notice that the keys &#8216;_length&#8217; and &#8216;_pages&#8217; got turned into
+attributes in the output XML because they started with &#8216;_&#8217;.
+This process is called <em>folding</em> and allows attributes to
+be represented simply in key-value structures.  If you aren&#8217;t comfortable
+with this, consider the following
+analogy: In UNIX, all files that start with a &#8216;.&#8217; are treated
+specially in an &#8216;ls&#8217;.  In the PicklingTools, all keys that
+start with &#8216;_&#8217; are treated specially in XML processing.</p>
+<p>You can turn this folding feature off easily enough:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span><span class="o">=</span><span class="n">XMLDumper</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">XML_DUMP_PRETTY</span> <span class="o">|</span> <span class="n">XML_DUMP_PREPEND_KEYS_AS_TAGS</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span><span class="o">.</span><span class="n">XMLDumpKeyValue</span><span class="p">(</span><span class="s">&quot;top&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output:</p>
+<div class="highlight-python"><pre>&lt;top&gt;
+    &lt;chapter&gt;
+        &lt;_length&gt;100&lt;/_length&gt;
+        &lt;_pages&gt;200&lt;/_pages&gt;
+        &lt;text&gt;hello&lt;/text&gt;
+    &lt;/chapter&gt;
+&lt;/top&gt;</pre>
+</div>
+<p>You can also change the prepend_char to be anything you want in the
+constructor to XMLDumper (see help(xmldumper)).</p>
+<p>Many people using XML support the convention that simple data should
+be in attributes and only structure (lists, dictionaries) should
+be in tags.  The XML_DUMP_SIMPLE_TAGS_AS_ATTRIBUTES option allows
+you to do just that:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span><span class="o">=</span><span class="n">XMLDumper</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span><span class="n">XML_DUMP_PRETTY</span><span class="o">|</span><span class="n">XML_DUMP_SIMPLE_TAGS_AS_ATTRIBUTES</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span><span class="o">.</span><span class="n">XMLDumpKeyValue</span><span class="p">(</span><span class="s">&quot;top&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output:</p>
+<div class="highlight-python"><pre>&lt;top&gt;
+    &lt;chapter length="100" pages="200" text="hello"&gt;
+    &lt;/chapter&gt;
+&lt;/top&gt;</pre>
+</div>
+<p>This option allows all simple data to sit in attributes.</p>
+<p>All the options for XMLDumper are below.  Some of them make more
+sense when coupled with the XMLLoader (see next section):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c"># Options for dictionaries -&gt; XML</span>
+<span class="c">#  If XML attributes are being folded up, then you may</span>
+<span class="c">#  want to prepend a special character to distinguish attributes</span>
+<span class="c">#  from nested tags: an underscore is the usual default.  If</span>
+<span class="c">#  you don&#39;t want a prepend char, use XML_DUMP_NO_PREPEND option</span>
+<span class="n">XML_PREPEND_CHAR</span> <span class="o">=</span> <span class="s">&#39;_&#39;</span>
+
+
+<span class="c"># When dumping, by DEFAULT the keys that start with _ become</span>
+<span class="c"># attributes (this is called &quot;unfolding&quot;).  You may want to keep</span>
+<span class="c"># those keys as tags.  Consider:</span>
+<span class="c">#</span>
+<span class="c">#   { &#39;top&#39;: { &#39;_a&#39;:&#39;1&#39;, &#39;_b&#39;: 2 }}</span>
+<span class="c">#</span>
+<span class="c"># DEFAULT behavior, this becomes:</span>
+<span class="c">#   &lt;top a=&quot;1&quot; b=&quot;2&quot;&gt;&lt;/top&gt;       This moves the _names to attributes</span>
+<span class="c">#</span>
+<span class="c"># But, you may want all _ keys to stay as tags: that&#39;s the purpose of this opt</span>
+<span class="c">#   &lt;top&gt; &lt;_a&gt;1&lt;/_a&gt; &lt;_b&gt;2&lt;/b&gt; &lt;/top&gt;</span>
+<span class="n">XML_DUMP_PREPEND_KEYS_AS_TAGS</span> <span class="o">=</span> <span class="mh">0x100</span>
+
+<span class="c"># Any value that is simple (i.e., contains no nested</span>
+<span class="c"># content) will be placed in the attributes bin:</span>
+<span class="c">#  For examples:</span>
+<span class="c">#    { &#39;top&#39;: { &#39;x&#39;:&#39;1&#39;, &#39;y&#39;: 2 }} -&gt;  &lt;top x=&quot;1&quot; y=&quot;2&quot;&gt;&lt;/top&gt;</span>
+<span class="n">XML_DUMP_SIMPLE_TAGS_AS_ATTRIBUTES</span> <span class="o">=</span> <span class="mh">0x200</span>
+
+<span class="c"># By default, everything dumps as strings (without quotes), but those things</span>
+<span class="c"># that are strings lose their &quot;stringedness&quot;, which means</span>
+<span class="c"># they can&#39;t be &quot;evaled&quot; on the way back in.  This option makes</span>
+<span class="c"># Vals that are strings dump with quotes.</span>
+<span class="n">XML_DUMP_STRINGS_AS_STRINGS</span> <span class="o">=</span> <span class="mh">0x400</span>
+
+<span class="c"># Like XML_DUMP_STRINGS_AS_STRINGS, but this one ONLY</span>
+<span class="c"># dumps strings with quotes if it thinks Eval will return</span>
+<span class="c"># something else.  For example in { &#39;s&#39;: &#39;123&#39; } : &#39;123&#39; is</span>
+<span class="c"># a STRING, not a number.  When evaled with an XMLLoader</span>
+<span class="c"># with XML_LOAD_EVAL_CONTENT flag, that will become a number.</span>
+<span class="n">XML_DUMP_STRINGS_BEST_GUESS</span> <span class="o">=</span> <span class="mh">0x800</span>
+
+<span class="c"># Show nesting when you dump: like &quot;prettyPrint&quot;: basically, it shows</span>
+<span class="c"># nesting</span>
+<span class="n">XML_DUMP_PRETTY</span> <span class="o">=</span> <span class="mh">0x1000</span>
+
+<span class="c"># Arrays of POD (plain old data: ints, real, complex, etc) can</span>
+<span class="c"># dump as huge lists:  By default they just dump with one tag</span>
+<span class="c"># and then a list of numbers.  If you set this option, they dump</span>
+<span class="c"># as a true XML list (&lt;data&gt;1.0/&lt;data&gt;&lt;data&gt;2.0&lt;/data&gt; ...)</span>
+<span class="c"># which is very expensive, but is easier to use with other</span>
+<span class="c"># tools (spreadsheets that support lists, etc.).</span>
+<span class="n">XML_DUMP_POD_LIST_AS_XML_LIST</span> <span class="o">=</span> <span class="mh">0x2000</span>
+
+<span class="c"># When dumping an empty tag, what do you want it to be?</span>
+<span class="c"># I.e., what is &lt;empty&gt;&lt;/empty&gt;</span>
+<span class="c"># Normally (DEFAULT) this is an empty dictionary &#39;empty&#39;: {}</span>
+<span class="c"># If you want that to be empty content, as in an empty string,</span>
+<span class="c"># set this option: &#39;empty&#39;: &quot;&quot;</span>
+<span class="c"># NOTE: You don&#39;t need this option if you are using</span>
+<span class="c"># XML_DUMP_STRINGS_AS_STRINGS or XML_DUMP_STRINGS_BEST_GUESS</span>
+<span class="n">XML_DUMP_PREFER_EMPTY_STRINGS</span> <span class="o">=</span> <span class="mh">0x4000</span>
+
+<span class="c"># When dumping dictionaries in order, a dict BY DEFAULT prints</span>
+<span class="c"># out the keys in sorted/alphabetic order and BY DEFAULT an OrderedDict</span>
+<span class="c"># prints out in the OrderedDict order.  The &quot;unnatural&quot; order</span>
+<span class="c"># for a dict is to print out in &quot;random&quot; order (but probably slightly</span>
+<span class="c"># faster).  The &quot;unnatural&quot; order for an OrderedDict is sorted</span>
+<span class="c"># (because normally we use an OrderedDict because we WANTS its</span>
+<span class="c"># notion of order)</span>
+<span class="n">XML_DUMP_UNNATURAL_ORDER</span> <span class="o">=</span> <span class="mh">0x8000</span>
+
+<span class="c"># Even though illegal XML, allow element names starting with Digits:</span>
+<span class="c"># when it does see a starting digit, it turns it into an _digit</span>
+<span class="c"># so that it is still legal XML</span>
+<span class="n">XML_TAGS_ACCEPTS_DIGITS</span>  <span class="o">=</span> <span class="mh">0x80</span>
+
+<span class="c"># Allows digits as starting XML tags, even though illegal XML.</span>
+<span class="c"># This preserves the number as a tag.</span>
+<span class="n">XML_DIGITS_AS_TAGS</span> <span class="o">=</span> <span class="mh">0x80000</span>
+
+
+<span class="c"># When dumping XML, the default is to NOT have the XML header</span>
+<span class="c"># &lt;?xml version=&quot;1.0&quot;&gt;:  Specifying this option will always make that</span>
+<span class="c"># the header always precedes all content</span>
+<span class="n">XML_STRICT_HDR</span> <span class="o">=</span> <span class="mh">0x10000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="python-and-the-xmlloader">
+<h2>Python and the XMLLoader<a class="headerlink" href="#python-and-the-xmlloader" title="Permalink to this headline">¶</a></h2>
+<p>The XMLLoader reads XML and converts it to a Python dictionary:
+this is the inverse operation of the XMLDumper.
+(Note this assumes the type of XML we are processing is key-value kind of
+XML, not document XML).</p>
+<p>The online docs are always helpful:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xmlloader</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">help</span><span class="p">(</span><span class="n">xmlloader</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Let&#8217;s start with a simple example.  In a file named &#8216;example.xml&#8217;,
+we will put the following XML:</p>
+<div class="highlight-python"><pre>&lt;top&gt;
+  &lt;a&gt;1&lt;/a&gt;
+  &lt;b&gt;2.2&lt;/b&gt;
+  &lt;c&gt;three&lt;/c&gt;
+&lt;/top&gt;</pre>
+</div>
+<p>To process this file and turn it into a dictionary:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xmlloader</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;example.xml&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">StreamXMLLoader</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c"># 0 = All defaults on options</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">result</span>
+<span class="go">{&#39;top&#39;: {&#39;a&#39;: &#39;1&#39;, &#39;c&#39;: &#39;three&#39;, &#39;b&#39;: &#39;2.2&#39;}}</span>
+</pre></div>
+</div>
+<p>We can match the <em>pretty print</em> nature of the original XML using the
+pretty module (which comes with the PicklingTools):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">pretty</span> <span class="kn">import</span> <span class="n">pretty</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pretty</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    &#39;top&#39;:{</span>
+<span class="go">        &#39;a&#39;:&#39;1&#39;,</span>
+<span class="go">        &#39;b&#39;:&#39;2.2&#39;,</span>
+<span class="go">        &#39;c&#39;:&#39;three&#39;</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>From the previous section, we know that all XML has to have exactly
+one outermost container: in this case, the &#8216;top&#8217; key.  Many times,
+when translating from XML to a dictionary, the outer most container
+is superfluous.  There is a simple option to &#8216;drop&#8217; the outer most container:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;example.xml&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">StreamXMLLoader</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="n">XML_LOAD_DROP_TOP_LEVEL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pretty</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    &#39;a&#39;:&#39;1&#39;,</span>
+<span class="go">    &#39;b&#39;:&#39;2.2&#39;,</span>
+<span class="go">    &#39;c&#39;:&#39;three&#39;</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>You might notice that the values above are strings and not integers or floats:
+the default when turning XML into a dict is to just keep whatever string
+of content was in the XML as, well, a string.  Using the eval function
+built-in to Python, we can turn these strings into their appropriate values.
+Or, we can use the XML_LOAD_EVAL_CONTENT option (which uses eval, but
+is a little bit smarter):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">example</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;example.xml&#39;</span><span class="p">,</span> <span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">StreamXMLLoader</span><span class="p">(</span><span class="n">example</span><span class="p">,</span> <span class="n">XML_LOAD_DROP_TOP_LEVEL</span> <span class="o">|</span> <span class="n">XML_LOAD_EVAL_CONTENT</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pretty</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    &#39;a&#39;:1,</span>
+<span class="go">    &#39;b&#39;:2.2,</span>
+<span class="go">    &#39;c&#39;:&#39;three&#39;</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>This brings the keys to real values.  Internally, the XMLLoader uses eval
+(which can be a security problem if you XML from untrusted sources), but
+is a little bit smarter:  it only keeps the result of the eval if the entire
+output would be consumed in a tag.  For example &lt;tag&gt;123 #12&lt;/tag&gt;
+should will stay a string using XML_LOAD_EVAL_CONTENT, even though plain eval
+would return 123. And this is good!  We don&#8217;t want to lose any content!:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xml_text</span> <span class="o">=</span> <span class="s">&#39;&lt;tag&gt;123 #12&lt;/tag&gt;&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">XMLLoader</span><span class="p">(</span><span class="n">xml_text</span><span class="p">,</span> <span class="n">XML_LOAD_EVAL_CONTENT</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="go">{&#39;tag&#39;:&#39;123 #12&#39;}</span>
+</pre></div>
+</div>
+<p>Notice the example above shows the difference between XMLLoader and
+StreamXMLLoader: the former takes input from a string, the latter
+takes input from a stream.  You might also note that in every example
+we have created a new XMLLoader: if we didn&#8217;t, the loader would
+just read from where we left off in the previous input.  Rule
+of thumb: create a new XMLLoader for each XML document to process.</p>
+</div>
+<div class="section" id="attributes-and-the-xmlloader">
+<h2>Attributes and the XMLLoader<a class="headerlink" href="#attributes-and-the-xmlloader" title="Permalink to this headline">¶</a></h2>
+<p>There are about 4 ways of dealing with attributes in XML when
+converting to Python dictionaries.</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Put them in a special &#8216;__attrs__&#8217; sub-table:  the default</li>
+<li>Unfold them:  use XML_LOAD_UNFOLD_ATTRS</li>
+<li>Unfold them, but drop the _: use XML_LOAD_NO_PREPEND_CHAR</li>
+<li>Ignore them:  use XML_LOAD_DROP_ALL_ATTRS option</li>
+</ol>
+</blockquote>
+<p>Consider the following XML file (book.xml):</p>
+<div class="highlight-python"><pre>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;top&gt;
+    &lt;chapter length="100" pages="200"&gt;
+       &lt;text&gt;hello&lt;/text&gt;
+   &lt;/chapter&gt;
+&lt;/top&gt;</pre>
+</div>
+<p>We will convert this XML to a dict using the default way of handling attributes:
+stick the attributes in a special table called &#8216;__attrs__&#8217;:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">book</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;book.xml&#39;</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">StreamXMLLoader</span><span class="p">(</span><span class="n">book</span><span class="p">,</span> <span class="n">XML_LOAD_DROP_TOP_LEVEL</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pretty</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    &#39;chapter&#39;:{</span>
+<span class="go">        &#39;__attrs__&#39;:{</span>
+<span class="go">            &#39;length&#39;:&#39;100&#39;,</span>
+<span class="go">            &#39;pages&#39;:&#39;200&#39;</span>
+<span class="go">        },</span>
+<span class="go">        &#39;text&#39;:&#39;hello&#39;</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>Just like normal XML, we can turn the strings into real values using
+XML_LOAD_EVAL_CONTENT:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">book</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;book.xml&#39;</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">StreamXMLLoader</span><span class="p">(</span><span class="n">book</span><span class="p">,</span> <span class="n">XML_LOAD_DROP_TOP_LEVEL</span> <span class="o">|</span> <span class="n">XML_LOAD_EVAL_CONTENT</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pretty</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    &#39;chapter&#39;:{</span>
+<span class="go">        &#39;__attrs__&#39;:{</span>
+<span class="go">            &#39;length&#39;:100,</span>
+<span class="go">            &#39;pages&#39;:200</span>
+<span class="go">        },</span>
+<span class="go">        &#39;text&#39;:&#39;hello&#39;</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>This method makes it clear which values are attributes and which values are tags:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;chapter&#39;</span><span class="p">][</span><span class="s">&#39;__attrs__&#39;</span><span class="p">][</span><span class="s">&#39;length&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="c"># attributes of chapter are under chapter/__attrs__ table</span>
+</pre></div>
+</div>
+<p>Another different way to handle attributes (if you don&#8217;t like the above) is to
+use the special character &#8216;_&#8217; in front of tags to indicate those came
+from the attributes section.  With the XML_LOAD_UNFOLD_ATTRS option, the
+attributes get <em>unfolded</em>
+into the table of interest, as special keys starting with an &#8216;_&#8217;:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">book</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;book.xml&#39;</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">StreamXMLLoader</span><span class="p">(</span><span class="n">book</span><span class="p">,</span> <span class="n">XML_LOAD_DROP_TOP_LEVEL</span> <span class="o">|</span>
+<span class="gp">... </span>                           <span class="n">XML_LOAD_EVAL_CONTENT</span> <span class="o">|</span> <span class="n">XML_LOAD_UNFOLD_ATTRS</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pretty</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    &#39;chapter&#39;:{</span>
+<span class="go">        &#39;_length&#39;:100,</span>
+<span class="go">        &#39;_pages&#39;:200,</span>
+<span class="go">        &#39;text&#39;:&#39;hello&#39;</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>It&#8217;s still pretty obvious what keys are attributes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">result</span><span class="p">[</span><span class="s">&#39;chapter&#39;</span><span class="p">][</span><span class="s">&#39;_length&#39;</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span>   <span class="c"># The attributes of chapter all start with an _</span>
+</pre></div>
+</div>
+<p>Of course, you can change the prepend character in the
+constructor of XMLLoader (see help(XMLLoader)),
+or you can get rid of it altogether with XML_LOAD_NO_PREPEND_CHAR:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">book</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;book.xml&#39;</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">StreamXMLLoader</span><span class="p">(</span><span class="n">book</span><span class="p">,</span> <span class="n">XML_LOAD_DROP_TOP_LEVEL</span> <span class="o">|</span>
+<span class="gp">... </span>                           <span class="n">XML_LOAD_EVAL_CONTENT</span> <span class="o">|</span> <span class="n">XML_LOAD_UNFOLD_ATTRS</span> <span class="o">|</span> <span class="n">XML_LOAD_NO_PREPEND_CHAR</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pretty</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    &#39;chapter&#39;:{</span>
+<span class="go">        &#39;length&#39;:100,</span>
+<span class="go">        &#39;pages&#39;:200,</span>
+<span class="go">        &#39;text&#39;:&#39;hello&#39;</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>Finally, you can just drop all your attributes using the XML_LOAD_DROP_ALL_ATTRS:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">book</span> <span class="o">=</span> <span class="nb">file</span><span class="p">(</span><span class="s">&#39;book.xml&#39;</span><span class="p">,</span><span class="s">&#39;r&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">StreamXMLLoader</span><span class="p">(</span><span class="n">book</span><span class="p">,</span> <span class="n">XML_LOAD_DROP_TOP_LEVEL</span> <span class="o">|</span>
+<span class="gp">... </span>                           <span class="n">XML_LOAD_EVAL_CONTENT</span> <span class="o">|</span> <span class="n">XML_LOAD_DROP_ALL_ATTRS</span> <span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">result</span> <span class="o">=</span> <span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pretty</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+<span class="go">{</span>
+<span class="go">    &#39;chapter&#39;:{</span>
+<span class="go">        &#39;text&#39;:&#39;hello&#39;</span>
+<span class="go">    }</span>
+<span class="go">}</span>
+</pre></div>
+</div>
+<p>A list of options is available below (or look in xmlloader.py):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">###################### OPTIONS for XML -&gt; dictionaries</span>
+
+<span class="c"># ATTRS (attributes on XML nodes) by default becomes</span>
+<span class="c"># separate dictionaries in the table with a</span>
+<span class="c"># &quot;__attrs__&quot; key.  If you choose to unfold, the attributes</span>
+<span class="c"># become keys at the same level, with an underscore.</span>
+<span class="c"># (thus &quot;unfolding&quot; the attributes to an outer level).</span>
+<span class="c">#</span>
+<span class="c"># For example:</span>
+<span class="c">#   &lt;book attr1=&quot;1&quot; attr2=&quot;2&gt;contents&lt;/book&gt;</span>
+<span class="c"># WITHOUT unfolding  (This is the DEFAULT)</span>
+<span class="c">#   { &#39;book&#39; : &quot;contents&quot;,</span>
+<span class="c">#     &#39;__attrs__&#39; : {&#39;attr1&#39;=&quot;1&quot;, &quot;attr2&quot;=&quot;2&quot;}</span>
+<span class="c">#   }</span>
+<span class="c"># WITH unfolding:  (Turning XML_LOAD_UNFOLD_ATTRS on)</span>
+<span class="c">#   { &#39;book&#39; : &quot;contents&quot;,</span>
+<span class="c">#     &#39;_attr1&#39;:&quot;1&quot;,</span>
+<span class="c">#     &#39;_attr2&#39;:&quot;2&quot;,</span>
+<span class="c">#   }</span>
+<span class="n">XML_LOAD_UNFOLD_ATTRS</span> <span class="o">=</span> <span class="mh">0x01</span>
+
+
+<span class="c"># When unfolding, choose to either use the XML_PREPEND character &#39;_&#39;</span>
+<span class="c"># or no prepend at all.  This only applies if XML_LOAD_UNFOLD_ATTRS is on.</span>
+<span class="c">#   &lt;book attr1=&quot;1&quot; attr2=&quot;2&gt;contents&lt;/book&gt;</span>
+<span class="c"># becomes</span>
+<span class="c">#  { &#39;book&#39;: &quot;content&quot;,</span>
+<span class="c">#    &#39;attr1&#39;:&#39;1&#39;,</span>
+<span class="c">#    &#39;attr2&#39;:&#39;2&#39;</span>
+<span class="c">#  }</span>
+<span class="c"># Of course, the problem is you can&#39;t differentiate TAGS and ATTRIBUTES</span>
+<span class="c"># with this option</span>
+<span class="n">XML_LOAD_NO_PREPEND_CHAR</span> <span class="o">=</span> <span class="mh">0x02</span>
+
+<span class="c"># If XML attributes are being folded up, then you may</span>
+<span class="c"># want to prepend a special character to distinguish attributes</span>
+<span class="c"># from nested tags: an underscore is the usual default.  If</span>
+<span class="c"># you don&#39;t want a prepend char, use XML_LOAD_NO_PREPEND_CHAR option</span>
+<span class="n">XML_PREPEND_CHAR</span> <span class="o">=</span> <span class="s">&#39;_&#39;</span>
+
+<span class="c"># Or, you may choose to simply drop all attributes:</span>
+<span class="c"># &lt;book a=&quot;1&quot;&gt;text&lt;book&gt;</span>
+<span class="c">#   becomes</span>
+<span class="c"># { &#39;book&#39;:&#39;1&#39; }   # Drop ALL attributes</span>
+<span class="n">XML_LOAD_DROP_ALL_ATTRS</span> <span class="o">=</span> <span class="mh">0x04</span>
+
+<span class="c"># By default, we use Dictionaries (as we trying to model</span>
+<span class="c"># key-value dictionaries).  Can also use ordered dictionaries</span>
+<span class="c"># if you really truly care about the order of the keys from</span>
+<span class="c"># the XML</span>
+<span class="n">XML_LOAD_USE_OTABS</span> <span class="o">=</span> <span class="mh">0x08</span>
+
+<span class="c"># Sometimes, for key-value translation, somethings don&#39;t make sense.</span>
+<span class="c"># Normally:</span>
+<span class="c">#   &lt;top a=&quot;1&quot; b=&quot;2&quot;&gt;content&lt;/top&gt;</span>
+<span class="c"># .. this will issue a warning that attributes a and b will be dropped</span>
+<span class="c"># because this doesn&#39;t translate &quot;well&quot; into a key-value substructure.</span>
+<span class="c">#   { &#39;top&#39;:&#39;content&#39; }</span>
+<span class="c">#</span>
+<span class="c"># If you really want the attributes, you can try to keep the content by setting</span>
+<span class="c"># the value below (and this will suppress the warning)</span>
+<span class="c">#</span>
+<span class="c">#  { &#39;top&#39;: { &#39;__attrs__&#39;:{&#39;a&#39;:1, &#39;b&#39;:2}, &#39;__content__&#39;:&#39;content&#39; } }</span>
+<span class="c">#</span>
+<span class="c"># It&#39;s probably better to rethink your key-value structure, but this</span>
+<span class="c"># will allow you to move forward and not lose the attributes</span>
+<span class="n">XML_LOAD_TRY_TO_KEEP_ATTRIBUTES_WHEN_NOT_TABLES</span> <span class="o">=</span> <span class="mh">0x10</span>
+
+<span class="c"># Drop the top-level key: the XML spec requires a &quot;containing&quot;</span>
+<span class="c"># top-level key.  For example: &lt;top&gt;&lt;l&gt;1&lt;/l&gt;&lt;l&gt;2&lt;/l&gt;&lt;/top&gt;</span>
+<span class="c"># becomes { &#39;top&#39;:[1,2] }  (and you need the top-level key to get a</span>
+<span class="c"># list) when all you really want is the list:  [1,2].  This simply</span>
+<span class="c"># drops the &quot;envelope&quot; that contains the real data.</span>
+<span class="n">XML_LOAD_DROP_TOP_LEVEL</span> <span class="o">=</span> <span class="mh">0x20</span>
+
+<span class="c"># Converting from XML to Tables results in almost everything</span>
+<span class="c"># being strings:  this option allows us to &quot;try&quot; to guess</span>
+<span class="c"># what the real type is by doing an Eval on each member:</span>
+<span class="c"># Consider: &lt;top&gt; &lt;a&gt;1&lt;/a&gt; &lt;b&gt;1.1&lt;/b&gt; &lt;c&gt;&#39;string&#39; &lt;/top&gt;</span>
+<span class="c"># WITHOUT this option (the default) -&gt; {&#39;top&#39;: { &#39;a&#39;:&#39;1&#39;,&#39;b&#39;:&#39;1.1&#39;,&#39;c&#39;:&#39;str&#39;}}</span>
+<span class="c"># WITH this option                  -&gt; {&#39;top&#39;: { &#39;a&#39;:1, &#39;b&#39;:1.1, &#39;c&#39;:&#39;str&#39; } }</span>
+<span class="c"># If the content cannot be evaluated, then content simply says &#39;as-is&#39;.</span>
+<span class="c"># Consider combining this with the XML_DUMP_STRINGS_BEST_GUESS</span>
+<span class="c"># if you go back and forth between Tables and XML a lot.</span>
+<span class="n">XML_LOAD_EVAL_CONTENT</span> <span class="o">=</span> <span class="mh">0x40</span>
+
+<span class="c"># Even though illegal XML, allow element names starting with Digits:</span>
+<span class="c"># when it does see a starting digit, it turns it into an _digit</span>
+<span class="c"># so that it is still legal XML</span>
+<span class="n">XML_TAGS_ACCEPTS_DIGITS</span> <span class="o">=</span> <span class="mh">0x80</span>
+
+<span class="c"># Allows digits as starting XML tags, even though illegal XML.</span>
+<span class="c"># This preserves the number as a tag.</span>
+<span class="n">XML_DIGITS_AS_TAGS</span> <span class="o">=</span> <span class="mh">0x80000</span>
+
+<span class="c"># When loading XML, do we require the strict XML header?</span>
+<span class="c"># I.e., &lt;?xml version=&quot;1.0&quot;?&gt;</span>
+<span class="c"># By default, we do not.  If we set this option, we get an error</span>
+<span class="c"># thrown if we see XML without a header</span>
+<span class="n">XML_STRICT_HDR</span> <span class="o">=</span> <span class="mh">0x10000</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="lists-and-the-xmlloader-xmldumper">
+<h2>Lists and the XMLLoader/XMLDumper<a class="headerlink" href="#lists-and-the-xmlloader-xmldumper" title="Permalink to this headline">¶</a></h2>
+<p>Lists present some interesting challenges when converting back
+and forth.  XML supports lists, but Python lists and XML
+lists are very different beasts in a few areas.</p>
+<p>Consider: by default, multiple entries of the same tag in XML form a list:</p>
+<div class="highlight-python"><pre>&lt;top&gt;
+   &lt;ch&gt;text1&lt;/ch&gt;   # list item 1
+   &lt;ch&gt;text2&lt;/ch&gt;   # list item 2
+&lt;/top&gt;</pre>
+</div>
+<p>There is an easy, obvious way to convert this into Python lists,
+and it works well:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">XMLLoader</span><span class="p">(</span><span class="s">&quot;&lt;top&gt;&lt;ch&gt;text1&lt;/ch&gt;&lt;ch&gt;text2&lt;/ch&gt;&lt;/top&gt;&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="go">{ &#39;top&#39;: { &#39;ch&#39;: [&#39;text1&#39;, &#39;text2&#39;] } }</span>
+</pre></div>
+</div>
+<p>What happens, though, if there is only one tag in the XML list?:</p>
+<div class="highlight-python"><pre>&lt;top&gt;
+  &lt;ch&gt;text1&lt;/ch&gt;   # list item?  plain data?
+&lt;/top&gt;</pre>
+</div>
+<p>In the absence of extra information, &#8216;ch&#8217; becomes a plain string: in XML,
+the only way to signal a list is with multiple entries, which don&#8217;t
+exist here:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">XMLLoader</span><span class="p">(</span><span class="s">&quot;&lt;top&gt;&lt;ch&gt;text1&lt;/ch&gt;&lt;/top&gt;&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="go">{&#39;top&#39;: {&#39;ch&#39;: &#39;text1&#39; }}</span>
+</pre></div>
+</div>
+<p>In a full XML world, where schemas abound, the solution might be to have
+a schema to enforce this.   Unfortunately, the XML tools here assume
+we <em>just</em> have the
+information of the table itself: there is no extra information.  So, we
+have to make due with what XML gives us.  In this case, we use the
+convention of having a
+special attribute <a href="#id1"><span class="problematic" id="id2">type__</span></a> to indicate that &#8216;ch&#8217; is a list:</p>
+<div class="highlight-python"><pre>&lt;top&gt;
+  &lt;ch type__="list"&gt;text1&lt;/ch&gt;
+&lt;/top&gt;</pre>
+</div>
+<p>Adding this attribute forces the XML translation to keep ch as a list:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">XMLLoader</span><span class="p">(</span><span class="s">&quot;&lt;top&gt;&lt;ch type__=&#39;list&#39;&gt;text1&lt;/ch&gt;&lt;/top&gt;&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="go">{&#39;top&#39;: {&#39;ch&#39;: [&#39;text1&#39;]}}</span>
+</pre></div>
+</div>
+<p>For consistency, you can <em>always</em> put it on the first entry to tag
+an entity as a list:</p>
+<div class="highlight-python"><pre>&lt;top&gt;
+ &lt;ch type__="list"&gt;text1&lt;/ch&gt;
+ &lt;ch&gt;text2&lt;/ch&gt;
+&lt;/top&gt;</pre>
+</div>
+<p>And when you translate:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">XMLLoader</span><span class="p">(</span><span class="s">&quot;&lt;top&gt;&lt;ch type__=&#39;list&#39;&gt;text1&lt;/ch&gt;&lt;ch&gt;text2&lt;/ch&gt;&lt;/top&gt;&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="go">{&#39;top&#39;: {&#39;ch&#39;: [&#39;text1&#39;, &#39;text2&#39;]}}</span>
+</pre></div>
+</div>
+<p>But you don&#8217;t have to put the <a href="#id1"><span class="problematic" id="id3">type__</span></a> tag on if you have multiple entries:
+in that case the tools can easily figure out if it&#8217;s a list or not.
+It&#8217;s really only if you have a <em>single lonesome tag</em> that you need the
+special <a href="#id1"><span class="problematic" id="id4">type__</span></a> to force a list.
+(but ONLY put in on the first entry: if you
+put it on all the entries, you won&#8217;t get what you expect).</p>
+<p>How do you represent an empty list?  Use an empty tag with the
+<a href="#id1"><span class="problematic" id="id5">type__</span></a> attribute:</p>
+<div class="highlight-python"><pre>&lt;top&gt;
+  &lt;ch type__="list"/&gt;
+&lt;/top&gt;</pre>
+</div>
+<p>Translating, you&#8217;ll see, yes, &#8216;ch&#8217; becomes an empty list:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">XMLLoader</span><span class="p">(</span><span class="s">&quot;&lt;top&gt;&lt;ch type__=&#39;list&#39;/&gt;&lt;/top&gt;&quot;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="go">{&#39;top&#39;: {&#39;ch&#39;: []}}</span>
+</pre></div>
+</div>
+<p>There&#8217;s another way in which XML lists and Python lists differ:
+all XML lists have to be <em>named</em>, whereas Python has the notion of <em>anonymous</em>
+lists and dictionaries.  Consider in Python:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;top&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">],</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span> <span class="p">]</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>The &#8216;top&#8217; list contains two anonymous lists and one anonymous
+dictionary.
+Basically, because lists can hold anything (including other lists),
+the content inside the list exists without a name.
+Python programmers normally think of that as just a[&#8216;top&#8217;][0], a[&#8216;top&#8217;][1],
+etc. using indices, so they don&#8217;t care that the inner lists
+don&#8217;t have names.</p>
+<p>In XML, all tags <em>HAVE</em> to have a name.  To preserve the XML notion
+of lists, all entries should have the same name as well (we saw above
+that XML enforces lists by having repeated tags).  This means we can&#8217;t
+use 0,1,2, etc. like a Python programmer would.  The XML needs
+a name for the anonymous list:  the tools use &#8216;<a href="#id1"><span class="problematic" id="id6">list__</span></a>&#8216;:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span> <span class="o">=</span> <span class="n">XMLDumper</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">XML_DUMP_PRETTY</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span>  <span class="p">{</span> <span class="s">&#39;top&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],[</span><span class="s">&#39;a&#39;</span><span class="p">,</span><span class="s">&#39;b&#39;</span><span class="p">],</span> <span class="p">{</span><span class="s">&#39;a&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">}</span> <span class="p">]</span> <span class="p">}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span><span class="o">.</span><span class="n">XMLDumpKeyValue</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span>
+<span class="go">&lt;a&gt;</span>
+<span class="go">    &lt;top&gt;</span>
+<span class="go">        &lt;list__&gt;1&lt;/list__&gt;</span>
+<span class="go">        &lt;list__&gt;2&lt;/list__&gt;</span>
+<span class="go">        &lt;list__&gt;3&lt;/list__&gt;</span>
+<span class="go">    &lt;/top&gt;</span>
+<span class="go">    &lt;top&gt;</span>
+<span class="go">        &lt;list__&gt;a&lt;/list__&gt;</span>
+<span class="go">        &lt;list__&gt;b&lt;/list__&gt;</span>
+<span class="go">    &lt;/top&gt;</span>
+<span class="go">    &lt;top&gt;</span>
+<span class="go">        &lt;a&gt;1&lt;/a&gt;</span>
+<span class="go">    &lt;/top&gt;</span>
+<span class="go">&lt;/a&gt;</span>
+</pre></div>
+</div>
+<p>The convention that the toolset uses is that &#8220;<a href="#id1"><span class="problematic" id="id7">list__</span></a>&#8221;
+will be the name XML uses to correspond to the anonymous Python
+lists.  In the case of the dictionary, being inside a list
+like that makes it &#8220;obvious&#8221; it&#8217;s a dictionary, so we don&#8217;t need any
+special mechanism for that.  To be sure this converts back
+faithfully:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="gp">... </span><span class="s">  &lt;a&gt;</span>
+<span class="gp">... </span><span class="s">      &lt;top&gt;</span>
+<span class="gp">... </span><span class="s">          &lt;list__&gt;1&lt;/list__&gt;</span>
+<span class="gp">... </span><span class="s">          &lt;list__&gt;2&lt;/list__&gt;</span>
+<span class="gp">... </span><span class="s">          &lt;list__&gt;3&lt;/list__&gt;</span>
+<span class="gp">... </span><span class="s">      &lt;/top&gt;</span>
+<span class="gp">... </span><span class="s">      &lt;top&gt;</span>
+<span class="gp">... </span><span class="s">          &lt;list__&gt;a&lt;/list__&gt;</span>
+<span class="gp">... </span><span class="s">          &lt;list__&gt;b&lt;/list__&gt;</span>
+<span class="gp">... </span><span class="s">      &lt;/top&gt;</span>
+<span class="gp">... </span><span class="s">      &lt;top&gt;</span>
+<span class="gp">... </span><span class="s">          &lt;a&gt;1&lt;/a&gt;</span>
+<span class="gp">... </span><span class="s">      &lt;/top&gt;</span>
+<span class="gp">... </span><span class="s">  &lt;/a&gt;</span>
+<span class="gp">... </span><span class="s">&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">XMLLoader</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="go">{&#39;a&#39;: {&#39;top&#39;: [[&#39;1&#39;, &#39;2&#39;, &#39;3&#39;], [&#39;a&#39;, &#39;b&#39;], {&#39;a&#39;: &#39;1&#39;}]}}</span>
+</pre></div>
+</div>
+<p>There is one final corner case:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">a</span><span class="o">=</span> <span class="p">{</span> <span class="s">&#39;top&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="p">{}</span> <span class="p">]</span> <span class="p">}</span>
+</pre></div>
+</div>
+<p>An empty dictionary inside a list (so the dictionary is anonymous).  Any
+keys in a dict usually offer enough information for the XML tools to figure
+out that it&#8217;s a dictionary.  In this case, since there are no keys, we need
+a special key to indicate an anonymous dictionary:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span><span class="o">.</span><span class="n">XMLDumpKeyValue</span><span class="p">(</span><span class="s">&#39;a&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s">&#39;top&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="p">{}</span> <span class="p">]</span> <span class="p">}</span> <span class="p">)</span>
+<span class="go">&lt;a&gt;</span>
+<span class="go">    &lt;top type__=&quot;list&quot;&gt;</span>
+<span class="go">        &lt;dict__&gt;</span>
+<span class="go">        &lt;/dict__&gt;</span>
+<span class="go">    &lt;/top&gt;</span>
+<span class="go">&lt;/a&gt;</span>
+</pre></div>
+</div>
+<p>In fact, you can use &#8216;<a href="#id1"><span class="problematic" id="id8">dict__</span></a>&#8216; to name an anonymous dictionary, and the
+tools will do the right thing:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="gp">... </span><span class="s">&lt;a&gt;</span>
+<span class="gp">... </span><span class="s">      &lt;top type__=&quot;list&quot;&gt;</span>
+<span class="gp">... </span><span class="s">          &lt;dict__&gt;</span>
+<span class="gp">... </span><span class="s">          &lt;/dict__&gt;</span>
+<span class="gp">... </span><span class="s">      &lt;/top&gt;</span>
+<span class="gp">... </span><span class="s">  &lt;/a&gt;</span>
+<span class="gp">... </span><span class="s">&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">XMLLoader</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="go">{&#39;a&#39;: {&#39;top&#39;: [{}]}}</span>
+</pre></div>
+</div>
+<p>In fact, adding the &#8216;<a href="#id1"><span class="problematic" id="id9">dict__</span></a>&#8216; in the anonymous list works just fine, it&#8217;s just clumsier:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="gp">... </span><span class="s">&lt;a&gt;</span>
+<span class="gp">... </span><span class="s">  &lt;top&gt;</span>
+<span class="gp">... </span><span class="s">    &lt;dict__&gt;&lt;a&gt;1&lt;/a&gt;&lt;/dict__&gt;</span>
+<span class="gp">... </span><span class="s">  &lt;/top&gt;</span>
+<span class="gp">... </span><span class="s">  &lt;top&gt;</span>
+<span class="gp">... </span><span class="s">    &lt;dict__/&gt;</span>
+<span class="gp">... </span><span class="s">  &lt;/top&gt;</span>
+<span class="gp">... </span><span class="s">&lt;/a&gt;</span>
+<span class="gp">... </span><span class="s">&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">XMLLoader</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="go">{&#39;a&#39;: {&#39;top&#39;: [{&#39;a&#39;: &#39;1&#39;}, {}]}}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="array-disposition">
+<h2>Array Disposition<a class="headerlink" href="#array-disposition" title="Permalink to this headline">¶</a></h2>
+<p>The ArrayDisposition parameter of the XMLLoader and XMLDumper is
+often misunderstood.  Basically, the array disposition tells
+the XMLLoader/XMLDumper how to deal with arrays of POD:
+POD stands for Plain Old Data, meaning data like ints, floats, complexes
+(In hard core C, POD is quick and easy to manipulate).
+POD arrays are very important for efficient processing
+of lots of scientific data as they are are stored efficiently
+as contiguous data in memory.</p>
+<p>Python lists <em>are not</em> POD arrays: lists have to deal with heterogeneous
+data (i.e., [1, 2.2, &#8216;three&#8217;]) and thus aren&#8217;t as efficient for storing large
+amounts of data. In a crunch, however, POD arrays can be stored
+as Python lists.</p>
+<p>There are five different array dispositions (number 4 is new to
+PicklingTools 1.3.0):</p>
+<blockquote>
+<ol class="arabic" start="0">
+<li><p class="first">ARRAYDISPOSITION_AS_NUMERIC : Assume all array data is
+using the Python Numeric module which keeps arrays of POD:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">Numeric</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s">&#39;f&#39;</span><span class="p">)</span> <span class="c"># POD array of floats</span>
+</pre></div>
+</div>
+<p>The Python Numeric module may or may not be installed on your
+platform: many versions of RedHat Linux allow an RPM to be
+installed.  If you use older XMPY (pre 4.0), Numeric is installed
+by default.  Newer XMPY should use NumPy (see next bullet).</p>
+<p>As of 1.5.x series, Numeric is out of maintenance and we
+tend to prefer NumPy.</p>
+</li>
+<li><p class="first">ARRAYDISPOSITION_AS_NUMPY : Assume all array data is
+using the Python NumPy module which keeps arrays of POD:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">numpy</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">numpy</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s">&#39;f&#39;</span><span class="p">)</span> <span class="c"># POD array of floats</span>
+</pre></div>
+</div>
+<p>The Python numpy module may or may not be installed on your
+platform: many versions of RedHat Linux allow an RPM to be
+installed.  NumPy really only works with XMPY greater than
+version 4.0.</p>
+</li>
+<li><p class="first">ARRAYDISPOSITION_AS_LIST: Turn all array POD data into
+a list.  This is the most inefficient way to store
+POD arrays, but it is the most compatible, as all versions of
+Python support the Python list:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">l</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]</span>  <span class="c"># Not stored as anything special: uses</span>
+<span class="gp">&gt;&gt;&gt; </span>             <span class="c"># overhead of lists which is not the most</span>
+<span class="gp">&gt;&gt;&gt; </span>             <span class="c"># efficient way to store lots of POD</span>
+</pre></div>
+</div>
+</li>
+<li><p class="first">ARRAYDISPOSITION_AS_ARRAY:  Most versions of Python have
+the array module:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">array</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="s">&#39;f&#39;</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span> <span class="c"># POD array of floats</span>
+<span class="gp">&gt;&gt;&gt; </span>                              <span class="c"># NOTE! Python arrays</span>
+<span class="gp">&gt;&gt;&gt; </span>                              <span class="c"># have different interfaces</span>
+<span class="gp">&gt;&gt;&gt; </span>                              <span class="c"># than Numeric arrays</span>
+</pre></div>
+</div>
+<p>The Python array module doesn&#8217;t support complex data,
+but is available on almost Pythons as a default module.</p>
+</li>
+<li><p class="first">ARRAYDISPOSITION_AS_NUMERIC_WRAPPER:  This is new to
+simple array class which wraps the Python array, but
+retains the interface of the Numeric array and also
+supports complex data.</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">simplearray</span> <span class="kn">import</span> <span class="n">SimpleArray</span> <span class="k">as</span> <span class="n">array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">a</span> <span class="o">=</span> <span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s">&#39;D&#39;</span><span class="p">)</span>   <span class="c"># POD array of complex doubles:</span>
+<span class="gp">&gt;&gt;&gt; </span>                          <span class="c"># works like Numeric arrays but</span>
+<span class="gp">&gt;&gt;&gt; </span>                          <span class="c"># just a simple Python class</span>
+<span class="gp">&gt;&gt;&gt; </span>                          <span class="c"># that wraps Python array module</span>
+</pre></div>
+</div>
+</li>
+</ol>
+</blockquote>
+<p>In general, the array disposition indicate what the XMLLoader/XMLDumper
+will try to do with arrays of POD.  The XMLLoader and XMLDumper
+do slightly different things based on the array disposition.</p>
+<blockquote>
+<ol class="arabic">
+<li><p class="first">In the XMLDumper case, if the Python dictionary contains
+any POD data (Numeric array, NumPy array, Python array,
+or Numeric array wrapper),
+it will dump it as Numeric data UNLESS the array disposition is
+AS_LIST, in which case it will dump it as a list.  Here&#8217;s an
+example using the Numeric wrapper array, and how it dumps:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">simplearray</span> <span class="kn">import</span> <span class="n">SimpleArray</span> <span class="k">as</span> <span class="n">array</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&#39;data&#39;</span><span class="p">:</span> <span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span> <span class="s">&#39;D&#39;</span><span class="p">),</span> <span class="s">&#39;time&#39;</span><span class="p">:</span><span class="s">&#39;12:00&#39;</span> <span class="p">}</span>
+<span class="go">&gt;&gt;&gt;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xmldumper</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span> <span class="o">=</span> <span class="n">XMLDumper</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">XML_DUMP_PRETTY</span><span class="p">,</span>
+<span class="gp">... </span>               <span class="n">ARRAYDISPOSITION_AS_NUMERIC_WRAPPER</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span><span class="o">.</span><span class="n">XMLDumpKeyValue</span><span class="p">(</span><span class="s">&#39;top&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output:</p>
+<div class="highlight-python"><pre>&lt;top&gt;
+    &lt;data arraytype__="D"&gt;(1+0j),(2+0j),(3+0j)&lt;/data&gt;
+    &lt;time&gt;12:00&lt;/time&gt;
+&lt;/top&gt;</pre>
+</div>
+<p>The POD array dumps a long list of comma-separated values (CSV), with
+an attribute indicating what the original type of the data was.
+But, if we use the default array disposition (which is
+ARRAYDISPOSITION_AS_LIST), that array will be turned into a
+plain list, and all POD array information will be lost (including the
+type tag):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span> <span class="o">=</span> <span class="n">XMLDumper</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">stdout</span><span class="p">,</span> <span class="n">XML_DUMP_PRETTY</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span>                         <span class="c"># Default is ARRAYDISPOSITION_AS_LIST)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xd</span><span class="o">.</span><span class="n">XMLDumpKeyValue</span><span class="p">(</span><span class="s">&#39;top&#39;</span><span class="p">,</span> <span class="n">e</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The output is:</p>
+<div class="highlight-python"><pre>&lt;top&gt;
+    &lt;data&gt;(1+0j)&lt;/data&gt;
+    &lt;data&gt;(2+0j)&lt;/data&gt;
+    &lt;data&gt;(3+0j)&lt;/data&gt;
+    &lt;time&gt;12:00&lt;/time&gt;
+&lt;/top&gt;</pre>
+</div>
+<p>Although we lose some information with this array disposition, this format
+is very compatible with
+many XML tools (as the notion of XML lists is well understood by those
+tools).</p>
+</li>
+<li><p class="first">From the XMLLoader&#8217;s point of view: it will only try to convert
+POD arrays if it actually encounters POD arrays!  If the XML has only
+plain XML lists, the array disposition doesn&#8217;t matter:</p>
+<div class="highlight-python"><pre>&lt;!-- XMLLoader won't care what the array disposition is for this
+     data, because all key values are standard lists: there is
+     no special tags or anything indicating otherwise --!&gt;
+&lt;top&gt;
+    &lt;data&gt;(1+0j)&lt;/data&gt;
+    &lt;data&gt;(2+0j)&lt;/data&gt;
+    &lt;data&gt;(3+0j)&lt;/data&gt;
+    &lt;time&gt;12:00&lt;/time&gt;
+&lt;/top&gt;
+
+&lt;!---- XMLLoader *will care* because it sees the special
+       arraytype__ tag below, so it knows that array POD --!&gt;
+&lt;top&gt;
+    &lt;data arraytype__="D"&gt;(1+0j),(2+0j),(3+0j)&lt;/data&gt;
+    &lt;time&gt;12:00&lt;/time&gt;
+&lt;/top&gt;</pre>
+</div>
+<p>When loading, the XMLLoader will follow the array disposition:
+all array POD data will be converted to either a Numeric array,
+Python array, Numeric wrapper array or plain Python list.
+As an example for Numeric Wrapper array:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="gp">... </span><span class="s">&lt;top&gt;</span>
+<span class="gp">... </span><span class="s">    &lt;data arraytype__=&quot;D&quot;&gt;(1+0j),(2+0j),(3+0j)&lt;/data&gt;</span>
+<span class="gp">... </span><span class="s">    &lt;time&gt;12:00&lt;/time&gt;</span>
+<span class="gp">... </span><span class="s">&lt;/top&gt;</span>
+<span class="gp">... </span><span class="s">&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xmlloader</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">XMLLoader</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">ARRAYDISPOSITION_AS_NUMERIC_WRAPPER</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="go">{&#39;top&#39;: {&#39;data&#39;: array([(1+0j),(2+0j),(3+0j)], &#39;D&#39;), &#39;time&#39;: &#39;12:00&#39;}}</span>
+</pre></div>
+</div>
+<p>In the above example, the POD array was preserved, because we set the
+array disposition to load all POD arrays using the Numeric wrapper
+(simplearray.py).  If we don&#8217;t specify an array disposition, it uses
+the ARRAYDISPOSITION_AS_LIST as the default:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">x</span> <span class="o">=</span> <span class="s">&quot;&quot;&quot;</span>
+<span class="gp">... </span><span class="s">&lt;top&gt;</span>
+<span class="gp">... </span><span class="s">   &lt;data arraytype__=&quot;D&quot;&gt;(1+0j),(2+0j),(3+0j)&lt;/data&gt;</span>
+<span class="gp">... </span><span class="s">   &lt;time&gt;12:00&lt;/time&gt;</span>
+<span class="gp">... </span><span class="s">&lt;/top&gt;</span>
+<span class="gp">... </span><span class="s">&quot;&quot;&quot;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">xmlloader</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span> <span class="o">=</span> <span class="n">XMLLoader</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span> <span class="c"># Default is ARRAYDISPOSITION_AS_LIST</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">xl</span><span class="o">.</span><span class="n">expectXML</span><span class="p">()</span>
+<span class="go">{&#39;top&#39;: {&#39;data&#39;: [(1+0j), (2+0j), (3+0j)], &#39;time&#39;: &#39;12:00&#39;}}</span>
+</pre></div>
+</div>
+<p>In the above case, the array was converted to a Python list: it
+preserves the data, but not the original type of the POD data
+(was the data complex float or complex double?) or the fact
+that is was a POD array.</p>
+</li>
+</ol>
+</blockquote>
+<p>The real reason for ArrayDisposition is because Python doesn&#8217;t have a
+&#8220;good&#8221; standard POD array:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Numeric arrays are a standard at many places of work,
+but they aren&#8217;t installed as standard</li>
+<li>Python array don&#8217;t handle complex data, which is a non-starter
+for some kinds of processing.
+They also don&#8217;t do array operations (vector add, multiply, etc.)
+AND the serialization for Python arrays has changed between 2.6
+and 2.7, so they are incompatibile between Pythons.</li>
+<li>The Numeric wrapper handles complex, but still doesn&#8217;t have the
+vector operations</li>
+<li>Python lists are standard, but are a poor way to store large
+amounts of data</li>
+<li>The NumPy package is fairly standard on most modern
+distributions, but you may still have to go out of your way
+to get it.  In general NumPy is the best choice, as NumPy
+is in maintenance and fairly standard across multiple platforms.</li>
+</ol>
+</blockquote>
+<p>C++ doesn&#8217;t have this problem: the Array&lt;T&gt; is the standard
+way to deal with POD arrays.  AS_NUMERIC and AS_PYTHON_ARRAY are
+handled the same (using the C++ Array&lt;T&gt; class).  The AS_LIST
+is offered as a compatibility option and will convert POD arrays
+to the equivalent Python List (the C++ Arr()).</p>
+<p>In XML, the &#8216;arraytype&#8217; tags are the following:</p>
+<div class="highlight-python"><pre>s: 1 byte signed char
+S: 1 byte unsigned char
+i: 2 byte signed char
+I: 2 byte unsigned char
+l: 4 byte signed char
+L: 4 byte unsigned char
+x: 4 byte signed char
+X: 4 byte unsigned char
+f: 4 byte float
+d: 8 byte double
+F: 8 byte complex (2 4-byte floats)
+D: 16 byte complex (2 8-byte doubles)</pre>
+</div>
+<p>Thus:</p>
+<div class="highlight-python"><pre>&lt;s arraytype__='S'&gt;1,2,3&lt;/s&gt;</pre>
+</div>
+<p>Is an array of unsigned 1 byte integers.  These typetags correspond to the
+C++ Val type tags.</p>
+<p>When building arrays from Python, look at the Numeric typecodes
+from Numeric (print Numeric.typecodes) or array (help array).</p>
+<p>Note that from a Python dictionary perspective, the arrays are
+usually printed as Numeric arrays.  Their typecodes:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">Numeric</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span> <span class="n">Numeric</span><span class="o">.</span><span class="n">typecodes</span>
+<span class="go">{&#39;Integer&#39;: &#39;1sil&#39;, &#39;UnsignedInteger&#39;: &#39;bwu&#39;, &#39;Float&#39;: &#39;fd&#39;, &#39;Character&#39;: &#39;c&#39;, &#39;Complex&#39;: &#39;FD&#39;}</span>
+</pre></div>
+</div>
+<p>Why didn&#8217;t we use Numeric typecodes as the standard for the XML type tags?
+Unfortunately, the Numeric typecodes don&#8217;t have a 8-byte unsigned integer,
+and depending on the type of machine (32-bit or 64-bit), the &#8216;l&#8217;
+typecode may be (resp.) a 4-byte integer or an 8-byte integer.
+The Numeric typecodes are unfortunately inconsistent.
+The Python array typecodes have similar problems (the tags aren&#8217;t
+guaranteed to be a x-bytes, and there are no complex typecodes).
+The Val typecodes (listed above) are always guaranteed to be exact number
+of bytes and they support complex data.</p>
+</div>
+<div class="section" id="back-and-forth-between-xml-and-python-dictionaries">
+<h2>Back and Forth Between XML and Python Dictionaries<a class="headerlink" href="#back-and-forth-between-xml-and-python-dictionaries" title="Permalink to this headline">¶</a></h2>
+<p>The XMLLoader and XMLDumper have been written in such a way to
+allow you to convert back and forth between XML and Python
+dictionaries and not lose information (if your XML is key-value XML).
+The previous sections made it look easy, but there are a lot of places
+where it be tricky.</p>
+<blockquote>
+<ol class="arabic simple">
+<li>lists: Lists can be problematic (see above discussion), but the
+solutions to those problems are outlined in the previous section.</li>
+<li>floating point numbers: With any floating point data, the number
+of places you print can be important.
+The &#8216;default&#8217; printing of Python is usually not good enough,
+so the <em>pretty</em> module has gone to great lengths (and the XMLDumper
+and XMLLoader both import the <em>pretty</em> module) to make sure that
+floating point numbers are handled responsibly: floats are printed
+with 7 places, doubles are printed with 16 places.  Both the C++
+and Python versions of pretty should behave exactly the same way.</li>
+<li>array disposition: When going back and forth between dictionaries
+and XML, be judicious with the array disposition, or you may lose
+information.    See the previous section for more details on
+POD data.</li>
+<li>dropping the top-level:  In XML, the top-level document is
+frequently irrelevant.  Converting back and forth between
+XML and dicts you will probably want to drop the top-level.</li>
+</ol>
+</blockquote>
+<p>There are two tools for converting between XML and Python
+dictionaries from the command line: they are xml2dict.py and the dict2xml.py
+(or in the C++ area, xml2dict and dict2xml: the C++ version is significantly
+faster (60x), but will have to be compiled.   As usual, the C++ and Python
+interfaces are exactly the same).  Sample usage:</p>
+<div class="highlight-python"><pre># From a UNIX prompt
+% cd /fullpath/to/PicklingTools130/Python
+% cat INPUT.XML
+
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;root&gt;
+  &lt;list__&gt;
+    &lt;data arraytype__="d"&gt;100.0,200.0&lt;/data&gt;
+    &lt;data arraytype__="D"&gt;(100-100j),(600+1j)&lt;/data&gt;
+    &lt;here&gt;1&lt;/here&gt;
+  &lt;/list__&gt;
+  &lt;list__&gt;7&lt;/list__&gt;
+  &lt;list__&gt;(1-2j)&lt;/list__&gt;
+&lt;/root&gt;
+
+% python xml2dict.py INPUT.XML
+
+[
+  {
+      'data':[
+          array([100.0,200.0], 'd'),
+          array([(100-100j),(600+1j)], 'D')
+      ],
+      'here':1
+  },
+  7,
+  (1-2j)
+]</pre>
+</div>
+<p>The options on there were chosen to try to make it easy to go back and
+forth between the two representations without losing any info.</p>
+</div>
+<div class="section" id="c-and-the-xmlloader-and-xmldumper">
+<h2>C++ and the XMLLoader and XMLDumper<a class="headerlink" href="#c-and-the-xmlloader-and-xmldumper" title="Permalink to this headline">¶</a></h2>
+<p>The C++ version is remarkable similar to the Python version:
+in almost all respects, their behaviors, their interfaces, their
+options, and even their names should
+be exactly alike.  Even though we said this earlier in this
+document, it is worth saying again: there has been considerable
+effort to make the C++
+and Python versions of the XMLLoader and XMLDumper to be
+as close to the same as possible (for ease of maintenance).
+Thus, the Python and C++ should be almost interchangeable.</p>
+<p>The C++ version is significantly faster (60x), but the Python will be easier
+to use.</p>
+<p>Some notable differences: the C++ version deals with Vals instead of
+Python objects, C++ uses OTabs instead of OrderedDict.</p>
+<p>Consider the following simple C++ example for XMLDumper:</p>
+<div class="highlight-python"><pre>// Includes needed
+#include &lt;iostream&gt;
+#include "xmldumper.h"
+
+// C++ code
+int main()
+{
+  Val v = Tab("{'a':1, 'b':2.2, 'c':'three'}");
+  XMLDumper xd(std::cout, XML_DUMP_PRETTY | XML_STRICT_HDR);
+  xd.XMLDumpKeyValue("top", v);
+}
+
+/* Output:
+&lt;top&gt;
+   &lt;a&gt;1&lt;/a&gt;
+   &lt;b&gt;2.2&lt;/b&gt;
+   &lt;c&gt;three&lt;/c&gt;
+&lt;/top&gt;
+*/</pre>
+</div>
+<p>Like the XMLDumper of Python, the options are specified the same
+and the behavior and interfaces are essentially the same.
+Instead of using &#8220;sys.stdout&#8221;, we use C++ stream std::cout.</p>
+<p>There are multiple examples in the baseline of using this the XMLLoader
+and XMLDumper:  take a look at xml2dict.cc and dict2xml.cc
+and the Makefiles to see examples of how to compile and use C++.</p>
+</div>
+<div class="section" id="different-types-of-keys-of-dictionaries">
+<h2>Different Types of Keys Of Dictionaries<a class="headerlink" href="#different-types-of-keys-of-dictionaries" title="Permalink to this headline">¶</a></h2>
+<p>Most of the discussions above assume the keys of dictionaries
+are strings.  They can be other types:</p>
+<blockquote>
+<ol class="arabic">
+<li><dl class="first docutils">
+<dt>numbers:</dt>
+<dd><p class="first">If a key is an int, it will be converted to a tag
+with &#8220;0&#8221; around it.  Unfortunately, an XML
+tag of &lt;0&gt; is not legal.  By default, the tools will
+error out saying that keys with only numbers
+would be illegal XML.  There are two options which
+help mitigate this:  XML_TAGS_ACCEPTS_DIGITS and
+XML_DIGITS_AS_TAGS (yes, they are closely named).
+The first option (XML_TAGS_ACCEPTS_DIGITS) turns a
+dict key that starts with digits into an _digit.
+In other words, <tt class="docutils literal"><span class="pre">0</span></tt> would become <tt class="docutils literal"><span class="pre">_0</span></tt>.  This
+gives legal XML, but doesn&#8217;t translate back from
+XML to dict well.  The second option (XML_DIGITS_AS_TAGS)
+allows &#8220;illegal&#8221; XML where <tt class="docutils literal"><span class="pre">0</span></tt> becomes the tag &lt;0&gt;:
+on other words, the numberness is preserved, even
+though the underlying XML is strictly speaking illegal.</p>
+<p class="last">For conversions between Midas 2k OpalTables and
+XML, we suggest using the XML_DIGITS_AS_TAGS conversion.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>tuples and other types:</dt>
+<dd><p class="first last">Right now, having a tuple as a key
+in a dict will cause &#8220;undefined&#8221; translations.  As
+The Python will likely error out, and the
+C++ will try to convert the tuple to a string
+with varying degrees of success.</p>
+</dd>
+</dl>
+</li>
+</ol>
+</blockquote>
+<p>In general, we suggest keeping keys as strings to keep the XML
+translations clean and well-defined.</p>
+</div>
+<div class="section" id="python-c-extension-module-new-in-picklingtools-1-4-1">
+<h2>Python C-Extension Module: New In PicklingTools 1.4.1<a class="headerlink" href="#python-c-extension-module-new-in-picklingtools-1-4-1" title="Permalink to this headline">¶</a></h2>
+<p>The XMLtools for Python (<tt class="docutils literal"><span class="pre">xmldumper.py</span></tt> and <tt class="docutils literal"><span class="pre">xmlloader.py</span></tt>)
+was originally written all in raw Python:
+this was on purpose it would be easy to include the Python &#8220;as-is&#8221; without
+any special build process: <cite>import xmldumper</cite> and you are ready to go.
+The C++ routines, however, are significantly faster than the Python routines
+(character based I/O is usually much faster in C/C++ than Python).
+Take a look at the output of <tt class="docutils literal"><span class="pre">xmltimingstest.py</span></tt>:</p>
+<div class="highlight-python"><pre>% python xmltimingschecks.py
+Time to create big table 0.00489687919617
+Time to deepcopy big table 0.0030460357666
+...time to convert PyObject to Val ... 0.00101280212402
+...time to convert PyObject to Val and back... 0.00146102905273
+Time for Python XMLDumper to dump an XML file 0.0433909893036
+Time for C XMLDumper to dump an XML file: 0.00465703010559
+ -----------
+ *Warning: This version of Python doesn't support ast.literal_eval, so XML_LOAD_EVAL_CONTENT can be an unsafe option in malicious input/XML
+Time for Python Loader to load an XML file 0.61283493042
+Time for C Ext Loader to load an XML file 0.00649094581604</pre>
+</div>
+<p>From these numbers, it&#8217;s easy to see that dict to XML C++ conversion routines
+are about an order of magnitude faster than their Python equivalents,
+and the XML to dict C++ conversion routines are about two orders of magnitude
+faster than their Python equivalents.  Although it is nice to
+have raw Python solution to convert between dicts and XML (for smaller tables),
+for any larger tables, the extra speed of C++ may be essential.</p>
+<p>The guts of the C++ converters are available in the Python C-Extension
+module <tt class="docutils literal"><span class="pre">pyobjconvert</span></tt>, but the real interface most Python users
+will use is <tt class="docutils literal"><span class="pre">cxmltools</span></tt>.</p>
+<div class="section" id="building-the-pyobjconvert-python-c-extension-module">
+<h3>Building the pyobjconvert Python C-Extension Module<a class="headerlink" href="#building-the-pyobjconvert-python-c-extension-module" title="Permalink to this headline">¶</a></h3>
+<p>The README describes how to create the pyobjconvert module, which has
+the XML conversion wrappers:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">CReadXMLFromStream</span><span class="p">,</span> <span class="n">CReadXMLFromString</span><span class="p">,</span> <span class="n">CReadXMLFromFile</span>
+<span class="n">CWriteXMLToStream</span><span class="p">,</span> <span class="n">CWriteXMLToString</span><span class="p">,</span> <span class="n">CWriteXMLToFile</span>
+</pre></div>
+</div>
+<p>This C extension module for Python increases the speed of the
+XML to dict conversion by 60x-100x and the dict to XML conversion by 6-10x.</p>
+<p>The user probably doesn&#8217;t want to use the pyobjconvert module directly
+(as it has a different API than the previous xmltools.py): instead,
+the user will <cite>import cxmltools</cite> which brings all the appropriate definitions
+in and the interfaces/names are converted to interfaces that are consistent
+with the xmldumper.py and xmlloader.py.</p>
+<blockquote>
+<blockquote>
+HOW TO BUILD</blockquote>
+<ol class="arabic">
+<li><p class="first">Check &#8216;setup.py&#8217;:</p>
+<p>Make sure it includes the paths to the code in
+<cite>PicklingTools141/C++</cite> and <cite>PicklingTools141/C++/opencontainers1_7_5/include</cite>
+(of course, the version numbers may change in later releases).</p>
+<p>By default, this should work, but these are relative paths from
+the PicklingTools main directory.  You may want to move those
+directories.</p>
+</li>
+<li><p class="first">Once you are sure those are correctly set-up, type:</p>
+<div class="highlight-python"><pre>% python setup.py build   # % is the UNIX prompt</pre>
+</div>
+<p>This starts the build process and builds the C extension module
+for you.  You should see something like this (and notice that
+it creates three sub-directories):</p>
+<div class="highlight-python"><pre>creating build
+creating build/temp.linux-x86_64-2.4
+gcc -pthread -fno-strict-aliasing -DNDEBUG -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fPIC -I../C++ -I../C++/opencontainers_1_7_5/include -I/usr/include/python2.4 -c pyobjconvertmodule.cc -o build/temp.linux-x86_64-2.4/pyobjconvertmodule.o
+gcc -pthread -fno-strict-aliasing -DNDEBUG -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -m64 -mtune=generic -D_GNU_SOURCE -fPIC -fPIC -I../C++ -I../C++/opencontainers_1_7_5/include -I/usr/include/python2.4 -c pyobjconverter.cc -o build/temp.linux-x86_64-2.4/pyobjconverter.o
+creating build/lib.linux-x86_64-2.4
+c++ -pthread -shared build/temp.linux-x86_64-2.4/pyobjconvertmodule.o build/temp.linux-x86_64-2.4/pyobjconverter.o -o build/lib.linux-x86_64-2.4/pyobjconvertmodule.so</pre>
+</div>
+</li>
+<li><p class="first">Underneath PythonCExt should be three subdirs with names &#8220;something&#8221; like below:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="n">build</span>
+<span class="n">build</span><span class="o">/</span><span class="n">temp</span><span class="o">.</span><span class="n">linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="mf">2.4</span>
+<span class="n">build</span><span class="o">/</span><span class="n">lib</span><span class="o">.</span><span class="n">linux</span><span class="o">-</span><span class="n">x86_64</span><span class="o">-</span><span class="mf">2.4</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<blockquote>
+<p>Take a look at the <cite>build/lib.linux-x86_64-2.4</cite> dir: under there should
+be a <tt class="docutils literal"><span class="pre">pyobjconvert.so</span></tt> file.  This is the file that contains your library.</p>
+<p>Note these names aren&#8217;t likely to be the same on your installation.
+The &#8216;x86&#8217; means the machine is a 64-bit installation: yours may be
+a 32-bit installation and would be &#8216;i686&#8217;.  The &#8216;2-4&#8217; means this
+is for Python 2.4; you are probably using a newer version of Python
+like 2.6 or 2.7.</p>
+<p>Use the appropriate names for your system.</p>
+</blockquote>
+<ol class="arabic" start="4">
+<li><p class="first">Set your PYTHONPATH so it picks up the .so when you import:</p>
+<div class="highlight-python"><pre>% setenv PYTHONPATH "/full/path/to/PicklingTools141/PythonCExt/build/lib.linux-x86_64-2.4"
+
+% python
+&gt;&gt;&gt; import pyobjconvert  # without PYTHONPATH, it probably won't find your .so
+&gt;&gt;&gt; dir(pyobjconvert)
+['CReadFromXMLFile', 'CReadFromXMLStream', 'CReadFromXMLString', 'CWriteToXMLFile', 'CWriteToXMLStream', 'ConvertToVal', '__doc__', '__file__', '__name__', 'deepcopy_via_val']</pre>
+</div>
+</li>
+<li><p class="first">Try it out!  An easy way to see if it works is to run the xmltimingtools.py
+script which shows the relative times of xmldumper vs. C XMLDumper, etc:</p>
+<div class="highlight-python"><pre>% python xmltimingschecks.py
+Time to create big table 0.00489687919617
+Time to deepcopy big table 0.0030460357666
+...time to convert PyObject to Val ... 0.00101280212402
+...time to convert PyObject to Val and back... 0.00146102905273
+Time for Python XMLDumper to dump an XML file 0.0433909893036
+Time for C XMLDumper to dump an XML file: 0.00465703010559
+ -----------
+ *Warning: This version of Python doesn't support ast.literal_eval, so XML_LOAD_EVAL_CONTENT can be an unsafe option in malicious input/XML
+Time for Python Loader to load an XML file 0.61283493042
+Time for C Ext Loader to load an XML file 0.00649094581604</pre>
+</div>
+<p>Note the C XMLDumper is about 10x faster than the Python version
+and the C XMLLoader is about 100x faster than the Python version</p>
+<p>Surprisingly, converting from PyObject-&gt;Val-&gt;PyObject (which accomplishes
+a deep copy) is faster than the Python deepcopy (!)</p>
+</li>
+<li><p class="first">To use the C version of the XML tools, try using <tt class="docutils literal"><span class="pre">cxmltools</span></tt></p>
+<p>The <tt class="docutils literal"><span class="pre">cxmltools</span></tt> requires the &#8216;PicklingTools141/Python&#8217; to be on the
+Python path along with the extension module:</p>
+<div class="highlight-python"><pre>% setenv PYTHONPATH "${PYTHONPATH}:/full/path/PicklingTools141/Python"
+% python
+&gt;&gt;&gt; from cxmltools import *   # make sure cxmltools.py is on PYTHONPATH
+...                           # as is
+
+&gt;&gt;&gt; d = {'a':1, 'b':2 }
+&gt;&gt;&gt;
+&gt;&gt;&gt; a = WriteToXMLFile(d, 'top')   # Don't forget the "top"
+&gt;&gt;&gt; print a
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;top&gt;
+  &lt;a&gt;1&lt;/a&gt;
+  &lt;b&gt;2&lt;/b&gt;
+&lt;/top&gt;
+
+&gt;&gt;&gt; res = ReadFromXMLString(a)
+&gt;&gt;&gt; print res
+{'a': 1, 'b': 2}</pre>
+</div>
+<p>In case the <tt class="docutils literal"><span class="pre">cxmltools</span></tt> aren&#8217;t built, you can <cite>import xmltools</cite> and get
+the same behavior as above, just not as fast!</p>
+</li>
+</ol>
+</blockquote>
+<p>Note that the <tt class="docutils literal"><span class="pre">cxmltools</span></tt> does NOT have everything the <tt class="docutils literal"><span class="pre">xmltools</span></tt> has:
+it only has the simplified wrappers (listed below). These are the same
+simplified wrappers that the xmldumper/xmlloader have as well.
+Really, the only thing you <em>don&#8217;t</em> have are the classes (XMLDumper/XMLLoader)
+that implements the conversions: all the functionality is still available,
+but through the easier-to-use wrappers.</p>
+<p>For converting from XML to dict, the simplified wrappers are:</p>
+<div class="highlight-python"><pre>ReadFromXMLFile(filename, options, array_disp, prepend_char);
+ReadFromXMLStream(stream, options, array_disp, prepend_char);
+ReadXMLString(xml_string, options, array_disp, prepend_char);
+
+defaults:
+     options=XML_STRICT_HDR | XML_LOAD_DROP_TOP_LEVEL | XML_LOAD_EVAL_CONTENT
+     array_disp=AS_NUMERIC
+     prepend_char=XML_PREPEND_CHAR</pre>
+</div>
+<p>For converting from dict to XML, the simplified wrappers are:</p>
+<div class="highlight-python"><pre>WriteToXMLFile(dict_to_convert, filename, top_level_key, options,
+               array_disp, prepend_char)
+WriteToXMLStream(dict_to_convert, stream, top_level_key, options,
+                 array_disp, prepend_char)
+WriteToXMLString(dict_to_convert, top_level_key, options,
+                 array_disp, prepend_char)
+
+defaults:
+     top_level_key=None   (this should probably always be "top" instead)
+     options=XML_DUMP_PRETTY | XML_STRICT_HDR | XML_DUMP_STRINGS_BEST_GUESS
+     array_disp=AS_NUMERIC
+     prepend_char=XML_PREPEND_CHAR</pre>
+</div>
+<p>Note that the <tt class="docutils literal"><span class="pre">WriteToXMLString</span></tt> returns the string of interest, whereas the
+WriteToXMLFile/Stream instead both write to the given entity (and return None).</p>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>There are two sets of Python conversion routines:
+<cite>xmltools.py</cite> and <cite>cxmltools.py</cite>.
+The former allows a raw Python solution so you can get going immediately.
+The latter requires more work to build and use correctly, but gives
+routines that are significantly faster.</p>
+<p>The XML Tools described herein have a particular job: allow
+dictionaries and XML to be used relatively interchangeably.  When
+there is not a clear translation, it&#8217;s
+probably worth stepping back and re-evaluating if XML or dict
+is the better solution. Some of the questionable conversions:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>Does the XML have content and tags freely interspersed?
+These don&#8217;t map well to dicts and maybe the user is using
+the &#8220;document&#8221; part of XML heavily.</li>
+<li>Do dicts have complex keys (like tuples)?  These don&#8217;t map well to XML,
+and the user is maybe relying on the complex nature of dicts
+within Python.</li>
+</ol>
+</blockquote>
+<p>If, on the other hand, your XML or dicts are used strictly for key-value type
+relationships (with a straight-forward use of attributes in XML), then
+these conversions make sense and may solve the problem for you.
+These tools have been written with a particular usage in mind
+and hopefully fit your bill.</p>
+</div>
+<div class="section" id="appendix-a">
+<h2>Appendix A:<a class="headerlink" href="#appendix-a" title="Permalink to this headline">¶</a></h2>
+<p>What features of XML we support:</p>
+<blockquote>
+<ol class="arabic simple">
+<li>hex escape sequences:  Sequences such as &amp;#x2A; are supported
+as of 1.3.1</li>
+<li>DTDs:  Usually, a DTD has a &lt;!SOMETHING ... &gt; format: we don&#8217;t
+enforce or use the DTD at all, but it can be read&#8212;it is simply
+ignored.  1.3.0 couldn&#8217;t recognize DTDs and 1.3.1 recognizes
+but ignores them.</li>
+<li>namespaces: Neither 1.3.0 nor 1.3.1 recognize namespaces.
+1.3.1 can at least parse XML with namespaces (by recognizing the :
+in names), but there is no support beyond that.  A later release
+will embrace namespaces fully.</li>
+<li>comments:  XML comments can be interspersed in more places: they
+reduce to nothing.  A future release may try to preserve the comment
+in a Python #</li>
+<li>version: only 1.0</li>
+<li>encoding: BUG: We specify UTF-8, but currently only works with
+ASCII.  This won&#8217;t be a problem unless you use any non-ASCII chars.</li>
+</ol>
+</blockquote>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">XML Support: Pickling Tools 1.6.0</a><ul>
+<li><a class="reference external" href="#xml-support-new-in-picklingtools-1-3-0">XML Support: New in PicklingTools 1.3.0</a></li>
+<li><a class="reference external" href="#xml-dictionaries-and-ordering">XML, Dictionaries and Ordering</a></li>
+<li><a class="reference external" href="#xml-dictionaries-and-documents">XML, Dictionaries, and Documents</a></li>
+<li><a class="reference external" href="#translating-between-xml-and-python-dictionaries">Translating between XML and Python Dictionaries</a></li>
+<li><a class="reference external" href="#python-tools-xmldumper">Python Tools: XMLDumper</a></li>
+<li><a class="reference external" href="#attributes-and-folding">Attributes and Folding</a></li>
+<li><a class="reference external" href="#python-and-the-xmlloader">Python and the XMLLoader</a></li>
+<li><a class="reference external" href="#attributes-and-the-xmlloader">Attributes and the XMLLoader</a></li>
+<li><a class="reference external" href="#lists-and-the-xmlloader-xmldumper">Lists and the XMLLoader/XMLDumper</a></li>
+<li><a class="reference external" href="#array-disposition">Array Disposition</a></li>
+<li><a class="reference external" href="#back-and-forth-between-xml-and-python-dictionaries">Back and Forth Between XML and Python Dictionaries</a></li>
+<li><a class="reference external" href="#c-and-the-xmlloader-and-xmldumper">C++ and the XMLLoader and XMLDumper</a></li>
+<li><a class="reference external" href="#different-types-of-keys-of-dictionaries">Different Types of Keys Of Dictionaries</a></li>
+<li><a class="reference external" href="#python-c-extension-module-new-in-picklingtools-1-4-1">Python C-Extension Module: New In PicklingTools 1.4.1</a><ul>
+<li><a class="reference external" href="#building-the-pyobjconvert-python-c-extension-module">Building the pyobjconvert Python C-Extension Module</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#conclusion">Conclusion</a></li>
+<li><a class="reference external" href="#appendix-a">Appendix A:</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="faq.html"
+                                  title="previous chapter">Frequently Asked Questions for PicklingTools 1.6.0</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="shm.html"
+                                  title="next chapter">C++ Cross-Process Shared Memory Tools</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/xmldoc.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="shm.html" title="C++ Cross-Process Shared Memory Tools"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="faq.html" title="Frequently Asked Questions for PicklingTools 1.6.0"
+             >previous</a> |</li>
+        <li><a href="index.html">PicklingTools v1.6.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, Richard T. Saunders.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.6.
+    </div>
+  </body>
+</html>

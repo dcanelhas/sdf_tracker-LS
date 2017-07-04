@@ -1,0 +1,27 @@
+XMLEXAMPLE - XML utility for converting back and forth between XML and Tabs
+ 
+<input>     - input file
+<output>    - output file
+ 
+The XMLEXAMPLE primitive is a simple data conversion utility: it allows
+two types of conversions for XML and Python dictionaries (aka Tab):
+(1) XML text file to a Python dictionary (text file)
+(2) Python dictionary (text file) to an XML text file
+
+The extension on the filenames dictates how the conversion should
+happen: .xml file is ALWAYS an XML file, .dict or .tab is ALWAYS
+a Python dictionary.  If there is no extension on the file, you can
+use the switches below to force behaviour.  
+
+If the extension is NOT .xml, XMLEXAMPLE will assume the file
+is to operate on a Tab.
+ 
+By default, arrays of POD (Plain Old Data, e.g,, int, float, complex) 
+will output as lists in XML, which loses the array PODiness.  To fix
+that, use ARRDISP so that POD data is handled as either Numeric
+data or Python arrays. 
+
+Switches:
+  /XMLIN - Input is XML   (by default, input is considered to be a Tab file)
+  /XMLOUT - Output is XML (by default, output is considered to be a Tab file)
+  /ARRDISP - Handle POD data: 0(Numeric), 1(as list), 2(Python Array),4(NumPy)

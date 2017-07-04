@@ -1,0 +1,65 @@
+
+
+This directory contains a tar/gziped X-Midas Option Tree showing how
+to build sample C++ primitives using the MidasTalker and MidasServer.
+All of the files in the tarball are copies of the files from this
+distribution elsewhere, but copied again in the tarball so it's easy
+to untar and install as an X-Midas Option tree.
+
+The basic build should be straight-forward:
+
+# Requires X-Midas 4.2.0 or later
+
+  # Csh commands
+  % cd <dir>
+  % cp -r PicklingTools170/Xm/ptools170 .
+
+  ! X-Midas command inside of X-Midas shell
+  > xmopt ptools /new/all/lower/case/path/ptools170
+  > xmp +ptools
+  > xmbopt ptools
+
+This builds and creates a ptools option tree with a bunch of
+primitives: xmserver, xmclient, permclient, permserver are some
+examples.  Take a look at the primitives.cfg, commands.cfg and
+libraries.cfg to see how we built everything.
+
+Again, all the files in the inc and lib directories are copies of
+files from the rest of the distribution (in particular, the inc/oc is
+(mostly) just a copy of the
+   PicklingTools170/C++/opencontainers_1_8_5/include
+directory).
+
+
+NEW!!! If you wish to deliver a namespaced option tree, we suggest you
+change the name to nsptools170 because when namespaces are in place, ptools
+compiles and links very differently (and in fact will not work as expected
+with old code).  You shouldn't HAVE to do this: the default configuration
+still namespaces everything and opens up the namespace, so all the link
+symbols are protected.  If you HAVE to make a version with strict 
+namespacing, follow the rules below:
+
+To deliver a namespaced option tree:
+
+  # Csh commands
+  % cd <dir>
+  % cp -r PicklingTools170/Xm/ptools170 ./nsptools170    ## NOTICE NAME CHANGE!!
+  
+      EDIT nsptools170/inc/ocport.h and uncomment the line with:
+       //  #define OC_FORCE_NAMESPACE
+      By defining OC_FORCE_NAMESPACE, you force the user to deal the 
+      OC namespace without a default 'using'
+
+      EDIT nsptools170/cfg/commands.cfg and change PTOOLS to NSPTOOLS
+      EDIT all your .cfg files in your option trees and change 
+         libdepend + *;ptools 
+             to
+         libdepend + *;nsptools 
+     
+  ! X-Midas command inside of X-Midas shell
+  > xmopt nsptools /new/all/lower/case/path/nsptools170
+  > xmp +nsptools
+  > xmbopt nsptools
+
+
+

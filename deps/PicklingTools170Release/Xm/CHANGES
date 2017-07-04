@@ -1,0 +1,474 @@
+
+CHANGES as of 170
+  Nothing X-Midas specific: see CHANGES at PicklingTools top-level
+
+
+CHANGES as of 163
+  Nothing X-Midas specific: see CHANGES at PicklingTOols top-level
+
+CHANGES as of 162
+  Nothing X-Midas specific: see CHANGES at PicklingTOols top-level
+CHANGES as of 161
+
+CHANGES as of 160
+
+Mostly shared memory routine changes: nothing X-Midas specific
+Added a new pythoncextenion module
+
+CHANGES as of 154
+
+T4Tab change.
+
+CHANGES as of 153
+
+Added in T4Tab changes so you can change the serialization
+
+
+CHANGES as of 152
+
+Adding in a bunch of new primitives to convert between
+Tab and Blue Keywords.  See explain pages.
+Adding primitives keywords2tab, tab2xml for converting between
+Tabs and blue/xml.
+Updating tab2opal to handle arrays a little better (and generic Vals).
+Updating xmserver to indicate better error reporting for a failed open.
+Updated pipetab routines.
+
+CHANGES as of 151
+
+Better numpy support, moved sendTimed_ to MidasSocket.h.
+Updated valpipe so as to not seg fault when stopping.
+
+
+CHANGES as of 150
+
+Added Java support
+
+CHANGES as of 142
+
+Bug fixes: updated Python C extension module so works with later (2.7)
+versions of Python, fixed so Python select works with Java
+
+CHANGES as of 141
+
+Added Python C Extension module for converting between XML and dict
+
+CHANGES as of 140
+
+Added shared memory constructs to move Tabs across processes using shared memory
+Added new primitives demonstrating serverside, clientside and SHMMain
+
+CHANGES as of 134
+
+Added opalutils and opalprint updates to handle M2k arrays
+
+CHANGES as of 133
+
+Updated HTTPClient
+Sped up int_un/int_n division
+Added Conforms (an XML like schema detector for Python dicts)
+Updated opfile.py with minor XMTime fix
+Fixed int_un, int_n with minor bug
+
+CHANGES as of 132
+
+Added Split/Strip/ToLower/ToUpper
+Added HTTPServers, Clients
+Added JSON capability
+
+See the host directory for examples
+of http servers and clients,
+and JSON printers.
+
+Added NumPy capability.  Updated explain pages.
+
+CHANGES as of 131
+
+See CHANGES at top-level: fix XML converter bugs and sped it up.
+Made it so X-Midas primitives could clean up easier:  they need to use
+the idiom:
+   
+  
+
+CHANGES as of 130
+
+See CHANGES at top-level:  mostly added XML conversions to and from dict.
+Added a new X-Midas primitive (xmlexample) and explain page to show how to
+convert between XML and Python dictionaries from X-Midas.
+
+CHANGES as of 121 
+
+ Handle endianness for Java M2k Client
+
+ Workaround so will compile with Intel 10.0.12
+
+
+CHANGES as of 120 
+
+Added OTab, Tup, BigInt, fix some bugs, updated primitives to allow
+control^c to work (see the CHANGES from the main PicklingTools area).
+
+CHANGES as of 111
+
+Lots of minor changes, as the namespace OC gets included from the
+baseline (see the CHANGES from the main PicklingTools area).
+
+
+CHANGES as of 110
+
+Very minor changes: Moved the .rst help files to .txt files: the
+.txt extension is much more universal).   Updated the ocport.h file 
+to show version of OpenContainers is 1.6.6
+
+CHANGES as of 109
+
+Moved the faq.rst and usersguide.rst to the hlp area so X-Midas
+users are more aware of the docs.
+
+CHANGES as of 108
+
+Updated the threadedworker and WorkerCoordinator code to work
+in X-Midas (previously had include and link issues).  This allows
+you to have tools to manipulate threads in X-Midas.
+
+
+CHANGES as of 107
+
+Upgraded to OpenContainer 1.6.5:  
+   * Added BinarySearch code
+   * Added Combinations generation code
+   * Augmented CircularBuffer so put returns T& (no change to behavior)
+
+In Python Area:
+     Fixes:
+       1. Allow OpalTable list syntax { value, value, value } as well
+          as mixed { key=value, value, key=value... }
+
+       2. Parse embedded quotes in quoted key names, links and values
+          more robustly explicitly matching the trailing quote skipping over
+          escaped quotes (formerly simple greedy and non-greedy .* matches were
+          used)
+
+       3. Correctly parse string values followed by comments also
+          containing quotes (before it would include part of the comment 
+          through use of a greedy .* match)
+
+       4. Allow numeric values that do not require a trailing comma to
+          be directly followed by a comment , e.g. D:123//comment ... (formerly
+          the comment would be included)
+
+       5. Fail when a key name within quotes does not have both quotes
+          and require that non-quoted key names be proper identifiers
+
+CHANGES as of 106
+
+  Fixed a bug in serialization of Python Pickling 0:  the bug can
+  cause a seg fault if you are serializing from Python and deserializing
+  from C++.  
+  
+CHANGES as of 105
+
+  Changed default real_8 precision to 16 (instead of 15):  This matches 
+  more closely what M2k does.  
+
+  Added occonvert.py, giving the ability from Python to change Lists
+  to Dictionaries and vice-versa.
+
+CHANGES as of 104
+
+  Minor changes throughout so that -Wall supported.  By default,
+  the cfg files now use -Wall as well.
+
+  Added Python module prettyopal which *DOES NOT* require XMPY:
+  It allows you to print out Python dictionaries as OpalTables
+  without needing any XMPY (or M2kInter) or any other weird dependencies.
+  Note that we already *HAVE* this capability in C++ (opalprint.h).
+
+  On some platforms using X-Midas (64-bit), the size_t does not
+  correspond to either and int_u4 or an int_8 (in particular, an
+  int_u8 is an unsigned long long and a size_t is a an unsigned long,
+  but they are still the same size).  Thus, code like
+         size_t ii = 17;  Val v = ii;   // Used to cause overload problems
+  used to cause compiler errors because, strictly speaking, int_u8
+  and size_t and int_u4 are all different types.   To handle this,
+  we detect that size_t isn't either an int_u4 or int_u8 and
+  make Val recognize size_t (and turn it into an int_u8).  This
+  all happens automatically and shouldn't require the user to do
+  anything ... if you are using a compiler that can't use Modern
+  C++ Design template tricks, you can explicitly set -DOC_SIZE_T_ADD
+  to 0 or 1 (see ocport.h) to get the same effect.
+
+  Support for reading MultiVectors from text-based OpalTables from C++
+
+CHANGES as of 103
+
+  cfg files do NOT have to set OC_BYTES_IN_POINTER or OC_LONG_INT_IS_64BIT
+  anymore:  updated the config files to get rid of this.  This also means
+  we got rid of the LINUX_BYTES macro, which makes it easier for new
+  people to build this with 64-bit installs.  Updated the default
+  cfg files to get rid of this: tested on X-Midas 4.4.4 (32-bit)
+  and X-Midas 4.6.0 (64-bit).
+
+  Updated the open on MidasTalker to handle opens correctly.
+  
+  Added all the newer features of ptools: MakeTab, Val.get
+  
+CHANGES as of 102
+
+  Added pretty.py for pretty printing of dictionaries from Python (augments
+  the Python built-in pprint).
+
+  Updated midastalker.cc and .py to have dataReady methods to detect
+  if a Talker has data available.  Added a few enums for DUAL_SOCKET
+  and SINGLE_SOCKET.   Updated host primitive examples to use
+  these enumerations to make the code slightly more readable.
+
+CHANGES as of 101
+
+  This is a small bug release:  updated occonvert.h to have
+  a default argument for ConvertAllArrsToTabs and fixed
+  SockAddr_ (on midassocket.h) to work correctly as a user-defined
+  types.
+
+CHANGES as of 100
+
+  Ptools 100 is a big release: the major changes are the addition
+  of the Proxy, and updating all serialization protocols to handle
+  it.  All the primitives in the X-Midas area now handle proxies
+  as part of all the serialization protocols.
+
+  Almost all of the changes to the option tree are straight copies
+  from the PicklingTools/C++ area (i.e., adding proxies and updating
+  the protocols).  The only X-Midas specific changes are updating 
+  the explain pages to add serialization option --5 for OpenContainers
+  serialization.
+
+  See the CHANGES log for the entire PicklingTools release for
+  more information on proxies.
+
+
+CHANGES as of 095
+
+  Updated ocreader.h to get rid of a memory leak when reading text
+  OpalTables or text Python Dictionaries
+
+  Updated the tab2opal to give better messages when parsing tables.
+
+  Updated the adaptive MidasTalker and MidasServer so that
+  they renegotiate the serialization when the socket closes:
+  it was keying on the file descriptor which are frequently
+  reused which means it was choosing the wrong serialization from
+  a previous connection.  Fixed.
+
+  Updated the midassrver_ex.py and xmserver.cc so that they send
+  out a test message at connect time to test the adaptive serialization
+  bug above
+
+
+CHANGES as of 094
+
+  Added /SER=4 to many of the example primitives to demonstrate
+  how to use M2k Binary Serialization.  Also updated explain
+  pages.
+
+  Added the code to lib and inc so that we can now use M2k
+  Binary Serialization
+
+  New features of OpenContainer 1.5.6:  Opal table and Tab reads
+  have better error messages when a parse error happens.
+
+  All C++ MidasServers and Midastalkers use "adaptive" serialization
+  so you can talk to them with M2k or Python serializations:  it simply
+  recongnizes the serialization and unwravels it correctly. 
+
+  Cleaned up permserver so works better when client disconnects:
+  changed threads to join so can clean up resources better
+
+  Changes for OSF1 to still work
+
+  Testing for X-Midas on X-Midas 4.4.4 only
+
+CHANGES as of 093
+
+   
+  See the CHANGES file for the distribution:  Added the capability
+  to talk with Pickling Protocol version 2
+
+
+CHANGES as of 090
+
+
+  Augmented the OpalTable reader for C++ so that when it reads
+  in an OpalTable with all keys 0..n, it will turn it into
+  an Arr.  I.e., OpalTable {"0":D:1, "1":D:2 } becomes [1,2].
+  You can choose to preserve the "tableness" of the OpalTable,
+  but the default will be to become an Arr.  This was done so
+  that ASCII OpalTables convert to Tabs and back without 
+  losing too much information.  (The "Pickling" transformations
+  do not have this problem).
+   -Added the "ReadValFromOpalfile" routine, which can handle
+    the embedded Array-like OpalTables, and updated opal2dict
+    to use that routine instead.
+   -expectTab now returns a flag indicating whether or not
+    it could be converted to an Arr
+   -expectAnything has a flag to indicate whether or not to
+    convert from Tab to Arr:  by default it does.
+
+  Added the MidasYeller and MidasListener:  A UDP server and
+  client that "feel like" the MidasServer and MidasTalker.
+  This is a preliminary version that should work, but will have
+  expanded functionality in the future.  Modified the MidasSocket_
+  to factor some common code from all the Midas* classes.
+  The MidasYeller and MidasListener have both a Python and C++
+  version, and should be interchangable.  
+
+  In restructuring MidasSocket_ (see above), added helper functions to
+  the .cc of the MidasSocket_ which allows the C++ Midastalker
+  to be completely inline (i.e., removed the midastalker.cc file).
+  Moved a lot of the name server querying and socket creation
+  to MidasSocket_. 
+
+  Added 'close' method as an alias for "cleanUp" in all
+  the Python and C++ Midastalker and MidasServer code.
+  
+  Added the opalfile Python module.  This is a fairly complete
+  Python module that allows manipulation of OpalTables and Opal files,
+  but currently requires the Python "Numeric module".
+  This is a natural addition since we can manipulate OpalTables
+  within C++ in earlier releases.  This is just the 'opalfile'
+  module from XMPY.  Future releases will have remove the
+  Numeric dependance.
+
+  Allowed possibility of a timeout in the "open" of the
+  MidasTalker (both Python and C++) so that when the socket
+  protocol (dual or single socket), a timeout can occur can
+  really occur so a Midastalker won't hang on open.
+
+  Added some new examples to the C++, Python and X-Midas
+  area to show how the MidasYeller and MidasListener work.
+
+  
+
+
+CHANGES as of 086
+          Made it so WriteTabToFile, ReadTabFromFile, WriteTabToOpalFile
+	  and ReadTabFromFile throw a runtime_error exception if there
+	  are any problems opening the file.
+
+	  Fixed a linkage error in opalprint.h (forgot to make
+	  a routine inline)
+
+
+CHANGES as of 085
+
+          Added the OpalReader class so we can read opalfiles  from disk
+          or strings.  See "opalutils.h"
+
+          Added the Opal pretty printer so we can convert from Tabs
+          to OpalTables (see "opalprint.h").
+
+          Added the tab2opal primitive (and explain file) to demonstrate
+          how to print OpalTables from X-Midas.
+
+          Updated to OpenContainers_1_5_4 for new features/bugfixes
+           -Fixed it so very large numbers weren't trunctaed when reading
+            a literal
+           -Have Stringize preserve precision and type for floating point
+            quantities. This also makes it so double d=3.0 prints
+            out as "3.0" instead of "3" (like in the old version).  This
+            is more in line with what Python does.
+           -Made it so you can add commas at the end of tables
+
+
+CHANGES as of 084
+	  
+          Updated the pipetab routines with a bug fix, but we are
+          deprecating pipetab routines in favor of the routines
+          that work with type 4000 files (see below).
+ 
+          Added the new valpipe primitive: transfers X-MIDAS T4000
+          pipes containing Vals between computers.  Since ZPIPE
+          doesn't support type 4000 files, this is a way to
+          emulate the essentials of ZPIPE with type 4000 files and Vals.
+
+          Added the playtab primitive: designed to send a Tab through
+          a T4000 file/pipe. There are three modes to send the Tab data 
+          contained in <tabfile> through the <output> file/pipe.
+
+          Added new routines to help manipulate t4000/Val (t4tab.h, t4val.h)
+
+          Updated the MidasServer so that it won't hang/seg fault on
+          shutdown.
+
+CHANGES as of 083
+          Using OpenContainers_1_5_3 (minor bug fixes):  
+          -added new interface appendStr to Val and Tab
+          -fixed bug that complex_8 and complex_16 output correctly
+           with Tabs 
+
+          Added a python directory to the ptools X-Midas option tree so that
+          when you add PTOOLS to your X-Midas option trees, you automatically
+          pick up midastalker(midasserver) when you "import midastalker"
+          from Python.  This just makes it easier to use the MidasTalker
+	  with XMPY.
+
+	  The X-Midas PipeTab routines (for type 4000) files have been
+	  slightly rewritten to be more X-Midas like.  If you just use
+	  the functions as given with no other X-Midas type 4000isms, 
+	  there shouldn't be any changes to your code.
+
+          In the X-Midas option tree, there were multiple copies of 
+          ocserialize.cc, ocval.cc and pipetab.cc
+          in lib/ptools and lib/oc.  Removed the ones out of lib/ptools.
+
+          Added explain pages for all four primitives: xmclient, xmserver
+          permclient and permserver
+
+          Changed the xmclient and permclient code to reflect the
+          interface change (announced back in 0.80) and made to 
+          the "Numeric" argument.  
+
+
+CHANGES as of 082
+          Using OpenContainers_1_5_2 (minor bug fixes)
+
+          Separated oc and ptools libraries into two libraries
+	  
+	  Moved the oc/inc files up to just inc:  kept the oc
+	  directory with symbolic links for backwarsd compat
+
+	  Updated m2pythonpickling.{h,cc} to fix Numeric Array bug
+
+          OSF1 port of ptools only tested with X-Midas 4.4.X
+          and cxx V7.1-006 (but should work with 6.5-033).
+          Linux port tested on E4u3 and E3u4.
+	
+CHANGES as of 081
+          Using OpenContainers_1_5_1 (minor changes so compiles on Tru64)
+	   
+	  Using updated Pickling Tools (see CHANGES at top-level)
+
+	  Added routines for Tabs to Type 1000/4000 files.
+
+	  Added /NODLL switch (for Tru64 mainly) so primitives clean
+	  up as they exit better.
+
+CHANGES as of 080:
+          Using OpenContainers_1_5_0
+
+	  Using updated Pickling Tools
+	   
+	  Added an xmserver, xmclient primitive which uses the
+	  MidasServer code
+
+	  Added more complex example showing an X-Midas 
+	  server serving out permutations of data, and a client
+          that reads it.
+
+CHANGES as of 074:  
+          Added the OC_FACTOR_INTO_CC_AND_H flag 
+          for faster builds on Linux.
+	   
+	  Also tested further and added a few changes to
+	  support X-Midas complex's (instead of OC complexes)
+

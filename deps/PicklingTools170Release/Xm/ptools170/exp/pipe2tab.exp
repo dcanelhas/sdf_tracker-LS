@@ -1,0 +1,27 @@
+PIPE2TAB - Tab utility to take a Tab pipe as input and output Tab files.
+ 
+<input>     - input pipe
+<filename>  - base output filename
+<data tag>  - pipe filter, same as the /VRBKEY on other primitives.
+ 
+This Tab utility is a tool to output the Tabs that are going across a pipe
+to output files.  A good example of usage would be to have this primitive
+write out the files.  The files can be adjusted and put back through the
+system again.
+
+Each Tab that comes across the pipe will be written to its own Tab file.
+
+If the <filename> contains an extension, the extension will be used as the
+output file extension (EXT).  If no extension is found, 'tab' will be used
+as the output file extension (EXT).
+
+The format of the output is as follows:
+<filename>_YYMMDD_HHMMSS_x.(EXT) where x is a one-up number.
+ 
+Switches:
+  /MODE - Write the output files or not. 0 = NO WRITE 1 = WRITE (def=1)
+  /ECHO - Echos out each Tab that comes across the pipe to standard error
+ 
+Control widgets:
+  1. L:MODE - same as /MODE switch, but driven by a control widget.
+              if /MODE is set, it will use /MODE as the initial condition.

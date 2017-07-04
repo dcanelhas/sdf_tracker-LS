@@ -1,0 +1,18 @@
+TAB2OPAL - Converts a Tab to an Opal Table or an Opal Table to a Tab
+ 
+<input>   Tab or Opal filename (*.tab or *.tbl or *.hdr)
+<output>  [optional] Tab or Opal filename (*.tab or *.tbl or *.hdr)
+ 
+Converts the <input> Tab file to the <output> Opal file.  If the
+<output> file is left blank, the <output> will be set to the <input>
+with the follow extension: _opal.tbl.
+
+Note: The <input> and <output> are text files.
+
+Switches:
+  /PRINT   - Display to terminal only, don't write the file to disk.
+  /TABIN   - Forces the <input> to be read as a Tab.
+  /TABOUT  - Forces the <output> to be written as a Tab.
+  /OPALIN  - Forces the <input> to be read as an Opal table.
+  /OPALOUT - Forces the <output> to be written as an Opal table.
+ 

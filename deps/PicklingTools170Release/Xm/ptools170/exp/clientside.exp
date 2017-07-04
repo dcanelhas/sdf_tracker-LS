@@ -1,0 +1,16 @@
+CLIENTSIDE - Simple example showing ClientSide: cross process shared memory ex.
+ 
+<shm_name>  String name of the shared memory region used 
+<pipename>  The string name of the pipe (set by server, client rendezvous point)
+
+This is a simple example showing how to use the SHMMain, ServerSide
+and ClientSide classes to implement a client.  This client connects
+to the named shared memory region and reads Tabs from the CQ.
+The Tabs are actually stored in the shared memory region, so all that's
+being copied should be a pointer, so that large tables can be shared 
+across processes without having to serialize them.
+
+
+See the serverside explain page for more details.
+
+

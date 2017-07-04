@@ -1,0 +1,655 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>C++ Cross-Process Shared Memory Tools &mdash; PicklingTools v1.6.0 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.6.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="PicklingTools v1.6.0 documentation" href="index.html" />
+    <link rel="next" title="Java support for PicklingTools: New as of PicklingTools 1.5.0" href="java.html" />
+    <link rel="prev" title="XML Support: Pickling Tools 1.6.0" href="xmldoc.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="java.html" title="Java support for PicklingTools: New as of PicklingTools 1.5.0"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="xmldoc.html" title="XML Support: Pickling Tools 1.6.0"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">PicklingTools v1.6.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="c-cross-process-shared-memory-tools">
+<h1>C++ Cross-Process Shared Memory Tools<a class="headerlink" href="#c-cross-process-shared-memory-tools" title="Permalink to this headline">¶</a></h1>
+<p>The C++ Cross-Process Shared Memory Tools is new In PicklingTools 1.4.0.</p>
+<p>Although the PicklingTools library has had tools to handle cross
+process shared memory for sometime (since 1.0.0), this release
+introduces some simple abstractions to help make using shared memory
+a little bit easier.</p>
+<div class="section" id="reminder">
+<h2>Reminder<a class="headerlink" href="#reminder" title="Permalink to this headline">¶</a></h2>
+<p>First, a quick reminder: C++ Vals <em>can</em> be used with shared memory:
+this is the reason the <tt class="docutils literal"><span class="pre">Allocator</span></tt> became an inherent part of
+the PicklingTools back in 1.0.0.  For example, to create a Tab in
+some shared memory region:</p>
+<div class="highlight-python"><pre>char* mem = ... create/attach shared memory across processes ...
+StreamingPool *shm=StreamingPool::CreateStreamingPool(mem, bytes, 8);
+Val v = Shared(shm, Tab());
+v["a"] = "hello";   // Table and keys and values in shared memory</pre>
+</div>
+<p>The shared memory can be created with <tt class="docutils literal"><span class="pre">SHMCreate</span></tt> or connected to
+with already created memory with <tt class="docutils literal"><span class="pre">SHMAttach</span></tt>, but it&#8217;s tricky to get
+this right with the basic tools provided by the simple abstractions in
+&#8220;sharedmemory.h&#8221;:</p>
+<div class="highlight-python"><pre>size_t bytes = 1024*1024;
+char* mem = SHMCreate("shm_region", bytes);
+// Created, but is it available yet?  Do you have to check
+// if the entire shared memory has been mapped into the process
+// with SHMInitialized, etc.</pre>
+</div>
+<p>The process for using shared memory is a little clumsy:  Who creates and
+who attaches?
+The creator is responsible for calling <tt class="docutils literal"><span class="pre">SHMInitialize</span></tt> and the user
+is responsible for called <tt class="docutils literal"><span class="pre">SHMInitialized</span></tt> to see if the region
+is ready, even it already mapped it.  But these have to done in the right
+order, and it&#8217;s not well documented.</p>
+<p>To address these concerns, there are three new abstractions that handle
+Vals in shared memory a little better.</p>
+</div>
+<div class="section" id="shmmain-serverside-and-clientside">
+<h2>SHMMain, ServerSide and ClientSide<a class="headerlink" href="#shmmain-serverside-and-clientside" title="Permalink to this headline">¶</a></h2>
+<p>There are three new classes that make using shared memory a lot easier:
+SHMMain, ServerSide and ClientSide.    These all come from:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="c">#include &quot;shmboot.h&quot;   // Gets defn of SHMMain, ClientSide and ServerSide</span>
+</pre></div>
+</div>
+<div class="section" id="shmmain">
+<h3>SHMMain<a class="headerlink" href="#shmmain" title="Permalink to this headline">¶</a></h3>
+<p>SHMMain is responsible for creating the shared memory region of the proper
+size that all ServerSide and ClientSides can use.  And that&#8217;s it.
+It needs to be called exactly once.</p>
+<p>Ideally, the SHMMain gets called exactly once in a startup process
+that gets called before everyone else: frequently at the start of some
+main process that has to be started before anything else in the app:</p>
+<div class="highlight-python"><pre>#include "shmboot.h"
+
+int main (int argc, char**argv)
+{
+   int bytes = atoi(argv[1]);
+
+   // Initial set-up code
+   bool debug = true;
+   SHMMain mem("shm_region", bytes, debug);
+   mem.start();  // Actually calls and creates region
+
+   ... start rest of application, fork processes, etc. ...
+
+}</pre>
+</div>
+<p>Sometimes, if an application is built piecewise, the model described
+above won&#8217;t quite  work:  imagine something similar to a UNIX
+pipeline where each process may be communicating piecewise
+to server and a client.  In a case like that, the &#8220;head&#8221; of the
+pipeline would be where the SHMMain should have to be created.</p>
+<p>Once the SHMMain is created (and started), this establishes
+a shared memory zone or &#8220;pool&#8221; where queues and Vals can be used.
+Note that the SHMMain can be created from any process, even
+if there are no servers or clients in it: its sole purpose is
+to create and establish the shared memory region that later
+ServerSides and ClientSides use.</p>
+<p>Expert Notes: If you are creating a system where the
+clients and servers all are all created from one
+main process, then that makes things easier: you don&#8217;t
+<em>have</em> to specify a region, as all clients/servers
+that inherit from the main process can use the region already
+mapped in the main process: assuming all clients/servers <tt class="docutils literal"><span class="pre">fork</span></tt>
+from the main above and don&#8217;t <tt class="docutils literal"><span class="pre">exec</span></tt>, the shared memory set-up
+from SHMMain will be inherited (in a process sense, not in a
+OOP sense) and be in the same address space in all the clients.
+However, if (like all the examples in the baseline), the
+clients and servers are completely separate processes, they
+HAVE to be mapped to the same area: in this case, you want
+to specify where in memory to map:</p>
+<div class="highlight-python"><pre>// On a 32-bit i386 Linux machine, force into a pretty unused area
+SHMMain mem("shm_region_32bit", bytes, debug, (void*)0xB0000000);
+
+// On a 64-bit x86_64 Linux machine, force into pretty unused area
+SHMMain mem("shm_region_64bit", bytes, debug, (void*)0x700000000000ULL);</pre>
+</div>
+<p>Although the small standalone programs tend to work without
+forcing to use a particular region, larger &#8220;real&#8221; applications
+tend to need to be forced.  Although the ServerSide and ClientSide
+<em>can</em> explicitly set the memory needed, usually you only
+want to do this in the SHMMain (which sets it up in the
+right region) and that forces all clients and servers to
+attach to the right region.</p>
+</div>
+<div class="section" id="serverside">
+<h3>ServerSide<a class="headerlink" href="#serverside" title="Permalink to this headline">¶</a></h3>
+<p>The ServerSide presents the abstraction of a server, although strictly
+speaking it can also be either side of a communication.  The most
+important thing a ServerSide does is to create the pipe (in shared memory)
+which will be used for queuing and enqueueing.</p>
+<p>To create a pipe, you have to give it a string name (in the example below,
+<tt class="docutils literal"><span class="pre">pipename</span></tt>) and start the ServerSide:</p>
+<div class="highlight-python"><pre>// Create a pipe in the shared memory region (string name used in SHMMain)
+// The pipe has the given capacity (capacity is in packets).
+bool debug = true;
+int packet_capacity = 4;
+ServerSide server("shm_region",
+                  "pipename", packet_capacity. true);
+
+server.start();   // pipe only created when started
+CQ&amp; pipe = server.pipe();</pre>
+</div>
+<p>Once the pipe has been created, it can be enqueued or dequeued
+from: <em>Note that queueing and dequeueing is thread-safe</em>: I.e.,
+you can have multiple processes operating on the queue simultaneously
+and its state is never inconsistent.   Typically, the ServerSide
+enqueues and the ClientSide dequeues from the given CQ:</p>
+<div class="highlight-python"><pre>// ServerSide enqueues
+for (int seq=0; ; seq++) {
+
+   // Create the value to enqueue in shared memory
+   Val data = Shared(server.pool(), Tab());  // Create a Tab in shared memory
+   data["sequence_number"] = seq;
+
+   // Now enqueue
+   bool enqueued = false;
+   real_8 timeout_in_seconds = 3.2;
+   while (!enqueued) {
+       enqueued = pipe.enqueue(data, timeout_in_seconds);
+       if (!enqueued) {
+           cerr &lt;&lt; "Failed to enqueue after " &lt;&lt; timeout_in_seconds
+                &lt;&lt; " in seconds ... trying again ..." &lt;&lt; endl;
+       } else {
+           cout &lt;&lt; "Enqueued! Going to next packet" &lt;&lt; endl;
+           break;
+       }
+   }
+
+}</pre>
+</div>
+<p>Note that the enqueue has a timeout: in case the queue is full
+and the Val can&#8217;t be placed in the queue, it will wait up to
+<tt class="docutils literal"><span class="pre">timeout_in_seconds</span></tt> for some space to open up.  If the space
+opens up in the given time, the data is enqueued and enqueue returns true:
+the data has now been enqueued.
+If space doesn&#8217;t open up in the given time, enqueue returns
+false.  In the example code above, the sender just keeps retrying,
+but gives a warning every 3.2 seconds warning indicating the queue is full.</p>
+<p>Although typically the ServerSide is used as the <em>send</em> side only,
+there&#8217;s no reason the ServerSide can&#8217;t dequeue as well (see below
+for examples of how to dequeue).  This ability might be useul if that queue
+needed to be cleaned as part of a shutdown or restart.</p>
+<p>There is another call to enqueue data <tt class="docutils literal"><span class="pre">pipe.enq(data)</span></tt> which will
+block forever; this is simpler and will work but makes it harder
+to detect error conditions and/or gracefully exit.</p>
+</div>
+<div class="section" id="clientside">
+<h3>ClientSide<a class="headerlink" href="#clientside" title="Permalink to this headline">¶</a></h3>
+<p>The ClientSide is the other end of the pipe: if the ServerSide creates
+the pipe and writes to it, then the ClientSide waits for the pipe to be
+created so it can attach and read from the pipe:</p>
+<div class="highlight-python"><pre> ClientSide client("shm_region", "pipename", true);
+ client.start(); // blocks waiting for pipe to be created
+
+ CQ&amp; pipe = client.pipe();
+
+ // Once pipe is available, we can read from it
+ real_8 timeout_in_seconds = 5.5;
+ while (1) {
+
+   // Try to dequeue a single packet
+   Val packet;
+   bool valid=false;
+   while (!valid) {
+
+       valid = pipe.dequeue(timeout_in_seconds, packet);
+       if (!valid) {
+             cerr &lt;&lt; "Couldn't dequeue after " &lt;&lt; timeout_in_seconds
+                  &lt;&lt; " ... trying to dequeue again ... " &lt;&lt; endl;
+             continue;
+       } else {
+             cout &lt;&lt; "Got packet!" &lt;&lt; endl;
+             break;
+       }
+
+   }
+}</pre>
+</div>
+<p>Note that the client (in order to read from the proper pipe) has to match
+<em>both</em> the name of the shared memory region <em>and</em> the pipename the server
+writes to.</p>
+<p>In the above example, if the client can&#8217;t get something from
+the pipe immediately, thee queue blocks for up to a few seconds.
+If something appears on the pipe before the timeout, then that value
+is dequeued and taken off the pipe and valid becomes true.  If after
+those few seconds the pipe is still empty, valid becomes false and the
+dequeue fails.</p>
+<p>This is basic paradigm: Use SHMMain to create the shared memory region
+before anything else starts, start and create a sender with a ServerSide
+and client with ClientSide.</p>
+<p>Note that the ClientSide and ServerSide will block until SHMMain
+is called and creates the memory pool.  The ClientSide will block
+and wait until the the ServerSide creates the pipe.  The only way this
+can become problematic if the shared memory pool has a &#8220;unclean&#8221; shutdown:
+if you can&#8217;t guarantee SHMMain is called before all the clients
+and servers are created, it&#8217;s important to make sure the shared memory
+region has been destroyed, otherwise the client and server may
+pick up the shared pool from the LAST invocation.  To make sure the
+shared memory is clean, make sure /proc/shm does has been cleaned
+up and does NOT contain the memory pools; this is discussed a bit more
+in the <em>Five Major Headaches</em> section below later.</p>
+</div>
+<div class="section" id="middleside">
+<h3>Middleside<a class="headerlink" href="#middleside" title="Permalink to this headline">¶</a></h3>
+<p>Many times a server is also a client: it reads from one queue
+and posts to another queue (like a UNIX pipeline): this role is
+frequently called a <em>transformer</em> in X-Midas or M2k speak.  The example below
+show how to <em>both</em> read from a client and post to a server
+in the same process:</p>
+<div class="highlight-python"><pre>ClientSide client("shm_region", "pipe_0", true);
+client.start(); // read from this pipe
+CQ&amp; input = client.pipe();
+
+ServerSide server("shm_region", "pipe_1", 4, true);
+server.start(); // write to this pipe
+CQ&amp; output = server.pipe();
+
+while (1) {
+
+    // Read from input pipe
+    Val in_packet;
+    if (!input.dequeue(.1, in_packet))
+        continue; // retry to get input
+
+    // Write to output pipe
+    bool enqueued = false;
+    while (!enqueued) {
+      enqueued = out.enqueue(in_packet, .1);
+    }
+}</pre>
+</div>
+<p>In this way, a client and server can be used together.  In fact, there
+is no apriori limit on the number of clients and servers that can be in
+a single process (limited only by the amount of memory).  Multiple clients
+and/or servers allows programming any type of semantics you want:
+see the new section.</p>
+</div>
+</div>
+<div class="section" id="complex-interactions">
+<h2>Complex Interactions<a class="headerlink" href="#complex-interactions" title="Permalink to this headline">¶</a></h2>
+<p>By default, the CQ class (so-called because it is a Queue that
+preserves thread-safety using a Condition variable: CQ) has a simple
+interface: Vals (which exist in shared memory, this is critical!)
+can either be enqueued or dequeued.  Period.  There can be any number
+of processes enqueueing or dequeueing simultaneously,
+but (this is important) <em>there is
+no notion of multicast</em>: once a Val is dequeued by any reader, it&#8217;s gone,
+even if there are twelve readers.   If we wanted to support multicast,
+or any complicated semantics for multiple readers, we have to enforce
+those ourselves.</p>
+<p>For example, if we wanted to have the multicast semantics to
+only dequeue when all the readers have read the packet (or anything
+more complicated), we could put all the logic in a simple component
+with one input and multiple outputs:</p>
+<div class="highlight-python"><pre>// Implement a simple multicast with n clients where
+// all clients see all data that is dequeued.
+
+// Start up the single input
+ClientSide single_input("shm_region", "pipe_input", true);
+single_input.start();
+CQ&amp; input = single_input.pipe();
+
+// Array of outputs: each output queue will see the input exactly once
+Array&lt;ServerSide*&gt; outputs;
+for (int ii=0; ii&lt;number_of_outputs; ii++) {
+   ServerSide* ssp=new ServerSide("shm_region", "out"+Stringize(ii), 4, true);
+   ssp-&gt;start();
+   outputs.append(ssp);
+}
+
+while (1) {
+
+   // Pull input off the input queue
+   Val in_packet;
+   if (!input.dequeue(.1, in_packet)) {
+      continue;  // nothing available, try again
+   }
+
+   // Got input: implement multicast semantics so
+   // all outputs see the same input
+   for (int ii=0; ii&lt;outputs.length(); ii++) {
+      ServerSide* ssp = outputs[ii];
+      CQ&amp; out = ssp-&gt;pipe();
+
+      // Try to enqueue; blocks until delivered
+      out.enq(in_packet);
+   }
+}</pre>
+</div>
+<p>With the example above, all outputs see a copy of the input.
+Since <em>hopefully</em> the input packet is just a proxy (where the
+underlying Tab is shared), this should be a quick and easy
+dispersal.</p>
+<p>Although this abstraction makes it a little harder to implement
+multiple readers and writers, it gives you full mechanism to
+implement any policy for multiple readers.
+For example, in the example above, the multicast can get stuck if one
+the readers never reads its pipe: the enqueue blocks forever.
+What if we
+wanted data to drop if the reader hadn&#8217;t read it after 5 seconds?:</p>
+<div class="highlight-python"><pre>bool enqueued = out.enqueue(in_packet, 5.0);
+if (!enqueued) {
+   cerr &lt;&lt; "Reader " &lt;&lt; ii " &lt;&lt; is too slow, dropping packet" &lt;&lt; endl;
+   continue;
+}</pre>
+</div>
+<p>Thus with a simple change,
+we have implemented a custom multi-cast semantics.   For systems where
+dropped data is okay, we can implement whatever semantics we need
+with whatever time constraints are relevant.  If dropped data is not
+okay, we can keep retrying to send data, with some messages.
+We could also implement a nice GUI to show the status of a pipe.
+Whatever is needed can be built on ServerSide, ClientSide and timeouts.</p>
+<div class="section" id="address-randomization">
+<h3>Address Randomization<a class="headerlink" href="#address-randomization" title="Permalink to this headline">¶</a></h3>
+<p>Many Linuxes today implement the Address Randomization &#8220;feature&#8221;
+to stop hackers from exploiting address space regularity.  In other words,
+the code and data part of your program can be randomly place
+&#8220;anywhere&#8221; in main memory.
+This can be problematic for systems where shared memory needs to
+be mapped in: What if regions conflict?
+What part of memory is used? To that end, you may
+have to force your processes to turn off this feature.  This
+feature can be turned off on a per-process basis easily:</p>
+<div class="highlight-python"><pre>% setarch i386 -L -R serverside_ex ...    # 32-bit machine
+       or
+% setarch x86_64 -L -R serverside_ex ...  # 64-bit machine</pre>
+</div>
+<p>Frequently, the simple examples work without the above, but the
+more complex programs may need to do the above.  Note that the
+examples remind you to use setarch when you run them.</p>
+<p>If you forget to turn off the feature, then each of the SHMMain,
+ClientSide and ServerSide will <em>warn</em> you with a large message
+to standard error:</p>
+<div class="highlight-python"><pre>% serverside_ex ...   # forgot to run with setarch!
+
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!
+! It appears that the address randomization feature is still on.
+! Your SHMMain/ServerSide/ClientSide is unlikely to work correctly.
+! Program will continue running ... but may not run correctly ...
+!
+! Make sure the process that's gets started up has this feature
+! turned off using setarch.  For example:
+!  % setarch i386 -L -R startup_program     # 32-bit machine
+!           or
+!  % setarch x86_64 -L -R startup_program   # 64-bit machine
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!</pre>
+</div>
+<p>Detecting the absence of the Address Randomization feature
+is a bit tricky, so you may be using setarch correctly but it still outputs
+the warning.  Lots of false positive warning messages are clumsy
+and messy, so there is a mechanism to turn off the potential
+warning.  For example, to turn off this
+message for SHMMain:</p>
+<div class="highlight-python"><pre>SHMMain mem(...);
+mem.warning(false);  // Turn off warning message above
+mem.start();         // Warning message above suppressed</pre>
+</div>
+<p>Both ClientSide and ServerSide have the same method.  By default,
+the warning is turned on: the idea is that it is better to get a
+warning message when you are first starting so you can figure
+out how things work; Once you are comfortable and always
+turning on the setarch feature, you don&#8217;t need the warning
+anymore and can turn it off if needed.</p>
+</div>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>There are three standalone examples and three X-Midas examples
+in the PicklingTools baseline demonstrating the shared mem client/server tools.</p>
+<p>In the C++ area are serverside_ex.cc, middleside_ex.cc and clientside_ex.cc
+examples.  These three examples should be run together <em>on the same machine</em>:</p>
+<div class="highlight-python"><pre># In one shell prompt
+% setarch i386 -L -R serverside_ex mempool 1000000 pipe1 4</pre>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">serverside_ex</span></tt> creates the shared memory region (called <tt class="docutils literal"><span class="pre">mempool</span></tt>)
+of one million bytes.  The pipe the server will write to is <tt class="docutils literal"><span class="pre">pipe1</span></tt>
+and it will have a capacity of four packets:</p>
+<div class="highlight-python"><pre># In another shell prompt
+% setarch i386 -L -R middleside_ex mempool pipe1 pipe2 4</pre>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">middleside_ex</span></tt> waits for the shared memory region (called <tt class="docutils literal"><span class="pre">mempool</span></tt>)
+to be available.  Once it is, the middleside reads from <tt class="docutils literal"><span class="pre">pipe1</span></tt> and
+writes to <tt class="docutils literal"><span class="pre">pipe2</span></tt>; <tt class="docutils literal"><span class="pre">pipe2</span></tt> also has a capacity of four packets:</p>
+<div class="highlight-python"><pre># In yet another shell prompt
+% setarch i386 -L -R clientside_ex mempool pipe2</pre>
+</div>
+<p>The <tt class="docutils literal"><span class="pre">clientside_ex</span></tt> waits for the memory pool, waits from <tt class="docutils literal"><span class="pre">pipe2</span></tt> to
+be created, then reads
+from <tt class="docutils literal"><span class="pre">pipe2</span></tt>.</p>
+<p>This will cause the server to talk the middle and the middle will talk
+to the final client.  Note that SHMMain is created <em>exactly once</em>
+by serverside_ex.</p>
+<p>Also note that the X-Midas primitives can talk to the standalone
+executables.</p>
+</div>
+<div class="section" id="five-biggest-headaches">
+<h3>Five Biggest Headaches<a class="headerlink" href="#five-biggest-headaches" title="Permalink to this headline">¶</a></h3>
+<p>The five biggest problems getting shared memory across platforms to work are:</p>
+<ol class="arabic">
+<li><p class="first">Memory size:  Most Linuxes are constrained by how much
+shared memory they can allocate.  If the allocation is too
+big, then Linux will simply fail.  Carefully try larger
+and larger sizes of shared memory from SHMMain to make
+sure that your box can legally create and use that much shared memory.</p>
+</li>
+<li><p class="first">Using Vals in shared memory.  Once a Val is created
+in shared memory, most updates on the table will cause the
+new keys/values to be created in the same shared memory.
+If you wish to enqueue a table or Array, make <em>sure</em> the
+entire table is in shared memory:</p>
+<div class="highlight-python"><pre>// Okay
+Val data = Shared(shm, Tab());  // created in shared memory
+pipe.enqueue(data);             // Okay, because data in shared memory
+
+// !!!! NOT OKAY!!!
+Val data2 = Tab();  // data2 NOT in shared memory!!
+pipe.enqueue(data2);  // Will seg fault</pre>
+</div>
+<p>There is a routine called <tt class="docutils literal"><span class="pre">IsSHM</span></tt> from #include &#8220;checkshm.h&#8221;
+which allows the user to check and see if a Val is completely contained
+in shared memory.  In debug mode, this is a very useful
+tool; before data is enqueued on a shared memory pipe, the table
+can be checked to make sure all of its parts are in shared memory.</p>
+</li>
+<li><p class="first">Left-Over files.  By default, the shared memory regions have an
+file in the /dev/shm area.  There is good news and bad news
+about this.  If you do not destruct SHMMain (in the C++ sense),
+then the region persists.  This can be good because your queues can persist
+across time: assuming a client connect and disconnects frequently,
+this can just work as the new connection will simply pick up where the
+last one left off.</p>
+<p>This can be horrible if the queues get into an inconsistent state:
+then every client will simply break.</p>
+<p>It can be useful to completely clean /dev/shm of your
+shared memory.  By default, when you create shared memory region
+like the &#8220;shm_region&#8221; in all the examples above, two files are created:</p>
+<div class="highlight-python"><pre>/dev/shm/shm_region_boot
+/dev/shm/shm_region</pre>
+</div>
+<p>The boot region is very small and used only to pass global information
+to each client (where memory should be mapped, the size of the memory,
+where to find the pipes, etc).  The boot is first mapped in anywhere
+in memory.  The data in the boot informs where to map
+the main section: the main section contains the giant memory pool.</p>
+<p>To make sure your application starts in a fresh start, it&#8217;s probably
+worth removing <tt class="docutils literal"><span class="pre">/dev/shm/shm_region_boot</span></tt> and
+<tt class="docutils literal"><span class="pre">/dev/shm/shm_region</span></tt> before starting, or restarting your application.
+Note that <em>by default</em>,
+SHMMain will completely clean-up for you when you create and start
+the SHMMain component.</p>
+</li>
+<li><p class="first">Forgetting About Address Randomization</p>
+<p>Frustratingly, sometimes things will work with the address
+randomization on, then one small change will cause everything
+to stop working.  It&#8217;s best put this as part of a start-up script
+where all processes will &#8220;inherit&#8221; this attribute:</p>
+<div class="highlight-python"><pre>% setarch i386 -L -R startup_process</pre>
+</div>
+<p>See the <em>Address Randomization</em> section above.</p>
+</li>
+<li><p class="first">Holding On Too Long or Letting Go Too Soon</p>
+<p>What does <tt class="docutils literal"><span class="pre">Shared(client.pool(),</span> <span class="pre">Tab())</span></tt> return?  A proxy
+to a Tab in shared memory protected by a process-safe reference count.
+Remember, that every copy of the proxy increments the
+reference count:</p>
+<div class="highlight-python"><pre>// Serverside
+{
+  Val v = Shared(shm, Tab());  // ref count at 1
+  pipe.enq(v);                 // ref count at 2
+} // Val destructed, ref count at 1
+
+
+// Clientside
+{
+  Val off = pipe.deq();  // Ref count at 1
+}  // Val destructed, ref count at 0, memory reclaimed</pre>
+</div>
+</li>
+</ol>
+<blockquote>
+<p>Thus, once you have enqueued your shared Tab, you can let go
+of the packet and let the client dequeue it.  Once the client
+dequeues it and is done, it will be reclaimed by the pool.</p>
+<p>Be careful not to keep your Tab alive after you have enqueued it,
+or that could become a memory growth.</p>
+</blockquote>
+</div>
+</div>
+<div class="section" id="conclusion">
+<h2>Conclusion<a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>With three simple abstractions, tables across shared memory
+can be much easier to manipulate.</p>
+<div class="section" id="known-bugs">
+<h3>Known Bugs:<a class="headerlink" href="#known-bugs" title="Permalink to this headline">¶</a></h3>
+<p>There are still some known bugs: we prefer to release early so as to
+get feedback, even if there are some known issues.</p>
+<ol class="arabic simple">
+<li>The <tt class="docutils literal"><span class="pre">int_un</span></tt> and <tt class="docutils literal"><span class="pre">int_n</span></tt> DO NOT work with shared memory.
+A future version will fix this.  <strong>FIXED: in PicklingTools 1.4.1</strong></li>
+<li>Should a Val initialized from a Proxy copy the allocator?
+This makes the <tt class="docutils literal"><span class="pre">IsSHM</span></tt> check without an explicit work-around
+for Proxies.</li>
+</ol>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">C++ Cross-Process Shared Memory Tools</a><ul>
+<li><a class="reference external" href="#reminder">Reminder</a></li>
+<li><a class="reference external" href="#shmmain-serverside-and-clientside">SHMMain, ServerSide and ClientSide</a><ul>
+<li><a class="reference external" href="#shmmain">SHMMain</a></li>
+<li><a class="reference external" href="#serverside">ServerSide</a></li>
+<li><a class="reference external" href="#clientside">ClientSide</a></li>
+<li><a class="reference external" href="#middleside">Middleside</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#complex-interactions">Complex Interactions</a><ul>
+<li><a class="reference external" href="#address-randomization">Address Randomization</a></li>
+<li><a class="reference external" href="#examples">Examples</a></li>
+<li><a class="reference external" href="#five-biggest-headaches">Five Biggest Headaches</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#conclusion">Conclusion</a><ul>
+<li><a class="reference external" href="#known-bugs">Known Bugs:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="xmldoc.html"
+                                  title="previous chapter">XML Support: Pickling Tools 1.6.0</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="java.html"
+                                  title="next chapter">Java support for PicklingTools: New as of PicklingTools 1.5.0</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/shm.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="java.html" title="Java support for PicklingTools: New as of PicklingTools 1.5.0"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="xmldoc.html" title="XML Support: Pickling Tools 1.6.0"
+             >previous</a> |</li>
+        <li><a href="index.html">PicklingTools v1.6.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2010, Richard T. Saunders.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.6.
+    </div>
+  </body>
+</html>

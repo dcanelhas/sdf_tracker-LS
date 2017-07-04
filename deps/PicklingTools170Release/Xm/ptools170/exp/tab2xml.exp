@@ -1,0 +1,34 @@
+TAB2XML - Converts Tab to XML and back
+ 
+<input>  - Can be Tab or XML
+<output> - Can be Tab or XML
+ 
+Utility to convert from Python dictionaries to XML and back.  This
+does not support namespaces very well, but give it a shot, it may
+just work cases that include namespaces.
+ 
+Switches:
+  /TOP      - Sets the top ofthe XML table; def="top"
+  /PRINT    - Pretty prints results to screen
+  /VALIN    - Forces input to be read as Val (Tab)
+  /VALOUT   - Forces output to be written as Val (Tab)
+  /XMLIN    - Forces input to be read as XML
+  /XMLOUT   - Forces output to be written as XML
+  /TABOUT   - Forces output to be written as Tab
+  /STRICT   - Use XML strict headers
+  /UNFOLD   - XMLIN:  Unfold XML attributes on load (def on)
+  /NOPRE    - XMLIN:  Don't prepend characters (def on)
+  /DROPATT  - XMLIN:  Drop all attributes
+  /ORDER    - XMLIN:  Use OTabs
+  /TRYATT   - XMLIN:  Try to keep attributes when not tables
+  /DROPTOP  - XMLIN:  Drop the top level
+  /EVAL     - XMLIN:  Evaluate content (def on)
+  /PREKEYS  - XMLOUT: Prepend keys as tags
+  /TAGATT   - XMLOUT: Simple tags as attributes
+  /STRSTR   - XMLOUT: Strings as strings
+  /STRGUESS - XMLOUT: String best guess (def on)
+  /PRETTY   - XMLOUT: Write pretty (def on)
+  /PODLIST  - XMLOUT: Pod list as XML list
+  /STREMPTY - XMLOUT: Prefer empty strings
+  /SORT     - XMLOUT: Unatural order
+ 
